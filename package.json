@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.5"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "eslint": "^8",
-    "eslint-config-next": "14.2.5"
+    "eslint-config-next": "14.2.5",
+    "husky": "^9.1.6",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3"
   }
 }
