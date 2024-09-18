@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "./addIssueNumber.sh $HUSKY_GIT_PARAMS"
+    }
   },
   "dependencies": {
     "next": "14.2.5",

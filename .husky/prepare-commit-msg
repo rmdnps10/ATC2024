@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# 커밋 메시지 파일 경로
+COMMIT_MSG_FILE=$1
+
+# 커밋 메시지 파일이 존재하는지 확인
+if [ ! -f "$COMMIT_MSG_FILE" ]; then
+  echo "Error: Commit message file does not exist: $COMMIT_MSG_FILE"
+  exit 1
+fi
+
+# 커밋 메시지 파일에서 메시지 읽기
+MESSAGE=$(cat "$COMMIT_MSG_FILE")
+
+# 커밋 메시지 포맷 정규식
+COMMITFORMAT="^(Feat|Fix|Docs|Style|Chore|Refactor|Design|Comment|Rename|Remove|Test|!HOTFIX|!BREAKING CHANGE): (.*)"
+
+# 포맷 검증
+if ! [[ "$MESSAGE" =~ $COMMITFORMAT ]]; then
+  echo ""
+  echo " Commit Message 포맷을 아래 예시와 같이 지켜주세요."
+  echo " 사용 가능한 commit의 Prefix는 아래와 같습니다."
+  echo ""
+  echo "======================= 반드시 콜론(:) 을 붙여야 합니다. ========================="
+  echo ""
+  echo "  Feat:             새로운 기능을 추가"
+  echo "  Fix:              버그 수정"
+  echo "  Design:           CSS 등 사용자 UI 디자인 변경"
+  echo "  !BREAKING CHANGE: 커다란 API 변경의 경우"
+  echo "  !HOTFIX:          급하게 치명적인 버그를 고쳐야하는 경우"
+  echo "  Style:            코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우"
+  echo "  Refactor:         코드 리팩토링"
+  echo "  Comment:          필요한 주석 추가 및 변경"
+  echo "  Docs:             문서 수정"
+  echo "  Chore :           build와 관련된 부분, 패키지 매니저 설정 등 여러가지 production code와 무관한 부분, 자잘한 부분!"
+  echo "  Test:             빌드 업무 수정, 패키지 매니저 수정, 패키지 관리자 구성 등 업데이트, Production Code 변경 없음"
+  echo ""
+  echo "=================================================================================="
+  echo ""
+  echo -e " 아래 EXAMPLE과 같이 첫째 줄에 Prefix와 함께 요약을 남기고 한 줄 개행 후 상세 내용을 작성해주세요. \n Merge Request 시 Overview에 자동으로 Title, Description 작성이 완료됩니다."
+  echo ""
+  echo "================================== E X A M P L E ================================="
+  echo ""
+  echo -e " git commit -m \"Feat: 기능 A 추가\n\n  1. 000파일 추가 \n  2. 2222파일추가\n  3. 00 관련 비즈니스 로직 추가\""
+  echo ""
+  echo "=================================================================================="
+  echo ""
+  exit 1
+fi
+
+# 브랜치 이름에서 이슈 번호 추출
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+issue_number=$(echo "$branch_name" | grep -o '#[0-9]\+')
+
+# 이슈 번호가 있는 경우 커밋 메시지 수정
+if [ -n "$issue_number" ]; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    sed -i '' "1s/$/ $issue_number/" "$COMMIT_MSG_FILE"
+  else
+    # 리눅스
+    sed -i.bak "1s/$/ $issue_number/" "$COMMIT_MSG_FILE"
+  fi
+fi
