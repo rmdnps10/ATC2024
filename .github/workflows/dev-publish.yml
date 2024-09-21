@@ -3,7 +3,7 @@ name: 개발 브랜치를 바라보는 배포 (by netlify)
 on:
   push:
     branches:
-      - main # main 브랜치에 푸시될 때마다 실행
+      - dev
 
 jobs:
   deploy:
