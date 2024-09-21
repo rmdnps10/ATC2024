@@ -1,34 +1,34 @@
-name: 개발 브랜치를 바라보는 배포 (by netlify)
+# name: 개발 브랜치를 바라보는 배포 (by netlify)
 
-on:
-  push:
-    branches: [dev]
-  pull_request:
-    branches: [dev]
+# on:
+#   push:
+#     branches: [dev]
+#   pull_request:
+#     branches: [dev]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "14" # 사용할 Node.js 버전
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: "14" # 사용할 Node.js 버전
 
-      - name: Install dependencies
-        run: npm install # 프로젝트에 필요한 종속성 설치
+#       - name: Install dependencies
+#         run: npm install # 프로젝트에 필요한 종속성 설치
 
-      - name: Build project
-        run: npm run build # 빌드 명령어 (프로젝트에 맞게 수정)
+#       - name: Build project
+#         run: npm run build # 빌드 명령어 (프로젝트에 맞게 수정)
 
-      - name: Deploy to Netlify
-        run: |
-          npm install netlify-cli -g
-          netlify deploy --dir=build --prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#       - name: Deploy to Netlify
+#         run: |
+#           npm install netlify-cli -g
+#           netlify deploy --dir=build --prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
