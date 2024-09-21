@@ -2,8 +2,9 @@ name: 개발 브랜치를 바라보는 배포 (by netlify)
 
 on:
   push:
-    branches:
-      - dev
+    branches: [dev]
+  pull_request:
+    branches: [dev]
 
 jobs:
   deploy:
