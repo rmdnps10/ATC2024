@@ -1,4 +1,4 @@
-name: GitHub Actions Vercel Preview Deployment
+name: 메인 브랜치를 바라보는 배포 (by vercel)
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
