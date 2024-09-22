@@ -1,3 +1,5 @@
+import "@/style/global.css";
+
 export const metadata = {
   title: "ATC 2024 온보딩 페이지",
   description:
