@@ -55,9 +55,9 @@ Test: 테스트 코드 또는 빌드 관련 설정 변경, production 코드 변
 
 ```
 📦public
- ┣ 📂icon  : 프로젝트에 쓰일 아이콘 
+ ┣ 📂icon  : 프로젝트에 쓰일 아이콘
  ┃ ┗ 📜.gitkeep
- ┣ 📂images : 프로젝트 쓰일 그래픽, 이미지, 후에 
+ ┣ 📂images : 프로젝트 쓰일 그래픽, 이미지, 후에
  ┃ ┗ 📜.gitkeep
  ┗ 📂logo : 로고 (회사 로고, atc 로고, 그 이 이것저것)
  ┃ ┗ 📜atc-logo.svg
@@ -101,11 +101,11 @@ Test: 테스트 코드 또는 빌드 관련 설정 변경, production 코드 변
 
 - css 스타일링은 module.css 방식으로 진행하며, `page.module.css` (🚨컨벤션)를 page.js 와 같은 파일 depth에서 정의.
 
-  -  <a href="https://react.vlpt.us/styling/02-css-module.html">css module 사용방식</a> 참고
+  - <a href="https://react.vlpt.us/styling/02-css-module.html">css module 사용방식</a> 참고
 
 - page.js의 양이 너무 많을 경우 <b>분리할 수 있음!</b> 그러나, page.js 파일을 지우는 게 아니라, 컴포넌트 조각들을 생성하여 page.js에서 한번에 import 해줘야함.
 
-    - 예를 들어서 About 페이지의 양이 너무 많은경우 page.js와 같은 파일 depth에서 About1, About2, About3.js 컴포넌트를 생성하고 page.js에서 한번에 import하여
+  - 예를 들어서 About 페이지의 양이 너무 많은경우 page.js와 같은 파일 depth에서 About1, About2, About3.js 컴포넌트를 생성하고 page.js에서 한번에 import하여
 
 ```js
 import About1 from "./About1";
@@ -123,6 +123,7 @@ export default function AboutPage() {
 ```
 
 이런 식으로 적용함.
+
 - `page.js`의 적용하는 module.css -> `page.module.css` 이름으로 설정
 - 컴포넌트 조각들에 적용하는 module.css의 경우 `컴포넌트이름.module.css` (🚨컨벤션) 이름으로 설정함
 
@@ -135,7 +136,7 @@ export default function AboutPage() {
 
   - `<section>` , `<article>`, `<p>`, `<main>` , `<ul>`, `<li>` 등등..
   - 📄 [시멘틱 태그가 뭔가요](https://yozm.wishket.com/magazine/detail/2495/)
-  
+
 - css 속성 선언 순서
 
 ```
@@ -157,13 +158,67 @@ export default function AboutPage() {
 16. background - 배경
 17. etc(기타) - color, text-decoration, text-indent, clear...
 ```
+
 - 컴포넌트 조각들에 적용하는 module.css의 경우 `컴포넌트이름.module.css` (🚨컨벤션) 이름으로 설정함
-- 피그마 와이어프레임에서 사용되는 폰트는 외부에서 (눈누, 구글폰트) 가져오지않기 ❌,  일단은 font-family 설정하지 않고 기본폰트 사용하기. (디자인팀에서 폰트 확정되면 그때 로컬 폰트로 프로젝트 안에서 다운받아서 가져올거임)
+- 피그마 와이어프레임에서 사용되는 폰트는 외부에서 (눈누, 구글폰트) 가져오지않기 ❌, 일단은 font-family 설정하지 않고 기본폰트 사용하기. (디자인팀에서 폰트 확정되면 그때 로컬 폰트로 프로젝트 안에서 다운받아서 가져올거임)
 
 ### JS 컨벤션
 
 - [js 스타일 가이드](https://github.com/tipjs/javascript-style-guide)
 - 컴포넌트는 `export default function`로 내보내기
+- import 문과 컴포넌트 사이에 슬래쉬 세 줄 추가하기
+
+
+
+```js
+"use-client";
+import React from "react";
+import styles from "./Header.module.css";
+import Link from "next/link";
+import Image from "next/image";
+//
+//
+//
+export default function Header() {
+  return (
+    <header className={styles.header}>
+      <Image
+        src="logo/atc-logo.svg"
+        alt="2024 atc 공식 로고"
+        width={76}
+        height={42}
+      />
+      <ul>
+        <li>
+          <Link href={"/about"}>About</Link>
+        </li>
+        <li>
+          <Link href={"/work"}>Work</Link>
+        </li>
+        <li>
+          <Link href={"/program"}>Program</Link>
+        </li>
+        <li>
+          <Link href={"/archive"}>Archive</Link>
+        </li>
+        <li>
+          <Link href={"/map"}>Maps</Link>
+        </li>
+      </ul>
+    </header>
+  );
+}
+```
+
+
+- "use client" 를 컴포넌트나 `page.js`에 추가하면 `클라이언트 컴포넌트`를 만들 수 있음.
+  - 클라이언트 컴포넌트: 사용자 인터랙션이 필요한 컴포넌트
+  - 클라이언트 컴포넌트와 서버 컴포넌트의 차이 알아야 함, 각자 알아와주세요.
+- 우리가 만들 대부분의 컴포넌트는 클라인트 컴포넌트가 될 거임. 
+  - 주의:  `layout.js`는 'use client' 선언하면 안됨
+
+
+
 
 
 ### 중요!!
