@@ -3,15 +3,20 @@ import React from "react";
 import styles from "./Header.module.css";
 import Link from "next/link";
 import Image from "next/image";
+//
+//
+//
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Image
-        src="logo/atc-logo.svg"
-        alt="2024 atc 공식 로고"
-        width={76}
-        height={42}
-      />
+      <Link href={"/"}>
+        <Image
+          src="logo/atc-logo.svg"
+          alt="2024 atc 공식 로고"
+          width={76}
+          height={42}
+        />
+      </Link>
       <ul>
         <li>
           <Link href={"/about"}>About</Link>
