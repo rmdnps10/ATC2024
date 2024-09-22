@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  height: 8rem;
+  margin-left: 7.5rem;
+  display: flex;
+  align-items: center;
+  gap: 5.1rem;
+  background-color: white;
+}
+
+.header ul {
+  display: flex;
+  gap: 3.6rem;
+}
+
+.header ul li {
+  font-size: 1.6rem;
+  font-weight: 500;
+}

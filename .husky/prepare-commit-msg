@@ -32,7 +32,7 @@ if ! [[ "$MESSAGE" =~ $COMMITFORMAT ]]; then
   echo "  Refactor:         코드 리팩토링"
   echo "  Comment:          필요한 주석 추가 및 변경"
   echo "  Docs:             문서 수정"
-  echo "  Chore :           build와 관련된 부분, 패키지 매니저 설정 등 여러가지 production code와 무관한 부분, 자잘한 부분!"
+  echo "  Chore :           자잘한 부분 작업(build와 관련된 부분, 패키지 매니저 설정 등 여러가지 production code와 무관한 부분)"
   echo "  Test:             빌드 업무 수정, 패키지 매니저 수정, 패키지 관리자 구성 등 업데이트, Production Code 변경 없음"
   echo ""
   echo "=================================================================================="
