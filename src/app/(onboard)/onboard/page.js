@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Canvas } from '@react-three/fiber'; 
-import Experience from "./Experience";
+import Experience from "../../../components/onboard/Experience";
 import styles from "./page.module.css";
 
 export default function OnBoardPage() {
