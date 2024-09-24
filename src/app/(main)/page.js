@@ -1,13 +1,11 @@
 'use client'
 
-import { Cloud, OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import Experience from './components/Experience.js';
 //
 //
 //
 export default function MainPage() {
-  const fish = useGLTF('./model/fishswim.glb');
-
   return (
       <div id="canvas-container"
         style={{ 
@@ -22,24 +20,15 @@ export default function MainPage() {
           boxSizing: 'border-box'
         }}>
         <Canvas
-        shadows={true}
-        camera={{
-          fov: 35,
-          near: 0.1,
-          far: 300,
-          position: [ -4, 3, 6 ],
+          shadows={true}
+          camera={{
+            fov: 35,
+            near: 0.1,
+            far: 300,
+            position: [ -4, 3, 6 ],
         }}
         >
-          <color args={ [ 'skyblue' ] } attach="background" />
-
-          <OrbitControls />
-
-          <ambientLight intensity={ 1.5 } />
-          <directionalLight />
-
-          <Cloud />
-
-          <primitive object={ fish.scene } scale={ 10.0 } position-y={ 3 } />
+          <Experience />
         </Canvas>
       </div>
   )
