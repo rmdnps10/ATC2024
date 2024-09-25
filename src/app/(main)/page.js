@@ -1,24 +1,14 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber';
-import Experience from './components/Experience.js';
+import Experience from '../../components/main/Experience.js';
+import styles from './page.module.css'
 //
 //
 //
 export default function MainPage() {
   return (
-      <div id="canvas-container"
-        style={{ 
-          overflow: 'hidden',
-          position: 'fixed',
-          width: '100%',
-          height: '100%',
-          margin: '0',
-          padding: '0',
-          left: '0',
-          top: '0',
-          boxSizing: 'border-box'
-        }}>
+      <div className={styles.canvasContainer}>
         <Canvas
           shadows={true}
           camera={{
