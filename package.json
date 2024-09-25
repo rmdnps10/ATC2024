@@ -17,7 +17,9 @@
   "dependencies": {
     "@react-three/drei": "^9.108.1",
     "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.16.2",
     "env-cmd": "^10.1.0",
+    "gsap": "^3.12.5",
     "leva": "^0.9.34",
     "next": "14.2.5",
     "r3f-perf": "^7.2.1",
