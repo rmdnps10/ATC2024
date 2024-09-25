@@ -1,0 +1,71 @@
+.main {
+    overflow: hidden;
+    background-color: rgb(206, 248, 248);
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 26.2rem;
+    margin-bottom: 26.1rem;
+}
+
+.videoContainer {
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+}
+
+.videoContainer video {
+    width: 120rem;
+    height: 67.5rem;
+    background-color: rgb(175, 255, 228);
+} 
+
+.articles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    gap: 2.4rem;
+}
+
+.articles article { 
+    width: 58.8rem;
+    height: 21.6rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+
+.quote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.4rem; 
+}
+
+.quote blockquote:first-child{
+    align-self: flex-start;
+    width: 58.8rem;
+    margin-top: 27.5rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+.quote blockquote:last-child{
+    align-self: flex-start;
+    width: 58.8rem;
+    margin-top: 62.4rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+
+.quoteTitle {
+    margin-bottom: 5.1rem;
+}
+
+.quote p:first-child {
+    font-size: 3.2rem;
+}
