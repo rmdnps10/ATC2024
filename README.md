@@ -12,7 +12,7 @@ ATC에 관한 모든 것을 아카이빙하는 <b>인터랙티브 웹.</b>
 
 > 개발용 : https://art2024-dev.netlify.app/
 
-> Wireframe : [figma link](https://www.figma.com/design/Gg3Kl9xJ9zcpAwbfrF21td/atc_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=507-1000&t=Gp1D3eMwsQq6L9Fh-1)
+> Wireframe : [figma link](https://www.figma.com/design/FlQVjCIVza7LEn9EPVyf40/ATC-Wireframe?node-id=229-790&m=dev)
 
 ## 애플리케이션 실행 방법
 
@@ -50,6 +50,11 @@ Comment: 주석 추가 및 변경
 Docs: 문서 수정
 Test: 테스트 코드 또는 빌드 관련 설정 변경, production 코드 변화 없음
 ```
+
+4. 주기적으로 branch를 `push`한다.
+5. 웹 팀장의 요청사항이 있을 경우 `dev` 브랜치로 `PR`을 보낸다. 
+6. 웹 팀장의 코드 리뷰
+6. PR은 웹 팀장이 `Merge` 하는 권한을 갖는다. 
 
 ## Directory structure
 
@@ -160,7 +165,79 @@ export default function AboutPage() {
 ```
 
 - 컴포넌트 조각들에 적용하는 module.css의 경우 `컴포넌트이름.module.css` (🚨컨벤션) 이름으로 설정함
+- 반응형은 (min-width: 768px) 을 분기점으로 구현하기
+- module.css 적용할 떄 클래스를 여러 개 선언해서 각각 가져올 수도 있겠지만, 
+
+```css
+/** Header.modue.css **/
+
+.header {
+  width: 100%;
+  height: 8rem;
+  margin-left: 7.5rem;
+  display: flex;
+  align-items: center;
+  gap: 5.1rem;
+  background-color: white;
+}
+
+.header ul {
+  display: flex;
+  gap: 3.6rem;
+}
+
+.header ul li {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+
+/** Header.js **/
+
+export default function Header() {
+  return (
+    <header className={styles.header}>
+      <Image
+        src="logo/atc-logo.svg"
+        alt="2024 atc 공식 로고"
+        width={76}
+        height={42}
+      />
+      <ul>
+        <li>
+          <Link href={"/about"}>About</Link>
+        </li>
+        <li>
+          <Link href={"/work"}>Work</Link>
+        </li>
+        <li>
+          <Link href={"/program"}>Program</Link>
+        </li>
+        <li>
+          <Link href={"/archive"}>Archive</Link>
+        </li>
+        <li>
+          <Link href={"/map"}>Maps</Link>
+        </li>
+      </ul>
+    </header>
+  );
+}
+
+
+```
+```
+ 위의 예시처럼 태그 선택자를 통해 스타일을 정의하고, className은 상위 요소에만 부여할 수 있다.
+이렇게 하면 page.js나 컴포넌트.js에서 스타일을 className으로 일일이 부여해 줄 필요가 없다.
+
+ 만약에 요소 간의 계층이 뚜렷한 경우 (flex container와 flex item, ul 요소와 li 요소.. ) 
+위에처럼 스타일 할 것을 권함
+```
+
+
 - 피그마 와이어프레임에서 사용되는 폰트는 외부에서 (눈누, 구글폰트) 가져오지않기 ❌, 일단은 font-family 설정하지 않고 기본폰트 사용하기. (디자인팀에서 폰트 확정되면 그때 로컬 폰트로 프로젝트 안에서 다운받아서 가져올거임)
+
+
 
 ### JS 컨벤션
 
@@ -213,9 +290,10 @@ export default function Header() {
 
 - "use client" 를 컴포넌트나 `page.js`에 추가하면 `클라이언트 컴포넌트`를 만들 수 있음.
   - 클라이언트 컴포넌트: 사용자 인터랙션이 필요한 컴포넌트
-  - 클라이언트 컴포넌트와 서버 컴포넌트의 차이 알아야 함, 각자 알아와주세요.
-- 우리가 만들 대부분의 컴포넌트는 클라인트 컴포넌트가 될 거임. 
-  - 주의:  `layout.js`는 'use client' 선언하면 안됨
+  - 클라이언트 컴포넌트와 서버 컴포넌트의 차이 알아야함
+- 우리가 만들 대부분의 컴포넌트는 클라이언트 컴포넌트가 되어야함 (사용자 인터랙션 때문에) 
+  - 주의: `layout.js`는 'use client' 선언하면 안됨
+  - `page.js`는 각 페이지별로 인터랙션 필요여부에 따라 "use client" 선언해주면됨
 
 
 
