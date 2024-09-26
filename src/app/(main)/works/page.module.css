@@ -1,0 +1,88 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 15rem 1fr;
+  overflow: hidden;
+}
+
+.main nav {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.main nav ul {
+  width: fit-content;
+  height: fit-content;
+  background-color: aqua;
+  display: flex;
+  gap: 19rem;
+  font-size: 1.8rem;
+}
+
+.main nav div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  width: 20rem;
+  height: 6rem;
+}
+
+.main nav div::after {
+  position: absolute;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  content: "";
+  height: 50%;
+  width: 50%;
+  top: 0;
+  left: 0;
+}
+.main nav div::before {
+  position: absolute;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  content: "";
+  height: 50%;
+  width: 50%;
+  bottom: 0;
+  right: 0;
+}
+
+.main section {
+  width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  overscroll-behavior: contain;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.main section figure {
+  width: 20vw;
+  height: 50rem;
+  background-color: red;
+  display: flex;
+  position: relative;
+}
+
+.image {
+  position: absolute;
+}
+
+.main section figure figcaption {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
