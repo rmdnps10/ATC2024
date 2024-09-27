@@ -4,6 +4,7 @@ import { Float, Text, Cloud, OrbitControls, useGLTF } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { Perf } from 'r3f-perf';
 import { TextureLoader, ShaderMaterial, Color} from 'three';
+import Background from './background.js';
 import FishModel from './Model.js';
 import SphericalBackground from './SphericalBackground.js';
 //
@@ -16,8 +17,10 @@ export default function Experience() {
     return (
         <>
             <Perf />
+
+            <Background />
             
-            <SphericalBackground />
+            {/* <SphericalBackground /> */}
 
             <OrbitControls />
 
