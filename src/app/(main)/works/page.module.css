@@ -1,6 +1,6 @@
 .main {
   width: 100vw;
-  height: 100vh;
+  height: 88vh;
   display: grid;
   grid-template-rows: 15rem 1fr;
   overflow: hidden;
@@ -10,7 +10,7 @@
   position: relative;
   width: 100vw;
   height: 100%;
-  color: black;
+  color: #767676;
   display: flex;
   align-items: center;
 }
@@ -19,9 +19,16 @@
   width: fit-content;
   height: fit-content;
   background-color: aqua;
-  display: flex;
+  display: flex; /* grid로 바꿀것! */
+  align-items: center;
   gap: 19rem;
   font-size: 1.8rem;
+  transform: translate(50vw);
+  cursor: pointer;
+}
+
+.main nav ul li span:hover {
+  color: black;
 }
 
 .main nav div {
@@ -69,7 +76,7 @@
 
 .main section figure {
   width: 20vw;
-  height: 50rem;
+  height: 40rem;
   background-color: red;
   display: flex;
   position: relative;
@@ -79,10 +86,47 @@
   position: absolute;
 }
 
+.image:hover ~ figcaption {
+  display: flex;
+}
+
+.main section figure figcaption:hover {
+  display: flex;
+}
+
 .main section figure figcaption {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
   color: black;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  padding: 2.4rem 2rem 7rem 2rem;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  letter-spacing: -0.8px;
+  cursor: pointer;
+}
+
+.figCategory {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  color: #686868;
+}
+.figBox {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.figTitle {
+  max-width: 30rem;
+  font-size: 2rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+.figDesc {
+  margin-top: 2.4rem;
+  font-size: 1.2rem;
 }
