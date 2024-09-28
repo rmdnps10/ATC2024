@@ -9,25 +9,19 @@ export default function AboutPage() {
     <main className={styles.main}>
       <section className={styles.imageContainer}>
         <Image
-          src="logo/atc-2024.svg"
-          alt="2024 atc 공식 타이틀"
-          width={178}
-          height={36}
-        />
-        <Image
           src="logo/atc-title.svg"
           alt="2024 atc 공식 타이틀"
           width={938}
           height={143}
         />
       </section>
-      <section className={styles.videoContainer}>
-      <video 
-        controls
-        style={{ width: "120rem", height: "67.5rem" }} 
-        
-      />
-      </section>
+      <div className={styles.videoWrapper}>
+        <section className={styles.videoContainer}>
+        <video 
+          controls
+        />
+        </section>
+      </div>
 
       <section className={styles.articles}>
         <article>
@@ -71,6 +65,12 @@ export default function AboutPage() {
             또한, 크레딧은 웹사이트의 신뢰성을 높여주며, 기여자들이 자신의 작업을 포트폴리오에 포함할 수 있는 근거가 됩니다.
           </p>
         </blockquote>
+      </section>
+      <section className={styles.credit}>
+        <div>
+          <p>Credit</p>
+          <p>ATC를 함께 만들어간 분들을 소개합니다</p>
+        </div>
       </section>
     </main>
   );
