@@ -1,43 +1,42 @@
-'use client'
+// Experience.js
+'use client';
 
-import { Float, Text, Cloud, OrbitControls, useGLTF } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
+import { useRef, useEffect } from 'react';
+import Model from './Model';
+import Background from './Background';
 import { Perf } from 'r3f-perf';
-import { TextureLoader } from 'three';
-import Background from './background.js';
-import FishModel from './Model.js';
-//
-//
-//
-export default function Experience() {
-    const fish = useGLTF('./model/fishswim.glb');
-    const backgroundTexture = useLoader(TextureLoader, './images/main/background.png');
 
-    return (
-        <>
-            <Perf />
+export default function Experience({ scroll }) {
+  const { camera } = useThree();
 
-            <Background />
+  // 카메라 초기 위치 설정
+  useEffect(() => {
+    camera.position.set(0, 0, 10);
+  }, [camera]);
 
-            <OrbitControls />
+  useFrame(() => {
+    const scrollOffset = scroll.current; // 0에서 1 사이의 값
 
-            <ambientLight intensity={ 1.5 } />
-            <directionalLight />
+    // 스크롤 값에 따라 카메라 위치와 각도 업데이트
+    const targetPositionZ = 10 - scrollOffset * 20; // 카메라 Z축 이동
+    const targetRotationX = scrollOffset * Math.PI * 0.2; // 카메라 X축 회전
 
-            <Float
-                floatIntensity={ 10 }
-            >
-                <Text
-                    position={ [ 0, 0, 3 ] }
-                    fontSize={ 2 }
-                    color={ 'mediumpurple' }
-                >
-                    MAINPAGE!!
-                </Text>
-            </Float>
-            {/* <Cloud /> */}
+    // 부드러운 이동을 위해 보간 처리
+    camera.position.z += (targetPositionZ - camera.position.z) * 0.1;
+    camera.rotation.x += (targetRotationX - camera.rotation.x) * 0.1;
+  });
 
-           <FishModel />
-        </>
-    )
+  return (
+    <>
+      <Perf />
+
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+
+      <Background />
+
+      <Model scroll={scroll} />
+    </>
+  );
 }

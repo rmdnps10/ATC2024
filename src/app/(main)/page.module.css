@@ -1,4 +1,5 @@
 .canvasContainer {
+    display: block;
     position: fixed; /* Makes sure the canvas sticks to the viewport */
     top: 0;
     left: 0;
