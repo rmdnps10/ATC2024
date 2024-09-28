@@ -22,16 +22,16 @@
     "vercel": "^37.5.3"
   },
   "devDependencies": {
+    "@react-three/drei": "^9.108.1",
+    "@react-three/fiber": "^8.16.8",
     "dotenv": "^16.4.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "husky": "^9.1.6",
+    "leva": "^0.9.35",
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
-    "@react-three/drei": "^9.108.1",
-    "@react-three/fiber": "^8.16.8",
-    "three": "^0.166.1",
-    "leva": "^0.9.35",
-    "r3f-perf": "^7.2.1"
+    "r3f-perf": "^7.2.1",
+    "three": "^0.166.1"
   }
 }
