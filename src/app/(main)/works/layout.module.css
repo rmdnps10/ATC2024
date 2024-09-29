@@ -1,34 +1,58 @@
 .main {
   width: 100vw;
   height: 88vh;
-  display: grid;
-  grid-template-rows: 15rem 1fr;
+  display: flex;
+  flex-direction: column;
+  /* display: grid;
+  grid-template-rows: 15rem 1fr; */
   overflow: hidden;
+  position: relative;
+}
+
+.pageDetail {
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: blue;
 }
 
 .main nav {
   position: relative;
   width: 100vw;
-  height: 100%;
+  height: 15rem;
   color: #767676;
-  display: flex;
-  align-items: center;
 }
 
 .main nav ul {
   width: fit-content;
   height: fit-content;
-  background-color: aqua;
-  display: flex; /* grid로 바꿀것! */
-  align-items: center;
-  gap: 19rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   font-size: 1.8rem;
-  transform: translate(50vw);
+  gap: 5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
 }
 
-.main nav ul li span:hover {
+.main nav ul li {
+  width: 7rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+}
+
+.main nav ul li:hover > span {
   color: black;
+  font-weight: 600;
+  transition: color 0.4s ease-in, font-weight 0.1s ease-in;
 }
 
 .main nav div {
@@ -109,12 +133,22 @@
   cursor: pointer;
 }
 
+.link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
 .figCategory {
   display: flex;
   width: 100%;
   justify-content: end;
   color: #686868;
 }
+
 .figBox {
   display: flex;
   flex-direction: column;
@@ -126,6 +160,7 @@
   font-weight: 700;
   word-break: break-all;
 }
+
 .figDesc {
   margin-top: 2.4rem;
   font-size: 1.2rem;

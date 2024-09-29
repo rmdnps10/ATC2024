@@ -1,0 +1,9 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(172, 113, 113, 0.477);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  font-size: 20rem;
+}
