@@ -12,6 +12,19 @@ import Background from './Background.js';
 import TextContent from './TextContent.js';
 import { Perf } from 'r3f-perf';
 
+function Postpro() {
+  return (
+    <EffectComposer disableNormalPass>
+      <HueSaturation saturation={-1} />
+      <BrightnessContrast brightness={0} contrast={0.25} />
+      <WaterEffect factor={0.75} />
+      <TiltShift2 samples={6} blur={0.5} />
+      <Bloom mipmapBlur luminanceThreshold={0} intensity={30} />
+      <ToneMapping />
+    </EffectComposer>
+  )
+}
+
 export default function Experience() {
   const { camera, mouse, viewport } = useThree();
   const scroll = useScroll();
