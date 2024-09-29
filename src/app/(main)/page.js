@@ -2,28 +2,23 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useRef } from 'react';
-import Experience from '../../components/main/Experience.js';
-import Overlay from '../../components/main/Overlay.js';
+import { ScrollControls } from '@react-three/drei';
+import Experience from '../../components/main/Experience';
 import styles from './page.module.css';
 
 export default function MainPage() {
-  const scrollRef = useRef(0);
-
   return (
-    <>
-      <div className={styles.canvasContainer}>
-        <Canvas
-          className={styles.canvas}
-          shadows
-          camera={{ fov: 35, near: 0.1, far: 1000 }}
-        >
-          <Suspense fallback={null}>
-            <Experience scroll={scrollRef} />
-          </Suspense>
-        </Canvas>
-      </div>
-      <Overlay scroll={scrollRef} />
-    </>
+    <div className={styles.canvasContainer}>
+      <Canvas
+        className={styles.canvas}
+        shadows
+        camera={{ fov: 50, near: 0.1, far: 1000 }}
+      >
+        {/* ScrollControls를 사용하여 스크롤 이벤트 처리 */}
+        <ScrollControls pages={3}>
+          <Experience />
+        </ScrollControls>
+      </Canvas>
+    </div>
   );
 }

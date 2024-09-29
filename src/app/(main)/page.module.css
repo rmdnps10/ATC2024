@@ -1,4 +1,6 @@
 .canvasContainer {
+    box-sizing: border-box;
+    overflow-x: hidden;
     display: block;
     position: fixed; /* Makes sure the canvas sticks to the viewport */
     top: 0;

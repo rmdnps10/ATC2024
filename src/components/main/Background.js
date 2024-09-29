@@ -103,6 +103,7 @@ export default function Background() {
         scale={ [ 3, 3, 1.5 ] }
         frustumCulled={ false }
         renderOrder={ - 1 }
+        rotation={ [ Math.PI * 0.3] }
         >
         <planeGeometry args={ [ 2, 2 ] } />
         <primitive object={ shaderMaterial } attach="material" />
