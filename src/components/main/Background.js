@@ -1,8 +1,9 @@
-'use client';
 import * as THREE from 'three';
 import { useRef } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
-
+//
+//
+//
 export default function Background() {
     const { size } = useThree();
 
@@ -98,15 +99,17 @@ export default function Background() {
     });
 
     return (
-        <mesh
-        position={ [ 0, 0, - 5 ] }
-        scale={ [ 3, 3, 1.5 ] }
-        frustumCulled={ false }
-        renderOrder={ - 1 }
-        rotation={ [ Math.PI * 0.3] }
-        >
-        <planeGeometry args={ [ 2, 2 ] } />
-        <primitive object={ shaderMaterial } attach="material" />
-        </mesh>
+        <>
+            <mesh
+            position={ [ 0, 0, - 5 ] }
+            scale={ [ 3, 3, 1.5 ] }
+            frustumCulled={ false }
+            renderOrder={ - 1 }
+            rotation={ [ Math.PI * 0.3] }
+            >
+            <planeGeometry args={ [ 2, 2 ] } />
+            <primitive object={ shaderMaterial } attach="material" />
+            </mesh>
+        </>
     );
 }

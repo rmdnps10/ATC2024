@@ -7,30 +7,20 @@ import { Scroll, ScrollControls, useScroll } from '@react-three/drei';
 import * as THREE from 'three';
 import Model from './Model.js';
 import Particles from './Particles.js';
+import Level from './Level.js';
 import Objects from './Objects.js';
 import Background from './Background.js';
-import TextContent from './TextContent.js';
 import { Perf } from 'r3f-perf';
-
-function Postpro() {
-  return (
-    <EffectComposer disableNormalPass>
-      <HueSaturation saturation={-1} />
-      <BrightnessContrast brightness={0} contrast={0.25} />
-      <WaterEffect factor={0.75} />
-      <TiltShift2 samples={6} blur={0.5} />
-      <Bloom mipmapBlur luminanceThreshold={0} intensity={30} />
-      <ToneMapping />
-    </EffectComposer>
-  )
-}
-
+import { EffectComposer, Bloom, BrightnessContrast } from '@react-three/postprocessing';
+//
+//
+//
 export default function Experience() {
   const { camera, mouse, viewport } = useThree();
   const scroll = useScroll();
 
   // ScrollControls의 페이지 수 (스크롤 길이 결정)
-  const pages = 3;
+  const pages = 9;
 
   useFrame((state, delta) => {
     const { height } = viewport;
@@ -51,24 +41,29 @@ export default function Experience() {
 
   return (
     <>
-      <Perf />
+      <Perf position="top-left" />
 
-      <ambientLight />
-      <directionalLight color="red" intensity={10} />
+      <ambientLight intensity={1.5} />
+      <directionalLight color="white" intensity={1} />
 
-      {/* 배경 */}
       <Background />
 
-      {/* ScrollControls 내에 Scroll 컴포넌트로 컨텐츠 구성 */}
-      <ScrollControls pages={pages}>
-        {/* 3D 컨텐츠 */}
+      <EffectComposer multisampling={0} disableNormalPass>
+        <Bloom
+          mipmapBlur
+          luminanceThreshold={0.8}
+          intensity={0.4}
+          // resolutionScale={512}
+        />
+        {/* <BrightnessContrast brightness={0} contrast={0.15} /> */}
+      </EffectComposer>
+
+      <ScrollControls pages={pages} damping={0.05}>
         <Scroll>
           <Particles />
-          <Objects />
-          {/* 모델 추가 */}
-          <Model />
-          {/* 스크롤에 따라 움직이는 3D 텍스트 추가 */}
-          <TextContent />
+          {/* <Objects /> */}
+          {/* <Model /> */}
+          <Level />
         </Scroll>
       </ScrollControls>
     </>

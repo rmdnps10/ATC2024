@@ -8,3 +8,13 @@
     width: 100%;
     height: 100%;
 }
+
+.canvas {
+    overflow-y: scroll;
+    pointer-events: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.canvas::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
