@@ -120,7 +120,7 @@ function Planes() {
       <mesh position={[3, -1, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         {/* BoxGeometry로 두께 설정 */}
         <boxGeometry args={[10, 17, 0.5]} /> {/* 마지막 인자는 두께 */}
-        <meshStandardMaterial color="#a0a0a0" metalness={0.6} roughness={0.5} />
+        <meshStandardMaterial color="#ffffff" metalness={0.6} roughness={0.5} />
       </mesh>
 
       <Reflector
@@ -135,7 +135,7 @@ function Planes() {
       >
         {(Material, props) => (
           <Material
-            color="#a0a0a0"
+            color="#ffffff"
             metalness={0.6}
             roughness={0.5}
             {...props}
@@ -146,10 +146,8 @@ function Planes() {
       <Plane color="#f4ae00" rotation-x={-Math.PI / 2} position={[0, 1, 0]} scale={[4.2, 1, 4]} />
       <Plane color="#436fbd" rotation-x={-Math.PI / 2} position={[-1.7, 1, 6]} scale={[1.5, 4, 3]} />
       {/* <Plane color="#d7dfff" rotation-x={-Math.PI / 2} rotation-z={-Math.PI / 3} position={[0, 4, 3]} scale={[2, 0.03, 4]} /> */}
-      <mesh position={[-2, 4, 0]} rotation={[0, Math.PI / 2, 0]} scale={[17, 10, 1]}>
+      {/* <mesh position={[-2, 4, 0]} rotation={[0, Math.PI / 2, 0]} scale={[17, 10, 1]}>
         <planeGeometry />
-        <hemisphereLight intensity={ 0.5 }/>
-        <pointLight color={'#7334ff'} intensity={ 20 } position={ [ 0, 3, 3 ] } />
         <meshPhysicalMaterial
           receiveShadow
           toneMapped={false}
@@ -158,7 +156,7 @@ function Planes() {
           metalness={1} // 금속성이 아닌 유리
           reflectivity={0.8}
         />
-      </mesh>
+      </mesh> */}
     </group>
   );
 }

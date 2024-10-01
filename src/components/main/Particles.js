@@ -15,13 +15,13 @@ export default function Particles({ size = 3000 }) {
   return (
     <Points limit={size}>
       {/* 텍스처를 map 속성에 전달 */}
-      <pointsMaterial size={0.2} map={particleTexture} transparent depthWrite={ false } alphaTest={ 0.5 } vertexColors={true} blending={ THREE.AdditiveBlending } />
+      <pointsMaterial size={0.5} map={particleTexture} transparent depthWrite={ false } alphaTest={ 0.5 } vertexColors={true} blending={ THREE.AdditiveBlending } />
       {Array.from({ length: size }).map((_, i) => (
         <Point
           key={i}
           position={[
             (0.5 - Math.random()) * width * 2,
-            0.5 * height + Math.random() ** 0.8 * height * - 18,
+            0.5 * height + Math.random() ** 0.8 * height * - 12,
             (0.5 - Math.random()) * 25,
           ]}
           color={particleColors[Math.floor(Math.random() * particleColors.length)]}
