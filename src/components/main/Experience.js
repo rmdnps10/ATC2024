@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState } from 'react';
 import { useFrame, useThree } from '@react-three/fiber'
 import { Environment, Lightformer, OrbitControls, Text } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
@@ -36,6 +36,16 @@ const shuffle = (accent = 0) => [
 ];
 
 export default function Experience({ accent }) {
+  const [ hitSound ] = useState(() => new Audio('./images/main/hit.mp3'));
+
+  const collisionEnter = () =>
+  {
+      console.log('collision!');
+      hitSound.currentTime = 0
+      hitSound.volume = Math.random()
+      hitSound.play()
+  }
+
   const connectors = useMemo(() => shuffle(accent), [accent]);
 
   const { camera, mouse } = useThree();
@@ -117,10 +127,27 @@ function Sphere({ position, children, vec = new THREE.Vector3(), scale, r = THRE
 
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-  useFrame(({ mouse, viewport }) => ref.current?.setNextKinematicTranslation(vec.set((mouse.x * viewport.width) / 2, (mouse.y * viewport.height) / 2, 0)));
+  
+  // 여기서 useState를 사용하여 사운드 초기화
+  const [hitSound] = useState(() => new Audio('./images/main/hit.mp3'));
+
+  // 충돌 시 사운드를 재생하는 함수
+  const collisionEnter = () => {
+    console.log('collision!');
+    hitSound.currentTime = 0;
+    hitSound.volume = Math.random();
+    hitSound.play();
+  };
+
+  // 마우스 위치에 따른 오브젝트 이동
+  useFrame(({ mouse, viewport }) => {
+    ref.current?.setNextKinematicTranslation(vec.set((mouse.x * viewport.width) / 2, (mouse.y * viewport.height) / 2, 0));
+  });
+
   return (
-    <RigidBody position={[0, 0, 0]} type="kinematicPosition" colliders={false} ref={ref}>
+    <RigidBody position={[0, 0, 0]} type="kinematicPosition" colliders={false} ref={ref} onCollisionEnter={collisionEnter}>
       <BallCollider args={[1]} />
     </RigidBody>
   );
 }
+
