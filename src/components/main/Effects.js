@@ -14,7 +14,7 @@ export default function Effects() {
 
     const renderPass = new RenderPass(scene, camera)
     composer.addPass(renderPass)
-    composer.addPass(new EffectPass(camera, new BloomEffect({ mipmapBlur: true, luminanceThreshold: 0.1, intensity: 1, levels: 7 })))
+    composer.addPass(new EffectPass(camera, new BloomEffect({ mipmapBlur: true, luminanceThreshold: 0.7, intensity: 0.8, levels: 20 })))
     composer.addPass(new EffectPass(camera, new FXAAEffect(), new ToneMappingEffect()))
 
     return () => {

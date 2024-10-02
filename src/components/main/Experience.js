@@ -11,12 +11,11 @@ import Background from './Background.js';
 import Particles from './Particles.js';
 import dynamic from 'next/dynamic';
 
-// Dynamic import for Effects to avoid SSR issues
-const Effects = dynamic(() => import('./Effects'), { ssr: false });
-
+const Effects = dynamic(() => import('./Effects'), { ssr: false }); // Dynamic import for Effects to avoid SSR issues
 //
-// ATC2024 메인 컬러 사용
-const accents = ['#9822ff', '#25cefc', '#168cff', '#df45ff'];
+//
+//
+const accents = ['#9822ff', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
   { color: '#25cefc', roughness: 0.1, metalness: 0.5 },
@@ -43,40 +42,39 @@ export default function Experience({ accent }) {
   // Shuffle colors for connectors
   const connectors = useMemo(() => shuffle(accent), [accent]);
 
-  const { camera, mouse } = useThree();
+  // const { camera, mouse } = useThree();
 
-  useFrame((state, delta) => {
-    // 카메라 위치 및 회전 업데이트
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouse.x * 0.2, 0.1); // X축 이동폭을 줄임
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, mouse.y * 0.2, 0.1); // Y축 이동폭을 줄임
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
+  // useFrame((state, delta) => {
+  //   // 카메라 위치 및 회전 업데이트
+  //   camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouse.x * 0.2, 0.1); // X축 이동폭을 줄임
+  //   camera.position.y = THREE.MathUtils.lerp(camera.position.y, mouse.y * 0.2, 0.1); // Y축 이동폭을 줄임
+  //   camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
 
-    // 카메라 회전 업데이트
-    camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
-    camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
-  });
+  //   // 카메라 회전 업데이트
+  //   camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
+  //   camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
+  // });
 
   return (
     <>
-      <Perf position="top-left" />
-      <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping />
+      {/* <Perf position="top-left" /> */}
+      {/* <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping /> */}
 
-      <color attach="background" args={['#141622']} />
       <Background />
 
       <Text
-        position={[0, 0, 5]}
+        position={[0, 0, 7]}
         fontSize={1}
-        color="white"
+        color="#ffffff99"
         anchorX="center"
         anchorY="middle"
         maxWidth={10}
         bevel={10}
       >
-        ATC2024
+        Art&Technology Conference               2024
       </Text>
 
-      <Physics timeStep="vary" gravity={[0, 0, 0]}>
+      <Physics timeStep="vary" gravity={[0, 0, 0]} >
         <Pointer />
         {connectors.map((props, i) => (
           <Sphere key={i} {...props} />
