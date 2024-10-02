@@ -1,11 +1,9 @@
-'use client'
-
 import { useThree, useFrame } from '@react-three/fiber'
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ToneMappingEffect, FXAAEffect } from 'postprocessing'
 import { useEffect, useState } from 'react'
 import { SSGIEffect, VelocityDepthNormalPass } from './realism-effects/v2'
 
-export function Effects() {
+export default function Effects() {
   const gl = useThree((state) => state.gl)
   const scene = useThree((state) => state.scene)
   const camera = useThree((state) => state.camera)

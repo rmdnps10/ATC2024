@@ -7,9 +7,10 @@ import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
 import { Perf } from 'r3f-perf';
 import { easing } from 'maath';
 import * as THREE from 'three';
-import { Effects } from './Effects.js';
 import Background from './Background.js';
 import Particles from './Particles.js';
+import dynamic from 'next/dynamic';
+const Effects = dynamic(() => import('./Effects'), { ssr: false }); // 호출 에러가 떠서 추가했습니다
 //
 //
 //
@@ -36,15 +37,6 @@ const shuffle = (accent = 0) => [
 ];
 
 export default function Experience({ accent }) {
-  const [ hitSound ] = useState(() => new Audio('./images/main/hit.mp3'));
-
-  const collisionEnter = () =>
-  {
-      console.log('collision!');
-      hitSound.currentTime = 0
-      hitSound.volume = Math.random()
-      hitSound.play()
-  }
 
   const connectors = useMemo(() => shuffle(accent), [accent]);
 
@@ -57,8 +49,8 @@ export default function Experience({ accent }) {
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
   
     // 카메라 회전 업데이트
-    camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.8;
-    camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.8;
+    camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
+    camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
   });
   
 
@@ -66,7 +58,7 @@ export default function Experience({ accent }) {
     <>
       {/* <Perf position="top-left" /> */}
 
-      <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={ 0.05 } angularDamping dampC />
+      <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={ 0.05 } angularDamping />
 
       <color attach="background" args={['#141622']} />
 
@@ -129,11 +121,10 @@ function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
   
   // 여기서 useState를 사용하여 사운드 초기화
-  const [hitSound] = useState(() => new Audio('./images/main/hit.mp3'));
+  const [hitSound] = useState(() => new Audio('./images/main/bubbleHit.mp3'));
 
   // 충돌 시 사운드를 재생하는 함수
   const collisionEnter = () => {
-    console.log('collision!');
     hitSound.currentTime = 0;
     hitSound.volume = Math.random();
     hitSound.play();
