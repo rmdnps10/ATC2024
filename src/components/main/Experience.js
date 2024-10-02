@@ -124,18 +124,23 @@ function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, 
 
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-
-  // 사운드 초기화
   const [hitSound] = useState(() => new Audio('./images/main/bubbleHit.mp3'));
 
-  // 충돌 시 사운드를 재생하는 함수
+  const lastPlayTime = useRef(0);
+  const soundCooldown = 80;
+
   const collisionEnter = () => {
-    hitSound.currentTime = 0;
-    hitSound.volume = Math.random();
-    hitSound.play();
+    const now = Date.now();
+
+    if (now - lastPlayTime.current > soundCooldown) {
+      hitSound.currentTime = 0;
+      hitSound.volume = Math.random() * 0.3;
+      hitSound.play();
+      
+      lastPlayTime.current = now;
+    }
   };
 
-  // 마우스 위치에 따른 오브젝트 이동
   useFrame(({ mouse, viewport }) => {
     ref.current?.setNextKinematicTranslation(vec.set((mouse.x * viewport.width) / 2, (mouse.y * viewport.height) / 2, 0));
   });
@@ -146,3 +151,4 @@ function Pointer({ vec = new THREE.Vector3() }) {
     </RigidBody>
   );
 }
+
