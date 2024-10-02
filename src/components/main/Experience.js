@@ -1,20 +1,22 @@
 'use client';
 
-import { useRef, useMemo, useState } from 'react';
-import { useFrame, useThree } from '@react-three/fiber'
+import { useRef, useMemo, useState, useCallback } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, OrbitControls, Text } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
-import { Perf } from 'r3f-perf';
 import { easing } from 'maath';
 import * as THREE from 'three';
 import Background from './Background.js';
 import Particles from './Particles.js';
 import dynamic from 'next/dynamic';
-const Effects = dynamic(() => import('./Effects'), { ssr: false }); // 호출 에러가 떠서 추가했습니다
+
+// Dynamic import for Effects to avoid SSR issues
+const Effects = dynamic(() => import('./Effects'), { ssr: false });
+
 //
-//
-//
-const accents = ['#9822ff', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
+// ATC2024 메인 컬러 사용
+const accents = ['#9822ff', '#25cefc', '#168cff', '#df45ff'];
+
 const shuffle = (accent = 0) => [
   { color: '#25cefc', roughness: 0.1, metalness: 0.5 },
   { color: '#005afb', roughness: 0.1, metalness: 0.5 },
@@ -37,7 +39,7 @@ const shuffle = (accent = 0) => [
 ];
 
 export default function Experience({ accent }) {
-
+  // Shuffle colors for connectors
   const connectors = useMemo(() => shuffle(accent), [accent]);
 
   const { camera, mouse } = useThree();
@@ -47,21 +49,18 @@ export default function Experience({ accent }) {
     camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouse.x * 0.2, 0.1); // X축 이동폭을 줄임
     camera.position.y = THREE.MathUtils.lerp(camera.position.y, mouse.y * 0.2, 0.1); // Y축 이동폭을 줄임
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
-  
+
     // 카메라 회전 업데이트
     camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
     camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
   });
-  
 
   return (
     <>
       {/* <Perf position="top-left" /> */}
-
-      <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={ 0.05 } angularDamping />
+      <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping />
 
       <color attach="background" args={['#141622']} />
-
       <Background />
 
       <Text
@@ -82,6 +81,7 @@ export default function Experience({ accent }) {
           <Sphere key={i} {...props} />
         ))}
       </Physics>
+
       <Environment resolution={256}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
           <Lightformer form="circle" intensity={100} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
@@ -91,20 +91,24 @@ export default function Experience({ accent }) {
           <Lightformer form="ring" color="#4060ff" intensity={80} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 10, 0]} scale={10} />
         </group>
       </Environment>
+
       <Effects />
     </>
   );
 }
 
-function Sphere({ position, children, vec = new THREE.Vector3(), scale, r = THREE.MathUtils.randFloatSpread, accent, color = 'white', ...props }) {
+function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, color = 'white', ...props }) {
   const api = useRef();
   const ref = useRef();
-  const pos = useMemo(() => position || [r(10), r(10), r(10)], []);
+  const r = useCallback(() => THREE.MathUtils.randFloatSpread(10), []); // useCallback으로 메모이제이션
+  const pos = useMemo(() => position || [r(), r(), r()], [position, r]); // r을 의존성 배열에 추가
+
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
     api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(0.2));
     easing.dampC(ref.current.material.color, color, 0.2, delta);
   });
+
   return (
     <RigidBody linearDamping={4} angularDamping={1} friction={0.1} position={pos} ref={api} colliders={false}>
       <BallCollider args={[1]} />
@@ -117,10 +121,11 @@ function Sphere({ position, children, vec = new THREE.Vector3(), scale, r = THRE
   );
 }
 
+
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-  
-  // 여기서 useState를 사용하여 사운드 초기화
+
+  // 사운드 초기화
   const [hitSound] = useState(() => new Audio('./images/main/bubbleHit.mp3'));
 
   // 충돌 시 사운드를 재생하는 함수
@@ -141,4 +146,3 @@ function Pointer({ vec = new THREE.Vector3() }) {
     </RigidBody>
   );
 }
-
