@@ -7,21 +7,70 @@ import { useRouter } from "next/navigation";
 //
 //
 //
-export default function WorksPage({ children }) {
+export default function WorksPage({}) {
   const tabList = ["ALL", "GAME", "UI/UX"];
-  const worksList = Array(12).fill({
-    category: tabList[1],
-    imgUrl: "/images/Rectangle.jpg",
-    team: "team elephant",
-    title: "코끼리를 냉장고에 넣는 23가지 방법",
-    // title: "@OMO_unofficial",
-    desc: "작품에 대한 설명 입니다.",
-  });
+  const worksList = [
+    {
+      id: "0",
+      category: tabList[1],
+      imgUrl: "/images/Rectangle.jpg",
+      team: "team elephant",
+      title: "코끼리를 냉장고에 넣는 23가지 방법",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+    {
+      id: "1",
+      category: tabList[2],
+      imgUrl: "/images/Rectangle13.jpg",
+      team: "team 3D",
+      title: "MearMear",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+    {
+      id: "2",
+      category: tabList[1],
+      imgUrl: "/images/Rectangle.jpg",
+      team: "team elephant",
+      title: "코끼리를 냉장고에 넣는 23가지 방법",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+    {
+      id: "3",
+      category: tabList[2],
+      imgUrl: "/images/Rectangle13.jpg",
+      team: "team 3D",
+      title: "MearMear",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+    {
+      id: "4",
+      category: tabList[1],
+      imgUrl: "/images/Rectangle.jpg",
+      team: "team elephant",
+      title: "코끼리를 냉장고에 넣는 23가지 방법",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+    {
+      id: "5",
+      category: tabList[1],
+      imgUrl: "/images/Rectangle10.jpg",
+      team: "team gamemaker",
+      title: "스타듀밸리",
+      // title: "@OMO_unofficial",
+      desc: "작품에 대한 설명 입니다.",
+    },
+  ];
   const router = useRouter();
   const tabRefs = useRef([]);
   const tabListRef = useRef();
-  const [tabSelected, setTabSelected] = useState(0);
+  const [tabSelected, setTabSelected] = useState("ALL");
   const [clickedId, setClickedId] = useState(null);
+  const [works, setWorks] = useState(worksList);
   useEffect(() => {
     tabRefs.current.forEach((ref, idx) => {
       if (ref) {
@@ -51,7 +100,16 @@ export default function WorksPage({ children }) {
     tabListRef.current.style.transform = `translate(${
       -10 * (1 + key * 4)
     }%, -50%)`;
+    setTabSelected(key);
+    if (key === 0) {
+      setWorks(worksList);
+    } else {
+      setWorks(worksList.filter((el) => el.category === tabList[key]));
+    }
   }
+  useEffect(() => {
+    console.log("Zz");
+  }, [tabList]);
   return (
     <main className={styles.main}>
       <nav>
@@ -69,12 +127,17 @@ export default function WorksPage({ children }) {
         </ul>
       </nav>
       <section>
-        {worksList.map((el, key) => (
+        {works.map((el) => (
           <motion.div
-            layoutId={key}
-            onClick={() => handleClick(key)}
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            layoutId={el.id}
+            onClick={() => handleClick(el.id)}
             className={styles.figure}
-            key={key}
+            key={el.id}
           >
             <Image
               className={styles.image}
