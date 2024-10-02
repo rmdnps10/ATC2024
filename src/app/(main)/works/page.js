@@ -83,9 +83,6 @@ export default function WorksPage({ children }) {
               fill
             />
             <figcaption>
-              {/* <Link href={`/works/${key}`} className={styles.link}>
-            {1}
-          </Link> */}
               <div className={styles.figCategory}>{el.category}</div>
               <div className={styles.figBox}>
                 <span className={styles.figTeam}>{el.team}</span>
@@ -109,6 +106,23 @@ export default function WorksPage({ children }) {
           >
             <motion.div
               initial={{
+                width: "100vw",
+                height: "100vh",
+                opacity: 1,
+                zIndex: 150,
+                backgroundColor: "white",
+              }}
+              animate={{
+                width: "100vw",
+                height: "100vh",
+                opacity: 1,
+                zIndex: 150,
+                backgroundColor: "white",
+              }}
+              exit={{
+                width: "100%",
+                height: "100%",
+                opacity: 0,
                 zIndex: 150,
                 backgroundColor: "white",
               }}

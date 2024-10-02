@@ -58,10 +58,7 @@ const animate = {
   },
   exit: {
     transform: `translateY(50px)`,
-    scaleX: 0,
-    scaleY: 0,
-    opacity: 0,
-    transition: `scaleX 0.33s ease`,
+    transition: `transform 0.33s ease`,
   },
   transition: { ease: "ease", duration: 0.33 },
 };
