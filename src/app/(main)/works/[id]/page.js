@@ -30,6 +30,7 @@ export default function WorkDetailPage() {
           initial={animate.initial}
           animate={animate.animate}
           exit={animate.exit}
+          transition={animate.transition}
         >
           <main className={styles.main} onClick={handleExit}>
             <DetailHeader />
@@ -57,9 +58,12 @@ const animate = {
   },
   exit: {
     transform: `translateY(50px)`,
+    scaleX: 0,
+    scaleY: 0,
     opacity: 0,
-    transition: `transform 0.33s ease`,
+    transition: `scaleX 0.33s ease`,
   },
+  transition: { ease: "ease", duration: 0.33 },
 };
 
 // initial={{

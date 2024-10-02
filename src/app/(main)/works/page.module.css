@@ -32,12 +32,13 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-size: 1.8rem;
-  gap: 5rem;
+  gap: 10rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-10%, -50%);
   cursor: pointer;
+  transition: transform ease-in-out 0.3s;
 }
 
 .main nav ul li {
@@ -46,7 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .main nav ul li:hover > span {

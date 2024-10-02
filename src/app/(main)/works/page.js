@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Link from "next/link";
-import { useState } from "react";
-import { AnimatePresence, motion, px } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 //
 //
@@ -19,21 +18,51 @@ export default function WorksPage({ children }) {
     desc: "작품에 대한 설명 입니다.",
   });
   const router = useRouter();
-  const [tabSelected, setTabSelected] = useState("ALL");
+  const tabRefs = useRef([]);
+  const tabListRef = useRef();
+  const [tabSelected, setTabSelected] = useState(0);
   const [clickedId, setClickedId] = useState(null);
+  useEffect(() => {
+    tabRefs.current.forEach((ref, idx) => {
+      if (ref) {
+        ref.style.fontSize = idx === 0 ? "2.3rem" : "1.8rem";
+        ref.style.fontWeight = idx === 0 ? "600" : "500";
+        ref.style.color = idx === 0 ? "black" : "#767676";
+      }
+    });
+    tabListRef.current.style.transform = `translate(${
+      -10 * (1 + 0 * 4)
+    }%, -50%)`;
+  }, []);
   function handleClick(key) {
     setClickedId(key);
     setTimeout(() => {
       router.push(`/works/${key}`);
     }, 300);
   }
+  function handleTabClick(key) {
+    tabRefs.current.forEach((ref, idx) => {
+      if (ref) {
+        ref.style.fontSize = idx === key ? "2.1rem" : "1.8rem";
+        ref.style.fontWeight = idx === key ? "600" : "500";
+        ref.style.color = idx === key ? "black" : "#767676";
+      }
+    });
+    tabListRef.current.style.transform = `translate(${
+      -10 * (1 + key * 4)
+    }%, -50%)`;
+  }
   return (
     <main className={styles.main}>
       <nav>
         <div className="indicator"></div>
-        <ul>
+        <ul ref={tabListRef}>
           {tabList.map((el, key) => (
-            <li key={key}>
+            <li
+              key={key}
+              ref={(el) => (tabRefs.current[key] = el)}
+              onClick={() => handleTabClick(key)}
+            >
               <span>{el}</span>
             </li>
           ))}
@@ -55,8 +84,8 @@ export default function WorksPage({ children }) {
             />
             <figcaption>
               {/* <Link href={`/works/${key}`} className={styles.link}>
-                {1}
-              </Link> */}
+            {1}
+          </Link> */}
               <div className={styles.figCategory}>{el.category}</div>
               <div className={styles.figBox}>
                 <span className={styles.figTeam}>{el.team}</span>
@@ -80,41 +109,13 @@ export default function WorksPage({ children }) {
           >
             <motion.div
               initial={{
-                width: "100vw",
-                height: "100vh",
-                opacity: 1,
-                zIndex: 150,
-                backgroundColor: "white",
-              }}
-              animate={{
-                width: "100vw",
-                height: "100vh",
-                opacity: 1,
-                zIndex: 150,
-                backgroundColor: "white",
-              }}
-              exit={{
-                width: "100%",
-                height: "100%",
-                opacity: 0,
                 zIndex: 150,
                 backgroundColor: "white",
               }}
               transition={{ ease: "easeInOut", duration: 0.33 }}
               layoutId={clickedId}
               className={styles.animateBox}
-            >
-              {
-                // <Image
-                //   className={styles.image}
-                //   src="/images/Rectangle.jpg"
-                //   alt="overlay box"
-                //   // width={100}
-                //   // height={200}
-                //   fill
-                // />
-              }
-            </motion.div>
+            ></motion.div>
           </motion.div>
         )}
       </AnimatePresence>
