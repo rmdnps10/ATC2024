@@ -1,52 +1,49 @@
 .main {
-    width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding: 3rem 10rem 0 10rem; /*비율 뷰포트에 맞춰서 임의로 설정*/
     gap: 2.5rem;
-    padding: 3rem 10rem 0 10rem; /*와이어프레임 비율이랑 다름. 일단 뷰포트에 맞춰서 임의로 설정*/
     background-color: rgb(207, 229, 236);
 }
 
 .timetableContainer {
-    background-color: #ffe7e7;
-    padding: 2rem;
-    border-radius: 1rem;
     width: 40vw;
-    height: 68.4rem;
+    height: 70rem;
+    padding: 2rem;
+    border: 0;
+    border-radius: 1rem;
+    background-color: #ffe7e7;
 }
 
 .grid {
-    height: 100%;
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 2fr 2fr; 
     grid-template-rows: 1fr repeat(8, 2fr); 
-    border: 2px solid #9756ff; 
+    height: 100%;
     position: relative;
-}
-
-.timeslot12::before { 
-    content: "12:00";
-    position: absolute;
-    left: -5rem;
+    border: 2px solid #9756ff; 
 }
 
 .grid div {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #f9d938; 
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f9d938;
     background-color: rgb(255, 255, 255);
     font-size: 1.2rem;
 }
 
 .grid .time {
-    background-color: transparent; 
-    border: none;
-    position: relative;
     display: flex;
     justify-content: center;
-    top: -40%; /*시간을 그리드 선쪽으로 옮기기 */
+    position: relative;
+    top: -40%;
+    background-color: transparent;
+    border: none;
     font-size: 2rem;
 }
 
@@ -56,7 +53,7 @@
     font-size: 1.6rem;
 }
 
-/********************************************************************************************************************/
+
 
 .program {
     background-color: #2a4455;
@@ -67,21 +64,22 @@
     width: 40vw;
 }
 
-.programItem { 
+.programItem {
     margin-bottom: 1rem;
     background-color: #c16363;
 }
 
 .programHeader {
-    width: 100%;
-    height: 10.4rem;
-    padding: 2.8rem 3rem;
-    font-size: 3.2rem;
-    color: #333;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 10.4rem;
+    padding: 2.8rem 3rem;
+    border: none;
     background-color: #ffffff;
+    font-size: 3.2rem;
+    color: #333;
     border-radius: 1rem;
 }
 
@@ -89,8 +87,9 @@
     background-color: #fbffad;
 }
 
-.arrow {
-    font-size: 1.6rem; /*나중에 바꾸기*/
+.arrow { /*화살표 모양 수정 해야함*/
+    display: inline;
+    font-size: 1.6rem;
 }
 
 .accordionContent {
@@ -104,21 +103,15 @@
 
 .programTime {
     font-size: 1.8rem;
-    color: #555;
     margin-bottom: 0.5rem;
 }
 
 .programLocation {
     font-size: 1.4rem;
-    color: #333;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
 
 .programDescription {
     font-size: 1.4rem;
-    color: #666;
-}
-
-.active .accordionHeader {
-    background-color: #d9e1ff;
+    color: #444444;
 }
