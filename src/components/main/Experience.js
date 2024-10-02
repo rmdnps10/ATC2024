@@ -15,27 +15,27 @@ const Effects = dynamic(() => import('./Effects'), { ssr: false }); // Dynamic i
 //
 //
 //
-const accents = ['#9822ff', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
+const accents = ['#005afb', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
-  { color: '#25cefc', roughness: 0.1, metalness: 0.5 },
-  { color: '#005afb', roughness: 0.1, metalness: 0.5 },
-  { color: '#005afb', roughness: 0.1, metalness: 0.5 },
-  { color: '#168cff', roughness: 0.1, metalness: 0.1 },
+  { color: '#25cefc', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
+  { color: '#005afb', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
+  { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
+  { color: '#168cff', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.5  },
   { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
   { color: '#7334ff', roughness: 0.1, metalness: 0.1 },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
-  { color: accents[accent], roughness: 0.1, accent: true },
-  { color: 'white', roughness: 0.1 },
-  { color: 'white', roughness: 0.3 },
-  { color: 'white', roughness: 0.3 },
-  { color: '#168cff', roughness: 0.1 },
-  { color: '#9822ff', roughness: 0.2 },
+  { color: accents[accent], roughness: 0.7, accent: true },
+  { color: '#ffffff99', roughness: 0.1 },
+  { color: 'white', roughness: 0.3, metalness: 0.3 },
+  { color: 'ivory', roughness: 0.3 },
+  { color: '#168cff', roughness: 0.1, transparent: true, opacity: 0.5  },
+  { color: '#9822ff', roughness: 0.2,  transparent: true, opacity: 0.5  },
   { color: '#7334ff', roughness: 0.1 },
-  { color: accents[accent], roughness: 0.1, accent: true, transparent: true, opacity: 0.5 },
+  { color: accents[accent], roughness: 0.1, metalness: 0.5, accent: true },
   { color: accents[accent], roughness: 0.3, accent: true },
-  { color: accents[accent], roughness: 0.1, accent: true, transparent: true, opacity: 0.5 },
+  { color: accents[accent], roughness: 0.1, accent: true },
 ];
 
 export default function Experience({ accent }) {
@@ -83,7 +83,7 @@ export default function Experience({ accent }) {
 
       <Environment resolution={256} preset="studio" environmentIntensity={0.3}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
-          <Lightformer form="circle" intensity={100} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
+          <Lightformer form="circle" intensity={50} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
           <Lightformer form="circle" intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={2} />
           <Lightformer form="circle" intensity={2} rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={2} />
           <Lightformer form="circle" intensity={2} rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={8} />
