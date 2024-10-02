@@ -5,6 +5,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, OrbitControls, Text } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
 import { easing } from 'maath';
+import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
 import Background from './Background.js';
 import Particles from './Particles.js';
@@ -57,7 +58,7 @@ export default function Experience({ accent }) {
 
   return (
     <>
-      {/* <Perf position="top-left" /> */}
+      <Perf position="top-left" />
       <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping />
 
       <color attach="background" args={['#141622']} />
@@ -82,7 +83,7 @@ export default function Experience({ accent }) {
         ))}
       </Physics>
 
-      <Environment resolution={256}>
+      <Environment resolution={256} preset="studio" environmentIntensity={0.3}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
           <Lightformer form="circle" intensity={100} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
           <Lightformer form="circle" intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={2} />
