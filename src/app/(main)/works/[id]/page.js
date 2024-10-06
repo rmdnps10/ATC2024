@@ -7,8 +7,9 @@ import DetailReservation from "@/components/works/DetailReservation";
 import DetailArtist from "@/components/works/DetailArtist";
 import DetailGuestBook from "@/components/works/DetailGuestBook";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { worksData } from "@/components/works/MockData";
 //
 //
 //
@@ -16,12 +17,34 @@ export default function WorkDetailPage() {
   const pathname = useParams();
   const router = useRouter();
   const [isClicked, setIsClicked] = useState(false);
+  const [detailData, setDetailData] = useState(null);
+
+  useEffect(() => {
+    if (pathname.id) {
+      setDetailData(worksData[Number(pathname.id)]);
+    }
+  }, []);
+  console.log(detailData);
   function handleExit() {
     setIsClicked(true);
     setTimeout(() => {
-      router.push("/works");
+      router.back();
     }, 330);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({ top: -1, left: 0, behavior: "smooth" });
+    }, 100);
+    // document
+    //   .querySelector("meta[name=viewport]")
+    //   .setAttribute(
+    //     "content",
+    //     "width=device-width, user-scalable=no, initial-scale=" +
+    //       1 / window.devicePixelRatio +
+    //       ""
+    //   );
+  }, []);
   return (
     <AnimatePresence>
       {!isClicked && (
@@ -33,7 +56,13 @@ export default function WorkDetailPage() {
           transition={animate.transition}
         >
           <main className={styles.main} onClick={handleExit}>
-            <DetailHeader />
+            <DetailHeader
+              titleKor={detailData.title.title_kor}
+              titleEng={detailData.title.title_eng}
+              summary={detailData.summary}
+              desc={detailData.desc}
+              urls={detailData.urls}
+            />
             <DetailAbout />
             <DetailReservation />
             <DetailArtist />
@@ -62,23 +91,3 @@ const animate = {
   },
   transition: { ease: "ease", duration: 0.33 },
 };
-
-// initial={{
-//   scaleX: 0,
-//   scaleY: 0,
-//   opacity: 0,
-//   background: "none",
-// }}
-// animate={{
-//   scaleX: 1,
-//   scaleY: 1,
-//   opacity: 1,
-//   background: "none",
-// }}
-// exit={{
-//   scaleX: 0,
-//   scaleY: 0,
-//   opacity: 0,
-//   background: "none",
-// }}
-// transition={{ ease: "easeInOut", duration: 0.5 }}

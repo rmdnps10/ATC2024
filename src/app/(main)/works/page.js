@@ -4,74 +4,21 @@ import styles from "./page.module.css";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { worksData } from "@/components/works/MockData";
 //
 //
 //
 export default function WorksPage({}) {
   const tabList = ["ALL", "GAME", "UI/UX"];
-  const worksList = [
-    {
-      id: "0",
-      category: tabList[1],
-      imgUrl: "/images/Rectangle.jpg",
-      team: "team elephant",
-      title: "코끼리를 냉장고에 넣는 23가지 방법",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-    {
-      id: "1",
-      category: tabList[2],
-      imgUrl: "/images/Rectangle13.jpg",
-      team: "team 3D",
-      title: "MearMear",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-    {
-      id: "2",
-      category: tabList[1],
-      imgUrl: "/images/Rectangle.jpg",
-      team: "team elephant",
-      title: "코끼리를 냉장고에 넣는 23가지 방법",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-    {
-      id: "3",
-      category: tabList[2],
-      imgUrl: "/images/Rectangle13.jpg",
-      team: "team 3D",
-      title: "MearMear",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-    {
-      id: "4",
-      category: tabList[1],
-      imgUrl: "/images/Rectangle.jpg",
-      team: "team elephant",
-      title: "코끼리를 냉장고에 넣는 23가지 방법",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-    {
-      id: "5",
-      category: tabList[1],
-      imgUrl: "/images/Rectangle10.jpg",
-      team: "team gamemaker",
-      title: "스타듀밸리",
-      // title: "@OMO_unofficial",
-      desc: "작품에 대한 설명 입니다.",
-    },
-  ];
   const router = useRouter();
   const tabRefs = useRef([]);
   const tabListRef = useRef();
   const [tabSelected, setTabSelected] = useState("ALL");
   const [clickedId, setClickedId] = useState(null);
-  const [works, setWorks] = useState(worksList);
+  const [works, setWorks] = useState(worksData);
+  const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
+    //필터링 탭에 useRef
     tabRefs.current.forEach((ref, idx) => {
       if (ref) {
         ref.style.fontSize = idx === 0 ? "2.3rem" : "1.8rem";
@@ -82,13 +29,20 @@ export default function WorksPage({}) {
     tabListRef.current.style.transform = `translate(${
       -10 * (1 + 0 * 4)
     }%, -50%)`;
+    //스크롤 인식
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
   }, []);
-  function handleClick(key) {
+
+  function handleWorkClick(key) {
     setClickedId(key);
     setTimeout(() => {
-      router.push(`/works/${key}`);
+      router.push(`/works/${key}`, undefined, { shallow: true });
     }, 300);
   }
+
   function handleTabClick(key) {
     tabRefs.current.forEach((ref, idx) => {
       if (ref) {
@@ -102,14 +56,12 @@ export default function WorksPage({}) {
     }%, -50%)`;
     setTabSelected(key);
     if (key === 0) {
-      setWorks(worksList);
+      setWorks(worksData);
     } else {
-      setWorks(worksList.filter((el) => el.category === tabList[key]));
+      setWorks(worksData.filter((el) => el.category === tabList[key]));
     }
   }
-  useEffect(() => {
-    console.log("Zz");
-  }, [tabList]);
+
   return (
     <main className={styles.main}>
       <nav>
@@ -135,21 +87,21 @@ export default function WorksPage({}) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             layoutId={el.id}
-            onClick={() => handleClick(el.id)}
+            onClick={() => handleWorkClick(el.id)}
             className={styles.figure}
             key={el.id}
           >
             <Image
               className={styles.image}
               src={el.imgUrl}
-              alt={el.title}
+              alt={el.title.title_kor}
               fill
             />
             <figcaption>
               <div className={styles.figCategory}>{el.category}</div>
               <div className={styles.figBox}>
-                <span className={styles.figTeam}>{el.team}</span>
-                <span className={styles.figTitle}>{el.title}</span>
+                <span className={styles.figTeam}>{el.team.team_kor}</span>
+                <span className={styles.figTitle}>{el.title.title_kor}</span>
                 <span className={styles.figDesc}>{el.desc}</span>
               </div>
             </figcaption>
@@ -159,6 +111,7 @@ export default function WorksPage({}) {
       <AnimatePresence>
         {clickedId !== null && (
           <motion.div
+            style={{ transform: `translateY(${scrollY - 100}px)` }}
             className={styles.animateOverlay}
             onClick={() => {
               setClickedId(null);
@@ -172,22 +125,16 @@ export default function WorksPage({}) {
                 width: "100vw",
                 height: "100vh",
                 opacity: 1,
-                zIndex: 150,
-                backgroundColor: "white",
               }}
               animate={{
                 width: "100vw",
-                height: "100vh",
+                height: "200vh",
                 opacity: 1,
-                zIndex: 150,
-                backgroundColor: "white",
               }}
               exit={{
                 width: "100%",
                 height: "100%",
                 opacity: 0,
-                zIndex: 150,
-                backgroundColor: "white",
               }}
               transition={{ ease: "easeInOut", duration: 0.33 }}
               layoutId={clickedId}

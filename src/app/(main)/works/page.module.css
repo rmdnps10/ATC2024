@@ -3,9 +3,6 @@
   height: 88vh;
   display: flex;
   flex-direction: column;
-  /* display: grid;
-  grid-template-rows: 15rem 1fr; */
-  overflow: hidden;
   position: relative;
 }
 
@@ -23,6 +20,7 @@
   position: relative;
   width: 100vw;
   height: 15rem;
+  min-height: 15rem;
   color: #767676;
 }
 
@@ -75,6 +73,7 @@
   top: 0;
   left: 0;
 }
+
 .main nav div::before {
   position: absolute;
   border-bottom: 1px solid black;
@@ -87,16 +86,16 @@
 }
 
 .main section {
-  width: 100vw;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  width: 100%;
+  /* height: 100%; */
+  /* overflow-x: hidden; */
+  /* overflow-y: scroll; */
   display: flex;
   flex-wrap: wrap;
-  overscroll-behavior: contain;
+  /* overscroll-behavior: contain;
   &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 }
 
 .figure {
@@ -133,15 +132,6 @@
   cursor: pointer;
 }
 
-.link {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-
 .figCategory {
   display: flex;
   width: 100%;
@@ -167,8 +157,8 @@
 }
 
 .animateOverlay {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -178,4 +168,6 @@
 .animateBox {
   width: 10rem;
   height: 20rem;
+  z-index: 150;
+  background-color: white;
 }
