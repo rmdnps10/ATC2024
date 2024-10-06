@@ -1,3 +1,11 @@
+// page.js
+"use client";
+
+import styles from "./page.module.css";
+import Scene from "../../../components/onboard/Scene";
+
 export default function OnBoardPage() {
-  return <main>온보딩 페이지</main>;
+  return <div className={styles.root}>
+    <Scene />
+  </div>;
 }
