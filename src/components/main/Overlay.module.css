@@ -1,0 +1,43 @@
+/* components/main/Overlay.module.css */
+.overlay {
+    position: fixed;
+    top: 50%;
+    right: 3vh;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .topStack, .bottomStack {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .topStack {
+    margin-bottom: 1px;
+  }
+  
+  .bottomStack {
+    margin-top: 1px;
+  }
+  
+  .box {
+    /* left: 3px; */
+    width: 25px;
+    height: 2px;
+    margin: 3px;
+    border-radius: 0.3px;
+    transition: background-color 0.4s, transform 0.4s;
+  }
+  
+  .filled {
+    background-color: #ffffff;
+  }
+  
+  .percentageText {
+    color: white;
+    font-size: 1.2rem;
+  }
+  
