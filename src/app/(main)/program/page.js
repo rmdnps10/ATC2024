@@ -133,7 +133,7 @@ export default function ProgramPage() {
                     return (
                       <td
                         key={colIndex}
-                        className={`${styles.tableCell} ${hoveredProgram === cellData.id ? styles.hovered : ''}`} 
+                        className={`${styles.tableCell} ${hoveredProgram === cellData.id ? styles.highlightedProgram : ''}`} 
                         rowSpan={cellData.rowspan}
                         onMouseEnter={() => setHoveredProgram(cellData.id)}  
                         onMouseLeave={() => setHoveredProgram(null)}  
@@ -153,23 +153,22 @@ export default function ProgramPage() {
 
       {/* 오른쪽 프로그램 목록 */}
       <section className={styles.programContainer}>
-        {programs.map((program, index) => (
+        {programs.map((program) => (
           <div
-            key={index}
-            className={`${styles.programItem} ${openPrograms.includes(index) ? styles.active : ''}`}
-          >
+            key={program.id}
+            className={styles.programItem}>
             <div
-              className={`${styles.programHeader} ${hoveredProgram === program.id ? styles.hovered : ''}`}
-              onClick={() => setOpenPrograms(openPrograms.includes(index)
-                ? openPrograms.filter(i => i !== index)
-                : [...openPrograms, index])}
+              className={`${styles.programHeader} ${hoveredProgram === program.id ? styles.highlightedProgram : ''} ${openPrograms.includes(program.id) ? styles.active : ''}`} 
+              onClick={() => setOpenPrograms(openPrograms.includes(program.id)
+                ? openPrograms.filter(id => id !== program.id)
+                : [...openPrograms, program.id])}
             >
               <span>{program.title}</span>
               <span className={styles.arrow}>
-                {openPrograms.includes(index) ? '▲' : '▼'}
+                {openPrograms.includes(program.id) ? '▲' : '▼'}
               </span>
             </div>
-            {openPrograms.includes(index) && (
+            {openPrograms.includes(program.id) && (
               <div className={styles.accordionContent}>
                 <div className={styles.programDetails}>
                   <p className={styles.programTime}>{program.startTime} - {program.endTime} ({program.day})</p>
