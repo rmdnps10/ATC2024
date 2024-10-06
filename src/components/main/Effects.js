@@ -1,7 +1,9 @@
 import { useThree, useFrame } from '@react-three/fiber'
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ToneMappingEffect, FXAAEffect } from 'postprocessing'
 import { useEffect, useState } from 'react'
-
+//
+//
+//
 export default function Effects() {
   const gl = useThree((state) => state.gl)
   const scene = useThree((state) => state.scene)
@@ -23,7 +25,7 @@ export default function Effects() {
   }, [composer, camera, scene])
 
   useFrame((state, delta) => {
-    gl.autoClear = true // ?
+    gl.autoClear = true
     composer.render(delta)
   }, 1)
 }

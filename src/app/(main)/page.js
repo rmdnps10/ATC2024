@@ -15,6 +15,7 @@ export default function MainPage() {
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
   const [dpr, setDpr] = useState(1.5);
   const [scrollPercent, setScrollPercent] = useState(0);
+  const pages = 3;
 
   return (
     <div className={styles.canvasContainer} onClick={click} >
@@ -27,7 +28,7 @@ export default function MainPage() {
         camera={{ position: [0, 0, 30], fov: 17.5, near: 10, far: 40 }}
         style={{ scrollbarWidth: 'none' }}
       >
-        <ScrollControls pages={3} damping={0.1} style={{ scrollbarWidth: 'none' }} >
+        <ScrollControls pages={pages} damping={0.1} style={{ scrollbarWidth: 'none' }} >
           <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)} />
           <Experience accent={accent} />
           <Scroll html />

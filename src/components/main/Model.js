@@ -38,14 +38,14 @@ export default function Model(props) {
     <group ref={groupRef}>
       <primitive
         object={fishScene}
-        scale={15}
-        position={[5, - 1, -5]}
+        scale={5}
+        position={[6, 1, -5]}
       />
       <primitive
         object={mainScene}
         scale={15}
-        position={[5, - 1.5, 0]}
-        rotation-y={ Math.PI * 0.3 }
+        position={[6, - 1.5, 0]}
+        rotation-y={ -Math.PI * 0.3 }
       />
     </group>
   );

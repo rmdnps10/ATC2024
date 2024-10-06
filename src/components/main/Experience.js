@@ -10,54 +10,55 @@ import { easing } from 'maath';
 import Background from './Background.js';
 import CameraController from './CameraController.js';
 import dynamic from 'next/dynamic';
+import VideoText from './VideoText.js';
+import Cube from './Cube.js';
 
-const Effects = dynamic(() => import('./Effects'), { ssr: false }); // Dynamic import for Effects to avoid SSR issues
+const Effects = dynamic(() => import('./Effects'), { ssr: false });
 //
 //
 //
 const accents = ['#005afb', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
-  { color: '#25cefc', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
-  { color: '#005afb', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
+  { color: 'white', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
+  { color: 'white', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
   { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
-  { color: '#168cff', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.5  },
+  { color: 'white', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.5  },
   { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
   { color: '#7334ff', roughness: 0.1, metalness: 0.1 },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.7, accent: true },
   { color: 'white', roughness: 0.1 },
-  { color: 'white', roughness: 0.3, metalness: 0.3 },
+  { color: '#005afb', roughness: 0.3, metalness: 0.3 },
   { color: 'ivory', roughness: 0.3 },
-  { color: '#168cff', roughness: 0.1, transparent: true, opacity: 0.5  },
-  { color: '#9822ff', roughness: 0.2,  transparent: true, opacity: 0.5  },
+  { color: '#168cff', roughness: 0.1, },
+  { color: 'white', roughness: 0.2,  transparent: true, opacity: 0.5  },
   { color: '#7334ff', roughness: 0.1 },
-  { color: accents[accent], roughness: 0.1, metalness: 0.5, accent: true },
+  { color: accents[accent], roughness: 0.1, metalness: 0.5},
   { color: accents[accent], roughness: 0.3, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
 ];
 
 export default function Experience({ accent }) {
-  // Shuffle colors for connectors
   const connectors = useMemo(() => shuffle(accent), [accent]);
 
   // const { camera, mouse } = useThree();
 
   // useFrame((state, delta) => {
-  //   // 카메라 위치 및 회전 업데이트
+  //   // 카메라 위치 및 회전
   //   camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouse.x * 0.2, 0.1); // X축 이동폭을 줄임
   //   camera.position.y = THREE.MathUtils.lerp(camera.position.y, mouse.y * 0.2, 0.1); // Y축 이동폭을 줄임
   //   camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
 
-  //   // 카메라 회전 업데이트
+  //   // 카메라 회전
   //   camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
   //   camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
   // });
 
   return (
     <>
-      {/* <Perf position="top-left" /> */}
+      <Perf position="top-left" />
       {/* <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping /> */}
 
       <Background />
@@ -93,6 +94,10 @@ export default function Experience({ accent }) {
         </group>
       </Environment>
 
+      <VideoText />
+
+      <Cube />
+
       <Effects />
     </>
   );
@@ -101,8 +106,8 @@ export default function Experience({ accent }) {
 function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, color = 'white', ...props }) {
   const api = useRef();
   const ref = useRef();
-  const r = useCallback(() => THREE.MathUtils.randFloatSpread(10), []); // useCallback으로 메모이제이션
-  const pos = useMemo(() => position || [r(), r(), r()], [position, r]); // r을 의존성 배열에 추가
+  const r = useCallback(() => THREE.MathUtils.randFloatSpread(10), []);
+  const pos = useMemo(() => position || [r(), r(), r()], [position, r]);
 
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);

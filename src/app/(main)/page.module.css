@@ -1,14 +1,12 @@
 .canvasContainer {
-    /* display: block; */
-    position: fixed; /* fixed에서 relative로 변경 */
+    position: fixed;
     width: 100vw;
     height: 100vh;
-    /* left: 0; */
     top: 0;
   }
   
   .canvasContainer::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+    display: none;
   }
 
   

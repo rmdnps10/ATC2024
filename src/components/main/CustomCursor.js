@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import styles from './CustomCursor.module.css';
-
+//
+//
+//
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [click, setClick] = useState(false);
