@@ -4,7 +4,7 @@
     height: 30px;
     border-radius: 50%;
     background-color: rgba(252, 252, 252, 0.8);
-    pointer-events: none; /* Prevent interaction with elements */
+    pointer-events: none;
     transform: translate(-50%, -50%);
     transition: transform 0.15s ease, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
     z-index: 9999;
@@ -14,12 +14,12 @@
   
   .click {
     background-color: rgba(255, 255, 255, 0.7);
-    transform: translate(-50%, -50%) scale(0.8); /* Shrinks when clicked */
+    transform: translate(-50%, -50%) scale(0.8);
   }
   
   .hover {
     background-color: rgba(255, 255, 255, 0.5);
     width: 50px;
-    height: 50px; /* Enlarges when hovering */
+    height: 50px;
   }
   

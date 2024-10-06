@@ -1,14 +1,14 @@
 'use client';
 
+import * as THREE from 'three';
 import { useRef, useMemo, useState, useCallback } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { Environment, Lightformer, OrbitControls, Text } from '@react-three/drei';
 import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
-import { easing } from 'maath';
 import { Perf } from 'r3f-perf';
-import * as THREE from 'three';
+import { easing } from 'maath';
 import Background from './Background.js';
-import Particles from './Particles.js';
+import CameraController from './CameraController.js';
 import dynamic from 'next/dynamic';
 
 const Effects = dynamic(() => import('./Effects'), { ssr: false }); // Dynamic import for Effects to avoid SSR issues
@@ -27,7 +27,7 @@ const shuffle = (accent = 0) => [
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.7, accent: true },
-  { color: '#ffffff99', roughness: 0.1 },
+  { color: 'white', roughness: 0.1 },
   { color: 'white', roughness: 0.3, metalness: 0.3 },
   { color: 'ivory', roughness: 0.3 },
   { color: '#168cff', roughness: 0.1, transparent: true, opacity: 0.5  },
@@ -62,16 +62,18 @@ export default function Experience({ accent }) {
 
       <Background />
 
+      <CameraController />
+
       <Text
         position={[0, 0, 7]}
         fontSize={1}
-        color="#ffffff99"
+        color="#ffffff"
         anchorX="center"
         anchorY="middle"
         maxWidth={10}
         bevel={10}
       >
-        Art&Technology Conference               2024
+        {'Art&Technology Conference               2024'}
       </Text>
 
       <Physics timeStep="vary" gravity={[0, 0, 0]} >

@@ -1,28 +1,52 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import Experience from '../../components/main/Experience';
+import { useReducer, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { PerformanceMonitor, ScrollControls, Scroll, useScroll } from '@react-three/drei';
 import styles from './page.module.css';
-import { useReducer } from 'react';
+import Experience from '@/components/main/Experience';
 import CustomCursor from '@/components/main/CustomCursor';
+import Overlay from '@/components/main/Overlay';
 //
 //
 //
-const accents = ['#25cefc', '#005afb', '#df45ff', '#7334ff'];
-
 export default function MainPage() {
+  const accents = ['#005afb', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
   const [accent, click] = useReducer((state) => ++state % accents.length, 0);
+  const [dpr, setDpr] = useState(1.5);
+  const [scrollPercent, setScrollPercent] = useState(0);
 
   return (
-    <div className={styles.canvasContainer} onClick={click}> {/* 클릭 이벤트 추가 */}
+    <div className={styles.canvasContainer} onClick={click} >
       <CustomCursor />
       <Canvas
-        flat
+        frameloop="always"
         shadows
-        dpr={[1, 1.5]} gl={{ antialias: false }} camera={{ position: [0, 0, 30], fov: 17.5, near: 10, far: 40 }}
+        dpr={dpr}
+        gl={{ antialias: false }}
+        camera={{ position: [0, 0, 30], fov: 17.5, near: 10, far: 40 }}
+        style={{ scrollbarWidth: 'none' }}
       >
-        <Experience accent={accent} /> {/* 액센트를 Experience에 전달 */}
+        <ScrollControls pages={3} damping={0.1} style={{ scrollbarWidth: 'none' }} >
+          <PerformanceMonitor onIncline={() => setDpr(2)} onDecline={() => setDpr(1)} />
+          <Experience accent={accent} />
+          <Scroll html />
+          <ScrollTracker setScrollPercent={setScrollPercent} />
+        </ScrollControls>
       </Canvas>
+      <Overlay scrollPercent={scrollPercent} />
     </div>
   );
+}
+
+function ScrollTracker({ setScrollPercent }) {
+  const scroll = useScroll();
+
+  useFrame(() => {
+    const offset = scroll.offset;
+    const percent = Math.min(Math.max(offset * 100, 0), 100);
+    setScrollPercent(percent.toFixed(0));
+  });
+
+  return null;
 }

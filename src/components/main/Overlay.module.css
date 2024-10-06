@@ -1,0 +1,22 @@
+.overlay {
+    position: fixed;
+    top: 47vh; /* 화면 상단에서의 거리 */
+    right: 3vh; /* 화면 오른쪽에서의 거리 */
+    z-index: 1000; /* 다른 요소들보다 위에 표시되도록 설정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scrollbar-width: none;
+  }
+  
+  .percentageText {
+    margin-top: 5px;
+    color: white; /* 텍스트 색상 */
+    font-size: 1.2rem;
+    /* font-family: Arial, sans-serif; */
+  }
+
+  .overlay::-webkit-scrollbar {
+    display: none;
+  }
+  

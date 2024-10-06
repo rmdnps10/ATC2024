@@ -1,21 +1,14 @@
 .canvasContainer {
-    box-sizing: border-box;
-    overflow-x: hidden;
-    display: block;
-    position: fixed; /* Makes sure the canvas sticks to the viewport */
+    /* display: block; */
+    position: fixed; /* fixed에서 relative로 변경 */
+    width: 100vw;
+    height: 100vh;
+    /* left: 0; */
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: none;
-}
+  }
+  
+  .canvasContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera에서 스크롤바 숨기기 */
+  }
 
-.canvas {
-    overflow-y: scroll;
-    pointer-events: auto;
-    scrollbar-width: none; /* Firefox */
-}
-
-.canvas::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
+  
