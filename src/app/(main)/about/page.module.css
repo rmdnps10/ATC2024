@@ -1,0 +1,148 @@
+.main {
+    width: 100vw;
+    margin-top: 0rem;
+    overflow: hidden;
+    background-color: rgb(206, 248, 248);
+}
+
+.imageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 26.2rem;
+    margin-bottom: 26.1rem;
+}
+
+.videoWrapper {
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+}
+.videoContainer {
+    width: 62.5%;
+    background-color: blueviolet;
+    aspect-ratio: 16 / 9;
+}
+.videoContainer video {
+    width: 100%;
+    height: 100%;
+}
+
+.articles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    gap: 2.4rem;
+}
+.articles article { 
+    width: 58.8rem;
+    height: 21.6rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+
+.quote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2.4rem; 
+}
+.quote blockquote:first-child{
+    align-self: flex-start;
+    width: 58.8rem;
+    margin-top: 27.5rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+.quote blockquote:last-child{
+    align-self: flex-start;
+    width: 58.8rem;
+    margin-top: 62.4rem;
+    background-color: white;
+    font-size: 1.6rem;
+}
+.quoteTitle {
+    margin-bottom: 5.1rem;
+}
+.quote p:first-child {
+    font-size: 3.2rem;
+}
+
+.sponsorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    overflow: hidden;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.scrollRow.firstRow {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    animation: scrollFirstRow 10s linear infinite;
+    background-color: yellowgreen;
+}
+.scrollRow.secondRow {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    animation: scrollSecondRow 10s linear infinite reverse;
+    background-color: lightcoral;
+}
+
+@keyframes scrollFirstRow {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+}
+@keyframes scrollSecondRow {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+}
+
+.sponsorBox {
+    width: 33rem;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: palevioletred;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.sponsorBox img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    background-color: azure;
+}
+
+.credit {
+    width: 100%;
+    height: 102rem;
+    background-color: black;
+}
+.credit div {
+    width: 100%;
+    height: 94.7rem;
+    border-radius: 160.3rem;
+    opacity: 0.3;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(39, 143, 251, 0.90) 0%, rgba(39, 143, 251, 0.00) 100%);
+    filter: blur(10rem);
+}
+.credit p {
+    justify-content: center;
+    color: white;
+}

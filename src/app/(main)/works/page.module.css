@@ -1,0 +1,173 @@
+.main {
+  width: 100vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pageDetail {
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: blue;
+}
+
+.main nav {
+  position: relative;
+  width: 100vw;
+  height: 15rem;
+  min-height: 15rem;
+  color: #767676;
+}
+
+.main nav ul {
+  width: fit-content;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 1.8rem;
+  gap: 10rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-10%, -50%);
+  cursor: pointer;
+  transition: transform ease-in-out 0.3s;
+}
+
+.main nav ul li {
+  width: 7rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 2px solid red; */
+}
+
+.main nav ul li:hover > span {
+  color: black;
+  font-weight: 600;
+  transition: color 0.4s ease-in, font-weight 0.1s ease-in;
+}
+
+.main nav div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  width: 20rem;
+  height: 6rem;
+}
+
+.main nav div::after {
+  position: absolute;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  content: "";
+  height: 50%;
+  width: 50%;
+  top: 0;
+  left: 0;
+}
+
+.main nav div::before {
+  position: absolute;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  content: "";
+  height: 50%;
+  width: 50%;
+  bottom: 0;
+  right: 0;
+}
+
+.main section {
+  width: 100%;
+  /* height: 100%; */
+  /* overflow-x: hidden; */
+  /* overflow-y: scroll; */
+  display: flex;
+  flex-wrap: wrap;
+  /* overscroll-behavior: contain;
+  &::-webkit-scrollbar {
+    display: none;
+  } */
+}
+
+.figure {
+  width: 20vw;
+  height: 40rem;
+  display: flex;
+  position: relative;
+}
+
+.image {
+  position: absolute;
+}
+
+.image:hover ~ figcaption {
+  display: flex;
+}
+
+.figure figcaption:hover {
+  display: flex;
+}
+
+.figure figcaption {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  padding: 2.4rem 2rem 7rem 2rem;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  letter-spacing: -0.8px;
+  cursor: pointer;
+}
+
+.figCategory {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  color: #686868;
+}
+
+.figBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.figTitle {
+  max-width: 30rem;
+  font-size: 2rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.figDesc {
+  margin-top: 2.4rem;
+  font-size: 1.2rem;
+}
+
+.animateOverlay {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animateBox {
+  width: 10rem;
+  height: 20rem;
+  z-index: 150;
+  background-color: white;
+}
