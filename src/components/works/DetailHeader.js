@@ -5,6 +5,7 @@ import styles from "./DetailHeader.module.css";
 //
 //
 export default function DetailHeader({
+  imgUrl,
   titleKor,
   titleEng,
   summary,
@@ -14,7 +15,7 @@ export default function DetailHeader({
   return (
     <section className={styles.section}>
       <div
-        // style={{ backgroundImage: `url(${data.imageUrl})` }}
+        style={{ backgroundImage: `url(${imgUrl})` }}
         className={styles.representImage}
       ></div>
       <div>

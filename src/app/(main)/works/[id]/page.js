@@ -24,13 +24,6 @@ export default function WorkDetailPage() {
       setDetailData(worksData[Number(pathname.id)]);
     }
   }, []);
-  console.log(detailData);
-  function handleExit() {
-    setIsClicked(true);
-    setTimeout(() => {
-      router.back();
-    }, 330);
-  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,6 +38,14 @@ export default function WorkDetailPage() {
     //       ""
     //   );
   }, []);
+
+  function handleExit() {
+    setIsClicked(true);
+    setTimeout(() => {
+      router.back();
+    }, 330);
+  }
+
   return (
     <AnimatePresence>
       {!isClicked && (
@@ -57,11 +58,12 @@ export default function WorkDetailPage() {
         >
           <main className={styles.main} onClick={handleExit}>
             <DetailHeader
-              titleKor={detailData.title.title_kor}
-              titleEng={detailData.title.title_eng}
-              summary={detailData.summary}
-              desc={detailData.desc}
-              urls={detailData.urls}
+              imgUrl={detailData?.imgUrl}
+              titleKor={detailData?.title.title_kor}
+              titleEng={detailData?.title.title_eng}
+              summary={detailData?.summary}
+              desc={detailData?.desc}
+              urls={detailData?.urls}
             />
             <DetailAbout />
             <DetailReservation />
