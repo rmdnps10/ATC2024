@@ -22,7 +22,7 @@ export default function Header() {
           <Link href={"/about"}>About</Link>
         </li>
         <li>
-          <Link href={"/work"}>Work</Link>
+          <Link href={"/works"}>Works</Link>
         </li>
         <li>
           <Link href={"/program"}>Program</Link>
