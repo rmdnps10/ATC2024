@@ -25,7 +25,7 @@ export default function Header() {
           <Link href={"/works"}>Works</Link>
         </li>
         <li>
-          <Link href={"/program"}>Program</Link>
+          <Link href={"/program"}>프로그램</Link>
         </li>
         <li>
           <Link href={"/archive"}>Archive</Link>
