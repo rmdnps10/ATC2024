@@ -4,11 +4,11 @@
   padding: 0 7.5rem;
   position: fixed;
   z-index: 999;
-  height: 8rem;
+  height: 6.5rem;
   align-items: center;
   gap: 5.1rem;
   backdrop-filter: blur(2px);
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .header ul {
@@ -17,8 +17,25 @@
 }
 
 .header ul li {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 500;
-  font-family: Sandoll Seoul;
+  font-family: Pretendard;
   font-weight: 400;
+}
+
+.logo {
+  padding-bottom: 10px;
+}
+
+.logo a {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+.line {
+  height: 20px;
+  margin-bottom: 4px;
+  width: 1px;
+  background-color: black;
 }
