@@ -1,41 +1,64 @@
-'use client';
+"use client";
 
-import * as THREE from 'three';
-import { useRef, useMemo, useState, useCallback } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import { Environment, Lightformer, OrbitControls, Text } from '@react-three/drei';
-import { BallCollider, Physics, RigidBody } from '@react-three/rapier';
-import { Perf } from 'r3f-perf';
-import { easing } from 'maath';
-import Background from './Background.js';
-import CameraController from './CameraController.js';
-import dynamic from 'next/dynamic';
-import VideoText from './VideoText.js';
-import Cube from './Cube.js';
+import * as THREE from "three";
+import { useRef, useMemo, useState, useCallback } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import {
+  Environment,
+  Lightformer,
+  OrbitControls,
+  Text,
+} from "@react-three/drei";
+import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
+import { Perf } from "r3f-perf";
+import { easing } from "maath";
+import Background from "./Background.js";
+import CameraController from "./CameraController.js";
+import dynamic from "next/dynamic";
+import VideoText from "./VideoText.js";
+import Cube from "./Cube.js";
 
-const Effects = dynamic(() => import('./Effects'), { ssr: false });
+const Effects = dynamic(() => import("./Effects"), { ssr: false });
 //
 //
 //
-const accents = ['#005afb', '#25cefc', '#168cff', '#df45ff']; // ATC2024 메인 컬러 사용
+const accents = ["#005afb", "#25cefc", "#168cff", "#df45ff"]; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
-  { color: 'white', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
-  { color: 'white', roughness: 0.1, metalness: 0.5, transparent: true, opacity: 0.5  },
-  { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
-  { color: 'white', roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.5  },
-  { color: '#9822ff', roughness: 0.1, metalness: 0.1 },
-  { color: '#7334ff', roughness: 0.1, metalness: 0.1 },
+  {
+    color: "white",
+    roughness: 0.1,
+    metalness: 0.5,
+    transparent: true,
+    opacity: 0.5,
+  },
+  {
+    color: "white",
+    roughness: 0.1,
+    metalness: 0.5,
+    transparent: true,
+    opacity: 0.5,
+  },
+  { color: "#9822ff", roughness: 0.1, metalness: 0.1 },
+  {
+    color: "white",
+    roughness: 0.1,
+    metalness: 0.1,
+    transparent: true,
+    opacity: 0.5,
+  },
+  { color: "#9822ff", roughness: 0.1, metalness: 0.1 },
+  { color: "#7334ff", roughness: 0.1, metalness: 0.1 },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent], roughness: 0.7, accent: true },
-  { color: 'white', roughness: 0.1 },
-  { color: '#005afb', roughness: 0.3, metalness: 0.3 },
-  { color: 'ivory', roughness: 0.3 },
-  { color: '#168cff', roughness: 0.1, },
-  { color: 'white', roughness: 0.2,  transparent: true, opacity: 0.5  },
-  { color: '#7334ff', roughness: 0.1 },
-  { color: accents[accent], roughness: 0.1, metalness: 0.5},
+  { color: "white", roughness: 0.1 },
+  { color: "#005afb", roughness: 0.3, metalness: 0.3 },
+  { color: "ivory", roughness: 0.3 },
+  { color: "#168cff", roughness: 0.1 },
+  { color: "white", roughness: 0.2, transparent: true, opacity: 0.5 },
+  { color: "#7334ff", roughness: 0.1 },
+  { color: accents[accent], roughness: 0.1, metalness: 0.5 },
   { color: accents[accent], roughness: 0.3, accent: true },
   { color: accents[accent], roughness: 0.1, accent: true },
 ];
@@ -74,10 +97,10 @@ export default function Experience({ accent }) {
         maxWidth={10}
         bevel={10}
       >
-        {'Art&Technology Conference               2024'}
+        {"Art&Technology Conference               2024"}
       </Text>
 
-      <Physics timeStep="vary" gravity={[0, 0, 0]} >
+      <Physics timeStep="vary" gravity={[0, 0, 0]}>
         <Pointer />
         {connectors.map((props, i) => (
           <Sphere key={i} {...props} />
@@ -86,11 +109,42 @@ export default function Experience({ accent }) {
 
       <Environment resolution={256} preset="studio" environmentIntensity={0.3}>
         <group rotation={[-Math.PI / 3, 0, 1]}>
-          <Lightformer form="circle" intensity={50} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
-          <Lightformer form="circle" intensity={2} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={2} />
-          <Lightformer form="circle" intensity={2} rotation-y={Math.PI / 2} position={[-5, -1, -1]} scale={2} />
-          <Lightformer form="circle" intensity={2} rotation-y={-Math.PI / 2} position={[10, 1, 0]} scale={8} />
-          <Lightformer form="ring" color="#4060ff" intensity={80} onUpdate={(self) => self.lookAt(0, 0, 0)} position={[10, 10, 0]} scale={10} />
+          <Lightformer
+            form="circle"
+            intensity={50}
+            rotation-x={Math.PI / 2}
+            position={[0, 5, -9]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, 1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={Math.PI / 2}
+            position={[-5, -1, -1]}
+            scale={2}
+          />
+          <Lightformer
+            form="circle"
+            intensity={2}
+            rotation-y={-Math.PI / 2}
+            position={[10, 1, 0]}
+            scale={8}
+          />
+          <Lightformer
+            form="ring"
+            color="#4060ff"
+            intensity={80}
+            onUpdate={(self) => self.lookAt(0, 0, 0)}
+            position={[10, 10, 0]}
+            scale={10}
+          />
         </group>
       </Environment>
 
@@ -103,7 +157,15 @@ export default function Experience({ accent }) {
   );
 }
 
-function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, color = 'white', ...props }) {
+function Sphere({
+  position,
+  children,
+  vec = new THREE.Vector3(),
+  scale,
+  accent,
+  color = "white",
+  ...props
+}) {
   const api = useRef();
   const ref = useRef();
   const r = useCallback(() => THREE.MathUtils.randFloatSpread(10), []);
@@ -111,12 +173,21 @@ function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, 
 
   useFrame((state, delta) => {
     delta = Math.min(0.1, delta);
-    api.current?.applyImpulse(vec.copy(api.current.translation()).negate().multiplyScalar(0.2));
+    api.current?.applyImpulse(
+      vec.copy(api.current.translation()).negate().multiplyScalar(0.2)
+    );
     easing.dampC(ref.current.material.color, color, 0.2, delta);
   });
 
   return (
-    <RigidBody linearDamping={4} angularDamping={1} friction={0.1} position={pos} ref={api} colliders={false}>
+    <RigidBody
+      linearDamping={4}
+      angularDamping={1}
+      friction={0.1}
+      position={pos}
+      ref={api}
+      colliders={false}
+    >
       <BallCollider args={[1]} />
       <mesh ref={ref} castShadow receiveShadow>
         <sphereGeometry args={[1, 64, 64]} />
@@ -127,10 +198,9 @@ function Sphere({ position, children, vec = new THREE.Vector3(), scale, accent, 
   );
 }
 
-
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-  const [hitSound] = useState(() => new Audio('./images/main/bubbleHit.mp3'));
+  const [hitSound] = useState(() => new Audio("./images/main/bubbleHit.mp3"));
 
   const lastPlayTime = useRef(0);
   const soundCooldown = 80;
@@ -142,19 +212,30 @@ function Pointer({ vec = new THREE.Vector3() }) {
       hitSound.currentTime = 0;
       hitSound.volume = Math.random() * 0.3;
       hitSound.play();
-      
+
       lastPlayTime.current = now;
     }
   };
 
   useFrame(({ mouse, viewport }) => {
-    ref.current?.setNextKinematicTranslation(vec.set((mouse.x * viewport.width) / 2, (mouse.y * viewport.height) / 2, 0));
+    ref.current?.setNextKinematicTranslation(
+      vec.set(
+        (mouse.x * viewport.width) / 2,
+        (mouse.y * viewport.height) / 2,
+        0
+      )
+    );
   });
 
   return (
-    <RigidBody position={[0, 0, 0]} type="kinematicPosition" colliders={false} ref={ref} onCollisionEnter={collisionEnter}>
+    <RigidBody
+      position={[0, 0, 0]}
+      type="kinematicPosition"
+      colliders={false}
+      ref={ref}
+      onCollisionEnter={collisionEnter}
+    >
       <BallCollider args={[1]} />
     </RigidBody>
   );
 }
-

@@ -11,10 +11,10 @@ export default function Header() {
     <header className={styles.header}>
       <Link href={"/"}>
         <Image
-          src="logo/atc-logo.svg"
+          src="/icon/logo/atc-logo-compose.png"
           alt="2024 atc 공식 로고"
-          width={76}
-          height={42}
+          width={140}
+          height={80}
         />
       </Link>
       <ul>
