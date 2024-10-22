@@ -15,8 +15,6 @@ export default function MainRootLayout({ children }) {
     <html
       lang="kr"
       className={`${Pretendard}`}>
-      {/* 산돌 서울 폰트  */}
-
       <body>
         <Header />
         {children}

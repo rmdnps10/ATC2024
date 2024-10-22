@@ -14,6 +14,7 @@
 .header ul {
   display: flex;
   gap: 3.6rem;
+  margin-left: auto;
 }
 
 .header ul li {
@@ -29,6 +30,7 @@
 
 .logo a {
   display: flex;
+  height: 40px;
   gap: 20px;
   align-items: flex-end;
 }
@@ -38,4 +40,8 @@
   margin-bottom: 4px;
   width: 1px;
   background-color: black;
+}
+
+.transition {
+  padding-bottom: 5px;
 }
