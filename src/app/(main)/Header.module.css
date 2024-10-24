@@ -7,7 +7,7 @@
   height: 6.5rem;
   align-items: center;
   gap: 5.1rem;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.8);
   transition: 1s;
 }
@@ -49,17 +49,20 @@
 }
 
 .logo a {
-  display: flex;
   height: 40px;
+  display: flex;
   align-items: flex-end;
-  gap: 20px;
+  gap: 14px;
 }
 
 .line {
   width: 1px;
   height: 20px;
   margin-bottom: 4px;
-  mix-blend-mode: difference;
+  background-color: black;
+}
+.line.active {
+  background-color: white;
 }
 
 .transition {

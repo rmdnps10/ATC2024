@@ -42,7 +42,10 @@ export default function Header() {
             priority
             height={30}
           />
-          <div className={styles.line}></div>
+          <div
+            className={`${styles.line} ${
+              isOpenMobileMenu && styles.active
+            }`}></div>
 
           {isShowMouseEnterAnimation ? (
             <Image
@@ -105,7 +108,7 @@ export default function Header() {
             <Link href={'/about'}>ABOUT</Link>
           </li>
           <li>
-            <Link href={'/work'}>WORK</Link>
+            <Link href={'/works'}>WORK</Link>
           </li>
           <li>
             <Link href={'/program'}>PROGRAM</Link>
