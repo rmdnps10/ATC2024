@@ -1,7 +1,6 @@
 import Header from './Header'
 import { Pretendard } from '../font/Font'
 import '@/style/global.css'
-import Script from 'next/script'
 
 export const metadata = {
   title: 'ATC 2024 : 코끼리를 냉장고에 넣는 방법',
