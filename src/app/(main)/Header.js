@@ -51,6 +51,7 @@ export default function Header() {
             <Image
               className={styles.transition}
               src="/icon/logo/transition/atc-elephant.webp"
+              unoptimized
               alt="2024 atc 공식 로고 - 로고에서 코끼리로"
               width={35}
               height={35}
@@ -59,6 +60,7 @@ export default function Header() {
             <Image
               className={styles.transition}
               src="/icon/logo/transition/elephant-atc.webp"
+              unoptimized
               alt="2024 atc 공식 로고 - 코끼리에서 로고로"
               width={35}
               height={35}
