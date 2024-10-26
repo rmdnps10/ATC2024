@@ -1,3 +1,3 @@
 export default function CreditPage() {
-  return <main></main>;
+  return <main></main>
 }
