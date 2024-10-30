@@ -10,6 +10,7 @@
   backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.8);
   transition: 1s;
+  font-family: 'Pretendard';
 }
 
 .header ul {
@@ -59,7 +60,15 @@
   width: 1px;
   height: 20px;
   margin-bottom: 4px;
-  background-color: black;
+  background: linear-gradient(
+    to right,
+    #7340fb,
+    #9734fb 20%,
+    #dd4ffc 40%,
+    #3c79fb 60%,
+    #278ffb 80%,
+    #35cffa
+  );
 }
 .line.active {
   background-color: white;
@@ -104,21 +113,27 @@
 .hamburgerMenu.active .bar:first-child {
   top: 25%;
   transform: rotate(45deg);
-  background: white;
 }
 
 .hamburgerMenu.active .bar:last-child {
   top: 25%;
   transform: rotate(-45deg);
-  background: white;
 }
 
 .bar {
   width: 25px;
   height: 1px;
-  background-color: black;
   margin: 6px 0;
   transition: 1s; /* 트랜지션 효과로 부드러운 애니메이션 적용 */
+  background: linear-gradient(
+    to right,
+    #7340fb,
+    #9734fb 20%,
+    #dd4ffc 40%,
+    #3c79fb 60%,
+    #278ffb 80%,
+    #35cffa
+  );
 }
 
 .mobileMenu {
@@ -127,7 +142,7 @@
   left: 0;
   width: 100%;
   background-color: inherit;
-  transition: height 1s;
+  transition: height 0.4s;
   border-top: 1px solid white;
 }
 
