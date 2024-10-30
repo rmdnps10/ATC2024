@@ -2,14 +2,12 @@
 'use client'
 
 import styles from './page.module.css'
-import Scene from '../../../components/onboard/Scene'
-import Ocean from '../../../components/onboard/Ocean'
+import Experience from '@/components/onboard/Experience'
 
 export default function OnBoardPage() {
   return (
     <div className={styles.root}>
-      {/* <Scene /> */}
-      <Ocean />
+      <Experience />
     </div>
   )
 }

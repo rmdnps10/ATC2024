@@ -79,7 +79,7 @@ export default function App() {
       </Suspense>
       <Sky
         scale={1000}
-        sunPosition={[500, 150, -1000]}
+        sunPosition={[0, 150, -1000]}
         turbidity={0.1}
       />
       <OrbitControls />
