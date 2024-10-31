@@ -1,0 +1,83 @@
+.main {
+  padding-top: 100px;
+  background-color: black;
+}
+
+.selectOption {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+}
+
+.selectOption div {
+  position: relative;
+  display: flex;
+  height: 6.45rem;
+}
+
+.selectOption div p {
+  color: white;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
+}
+.selectOption div p:first-child {
+  top: 1.9rem;
+  left: 5rem;
+}
+
+.selectOption div p:nth-child(2) {
+  top: 2.4rem;
+  left: 30rem;
+  width: max-content;
+  color: #767676;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.selectOption div img:first-child {
+  align-self: flex-start;
+}
+.selectOption div img:last-child {
+  align-self: flex-end;
+}
+
+.containerList {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4.6rem;
+}
+
+.container div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+.container h1 {
+  font-family: 'Sandoll Seoul';
+  color: white;
+  color: #fff;
+  font-size: 6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.12rem;
+  position: relative;
+}
+.container img {
+  mix-blend-mode: luminosity;
+}
