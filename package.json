@@ -15,23 +15,38 @@
     }
   },
   "dependencies": {
+    "@react-three/drei": "^9.108.1",
+    "@react-three/fiber": "^8.16.8",
+    "@react-three/postprocessing": "^2.16.2",
     "env-cmd": "^10.1.0",
+    "gsap": "^3.12.5",
+    "leva": "^0.9.34",
     "next": "14.2.5",
+    "postprocessing": "^6.36.3",
+    "r3f-perf": "^7.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-use": "^17.5.1",
     "vercel": "^37.5.3"
   },
   "devDependencies": {
-    "dotenv": "^16.4.5",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5",
-    "husky": "^9.1.6",
-    "mongodb": "^6.9.0",
-    "mongoose": "^8.6.3",
+    "@next/eslint-plugin-next": "^15.0.0",
     "@react-three/drei": "^9.108.1",
     "@react-three/fiber": "^8.16.8",
-    "three": "^0.166.1",
+    "@react-three/postprocessing": "^2.16.2",
+    "@react-three/rapier": "1.1.2",
+    "@svgr/webpack": "^8.1.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "framer-motion": "^11.11.9",
+    "husky": "^9.1.6",
     "leva": "^0.9.35",
-    "r3f-perf": "^7.2.1"
+    "maath": "0.10.4",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3",
+    "r3f-perf": "^7.2.1",
+    "three": "^0.169.0"
   }
 }
