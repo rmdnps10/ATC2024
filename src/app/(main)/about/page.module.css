@@ -1,148 +1,258 @@
 .main {
-    width: 100vw;
-    margin-top: 0rem;
-    overflow: hidden;
-    background-color: rgb(206, 248, 248);
+  width: 100vw;
+  margin-top: 0rem;
+  overflow: hidden;
+  background-color: rgb(218, 166, 166);
+  /*background: radial-gradient(
+    ellipse 100% 50% at 80% 10%,
+    #35cffa 50%,
+    transparent 50%
+  );*/
 }
 
 .imageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 26.2rem;
-    margin-bottom: 26.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5.4rem;
+  margin-top: 40.8rem;
+}
+.typography {
+  position: relative;
+  width: 10%;
+  padding-bottom: 5.4rem;
+  background-color: pink;
+  height: 3.6rem;
+}
+.title {
+  position: relative;
+  width: 50%;
+  background-color: lightblue;
+  height: 21.6rem;
+}
+
+.subtitle {
+  padding-top: 30.3rem;
+  margin-bottom: 6.8rem;
+
+  background-color: beige;
+}
+
+.subtitle p {
+  font-size: 6rem;
 }
 
 .videoWrapper {
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .videoContainer {
-    width: 62.5%;
-    background-color: blueviolet;
-    aspect-ratio: 16 / 9;
+  width: 60%;
+  background-color: blueviolet;
+  aspect-ratio: 16 / 9; /*동영상 비율 유지*/
 }
-.videoContainer video {
-    width: 100%;
-    height: 100%;
+.videoContainer iframe {
+  width: 100%;
+  height: 100%;
 }
 
-.articles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6rem;
-    gap: 2.4rem;
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22.9rem;
+  padding: 13rem;
+  background-color: rgba(255, 255, 255, 0.5);
 }
-.articles article { 
-    width: 58.8rem;
-    height: 21.6rem;
-    background-color: white;
-    font-size: 1.6rem;
+
+.description article {
+  padding: 0 3.6rem;
+  width: 60%;
+  background-color: white;
+  font-size: 3.6rem;
 }
 
 .quote {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.4rem; 
+  margin-top: 24.1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 29.1rem;
+  font-family: 'pretendard';
 }
-.quote blockquote:first-child{
-    align-self: flex-start;
-    width: 58.8rem;
-    margin-top: 27.5rem;
-    background-color: white;
-    font-size: 1.6rem;
+
+.quote div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 63.75%;
+  gap: 2.4rem;
+  background-color: lightgoldenrodyellow;
 }
-.quote blockquote:last-child{
-    align-self: flex-start;
-    width: 58.8rem;
-    margin-top: 62.4rem;
-    background-color: white;
-    font-size: 1.6rem;
+
+.quote blockquote:nth-of-type(1) .quoteTitle::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid black;
+}
+
+.quote blockquote:nth-of-type(2) .quoteTitle::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  border-bottom: 1px solid black;
+}
+
+.quote blockquote:first-child {
+  align-self: flex-start;
+  width: 49%;
+  background-color: white;
+  font-size: 1.6rem;
+}
+.quote blockquote:last-child {
+  align-self: flex-end;
+  width: 49%;
+  background-color: white;
+  font-size: 1.6rem;
 }
 .quoteTitle {
-    margin-bottom: 5.1rem;
+  position: relative;
+  margin-bottom: 1.6rem;
+  background-color: antiquewhite;
+  font-family: 'Sandoll Seoul';
 }
 .quote p:first-child {
-    font-size: 3.2rem;
+  font-size: 3.2rem;
+}
+.quote blockquote:nth-of-type(1) .quoteTitle {
+  text-align: right;
+}
+
+.quote blockquote:nth-of-type(2) .quoteTitle {
+  text-align: left;
 }
 
 .sponsorContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    overflow: hidden;
-    width: 100%;
-    background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow: hidden;
+  width: 100%;
+  background-color: antiquewhite;
 }
 
 .scrollRow.firstRow {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    animation: scrollFirstRow 10s linear infinite;
-    background-color: yellowgreen;
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollFirstRow 10s linear infinite;
+  background-color: yellowgreen;
 }
 .scrollRow.secondRow {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    animation: scrollSecondRow 10s linear infinite reverse;
-    background-color: lightcoral;
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollSecondRow 10s linear infinite reverse;
+  background-color: lightcoral;
 }
 
 @keyframes scrollFirstRow {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @keyframes scrollSecondRow {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .sponsorBox {
-    width: 33rem;
-    height: 18rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: palevioletred;
-    overflow: hidden;
-    flex-shrink: 0;
+  width: 33rem;
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: palevioletred;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 .sponsorBox img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-    background-color: azure;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  background-color: azure;
 }
 
 .credit {
-    width: 100%;
-    height: 102rem;
-    background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 95vh;
+  background-color: black;
 }
-.credit div {
-    width: 100%;
-    height: 94.7rem;
-    border-radius: 160.3rem;
-    opacity: 0.3;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(39, 143, 251, 0.90) 0%, rgba(39, 143, 251, 0.00) 100%);
-    filter: blur(10rem);
+
+.gradContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  height: 95%;
 }
-.credit p {
-    justify-content: center;
-    color: white;
+
+/* 중앙 그라데이션 효과 */
+.credit::before {
+  content: '';
+  position: absolute;
+  width: 85%;
+  height: 95%;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(39, 143, 251, 0.9) 0%,
+    rgba(39, 143, 251, 0) 100%
+  );
+  border-radius: 160.3rem;
+  opacity: 0.3;
+  filter: blur(10rem);
+  z-index: 1;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 68.9rem;
+  height: 45rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: 'Sandoll Seoul';
+}
+.box p:first-child {
+  text-align: center;
+  color: white;
+  font-size: 6rem;
+}
+.box p:nth-child(2) {
+  text-align: center;
+  color: white;
+  font-size: 2.8rem;
+}
+
+.creditButton {
+  padding: 0.8rem 2rem;
+  font-size: 2.4rem;
+  font-family: 'Sandoll Seoul';
 }
