@@ -61,7 +61,7 @@
   gap: 4.6rem;
 }
 
-.container div {
+.container .title {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,4 +80,12 @@
 }
 .container img {
   mix-blend-mode: luminosity;
+}
+
+.imageContainer {
+}
+
+.imageContainer img {
+  margin: 1.2rem;
+  mix-blend-mode: normal;
 }
