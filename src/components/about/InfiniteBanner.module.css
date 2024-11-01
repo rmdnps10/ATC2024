@@ -55,8 +55,25 @@
   object-fit: contain;
   background-color: azure;
 }
-.sponsorContainer p {
+
+.text p:first-child {
+  position: relative;
   font-size: 6rem;
+  text-align: center;
+  font-family: 'Sandoll Seoul';
+  margin-bottom: 1.6rem;
+}
+.text p:first-child::after {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-bottom: 1px solid black;
+}
+.text p:nth-child(2) {
+  font-size: 1.6rem;
   text-align: center;
   font-family: 'Sandoll Seoul';
 }

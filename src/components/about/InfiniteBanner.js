@@ -46,8 +46,13 @@ export default function InfiniteBanner() {
           </div>
         ))}
       </div>
-      <p>Collaboration & Sponsorship</p>
-      <p></p>
+      <div className={styles.text}>
+        <p>Collaboration & Sponsorship</p>
+        <p>
+          후원사에 대한 설명을 적습니다 이건 참여하는 파트너사들이 어떤 회사이고
+          그리고 우리에게 어떤 서포트를 해주는지 정해지면 적는 것으로 합니다
+        </p>
+      </div>
       <div className={styles.secondRow}>
         {secondRowSponsors.map((sponsor, index) => (
           <div
