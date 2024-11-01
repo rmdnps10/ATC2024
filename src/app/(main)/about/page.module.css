@@ -2,12 +2,134 @@
   width: 100vw;
   margin-top: 0rem;
   overflow: hidden;
-  background-color: rgb(218, 166, 166);
-  /*background: radial-gradient(
-    ellipse 100% 50% at 80% 10%,
-    #35cffa 50%,
-    transparent 50%
-  );*/
+  position: relative;
+}
+
+.cyan1 {
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  filter: blur(150px);
+  right: 0;
+  transform: translate(10%, 0%);
+  z-index: -1;
+}
+
+.cyan2 {
+  position: absolute;
+  width: 40%;
+  height: 12%;
+  background-color: #35cffa40;
+  filter: blur(150px);
+  left: 0;
+  top: 15%;
+  transform: translate(-20%, 0%);
+  z-index: -1;
+}
+
+.cyan3 {
+  position: absolute;
+  width: 40%;
+  height: 20%;
+  background-color: #35cffa40;
+  filter: blur(150px);
+  right: 0;
+  top: 44%;
+  transform: translate(25%, 0%);
+  z-index: -1;
+}
+
+.cyan4 {
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  filter: blur(150px);
+  left: 0;
+  top: 55%;
+  transform: translate(-30%, 0%);
+  z-index: -1;
+}
+.cyan5 {
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  filter: blur(150px);
+  left: 0;
+  top: 78%;
+  transform: translate(-30%, 0%);
+  z-index: -1;
+}
+
+.pink1 {
+  position: absolute;
+  width: 50%;
+  height: 50vh;
+  background-color: #dd4ffc30;
+  filter: blur(150px);
+  left: 0;
+  transform: translate(30%, -80%);
+  z-index: -1;
+}
+
+.pink2 {
+  position: absolute;
+  width: 40%;
+  height: 25%;
+  background-color: #dd4ffc25;
+  filter: blur(150px);
+  right: 0;
+  top: 16%;
+  transform: translate(-40%, 0%);
+  z-index: -1;
+}
+
+.pink3 {
+  position: absolute;
+  width: 50%;
+  height: 15%;
+  background-color: #dd4ffc25;
+  filter: blur(150px);
+  left: 0;
+  top: 60%;
+  transform: translate(-30%, 0%);
+  z-index: -1;
+}
+
+.blue1 {
+  position: absolute;
+  width: 40%;
+  height: 10%;
+  background-color: #1160f720;
+  filter: blur(150px);
+  left: 0;
+  top: 30%;
+  transform: translate(-40%, 0%);
+  z-index: -1;
+}
+.blue2 {
+  position: absolute;
+  width: 40%;
+  height: 10%;
+  background-color: #1160f730;
+  filter: blur(150px);
+  right: 0;
+  top: 42%;
+  transform: translate(-40%, 0%);
+  z-index: -1;
+}
+.blue3 {
+  position: absolute;
+  width: 50%;
+  height: 10%;
+  background-color: #1160f730;
+  filter: blur(150px);
+  right: 0;
+  top: 75%;
+  transform: translate(10%, 0%);
+  z-index: -1;
 }
 
 .imageContainer {
@@ -22,25 +144,34 @@
   position: relative;
   width: 10%;
   padding-bottom: 5.4rem;
-  background-color: pink;
   height: 3.6rem;
 }
 .title {
   position: relative;
   width: 50%;
-  background-color: lightblue;
   height: 21.6rem;
 }
 
 .subtitle {
+  display: flex;
+  justify-content: center;
   padding-top: 30.3rem;
   margin-bottom: 6.8rem;
-
-  background-color: beige;
 }
 
 .subtitle p {
+  position: relative;
+  width: 60%;
   font-size: 6rem;
+  background-color: pink;
+}
+
+.subtitle p::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  border-bottom: 1px solid black;
 }
 
 .videoWrapper {
@@ -72,6 +203,10 @@
   width: 60%;
   background-color: white;
   font-size: 3.6rem;
+}
+
+.description img {
+  vertical-align: text-bottom;
 }
 
 .quote {
@@ -138,70 +273,12 @@
   text-align: left;
 }
 
-.sponsorContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  overflow: hidden;
-  width: 100%;
-  background-color: antiquewhite;
-}
-
-.scrollRow.firstRow {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
-  animation: scrollFirstRow 10s linear infinite;
-  background-color: yellowgreen;
-}
-.scrollRow.secondRow {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
-  animation: scrollSecondRow 10s linear infinite reverse;
-  background-color: lightcoral;
-}
-
-@keyframes scrollFirstRow {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-@keyframes scrollSecondRow {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.sponsorBox {
-  width: 33rem;
-  height: 18rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: palevioletred;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-.sponsorBox img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
-  background-color: azure;
-}
-
 .credit {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 95vh;
+  height: 94vh;
   background-color: black;
 }
 
@@ -213,7 +290,7 @@
   height: 95%;
 }
 
-/* 중앙 그라데이션 효과 */
+/* 중앙 그라데이션 효과 
 .credit::before {
   content: '';
   position: absolute;
@@ -228,7 +305,7 @@
   opacity: 0.3;
   filter: blur(10rem);
   z-index: 1;
-}
+} */
 
 .box {
   display: flex;
@@ -240,6 +317,7 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   font-family: 'Sandoll Seoul';
 }
+
 .box p:first-child {
   text-align: center;
   color: white;
@@ -255,4 +333,6 @@
   padding: 0.8rem 2rem;
   font-size: 2.4rem;
   font-family: 'Sandoll Seoul';
+  background-color: rgb(255, 255, 255);
+  border-radius: 3px;
 }
