@@ -18,29 +18,50 @@ export default function Overlay({ scrollPercent }) {
     bottomFilled = Math.floor(((scrollPercent - 50) / 50) * totalBoxes);
   }
 
+  // 텍스트의 위치와 투명도 계산
+  const translateY = scrollPercent <= 30
+    ? -(scrollPercent / 30) * 100
+    : -100;
+
+  const opacity = scrollPercent <= 30
+    ? 0.8 - (scrollPercent / 30)
+    : 0;
+
   return (
-    <div className={styles.overlay}>
-      <div className={styles.topStack}>
-        {Array.from({ length: totalBoxes }, (_, i) => (
-          <div
-            key={i}
-            className={`${styles.box} ${i < topFilled ? styles.filled : ''}`}
-          />
-        ))}
+    <>
+      <div className={styles.overlay}>
+        <div className={styles.topStack}>
+          {Array.from({ length: totalBoxes }, (_, i) => (
+            <div
+              key={i}
+              className={`${styles.box} ${i < topFilled ? styles.filled : ''}`}
+            />
+          ))}
+        </div>
+
+        <div className={styles.percentageText}>
+          {scrollPercent}%
+        </div>
+
+        <div className={styles.bottomStack}>
+          {Array.from({ length: totalBoxes }, (_, i) => (
+            <div
+              key={i}
+              className={`${styles.box} ${i < bottomFilled ? styles.filled : ''}`}
+            />
+          ))}
+        </div>
       </div>
 
-      <div className={styles.percentageText}>
-        {scrollPercent}%
+      <div
+        className={styles.centerText}
+        style={{
+          transform: `translate(-50%, calc(-50% + ${translateY}%))`,
+          opacity: opacity
+        }}
+      >
+        Art&Technology Conference 2024
       </div>
-
-      <div className={styles.bottomStack}>
-        {Array.from({ length: totalBoxes }, (_, i) => (
-          <div
-            key={i}
-            className={`${styles.box} ${i < bottomFilled ? styles.filled : ''}`}
-          />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }

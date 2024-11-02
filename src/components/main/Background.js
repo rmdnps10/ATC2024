@@ -1,115 +1,153 @@
-import * as THREE from 'three';
-import { useRef } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-//
-//
-//
+import { useRef, useMemo, useState, useEffect } from "react";
+import * as THREE from "three";
+import gsap from "gsap";
+
 export default function Background() {
-    const { size } = useThree();
+    const [activeBoxes, setActiveBoxes] = useState(new Set());
+    const grid = useRef()
+    const boxSize = 3
+    const gap = 0.01
+    const rows = 6
+    const cols = 6
 
-  const shaderMaterial = useRef(
-    new THREE.ShaderMaterial({
-        uniforms: {
-            iResolution: { value: new THREE.Vector3(size.width, size.height, 1) },
-            iTime: { value: 0.0 },
-        },
-        vertexShader: `
-            varying vec2 vUv;
-            void main() {
-            vUv = uv;
-            gl_Position = vec4(position.xy, 0.0, 1.0);
-            }
-        `,
-        fragmentShader: `
-            uniform vec3 iResolution;
-            uniform float iTime;
-            varying vec2 vUv;
+    // geometry와 material을 재사용하기 위해 useMemo 사용
+    const geometry = useMemo(() => new THREE.BoxGeometry(boxSize, boxSize, boxSize), [boxSize])
+    const material = useMemo(() => new THREE.MeshStandardMaterial({
+        color: "#ffffff",
+        roughness: 0.5,
+        metalness: 0.3,
+        transparent: true,
+        opacity: 1
+    }), [])
 
-            // 쉐이더 코드 시작
-            mat2 n(float a) {
-                float b = sin(a), c = cos(a);
-                return mat2(c, b, -b, c);
-            }
+    // 랜덤 z 위치를 미리 계산하여 저장
+    const zPositions = useMemo(() => {
+        return Array.from({ length: rows * cols }).map(() => {
+            return 0;
+        });
+    }, []);
 
-            const mat2 z = mat2(-1.1, -.4, .3, 1);
-            float A(in vec2 a) { return sin(a.x) * sin(a.y); }
-            float o(vec2 b) {
-                float c = 0.;
-                for (float a = 0.; a < 5.; a++)
-                    c += .15 * A(b * a), b = z * b * abs(a - 2.) * 2.3;
-                return c / 1.;
-            }
-            vec2 h(vec2 a) { return vec2(o(a), o(a + vec2(7.8))); }
-            float p(vec3 b, int d) {
-                vec3 a = b;
-                float c = length(a) - .5 + h(a.yz - iTime * .2).y * 1.5 * h(a.xz - iTime * .2).x * 1. * cos(a).y * 1. * .6;
-                return c;
-            }
-            float e(vec3 a) { vec3 b = a; float c = p(b, 1); return c; }
-            vec3 q(in vec3 b) {
-                vec2 a = vec2(1, -1) * .5773;
-                return normalize(
-                    a.xyy * e(b + a.xyy * 5e-4) +
-                    a.yyx * e(b + a.yyx * 5e-4) +
-                    a.yxy * e(b + a.yxy * 5e-4) +
-                    a.xxx * e(b + a.xxx * 5e-4)
+    // 텍스처 로더 및 텍스처 생성
+    const textures = useMemo(() => {
+        const loader = new THREE.TextureLoader();
+        return [
+            loader.load('/images/main/AtcElephant.png'),
+            loader.load('/images/main/AtcElephant.png'),
+            loader.load('/images/main/AtcElephant.png'),
+            loader.load('/images/main/AtcRainbow.png'),
+            loader.load('/images/main/AtcRectangle.png'),
+            loader.load('/images/main/AtcBranding1.png'),
+        ];
+    }, []);
+
+    // 특별한 박스 인덱스 배열
+    const specialBoxIndices = [0, 7, 14, 21, 28, 35]; // 1, 8, 15, 22, 29, 36번째 박스 (0-based index)
+
+    // 기본 material은 그대로 두고, 특별한 박스용 material 배열 생성
+    // const specialMaterials = useMemo(() =>
+    //     textures.map(texture => new THREE.MeshStandardMaterial({
+    //         map: texture,
+    //         roughness: 0.5,
+    //         metalness: 0.3,
+    //         transparent: true,
+    //         opacity: 1
+    //     }))
+    //     , [textures]);
+
+    // 이미지 로더 및 이미지 텍스처 생성
+    const overlayTextures = useMemo(() => {
+        const loader = new THREE.TextureLoader();
+        return [
+            loader.load('/images/main/AtcElephant.png'),
+            loader.load('/images/main/AtcRainbow.png'),
+            loader.load('/images/main/AtcRectangle.png'),
+            loader.load('/images/main/AtcBranding1.png'),
+            loader.load('/images/main/AtcBranding1.png'),
+            loader.load('/images/main/AtcBranding1.png'),
+        ];
+    }, []);
+
+    // 특별한 박스용 material 배열 생성 - 기본 컬러에 이미지 오버레이
+    const specialMaterials = useMemo(() =>
+        overlayTextures.map(texture => {
+            // 텍스처의 인코딩을 LinearEncoding으로 설정
+            texture.encoding = THREE.LinearEncoding;
+            texture.minFilter = THREE.NearestFilter;
+            texture.magFilter = THREE.NearestFilter;
+
+            const material = new THREE.MeshStandardMaterial({
+                color: "#ffffff",
+                roughness: 0.5,
+                metalness: 0.3,
+                transparent: true,
+                opacity: 1
+            });
+
+            material.toneMapped = false; // 톤매핑 비활성화
+            // 이미지를 오버레이로 추가
+            material.onBeforeCompile = (shader) => {
+                shader.fragmentShader = shader.fragmentShader.replace(
+                    '#include <map_fragment>',
+                    `
+                    #include <map_fragment>
+                    vec4 texelColor = texture2D(map, vUv);
+                    diffuseColor.rgb = mix(diffuseColor.rgb, texelColor.rgb, texelColor.a);
+                    `
                 );
-            }
-
-            void main() {
-                vec2 fragCoord = vUv * iResolution.xy;
-                vec2 a = fragCoord.xy / iResolution.y;
-                a.x -= (iResolution.x - iResolution.y) / iResolution.y * .5;
-                float i = iTime * 0.4;
-                a = (a - 0.5) * 1.35;
-                vec3 b = vec3(cos(i) * -1.2, 0, sin(i) * -1.2), r = vec3(0, 0, 0);
-                b = vec3(0, 0, -1);
-                vec3 c = normalize(r - b), j = normalize(cross(c, vec3(0, 1, 0))), s = normalize(cross(j, c)), m = vec3(0), d = normalize(a.x * j + a.y * s + 1.5 * c);
-                float f = 0.;
-                for (int t = 0; t < 5; ++t) {
-                    vec3 u = b + d * f;
-                    float B = e(u);
-                    f += B * .9999;
-                }
-                vec3 k = vec3(0), l = normalize(vec3(.57703));
-                l.yz *= n(-iTime * 0.5);
-                l.xy *= n(iTime * 0.5);
-                vec3 v = normalize(l - d);
-                if (f < 5.) {
-                    vec3 w = b + f * d, g = q(w);
-                    float x = clamp(dot(g, vec3(.4, 1, -.5)), 0., 1.), y = pow(clamp(dot(g, v), 0., 1.), 125.) * 0.6;
-                    y *= x;
-                    float C = dot(g, vec3(0, 1, 0));
-                    k = y + vec3(.1) * C + vec3(.5) * x + vec3(.5);
-                }
-                k = sqrt(k);
-                m += k;
-                m *= 0.7 + 0.3 * cos(iTime + a.xyx + vec3(0, 2, 4));
-                gl_FragColor = vec4(m, 1.);
-            }
-        `,
-        depthWrite: false,
-        depthTest: false,
+            };
+            material.map = texture;
+            return material;
         })
-    ).current;
+        , [overlayTextures]);
 
-    useFrame(({ clock, size }) => {
-        shaderMaterial.uniforms.iTime.value = clock.getElapsedTime() * 0.5;
-        shaderMaterial.uniforms.iResolution.value.set(size.width, size.height, 1);
-    });
+    const handleClick = (index, meshRef) => {
+        setActiveBoxes(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(index)) {
+                // 박스를 원래 위치로
+                gsap.to(meshRef.current.position, {
+                    z: zPositions[index],
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+                newSet.delete(index);
+            } else {
+                // 박스를 앞으로 튀어나오게
+                gsap.to(meshRef.current.position, {
+                    z: 5,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+                newSet.add(index);
+            }
+            return newSet;
+        });
+    };
 
     return (
-        <>
-            <mesh
-            position={ [ 0, 0, - 5 ] }
-            scale={ [ 3, 3, 1.5 ] }
-            frustumCulled={ false }
-            renderOrder={ - 1 }
-            rotation={ [ Math.PI * 0.3] }
-            >
-            <planeGeometry args={ [ 2, 2 ] } />
-            <primitive object={ shaderMaterial } attach="material" />
-            </mesh>
-        </>
-    );
+        <group position={[5, -20, -20]}>
+            {Array.from({ length: rows }).map((_, row) =>
+                Array.from({ length: cols }).map((_, col) => {
+                    const index = row * cols + col;
+                    const x = (col - cols / 2) * (boxSize + gap);
+                    const y = (row - rows / 2) * (boxSize + gap);
+                    const specialIndex = specialBoxIndices.indexOf(index);
+                    const meshRef = useRef();
+
+                    return (
+                        <mesh
+                            ref={meshRef}
+                            receiveShadow
+                            castShadow
+                            key={`${row}-${col}`}
+                            position={[x, y, zPositions[index]]}
+                            geometry={geometry}
+                            material={specialIndex !== -1 ? specialMaterials[specialIndex] : material}
+                            onClick={() => specialIndex !== -1 && handleClick(index, meshRef)}
+                        />
+                    )
+                })
+            )}
+        </group>
+    )
 }

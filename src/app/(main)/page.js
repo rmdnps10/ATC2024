@@ -1,50 +1,55 @@
 'use client'
 
-import { useReducer, useState } from 'react'
+import { useReducer, useState, Suspense, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import {
   PerformanceMonitor,
   ScrollControls,
   Scroll,
-  useScroll
+  useScroll,
+  AdaptiveDpr,
+  AdaptiveEvents
 } from '@react-three/drei'
 import styles from './page.module.css'
 import CustomCursor from '@/components/main/CustomCursor'
 import Experience from '@/components/main/Experience'
 import Overlay from '@/components/main/Overlay'
-//
-//
-//
+
 export default function MainPage() {
-  const accents = ['#005afb', '#25cefc', '#168cff', '#df45ff'] // ATC2024 메인 컬러 사용
-  const [accent, click] = useReducer(state => ++state % accents.length, 0)
-  const [dpr, setDpr] = useState(1.5)
+  const [accent, click] = useReducer(state => ++state % 6, 0)
+  const [dpr, setDpr] = useState(1)
   const [scrollPercent, setScrollPercent] = useState(0)
-  const pages = 3
+  const pages = 5
 
   return (
-    <div
-      className={styles.canvasContainer}
-      onClick={click}>
+    <div className={styles.canvasContainer} onClick={click}>
       <CustomCursor />
       <Canvas
         frameloop="always"
-        shadows
         dpr={dpr}
-        gl={{ antialias: false }}
-        camera={{ position: [0, 0, 30], fov: 17.5, near: 10, far: 40 }}
+        gl={{
+          antialias: false,
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: false,
+          alpha: false
+        }}
+        camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 70 }}
         style={{ scrollbarWidth: 'none' }}>
-        <ScrollControls
-          pages={pages}
-          damping={0.1}
-          style={{ scrollbarWidth: 'none' }}>
+        <AdaptiveDpr pixelated />
+        <AdaptiveEvents />
+        <ScrollControls pages={pages} damping={0.1}>
           <PerformanceMonitor
-            onIncline={() => setDpr(2)}
-            onDecline={() => setDpr(1)}
-          />
-          <Experience accent={accent} />
-          <Scroll html />
-          <ScrollTracker setScrollPercent={setScrollPercent} />
+            onIncline={() => {
+              setDpr(Math.min(2, window.devicePixelRatio))
+            }}
+            onDecline={() => {
+              setDpr(1)
+            }}>
+            <Experience accent={accent} scrollPercent={scrollPercent} />
+            <Scroll html />
+            <ScrollTracker setScrollPercent={setScrollPercent} />
+          </PerformanceMonitor>
         </ScrollControls>
       </Canvas>
       <Overlay scrollPercent={scrollPercent} />
