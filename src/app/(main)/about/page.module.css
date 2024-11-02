@@ -15,7 +15,6 @@
   transform: translate(10%, 0%);
   z-index: -1;
 }
-
 .cyan2 {
   position: absolute;
   width: 40%;
@@ -27,7 +26,6 @@
   transform: translate(-20%, 0%);
   z-index: -1;
 }
-
 .cyan3 {
   position: absolute;
   width: 40%;
@@ -39,7 +37,6 @@
   transform: translate(25%, 0%);
   z-index: -1;
 }
-
 .cyan4 {
   position: absolute;
   width: 50%;
@@ -73,7 +70,6 @@
   transform: translate(30%, -80%);
   z-index: -1;
 }
-
 .pink2 {
   position: absolute;
   width: 40%;
@@ -85,7 +81,6 @@
   transform: translate(-40%, 0%);
   z-index: -1;
 }
-
 .pink3 {
   position: absolute;
   width: 50%;
@@ -142,13 +137,12 @@
 }
 .typography {
   position: relative;
-  width: 10%;
-  padding-bottom: 5.4rem;
+  width: 17.8rem; /*반응형 고려?*/
   height: 3.6rem;
 }
 .title {
   position: relative;
-  width: 50%;
+  width: 92rem;
   height: 21.6rem;
 }
 
@@ -187,26 +181,6 @@
 .videoContainer iframe {
   width: 100%;
   height: 100%;
-}
-
-.description {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 22.9rem;
-  padding: 13rem;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.description article {
-  padding: 0 3.6rem;
-  width: 60%;
-  background-color: white;
-  font-size: 3.6rem;
-}
-
-.description img {
-  vertical-align: text-bottom;
 }
 
 .quote {

@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
+import TypingDescription from '@/components/about/TypingDescription'
 //
 //
 //
@@ -53,39 +54,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      <section className={styles.description}>
-        <article>
-          <span>'코끼리를 냉장고에 넣는 방법'</span>은
-          <Image
-            src="/images/about/starBalloon.svg"
-            alt="emoji"
-            width={78}
-            height={56}
-          />
-          불가능해보이는 도전에 대한 아트&테크놀로지의 물음
-          <Image
-            src="/images/about/starCrystal2.svg"
-            alt="emoji"
-            width={78}
-            height={56}
-          />
-          입니다. 우리는 예술과 기술
-          <Image
-            src="/images/about/starWood 1.svg"
-            alt="emoji"
-            width={78}
-            height={56}
-          />
-          이라는, 거대한 두 축
-          <Image
-            src="/images/about/starPaper.svg"
-            alt="emoji"
-            width={78}
-            height={56}
-          />
-          을 통해 이 물음에 답하고자 합니다.
-        </article>
-      </section>
+      <TypingDescription />
 
       <section className={styles.quote}>
         <div>
