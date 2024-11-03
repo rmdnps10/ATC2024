@@ -82,6 +82,9 @@ export default function TypingDescription() {
             img.alt = content.alt
             img.className = styles.image
 
+            img.style.width = '7.8rem'
+            img.style.height = '5.6rem'
+
             img.onload = () => {
               // 이미지 로드 후 커서 위치 업데이트하기
               updateCursorPosition()
