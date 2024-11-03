@@ -1,8 +1,6 @@
 'use client'
-import { useEffect, useRef } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
-import Link from 'next/link'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
 import TypingDescription from '@/components/about/TypingDescription'
 import ToCreditPage from '@/components/about/ToCreditPage'
