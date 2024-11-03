@@ -1,12 +1,21 @@
 'use client'
 
 import Ocean from './Ocean'
-import { useGLTF } from '@react-three/drei'
+import Portal from './Portal'
+import { CameraControls } from '@react-three/drei'
+import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
 
 export default function Experience() {
   return (
     <>
-      <Ocean />
+      <Canvas camera={{ position: [0, 5, 100], fov: 55, near: 1, far: 20000 }}>
+        <CameraControls />
+        <Suspense>
+          <Ocean />
+          <Portal />
+        </Suspense>
+      </Canvas>
     </>
   )
 }

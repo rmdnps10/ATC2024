@@ -2,14 +2,8 @@
 
 import * as THREE from 'three'
 import React, { Suspense, useRef, useMemo } from 'react'
-import {
-  Canvas,
-  extend,
-  useThree,
-  useLoader,
-  useFrame
-} from '@react-three/fiber'
-import { OrbitControls, Sky } from '@react-three/drei'
+import { extend, useThree, useLoader, useFrame } from '@react-three/fiber'
+import { Sky } from '@react-three/drei'
 import { Water } from 'three-stdlib'
 
 extend({ Water })
@@ -32,7 +26,7 @@ function Ocean() {
       sunColor: 0xffffff,
       waterColor: 0x005afb,
       distortionScale: 3.7,
-      fog: true,
+      fog: false,
       format: gl.encoding
     }),
     [waterNormals]
@@ -70,19 +64,16 @@ function Box() {
 
 export default function App() {
   return (
-    <Canvas camera={{ position: [0, 5, 100], fov: 55, near: 1, far: 20000 }}>
+    <>
       <pointLight position={[100, 100, 100]} />
       <pointLight position={[-100, -100, -100]} />
-      <Suspense fallback={null}>
-        <Ocean />
-        <Box />
-      </Suspense>
+      <Ocean />
+      {/* <Box /> */}
       <Sky
         scale={1000}
-        sunPosition={[0, 150, -1000]}
+        sunPosition={[500, 150, -1000]}
         turbidity={0.1}
       />
-      <OrbitControls />
-    </Canvas>
+    </>
   )
 }
