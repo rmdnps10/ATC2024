@@ -26,14 +26,13 @@
   font-size: 3.6rem;
   color: #1160f7;
 }
-.description article::after {
-  content: '';
+.cursor {
+  position: absolute;
   border-left: 2px solid #000;
   animation: blink 0.7s infinite;
-  display: inline-block;
-  margin-left: 2px;
   height: 3.8rem;
   vertical-align: text-top;
+  display: inline-block;
 }
 @keyframes blink {
   0% {
