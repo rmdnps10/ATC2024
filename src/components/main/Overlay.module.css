@@ -53,7 +53,7 @@
   line-height: 0.9;
   color: white;
   pointer-events: none;
-  font-family: 'Sandoll Seoul';
+  /* font-family: 'Sandoll Seoul'; */
   text-align: left;
   z-index: 100;
 }

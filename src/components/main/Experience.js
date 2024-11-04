@@ -2,40 +2,37 @@
 
 import * as THREE from "three";
 import { useRef, useMemo, useState, useCallback } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import {
   Environment,
-  Lightformer,
   OrbitControls,
-  Text,
 } from "@react-three/drei";
 import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
 import { Perf } from "r3f-perf";
 import { easing } from "maath";
+import dynamic from "next/dynamic";
 import CameraController from "./CameraController.js";
 import VideoText from "./VideoText.js";
-import Cube from "./Cube.js";
-import BackgroundLight from "./BackgroundLight.js";
-import Background from "./Background.js";
-import Effects from "./Effects.js";
+import Boxes from "./Boxes.js";
+const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
 //
 //
 const accents = ['#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff']; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
-  { color: '#ffffff', roughness: 0.5, metalness: 0.3, opacity: 0.9 },
-  { color: '#ffffff', roughness: 0.5, metalness: 0.3, opacity: 0.8 },
-  { color: '#ffffff', roughness: 0.5, metalness: 0.3, opacity: 0.7 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
   { color: 'white', roughness: 0.1, metalness: 0.1 },
   { color: 'white', roughness: 0.1, metalness: 0.1 },
   { color: 'white', roughness: 0.1, metalness: 0.1 },
   { color: accents[accent], roughness: 0.1, accent: true },
   { color: accents[accent + 1], roughness: 0.1, accent: true },
   { color: accents[accent + 2], roughness: 0.1, accent: true },
-  { color: '#ffffff', roughness: 0.6, opacity: 0.6 },
-  { color: '#ffffff', roughness: 0.4, opacity: 0.5 },
-  { color: '#ffffff', roughness: 0.4, opacity: 0.4 },
+  { color: '#cccccc', roughness: 0.6 },
+  { color: '#cccccc', roughness: 0.4 },
+  { color: '#cccccc', roughness: 0.4 },
   { color: 'white', roughness: 0.1 },
   { color: 'white', roughness: 0.2 },
   { color: 'white', roughness: 0.1 },
@@ -49,18 +46,13 @@ export default function Experience({ accent, scrollPercent }) {
 
   return (
     <>
-      <Perf position="bottom-left" />
+      {/* <Perf position="bottom-left" /> */}
       <color attach="background" args={['#ffffff']} />
-      {/* <BackgroundLight scrollPercent={scrollPercent} /> */}
       <CameraController />
 
       {/* <OrbitControls /> */}
 
-      {/* <ambientLight intensity={0.5} /> */}
-      {/* <directionalLight position={[0, 0, 10]} intensity={0.1} color="#ffffff" /> */}
-
-      <Background />
-
+      <Boxes scrollPercent={scrollPercent} />
 
       {scrollPercent < 30 && (
         <Physics timeStep="vary" gravity={[0, 0, 0]}>
@@ -74,8 +66,6 @@ export default function Experience({ accent, scrollPercent }) {
       <Environment resolution={64} preset="studio" environmentIntensity={0.1} />
 
       {/* <VideoText /> */}
-
-      <Cube />
 
       <Effects />
     </>

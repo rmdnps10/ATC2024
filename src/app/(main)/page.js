@@ -34,7 +34,7 @@ export default function MainPage() {
           depth: false,
           alpha: false
         }}
-        camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 70 }}
+        camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 100 }}
         style={{ scrollbarWidth: 'none' }}>
         <AdaptiveDpr pixelated />
         <AdaptiveEvents />

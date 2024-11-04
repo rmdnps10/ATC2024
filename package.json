@@ -23,7 +23,6 @@
     "gsap": "^3.12.5",
     "leva": "^0.9.34",
     "next": "14.2.5",
-    "popmotion": "^11.0.5",
     "postprocessing": "^6.36.3",
     "r3f-perf": "^7.2.1",
     "react": "^18",

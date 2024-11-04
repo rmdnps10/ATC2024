@@ -1,7 +1,8 @@
 import { useThree, useFrame } from '@react-three/fiber'
 import { EffectComposer, RenderPass, EffectPass, BloomEffect, ToneMappingEffect, FXAAEffect } from 'postprocessing'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { SSGIEffect, VelocityDepthNormalPass } from './v2'
+import * as THREE from 'three'
 //
 //
 //
@@ -15,7 +16,62 @@ export default function Effects() {
   useEffect(() => composer.setSize(size.width, size.height), [composer, size])
 
   useEffect(() => {
-    // SSGI (Screen Space Global Illumination) 효과를 위한 설정
+    const handleShaderError = (material) => {
+      if (material) {
+        material.onBeforeCompile = (shader) => {
+          shader.vertexShader = shader.vertexShader.replace(
+            'void main() {',
+            `
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+            `
+          );
+
+          if (shader.vertexShader.includes('USE_SKINNING')) {
+            shader.vertexShader = shader.vertexShader.replace(
+              '#ifdef BONE_TEXTURE',
+              `#ifdef BONE_TEXTURE
+              #ifdef USE_SKINNING
+                uniform int boneTextureSize;
+              #endif
+              `
+            );
+          }
+
+          shader.fragmentShader = shader.fragmentShader.replace(
+            'void main() {',
+            `
+            varying vec2 vUv;
+            void main() {
+            `
+          );
+
+          shader.fragmentShader = shader.fragmentShader.replace(
+            /texture2D\(/g,
+            'texture('
+          );
+        };
+
+        if (material.skinning) {
+          material.uniforms = {
+            ...material.uniforms,
+            boneTextureSize: { value: 0 }
+          };
+        }
+      }
+    };
+
+    scene.traverse((object) => {
+      if (object.isMesh) {
+        if (Array.isArray(object.material)) {
+          object.material.forEach(handleShaderError);
+        } else {
+          handleShaderError(object.material);
+        }
+      }
+    });
+
     const config = {
       importanceSampling: true,
       steps: 20,
@@ -38,12 +94,6 @@ export default function Effects() {
       specularPhi: 7.099999999999999,
       envBlur: 0.8
     }
-
-    // 성능 향상을 위한 제안:
-    // 1. resolutionScale을 0.25로 낮추어 렌더링 해상도 감소
-    // 2. steps와 refineSteps 값을 각각 10과 2로 줄임
-    // 3. denoiseIterations를 2로 늘리고 다른 디노이징 값들은 낮춤
-    // 4. radius 값을 8로 줄여 필터링 범위 축소
 
     const renderPass = new RenderPass(scene, camera)
     const velocityDepthNormalPass = new VelocityDepthNormalPass(scene, camera)
