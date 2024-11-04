@@ -16,7 +16,7 @@ export const worksData = [
   {
     id: 0,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '코끼리를 냉장고에 넣는 23가지 방법',
       title_eng: '23 Ways to Put an Elephant in the Fridge'
@@ -41,7 +41,7 @@ export const worksData = [
   {
     id: 1,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: 'MearMear',
       title_eng: 'MearMear'
@@ -66,7 +66,7 @@ export const worksData = [
   {
     id: 2,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '코끼리를 냉장고에 넣는 23가지 방법',
       title_eng: '23 Ways to Put an Elephant in the Fridge'
@@ -91,7 +91,7 @@ export const worksData = [
   {
     id: 3,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: 'MearMear',
       title_eng: 'MearMear'
@@ -116,7 +116,7 @@ export const worksData = [
   {
     id: 4,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 4',
       title_eng: 'Work Title 4'
@@ -141,7 +141,7 @@ export const worksData = [
   {
     id: 5,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 5',
       title_eng: 'Work Title 5'
@@ -166,7 +166,7 @@ export const worksData = [
   {
     id: 6,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 6',
       title_eng: 'Work Title 6'
@@ -191,7 +191,7 @@ export const worksData = [
   {
     id: 7,
     category: tabList[3],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 7',
       title_eng: 'Work Title 7'
@@ -216,7 +216,7 @@ export const worksData = [
   {
     id: 8,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 8',
       title_eng: 'Work Title 8'
@@ -241,7 +241,7 @@ export const worksData = [
   {
     id: 9,
     category: tabList[3],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 9',
       title_eng: 'Work Title 9'
@@ -266,7 +266,7 @@ export const worksData = [
   {
     id: 10,
     category: tabList[4],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 10',
       title_eng: 'Work Title 10'
@@ -291,7 +291,7 @@ export const worksData = [
   {
     id: 11,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 11',
       title_eng: 'Work Title 11'
@@ -316,7 +316,7 @@ export const worksData = [
   {
     id: 12,
     category: tabList[4],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 12',
       title_eng: 'Work Title 12'
@@ -341,7 +341,7 @@ export const worksData = [
   {
     id: 13,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 13',
       title_eng: 'Work Title 13'
@@ -366,7 +366,7 @@ export const worksData = [
   {
     id: 14,
     category: tabList[4],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 14',
       title_eng: 'Work Title 14'
@@ -391,7 +391,7 @@ export const worksData = [
   {
     id: 15,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 15',
       title_eng: 'Work Title 15'
@@ -416,7 +416,7 @@ export const worksData = [
   {
     id: 16,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 16',
       title_eng: 'Work Title 16'
@@ -441,7 +441,7 @@ export const worksData = [
   {
     id: 17,
     category: tabList[2],
-    imgUrl: '/images/Rectangle13.jpg',
+    imgUrl: '/images/about/Rectangle13.jpg',
     title: {
       title_kor: '작품 제목 17',
       title_eng: 'Work Title 17'
@@ -466,7 +466,7 @@ export const worksData = [
   {
     id: 18,
     category: tabList[1],
-    imgUrl: '/images/Rectangle.jpg',
+    imgUrl: '/images/about/Rectangle.jpg',
     title: {
       title_kor: '작품 제목 18',
       title_eng: 'Work Title 18'
