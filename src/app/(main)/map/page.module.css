@@ -1,2 +1,10 @@
 .main {
+  width: 100vw;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main header {
+  margin-top: 6.5rem;
 }
