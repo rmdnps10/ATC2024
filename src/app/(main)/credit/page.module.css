@@ -1,0 +1,13 @@
+.svg circle:hover {
+  fill: red;
+  position: relative;
+}
+
+.main div {
+  position: absolute;
+  background-color: rgb(235, 211, 211);
+  color: white;
+  width: 30vw;
+  height: 30vh;
+  top: 50%;
+}

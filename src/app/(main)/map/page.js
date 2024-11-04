@@ -2,6 +2,9 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { useEffect, useRef, useState } from 'react'
+import FourthFloorMap from '/public/images/map/4f.svg'
+import FifthFloorMap from '/public/images/map/5f.svg'
+
 //
 //
 //
@@ -85,7 +88,7 @@ export default function Home() {
             ref={el => (mapRefs.current[0] = el)}
             className={styles.firstSpan}>
             <Image
-              src={'/images/about/4f.png'}
+              src={'/images/map/4f.svg'}
               alt="maps"
               fill
               objectFit="contain"
@@ -95,7 +98,7 @@ export default function Home() {
             ref={el => (mapRefs.current[1] = el)}
             className={styles.secondSpan}>
             <Image
-              src={'/images/about/5f.png'}
+              src={'/images/map/5f.svg'}
               alt="maps"
               fill
               objectFit="contain"
@@ -105,7 +108,7 @@ export default function Home() {
             ref={el => (mapRefs.current[2] = el)}
             className={styles.thirdSpan}>
             <Image
-              src={'/images/about/loyola.png'}
+              src={'/images/map/loyola.svg'}
               alt="maps"
               fill
               objectFit="contain"
@@ -116,7 +119,7 @@ export default function Home() {
           <Image
             onClick={() => handleTabClick((selectedTab + 2) % 3)}
             className={styles.arrowLeft}
-            src={'/images/about/Arrow_right.png'}
+            src={'/images/map/Arrow_right.png'}
             alt="arrow-left"
             width={50}
             height={50}
@@ -126,7 +129,7 @@ export default function Home() {
           <Image
             onClick={() => handleTabClick((selectedTab + 1) % 3)}
             className={styles.arrowRight}
-            src={'/images/about/Arrow_right.png'}
+            src={'/images/map/Arrow_right.png'}
             alt="arrow-right"
             width={50}
             height={50}

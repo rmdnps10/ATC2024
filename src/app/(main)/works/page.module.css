@@ -99,6 +99,9 @@
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   font-size: 1.8rem;
+  @media (min-width: 2000px) {
+    height: 6rem;
+  }
   @media (max-width: 430px) {
     height: 7rem;
     grid-template-columns: repeat(4, 1fr);
@@ -113,8 +116,11 @@
   align-items: center;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1vw;
+  font-size: 0.8vw;
   position: relative;
+  @media (min-width: 2000px) {
+    font-size: 1.8rem;
+  }
   @media (max-width: 430px) {
     font-size: 0.8rem;
   }
@@ -148,8 +154,8 @@
 
 .main nav ul li div::after {
   position: absolute;
-  border-top: 2px solid transparent;
-  border-left: 2px solid transparent;
+  border-top: 1.5px solid transparent;
+  border-left: 1.5px solid transparent;
   background-image: linear-gradient(#ffffff, #ffffff),
     linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
   background-origin: border-box;
@@ -168,8 +174,8 @@
 
 .main nav ul li div::before {
   position: absolute;
-  border-bottom: 2px solid transparent;
-  border-right: 2px solid transparent;
+  border-bottom: 1.5px solid transparent;
+  border-right: 1.5px solid transparent;
   background-image: linear-gradient(#ffffff, #ffffff),
     linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
   background-origin: border-box;
