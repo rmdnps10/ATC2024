@@ -122,7 +122,13 @@ export default function CreditPage() {
               height="28"
             />
             <h1>대외협력팀</h1>
-            <div class="image-container"></div>
+            <div class={styles.imageContainer}>
+              <Image
+                src="/images/artist-profile/대외협력/대외협력_임수빈.png"
+                width="200"
+                height="280"
+              />
+            </div>
           </div>
           <div class="image-container"></div>
         </section>
