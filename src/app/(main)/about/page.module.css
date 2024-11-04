@@ -151,13 +151,13 @@
   justify-content: center;
   padding-top: 30.3rem;
   margin-bottom: 6.8rem;
+  font-family: 'Sandoll Seoul';
 }
 
 .subtitle p {
   position: relative;
   width: 60%;
   font-size: 6rem;
-  background-color: pink;
 }
 
 .subtitle p::before {
@@ -175,7 +175,6 @@
 }
 .videoContainer {
   width: 60%;
-  background-color: blueviolet;
   aspect-ratio: 16 / 9; /*동영상 비율 유지*/
 }
 .videoContainer iframe {
@@ -198,7 +197,6 @@
   flex-direction: column;
   width: 63.75%;
   gap: 2.4rem;
-  background-color: lightgoldenrodyellow;
 }
 
 .quote blockquote:nth-of-type(1) .quoteTitle::before {
@@ -221,19 +219,16 @@
 .quote blockquote:first-child {
   align-self: flex-start;
   width: 49%;
-  background-color: white;
   font-size: 1.6rem;
 }
 .quote blockquote:last-child {
   align-self: flex-end;
   width: 49%;
-  background-color: white;
   font-size: 1.6rem;
 }
 .quoteTitle {
   position: relative;
   margin-bottom: 1.6rem;
-  background-color: antiquewhite;
   font-family: 'Sandoll Seoul';
 }
 .quote p:first-child {
