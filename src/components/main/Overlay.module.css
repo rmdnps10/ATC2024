@@ -25,7 +25,6 @@
 }
 
 .box {
-  /* left: 3px; */
   width: 25px;
   height: 2px;
   margin: 3px;
@@ -52,8 +51,49 @@
   font-size: 20rem;
   line-height: 0.9;
   color: white;
+  font-family: 'Sandoll Seoul';
   pointer-events: none;
-  /* font-family: 'Sandoll Seoul'; */
   text-align: left;
   z-index: 100;
+}
+
+/* 모바일 반응형 스타일 추가 */
+@media screen and (max-width: 768px) {
+  .overlay {
+    right: 2vh;
+  }
+
+  .box {
+    width: 15px;
+    height: 1.5px;
+    margin: 2px;
+  }
+
+  .percentageText {
+    font-size: 0.9rem;
+  }
+
+  .centerText {
+    left: 50%;
+    max-width: 90vw;
+    font-size: 4rem;
+    text-align: left;
+  }
+}
+
+/* 작은 모바일 화면용 추가 스타일 */
+@media screen and (max-width: 480px) {
+  .box {
+    width: 12px;
+    height: 1px;
+    margin: 1.5px;
+  }
+
+  .percentageText {
+    font-size: 0.8rem;
+  }
+
+  .centerText {
+    font-size: 3rem;
+  }
 }

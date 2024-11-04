@@ -126,8 +126,8 @@ export default function Boxes({ scrollPercent }) {
     const leftTextRef = useRef({ z: 20 });
     const rightTextRef = useRef({ z: 20 });
     const [textPositions, setTextPositions] = useState({
-        left: [-1, 4, 20],
-        right: [3, -4, 20]
+        left: [-1, 10.5, 20],
+        right: [3, -10.5, 20]
     });
 
     const animateToComplete = useCallback(() => {
@@ -162,19 +162,19 @@ export default function Boxes({ scrollPercent }) {
                             onUpdate: () => {
                                 setTextPositions(prev => ({
                                     ...prev,
-                                    left: [-1, 4, leftTextRef.current.z]
+                                    left: [-1, 3.5, leftTextRef.current.z]
                                 }));
                             }
                         });
 
                         gsap.to(rightTextRef.current, {
                             z: 0, // z축으로 0으로 이동
-                            duration: 2.5,
+                            duration: 5,
                             ease: "power2.inOut",
                             onUpdate: () => {
                                 setTextPositions(prev => ({
                                     ...prev,
-                                    right: [3, -4, rightTextRef.current.z]
+                                    right: [3, -3.5, rightTextRef.current.z]
                                 }));
                             }
                         });
@@ -196,7 +196,7 @@ export default function Boxes({ scrollPercent }) {
             >
                 <Text
                     position={textPositions.left}
-                    fontSize={1.5}
+                    fontSize={1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"
@@ -207,7 +207,7 @@ export default function Boxes({ scrollPercent }) {
                 </Text>
                 <Text
                     position={textPositions.right}
-                    fontSize={1.5}
+                    fontSize={1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"
