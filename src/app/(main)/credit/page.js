@@ -32,6 +32,13 @@ export default function CreditPage() {
               height="28"
             />
             <h1>Creative Director</h1>
+            <div className={styles.imageContainer}>
+              <Image
+                src="/images/artist-profile/기타/크디_임동준.png"
+                width="200"
+                height="280"
+              />
+            </div>
           </div>
           <div class="image-container"></div>
         </section>
@@ -43,6 +50,7 @@ export default function CreditPage() {
               height="28"
             />
             <h1>웹개발팀</h1>
+            <div className={styles.imageContainer}></div>
           </div>
 
           <div class="image-container"></div>
@@ -114,6 +122,7 @@ export default function CreditPage() {
               height="28"
             />
             <h1>대외협력팀</h1>
+            <div class="image-container"></div>
           </div>
           <div class="image-container"></div>
         </section>
