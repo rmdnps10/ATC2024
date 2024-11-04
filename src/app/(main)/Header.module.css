@@ -1,19 +1,164 @@
 .header {
   width: 100%;
-  height: 8rem;
-  margin-left: 7.5rem;
   display: flex;
+  padding: 0 2.5rem;
+  position: fixed;
+  z-index: 999;
+  height: 6.5rem;
   align-items: center;
   gap: 5.1rem;
-  background-color: white;
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: 1s;
+  font-family: 'Pretendard';
 }
 
 .header ul {
   display: flex;
   gap: 3.6rem;
+  margin-left: auto;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .header ul li {
   font-size: 1.6rem;
   font-weight: 500;
+  font-family: Pretendard;
+  font-weight: 400;
+}
+
+.header ul li a {
+  color: #696969;
+}
+
+.header ul li a:hover {
+  background: linear-gradient(
+    270deg,
+    #9734fb 0.27%,
+    #1160f7 36.56%,
+    #35cffa 99.7%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo {
+  padding-bottom: 10px;
+}
+
+.logo a {
+  height: 40px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.line {
+  width: 1px;
+  height: 20px;
+  margin-bottom: 4px;
+  background: linear-gradient(
+    to right,
+    #7340fb,
+    #9734fb 20%,
+    #dd4ffc 40%,
+    #3c79fb 60%,
+    #278ffb 80%,
+    #35cffa
+  );
+}
+.line.active {
+  background-color: white;
+}
+
+.transition {
+  padding-bottom: 5px;
+}
+
+.activeText {
+  background: linear-gradient(
+    270deg,
+    #9734fb 0.27%,
+    #1160f7 36.56%,
+    #35cffa 99.7%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hamburgerMenu {
+  display: none;
+  position: relative;
+  cursor: pointer;
+  width: 25px;
+  height: 30px;
+  @media (max-width: 768px) {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+.hamburgerMenu.active .bar {
+  position: absolute;
+}
+
+.hamburgerMenu.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerMenu.active .bar:first-child {
+  top: 25%;
+  transform: rotate(45deg);
+}
+
+.hamburgerMenu.active .bar:last-child {
+  top: 25%;
+  transform: rotate(-45deg);
+}
+
+.bar {
+  width: 25px;
+  height: 1px;
+  margin: 6px 0;
+  transition: 1s; /* 트랜지션 효과로 부드러운 애니메이션 적용 */
+  background: linear-gradient(
+    to right,
+    #7340fb,
+    #9734fb 20%,
+    #dd4ffc 40%,
+    #3c79fb 60%,
+    #278ffb 80%,
+    #35cffa
+  );
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 6.5rem;
+  left: 0;
+  width: 100%;
+  background-color: inherit;
+  transition: height 0.4s;
+  border-top: 1px solid white;
+}
+
+.mobileMenu nav {
+  margin-top: 12rem;
+}
+
+.mobileMenu nav li {
+  border-bottom: 1px solid #404040;
+}
+
+.mobileMenu nav li a {
+  display: block;
+  color: white;
+  font-size: 2rem;
+  padding-top: 3.6rem;
+  padding-bottom: 3.6rem;
+  padding-left: 4.4rem;
 }

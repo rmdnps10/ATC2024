@@ -127,7 +127,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 table {
@@ -147,12 +147,15 @@ body {
 }
 
 /* 목록 역할이 있는 ul, ol 요소에서 기본 목록 스타일을 제거합니다. */
-ul[role="list"],
-ol[role="list"] {
+ul[role='list'],
+ol[role='list'] {
   list-style: none;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+li {
+  list-style: none;
 }

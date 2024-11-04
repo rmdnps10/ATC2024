@@ -6,7 +6,7 @@
   position: relative;
 }
 
-.pageDetail {
+/* .pageDetail {
   width: 100vw;
   height: 100vh;
   z-index: 2000;
@@ -14,75 +14,155 @@
   top: 0;
   left: 0;
   background-color: blue;
+} */
+
+.main header {
+  margin-top: 6.5rem;
+  padding: 6.7rem 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.headerTitle {
+  width: fit-content;
+  font-family: 'Sandoll Seoul';
+  font-size: 10rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -2px;
+  background: linear-gradient(
+    90deg,
+    #dd4ffc 0%,
+    #1160f7 31%,
+    #7340fb 64.5%,
+    #35cffa 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.headerSummary {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: -0.4px;
+}
+
+.headerDesc {
+  font-family: Pretendard;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.headerDesc div {
+  color: #000;
+  font-size: 1.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 28.5px */
+  letter-spacing: -0.38px;
+  padding: 1rem 2rem 1rem 0;
+}
+
+.headerDesc div span {
+  font-weight: 600;
 }
 
 .main nav {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 15rem;
   min-height: 15rem;
-  color: #767676;
-}
-
-.main nav ul {
-  width: fit-content;
-  height: fit-content;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  font-size: 1.8rem;
-  gap: 10rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-10%, -50%);
-  cursor: pointer;
-  transition: transform ease-in-out 0.3s;
-}
-
-.main nav ul li {
-  width: 7rem;
-  height: 3rem;
+  color: #a5a5a5;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid red; */
+}
+
+.main nav ul {
+  width: 90%;
+  height: 7rem;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  font-size: 1.8rem;
+  @media (max-width: 430px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.main nav ul li {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1vw;
+  position: relative;
 }
 
 .main nav ul li:hover > span {
-  color: black;
-  font-weight: 600;
-  transition: color 0.4s ease-in, font-weight 0.1s ease-in;
+  background: linear-gradient(
+    90deg,
+    #dd4ffc 0%,
+    #1160f7 31%,
+    #7340fb 64.5%,
+    #35cffa 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.4s ease-in, font-weight 0.1s ease-in;
 }
 
-.main nav div {
+/* .main nav div {
   position: absolute;
-  left: 50%;
+  left: 5vw;
   top: 50%;
-  transform: translate(-50%) translateY(-50%);
-  width: 20rem;
+  transform: translateY(-50%);
+  width: 8.1vw;
   height: 6rem;
-}
+  z-index: -10000;
+  transition: transform 0.3s ease;
+} */
 
-.main nav div::after {
+.main nav ul li::after {
   position: absolute;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-  content: "";
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  background-image: linear-gradient(#ffffff, #ffffff),
+    linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  content: '';
   height: 50%;
   width: 50%;
   top: 0;
   left: 0;
+  z-index: -10000;
 }
 
-.main nav div::before {
+.main nav ul li::before {
   position: absolute;
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
-  content: "";
+  border-bottom: 2px solid transparent;
+  border-right: 2px solid transparent;
+  background-image: linear-gradient(#ffffff, #ffffff),
+    linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  content: '';
   height: 50%;
   width: 50%;
   bottom: 0;
   right: 0;
+  z-index: -10000;
 }
 
 .main section {
@@ -100,9 +180,17 @@
 
 .figure {
   width: 20vw;
-  height: 40rem;
+  height: 23.4vw;
   display: flex;
   position: relative;
+  @media (max-width: 768px) {
+    width: 25vw;
+    height: 29.2vw;
+  }
+  @media (max-width: 430px) {
+    width: 50vw;
+    height: 82.8vw;
+  }
 }
 
 .image {
