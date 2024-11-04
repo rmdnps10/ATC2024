@@ -24,7 +24,7 @@ export default function WorksPage({}) {
   ]
   const router = useRouter()
   const tabRefs = useRef([])
-  const indicatorRef = useRef()
+  const indicatorRefs = useRef([])
   const tabListRef = useRef()
   const [tabSelected, setTabSelected] = useState('ALL')
   const [clickedId, setClickedId] = useState(null)
@@ -32,13 +32,18 @@ export default function WorksPage({}) {
   const [scrollY, setScrollY] = useState(0)
   useEffect(() => {
     //필터링 탭에 useRef
+    indicatorRefs.current.forEach((indiRef, indiIdx) => {
+      if (indiRef) {
+        indiRef.style.opacity = indiIdx === 0 ? '1' : '0'
+      }
+    })
     tabRefs.current.forEach((ref, idx) => {
       if (ref) {
         ref.style.fontWeight = idx === 0 ? '600' : '500'
         ref.style.color = idx === 0 ? 'black' : '#767676'
         ref.style.background =
           idx === 0
-            ? 'linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%)'
+            ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
             : 'none'
         ref.style.backgroundClip = idx === 0 ? 'text' : 'none'
         ref.style.webkitBackgroundClip = idx === 0 ? 'text' : 'none'
@@ -65,18 +70,20 @@ export default function WorksPage({}) {
 
   function handleTabClick(key) {
     tabRefs.current.forEach((ref, idx) => {
-      if (ref && indicatorRef) {
+      if (ref) {
         ref.style.color = '#767676'
         ref.style.background =
           idx === key
-            ? 'linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%)'
+            ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
             : 'none'
         ref.style.backgroundClip = idx === key ? 'text' : 'none'
         ref.style.webkitBackgroundClip = idx === key ? 'text' : 'none'
         ref.style.webkitTextFillColor = idx === key ? 'transparent' : 'inherit'
-        // indicatorRef.current.style.transform = `translate(${
-        //   8.18 * key
-        // }vw, -50%)`
+      }
+    })
+    indicatorRefs.current.forEach((indiRef, indiIdx) => {
+      if (indiRef) {
+        indiRef.style.opacity = indiIdx === key ? '1' : '0'
       }
     })
     setTabSelected(key)
@@ -94,7 +101,7 @@ export default function WorksPage({}) {
       <header>
         <div className={styles.headerTitle}>OUR WORKS</div>
         <div className={styles.headerSummary}>
-          ${`ATC 2024, <코끼리를 냉장고에 넣는 방법>, 그리고 아테커들의 방식`}
+          {`ATC 2024, <코끼리를 냉장고에 넣는 방법>, 그리고 아테커들의 방식`}
         </div>
         <div className={styles.headerDesc}>
           <div>
@@ -108,7 +115,8 @@ export default function WorksPage({}) {
             {`<ATC 2024>에서 수많은 작품들은 다양한 색채와 형태로 질문에 대답하며, 저마다 다른 방식으로 이 도전과 마주합니다.`}
           </div>
           <div>
-            이 방식은 각기 다를 것입니다. 어떤 이는 냉장고를 확장하고, 다른 이는 코끼리를 축소합니다. 
+            이 <span>방식</span>
+            은 각기 다를 것입니다. 어떤 이는 냉장고를 확장하고, 다른 이는 코끼리를 축소합니다. 
             <br />
             또 어떤 이는 그 사이의 빈 공간을 새롭게 정의합니다. 어쩌면 세상에 없던것을 가져오는 사람도 있을지 모릅니다.
             <br />
@@ -118,9 +126,6 @@ export default function WorksPage({}) {
         </div>
       </header>
       <nav>
-        {/* <div
-          className="indicator"
-          ref={el => (indicatorRef.current = el)}></div> */}
         <ul ref={tabListRef}>
           {tabList.map((el, key) => (
             <li
@@ -128,6 +133,9 @@ export default function WorksPage({}) {
               ref={el => (tabRefs.current[key] = el)}
               onClick={() => handleTabClick(key)}>
               <span>{el}</span>
+              <div
+                className="indicator"
+                ref={el => (indicatorRefs.current[key] = el)}></div>
             </li>
           ))}
         </ul>
@@ -151,7 +159,6 @@ export default function WorksPage({}) {
               fill
             />
             <figcaption>
-              <div className={styles.figCategory}>{el.category}</div>
               <div className={styles.figBox}>
                 <span className={styles.figTeam}>{el.team.team_kor}</span>
                 <span className={styles.figTitle}>{el.title.title_kor}</span>
