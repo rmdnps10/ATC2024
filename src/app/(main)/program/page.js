@@ -5,7 +5,6 @@ import Image from 'next/image'
 //
 //
 //
-//
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
@@ -119,6 +118,12 @@ export default function ProgramPage() {
 
   return (
     <main className={styles.main}>
+      <div className={styles.cyan1}></div>
+      <div className={styles.cyan2}></div>
+      <div className={styles.pink1}></div>
+      <div className={styles.pink2}></div>
+      <div className={styles.blue1}></div>
+      <div className={styles.blue2}></div>
       <section className={styles.timetableContainer}>
         <div className={styles.gridContainer}>
           {/* 요일 표시 */}
@@ -150,7 +155,11 @@ export default function ProgramPage() {
                     return cellData ? (
                       <div
                         key={colIndex}
-                        className={styles.programCell}
+                        className={`${styles.programCellStyled} ${
+                          hoveredProgram === cellData.id
+                            ? styles.highlightedBackground
+                            : ''
+                        }`}
                         /*style={{
                           gridColumn: colIndex + 2,
                           gridRow: `span ${cellData.rowspan}`
@@ -158,20 +167,12 @@ export default function ProgramPage() {
                         onMouseEnter={() => setHoveredProgram(cellData.id)}
                         onMouseLeave={() => setHoveredProgram(null)}>
                         <div
-                          className={`${styles.backgroundLayer} ${
+                          className={`${styles.gradientText} ${
                             hoveredProgram === cellData.id
-                              ? styles.highlightedBackground
+                              ? styles.highlightedText
                               : ''
                           }`}>
-                          {/* 텍스트 레이어 */}
-                          <div
-                            className={`${styles.gradientText} ${
-                              hoveredProgram === cellData.id
-                                ? styles.highlightedText
-                                : ''
-                            }`}>
-                            {cellData.title}
-                          </div>
+                          {cellData.title}
                         </div>
                       </div>
                     ) : (
@@ -193,23 +194,18 @@ export default function ProgramPage() {
           {alwaysAvailablePrograms.map(program => (
             <div
               key={program.id}
-              className={styles.alwaysProgramCell}
+              className={`${styles.programCellStyled} ${
+                hoveredProgram === program.id
+                  ? styles.highlightedBackground
+                  : ''
+              }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
               onMouseLeave={() => setHoveredProgram(null)}>
-              {/* 배경 레이어 */}
               <div
-                className={`${styles.backgroundLayer} ${
-                  hoveredProgram === program.id
-                    ? styles.highlightedBackground
-                    : ''
+                className={`${styles.gradientText} ${
+                  hoveredProgram === program.id ? styles.highlightedText : ''
                 }`}>
-                {/* 텍스트 레이어 */}
-                <div
-                  className={`${styles.gradientText} ${
-                    hoveredProgram === program.id ? styles.highlightedText : ''
-                  }`}>
-                  {program.title}
-                </div>
+                {program.title}
               </div>
             </div>
           ))}
@@ -221,12 +217,13 @@ export default function ProgramPage() {
         {alwaysAvailablePrograms.map(program => (
           <div
             key={program.id}
-            className={styles.programItem}>
+            className={`${styles.programItem} ${
+              openPrograms.includes(program.id) ? styles.activeShadow : ''
+            }`}>
             <div
-              className={`${styles.programHeader} ${
-                hoveredProgram === program.id ? styles.highlightedProgram : ''
-              } ${openPrograms.includes(program.id) ? styles.active : ''}`}
-              data-text={program.title}
+              className={`${styles.programHeader}  ${
+                openPrograms.includes(program.id) ? styles.activeHeader : ''
+              }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
               onMouseLeave={() => setHoveredProgram(null)}
               onClick={() =>
@@ -236,7 +233,12 @@ export default function ProgramPage() {
                     : [...openPrograms, program.id]
                 )
               }>
-              <span>{program.title}</span>
+              <div
+                className={`${styles.gradientText} ${
+                  hoveredProgram === program.id ? styles.highlightedText : ''
+                }`}>
+                {program.title}
+              </div>
               <span className={styles.arrow}>
                 {openPrograms.includes(program.id) ? (
                   <Image
@@ -254,7 +256,8 @@ export default function ProgramPage() {
               </span>
             </div>
             {openPrograms.includes(program.id) && (
-              <div className={styles.accordionContent}>
+              <div
+                className={`${styles.accordionContent} ${styles.activeContent}`}>
                 <div className={styles.programDetails}>
                   <p className={styles.programLocation}>{program.location}</p>
                   <p className={styles.programDescription}>
@@ -268,12 +271,13 @@ export default function ProgramPage() {
         {programs.map(program => (
           <div
             key={program.id}
-            className={styles.programItem}>
+            className={`${styles.programItem} ${
+              openPrograms.includes(program.id) ? styles.activeShadow : ''
+            }`}>
             <div
-              className={`${styles.programHeader} ${
-                hoveredProgram === program.id ? styles.highlightedProgram : ''
-              } ${openPrograms.includes(program.id) ? styles.active : ''}`}
-              data-text={program.title}
+              className={`${styles.programHeader}  ${
+                openPrograms.includes(program.id) ? styles.activeHeader : ''
+              }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
               onMouseLeave={() => setHoveredProgram(null)}
               onClick={() =>
@@ -283,7 +287,12 @@ export default function ProgramPage() {
                     : [...openPrograms, program.id]
                 )
               }>
-              <span>{program.title}</span>
+              <div
+                className={`${styles.gradientText} ${
+                  hoveredProgram === program.id ? styles.highlightedText : ''
+                }`}>
+                {program.title}
+              </div>
               <span className={styles.arrow}>
                 {openPrograms.includes(program.id) ? (
                   <Image
@@ -301,7 +310,8 @@ export default function ProgramPage() {
               </span>
             </div>
             {openPrograms.includes(program.id) && (
-              <div className={styles.accordionContent}>
+              <div
+                className={`${styles.accordionContent} ${styles.activeContent}`}>
                 <div className={styles.programDetails}>
                   <p className={styles.programTime}>
                     {program.startTime} - {program.endTime} ({program.day})

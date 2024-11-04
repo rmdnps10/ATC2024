@@ -1,24 +1,75 @@
 .main {
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
-  padding: 10rem;
-  gap: 2.5rem;
-  background-color: rgb(207, 229, 236);
+  padding: 10rem 0;
+}
+
+.cyan1 {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  right: 0;
+  background-color: #35cffa30;
+  filter: blur(150px);
+  z-index: -1;
+}
+.cyan2 {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  bottom: 0;
+  background-color: #35cffa30;
+  filter: blur(150px);
+  z-index: -1;
+}
+.pink1 {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  background-color: #dd4ffc20;
+  filter: blur(150px);
+  z-index: -1;
+}
+
+.pink2 {
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  bottom: 0;
+  right: 10%;
+  background-color: #dd4ffc20;
+  filter: blur(150px);
+  z-index: -1;
+}
+.blue1 {
+  position: absolute;
+  width: 30%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  background-color: #278ffb20;
+  filter: blur(150px);
+  z-index: -1;
 }
 
 .timetableContainer {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 35vw;
-  height: 80vh;
+  width: 38vw;
+  height: 85vh;
   padding: 2rem;
   border: 0;
   border-radius: 1rem;
-  background-color: #ffe7e7;
-  overflow: auto;
+  background-color: white;
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-right: 1%;
 }
 
 .gridContainer {
@@ -27,7 +78,6 @@
   grid-template-rows: auto repeat(6, 1fr);
   height: 85%;
   font-size: 2rem;
-  font-family: 'Pretendard';
 }
 
 .alwaysTableContainer {
@@ -42,14 +92,13 @@
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border: 1px solid #ddd;
+  border: 1px solid #f0f0f0;
   text-align: center;
   font-size: 2rem;
   height: 100%;
 }
 
 .alwaysProgramTitle {
-  font-weight: bold;
   color: #333;
   font-size: 2rem;
 }
@@ -57,9 +106,8 @@
 .dayHeader {
   position: relative;
   text-align: center;
-  font-weight: bold;
   font-size: 1.8rem;
-  color: #555;
+  color: #333333;
 }
 
 .dayHeader:nth-child(2)::before {
@@ -78,11 +126,10 @@
   display: flex;
   justify-content: center;
   grid-column: 1;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   text-align: right;
-  padding-right: 1.8rem;
-  color: #555;
-  font-weight: bold;
+  color: #333333;
+  transform: translate(0, -8%);
 }
 
 .alwaysLabel {
@@ -90,21 +137,33 @@
   justify-content: center;
   align-items: center;
   grid-column: 1;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   text-align: right;
-  padding-right: 1.8rem;
-  color: #555;
-  font-weight: bold;
+  color: #333333;
 }
 
 .programCell {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: white;
+  border: 1px solid #f0f0f0;
+  text-align: center;
+  font-size: 1.6rem;
+  transition: background-color 0.3s;
+  padding: 1rem;
+}
+
+.programCellStyled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
   border: 1px solid #ddd;
   text-align: center;
+  font-size: 1.6rem;
   transition: background-color 0.3s;
+  padding: 1rem;
 }
 .grdientText {
   display: flex;
@@ -115,16 +174,17 @@
   text-align: center;
   transition: background-color 0.3s;
 }
+
 .highlightedBackground {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #f1fcff; /* 호버 시 나타나는 배경색 */
+  background-color: #f1fcff;
+  border: 1px solid #1160f7;
 }
 
-/* 호버 시 텍스트 그라디언트 적용 */
 .highlightedText {
   display: flex;
   justify-content: center;
@@ -151,7 +211,8 @@
 /**/
 /**/
 .programContainer {
-  width: 35vw;
+  width: 38vw;
+  margin-left: 1%;
 }
 
 .programItem {
@@ -166,10 +227,11 @@
   height: 10.4rem;
   padding: 2.8rem 3rem;
   border-radius: 1rem;
-  background-color: #ffffff;
+  background-color: white;
   font-size: 4.4rem;
   transition: background-color 0.3s;
   font-family: 'Sandoll Seoul';
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .arrow {
@@ -180,6 +242,8 @@
 .accordionContent {
   padding: 20px;
   background-color: white;
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
 }
 
 .programDetails {
@@ -187,20 +251,38 @@
 }
 
 .programTime {
-  margin-bottom: 0.5rem;
   font-size: 1.8rem;
 }
 
 .programLocation {
-  margin-bottom: 2rem;
-  font-size: 1.4rem;
+  position: relative;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
 }
 
+.programLocation::before {
+  position: absolute;
+  content: '';
+  width: 19rem;
+  bottom: -0.8rem;
+  border: 0.5px solid #333333;
+}
 .programDescription {
+  padding-top: 1.6rem;
   font-size: 1.4rem;
   color: #444444;
 }
 
-.active {
+.activeHeader {
   border-radius: 1rem 1rem 0 0;
+  box-shadow: none;
+}
+.activeContent {
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: none;
+}
+.activeShadow {
+  border-radius: 1rem;
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
 }
