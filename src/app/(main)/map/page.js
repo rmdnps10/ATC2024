@@ -2,9 +2,6 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { useEffect, useRef, useState } from 'react'
-import FourthFloorMap from '/public/images/map/4f.svg'
-import FifthFloorMap from '/public/images/map/5f.svg'
-
 //
 //
 //
