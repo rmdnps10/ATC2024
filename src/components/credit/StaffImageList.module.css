@@ -1,0 +1,50 @@
+.imageContainerList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+}
+
+.leader {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+.imageContainerItem {
+  position: relative;
+}
+
+.overlay {
+  padding: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.imageContainerItem:hover .overlay {
+  opacity: 1;
+}
+.staffId {
+  color: #fff;
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.028rem;
+}
+.staffInfo p {
+  font-size: 1.6rem;
+}
+.staffInfo h3 {
+  font-size: 4.8rem;
+  font-family: 'Sandoll Seoul';
+}

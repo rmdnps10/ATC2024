@@ -67,7 +67,11 @@
   align-items: center;
   width: fit-content;
 }
-.container h1 {
+
+.container .title img {
+  mix-blend-mode: luminosity;
+}
+.container .title h1 {
   font-family: 'Sandoll Seoul';
   color: white;
   color: #fff;
@@ -79,14 +83,34 @@
   position: relative;
   height: 90px;
 }
-.container img {
-  mix-blend-mode: luminosity;
+
+.imageContainerList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+}
+.imageContainerItem {
+  position: relative;
 }
 
-.imageContainer {
+.overlayStaffInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.imageContainerItem:hover .overlayStaffInfo {
+  opacity: 1;
 }
 
-.imageContainer img {
-  margin: 1.2rem;
-  mix-blend-mode: normal;
+.staffInfo h1 {
+  font-family: 'Sandoll Seoul';
 }
