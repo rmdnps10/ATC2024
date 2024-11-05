@@ -2,6 +2,7 @@
 
 import Ocean from './Ocean'
 import Portal from './Portal'
+import { App } from './TestPortal'
 import { CameraControls } from '@react-three/drei'
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
@@ -13,7 +14,8 @@ export default function Experience() {
         <CameraControls />
         <Suspense>
           <Ocean />
-          <Portal />
+          <App />
+          {/* <Portal /> */}
         </Suspense>
       </Canvas>
     </>

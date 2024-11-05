@@ -16,7 +16,7 @@ function Ocean() {
     './model/textures/ocean/waternormals.jpeg'
   )
   waterNormals.wrapS = waterNormals.wrapT = THREE.RepeatWrapping
-  const geom = useMemo(() => new THREE.PlaneGeometry(150, 10000), [])
+  const geom = useMemo(() => new THREE.PlaneGeometry(10000, 10000), [])
   const config = useMemo(
     () => ({
       textureWidth: 512,
