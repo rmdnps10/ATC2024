@@ -5,17 +5,17 @@ import { ObjectId } from 'mongodb'
 export async function GET(request, { params }) {
   try {
     await connectDb()
-    const detailWork = await DetailWork.findById(params.id)
+    const data = await DetailWork.findById(params.id)
 
     // 문서가 존재하지 않으면 404 반환
-    if (!detailWork) {
+    if (!data) {
       return new Response(JSON.stringify({ error: 'ID-NOT-FOUND' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' }
       })
     }
 
-    return new Response(JSON.stringify(detailWork), {
+    return new Response(JSON.stringify({ data }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
     })
