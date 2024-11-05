@@ -15,7 +15,6 @@ export async function GET(request, { params }) {
       })
     }
 
-    // 문서가 존재하면 정보 반환
     return new Response(JSON.stringify(detailWork), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
