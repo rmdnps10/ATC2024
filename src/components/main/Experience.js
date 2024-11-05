@@ -2,155 +2,70 @@
 
 import * as THREE from "three";
 import { useRef, useMemo, useState, useCallback } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import {
   Environment,
-  Lightformer,
   OrbitControls,
-  Text,
 } from "@react-three/drei";
 import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
 import { Perf } from "r3f-perf";
 import { easing } from "maath";
-import Background from "./Background.js";
-import CameraController from "./CameraController.js";
 import dynamic from "next/dynamic";
+import CameraController from "./CameraController.js";
 import VideoText from "./VideoText.js";
-import Cube from "./Cube.js";
-
-const Effects = dynamic(() => import("./Effects"), { ssr: false });
+import Boxes from "./Boxes.js";
+const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
 //
 //
-const accents = ["#005afb", "#25cefc", "#168cff", "#df45ff"]; // ATC2024 메인 컬러 사용
+const accents = ['#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff']; // ATC2024 메인 컬러 사용
 
 const shuffle = (accent = 0) => [
-  {
-    color: "white",
-    roughness: 0.1,
-    metalness: 0.5,
-    transparent: true,
-    opacity: 0.5,
-  },
-  {
-    color: "white",
-    roughness: 0.1,
-    metalness: 0.5,
-    transparent: true,
-    opacity: 0.5,
-  },
-  { color: "#9822ff", roughness: 0.1, metalness: 0.1 },
-  {
-    color: "white",
-    roughness: 0.1,
-    metalness: 0.1,
-    transparent: true,
-    opacity: 0.5,
-  },
-  { color: "#9822ff", roughness: 0.1, metalness: 0.1 },
-  { color: "#7334ff", roughness: 0.1, metalness: 0.1 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
+  { color: '#ffffff', roughness: 0.5, metalness: 0.3 },
+  { color: 'white', roughness: 0.1, metalness: 0.1 },
+  { color: 'white', roughness: 0.1, metalness: 0.1 },
+  { color: 'white', roughness: 0.1, metalness: 0.1 },
   { color: accents[accent], roughness: 0.1, accent: true },
-  { color: accents[accent], roughness: 0.1, accent: true },
-  { color: accents[accent], roughness: 0.7, accent: true },
-  { color: "white", roughness: 0.1 },
-  { color: "#005afb", roughness: 0.3, metalness: 0.3 },
-  { color: "ivory", roughness: 0.3 },
-  { color: "#168cff", roughness: 0.1 },
-  { color: "white", roughness: 0.2, transparent: true, opacity: 0.5 },
-  { color: "#7334ff", roughness: 0.1 },
-  { color: accents[accent], roughness: 0.1, metalness: 0.5 },
-  { color: accents[accent], roughness: 0.3, accent: true },
-  { color: accents[accent], roughness: 0.1, accent: true },
+  { color: accents[accent + 1], roughness: 0.1, accent: true },
+  { color: accents[accent + 2], roughness: 0.1, accent: true },
+  { color: '#cccccc', roughness: 0.6 },
+  { color: '#cccccc', roughness: 0.4 },
+  { color: '#cccccc', roughness: 0.4 },
+  { color: 'white', roughness: 0.1 },
+  { color: 'white', roughness: 0.2 },
+  { color: 'white', roughness: 0.1 },
+  { color: accents[accent + 3], roughness: 0.1, accent: true },
+  { color: accents[accent + 4], roughness: 0.3, accent: true },
+  { color: accents[accent + 5], roughness: 0.1, accent: true }
 ];
 
-export default function Experience({ accent }) {
+export default function Experience({ accent, scrollPercent }) {
   const connectors = useMemo(() => shuffle(accent), [accent]);
-
-  // const { camera, mouse } = useThree();
-
-  // useFrame((state, delta) => {
-  //   // 카메라 위치 및 회전
-  //   camera.position.x = THREE.MathUtils.lerp(camera.position.x, mouse.x * 0.2, 0.1); // X축 이동폭을 줄임
-  //   camera.position.y = THREE.MathUtils.lerp(camera.position.y, mouse.y * 0.2, 0.1); // Y축 이동폭을 줄임
-  //   camera.position.z = THREE.MathUtils.lerp(camera.position.z, 30, 0.1);
-
-  //   // 카메라 회전
-  //   camera.rotation.x = THREE.MathUtils.lerp(camera.rotation.x, mouse.y * -Math.PI * 0.05, 0.1) * 0.7;
-  //   camera.rotation.y = THREE.MathUtils.lerp(camera.rotation.y, mouse.x * -Math.PI * 0.05, 0.1) * 0.7;
-  // });
 
   return (
     <>
-      <Perf position="top-left" />
-      {/* <OrbitControls makeDefault zoomSpeed={0.1} dampingFactor={0.05} angularDamping /> */}
-
-      <Background />
-
+      {/* <Perf position="bottom-left" /> */}
+      <color attach="background" args={['#ffffff']} />
       <CameraController />
 
-      <Text
-        position={[0, 0, 7]}
-        fontSize={1}
-        color="#ffffff"
-        anchorX="center"
-        anchorY="middle"
-        maxWidth={10}
-        bevel={10}
-      >
-        {"Art&Technology Conference               2024"}
-      </Text>
+      {/* <OrbitControls /> */}
 
-      <Physics timeStep="vary" gravity={[0, 0, 0]}>
-        <Pointer />
-        {connectors.map((props, i) => (
-          <Sphere key={i} {...props} />
-        ))}
-      </Physics>
+      <Boxes scrollPercent={scrollPercent} />
 
-      <Environment resolution={256} preset="studio" environmentIntensity={0.3}>
-        <group rotation={[-Math.PI / 3, 0, 1]}>
-          <Lightformer
-            form="circle"
-            intensity={50}
-            rotation-x={Math.PI / 2}
-            position={[0, 5, -9]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, 1, -1]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={Math.PI / 2}
-            position={[-5, -1, -1]}
-            scale={2}
-          />
-          <Lightformer
-            form="circle"
-            intensity={2}
-            rotation-y={-Math.PI / 2}
-            position={[10, 1, 0]}
-            scale={8}
-          />
-          <Lightformer
-            form="ring"
-            color="#4060ff"
-            intensity={80}
-            onUpdate={(self) => self.lookAt(0, 0, 0)}
-            position={[10, 10, 0]}
-            scale={10}
-          />
-        </group>
-      </Environment>
+      {scrollPercent < 30 && (
+        <Physics timeStep="vary" gravity={[0, 0, 0]}>
+          <Pointer />
+          {connectors.map((props, i) => (
+            <Sphere key={i} {...props} />
+          ))}
+        </Physics>
+      )}
 
-      <VideoText />
+      <Environment resolution={64} preset="studio" environmentIntensity={0.1} />
 
-      <Cube />
+      {/* <VideoText /> */}
 
       <Effects />
     </>
@@ -200,7 +115,7 @@ function Sphere({
 
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-  const [hitSound] = useState(() => new Audio("./images/main/bubbleHit.mp3"));
+  const [hitSound] = useState(() => new Audio("./images/main/hit.mp3"));
 
   const lastPlayTime = useRef(0);
   const soundCooldown = 80;

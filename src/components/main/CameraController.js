@@ -15,7 +15,7 @@ export default function CameraController() {
 
   useFrame(() => {
     const scrollOffset = scroll.offset;
-    const moveDistance = -20;
+    const moveDistance = -80;
     const newY = initialPosition.current.y + scrollOffset * moveDistance;
 
     camera.position.lerp(new Vector3(initialPosition.current.x, newY, initialPosition.current.z), 0.1);
