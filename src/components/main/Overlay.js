@@ -18,7 +18,6 @@ export default function Overlay({ scrollPercent }) {
     bottomFilled = Math.floor(((scrollPercent - 50) / 50) * totalBoxes);
   }
 
-  // 텍스트의 위치와 투명도 계산
   const translateY = scrollPercent <= 30
     ? -(scrollPercent / 30) * 100
     : -100;

@@ -4,6 +4,7 @@
   height: 100vh;
   top: 0;
   box-sizing: border-box;
+  background-color: #ffffff;
 }
 
 .canvasContainer::-webkit-scrollbar {
@@ -22,5 +23,5 @@
 .canvasContainer {
   opacity: 0;
   touch-action: none;
-  animation: fade-in 5s ease 0.5s forwards;
+  animation: fade-in 5s ease-in-out 2.5s forwards;
 }

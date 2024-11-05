@@ -1,9 +1,13 @@
+'use client';
+
 import React, { useRef, useMemo, useState, useCallback, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { Text } from '@react-three/drei';
-
+//
+//
+//
 export default function Boxes({ scrollPercent }) {
     const boxRefs = useRef([]);
     const groupRef = useRef();
@@ -42,8 +46,11 @@ export default function Boxes({ scrollPercent }) {
         };
 
         return [
+            // 큐브 초기 위치 조정 해야해요...
+
             // 중앙 큐브
             { pos: [0, 0, 0], finalPos: [0, 0, 0], isCenter: true, colorIndex: 0 },
+
             // 앞면 큐브들
             { pos: getRandomPosition(), finalPos: [-1, 1, 1], isCenter: false, colorIndex: 0 },
             { pos: getRandomPosition(), finalPos: [0, 1, 1], isCenter: false, colorIndex: 0 },
@@ -154,9 +161,8 @@ export default function Boxes({ scrollPercent }) {
                         setIsCompleted(true);
                         setIsAnimating(false);
 
-                        // 텍스트 애니메이션 - z축으로 이동
                         gsap.to(leftTextRef.current, {
-                            z: 0, // z축으로 0으로 이동
+                            z: 0,
                             duration: 2.5,
                             ease: "power2.inOut",
                             onUpdate: () => {
@@ -168,7 +174,7 @@ export default function Boxes({ scrollPercent }) {
                         });
 
                         gsap.to(rightTextRef.current, {
-                            z: 0, // z축으로 0으로 이동
+                            z: 0,
                             duration: 5,
                             ease: "power2.inOut",
                             onUpdate: () => {

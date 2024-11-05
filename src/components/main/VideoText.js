@@ -1,9 +1,9 @@
 'use client'
 
-import * as THREE from 'three'
 import React, { Suspense, useEffect, useState } from 'react'
 import { Reflector, Text, useTexture } from '@react-three/drei'
 import Model from './Model'
+//
 //
 //
 export default function VideoText() {
