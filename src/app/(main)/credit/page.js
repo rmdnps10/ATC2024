@@ -66,9 +66,9 @@ export default function CreditPage() {
             <h1>Creative Director</h1>
           </div>
           <StaffImageList
-            teamName={'기타팀'}
+            teamName={'Creative Director'}
             teamType={'기타'}
-            memberList={기타팀}
+            memberList={기타팀.slice(0, 1)}
           />
         </section>
         <section className={styles.container}>
@@ -189,6 +189,21 @@ export default function CreditPage() {
             teamName={'작품팀'}
             teamType={'작품'}
             memberList={작품팀}
+          />
+        </section>
+        <section className={styles.container}>
+          <div className={styles.title}>
+            <Image
+              src="/images/credit/symbol1.svg"
+              width="28"
+              height="28"
+            />
+            <h1>회계</h1>
+          </div>
+          <StaffImageList
+            teamName={'회계'}
+            teamType={'기타'}
+            memberList={기타팀.slice(1)}
           />
         </section>
       </article>

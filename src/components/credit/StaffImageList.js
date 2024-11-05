@@ -16,7 +16,7 @@ export default function StaffImageList({ teamName, teamType, memberList }) {
           <div className={styles.staffId}>@rmdnps10</div>
           <div className={styles.staffInfo}>
             <p>{teamName}</p>
-            <p>{'팀장'}</p>
+            {teamName !== ('Creative Director' || '회계' ) && <p>{'팀장'}</p>}
             <h3>{memberList[0]}</h3>
           </div>
         </div>
