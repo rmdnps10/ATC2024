@@ -15,6 +15,7 @@ export default function Header() {
     useState(false)
 
   const pathname = usePathname()
+  const isPathCredit = pathname === '/credit'
 
   const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(state => {
     return !state
@@ -24,7 +25,9 @@ export default function Header() {
   return (
     <header
       className={styles.header}
-      style={{ backgroundColor: isOpenMobileMenu && 'black' }}>
+      style={{
+        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
+      }}>
       <div className={styles.logo}>
         <Link
           href={'/'}

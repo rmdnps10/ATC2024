@@ -14,7 +14,7 @@ export default function MainRootLayout({ children }) {
   return (
     <html
       lang="kr"
-      className={`${Pretendard}`}>
+      className={`${Pretendard.className}`}>
       {/* 산돌 서울 폰트 */}
       <Script
         type="module"
