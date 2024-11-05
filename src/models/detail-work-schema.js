@@ -1,7 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
+import { ObjectId } from 'mongodb'
 
 export const DetailWorkSchema = new Schema({
-  _id: String,
+  _id: ObjectId,
   title: String,
   thumbnailImg: String,
   category: String,
@@ -18,6 +19,7 @@ export const DetailWorkSchema = new Schema({
 
   interviewText: String,
   commentList: Array
+  
 })
 
 export const DetailWork =

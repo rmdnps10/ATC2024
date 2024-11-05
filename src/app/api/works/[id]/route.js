@@ -1,17 +1,21 @@
 import { connectDb } from '@/lib/connect-db'
 import { DetailWork } from '@/models/detail-work-schema'
+import { ObjectId } from 'mongodb'
 
 export async function GET(request, { params }) {
-  const { id } = params // URL 매개변수에서 id 추출
   try {
     await connectDb()
-    const detailWork = await DetailWork.findById(id)
+    const detailWork = await DetailWork.findById(params.id)
+
+    // 문서가 존재하지 않으면 404 반환
     if (!detailWork) {
-      return new Response(JSON.stringify({ error: 'DetailWork not found' }), {
+      return new Response(JSON.stringify({ error: 'ID-NOT-FOUND' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' }
       })
     }
+
+    // 문서가 존재하면 정보 반환
     return new Response(JSON.stringify(detailWork), {
       status: 200,
       headers: { 'Content-Type': 'application/json' }
