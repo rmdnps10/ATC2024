@@ -16,8 +16,9 @@ export const DetailWorkSchema = new Schema({
   artistImg: String,
   artistIntroduction: String,
 
+  interviewText: String,
   commentList: Array
 })
 
 export const DetailWork =
-  mongoose.models.Member ?? mongoose.model('DeatilWork', DetailWorkSchema)
+  mongoose.models.DetailWork ?? mongoose.model('DetailWork', DetailWorkSchema)
