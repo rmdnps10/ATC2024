@@ -65,11 +65,13 @@ export default function ProgramPage() {
     {
       id: 'always1',
       title: '대협팀 1',
+      location: '서강대학교 하비에르관 4F 신영균스튜디오',
       description: '상시운영 프로그램 1 설명'
     },
     {
       id: 'always2',
       title: '대협팀 2',
+      location: '서강대학교 하비에르관 4F 신영균스튜디오',
       description: '상시운영 프로그램 2 설명'
     }
   ]
@@ -156,19 +158,17 @@ export default function ProgramPage() {
                       <div
                         key={colIndex}
                         className={`${styles.programCellStyled} ${
-                          hoveredProgram === cellData.id
+                          hoveredProgram === cellData.id ||
+                          openPrograms.includes(cellData.id)
                             ? styles.highlightedBackground
                             : ''
                         }`}
-                        /*style={{
-                          gridColumn: colIndex + 2,
-                          gridRow: `span ${cellData.rowspan}`
-                        }}*/
                         onMouseEnter={() => setHoveredProgram(cellData.id)}
                         onMouseLeave={() => setHoveredProgram(null)}>
                         <div
                           className={`${styles.gradientText} ${
-                            hoveredProgram === cellData.id
+                            hoveredProgram === cellData.id ||
+                            openPrograms.includes(cellData.id)
                               ? styles.highlightedText
                               : ''
                           }`}>
@@ -195,7 +195,8 @@ export default function ProgramPage() {
             <div
               key={program.id}
               className={`${styles.programCellStyled} ${
-                hoveredProgram === program.id
+                hoveredProgram === program.id ||
+                openPrograms.includes(program.id)
                   ? styles.highlightedBackground
                   : ''
               }`}
@@ -203,7 +204,10 @@ export default function ProgramPage() {
               onMouseLeave={() => setHoveredProgram(null)}>
               <div
                 className={`${styles.gradientText} ${
-                  hoveredProgram === program.id ? styles.highlightedText : ''
+                  hoveredProgram === program.id ||
+                  openPrograms.includes(program.id)
+                    ? styles.highlightedText
+                    : ''
                 }`}>
                 {program.title}
               </div>
@@ -226,16 +230,13 @@ export default function ProgramPage() {
               }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
               onMouseLeave={() => setHoveredProgram(null)}
-              onClick={() =>
-                setOpenPrograms(
-                  openPrograms.includes(program.id)
-                    ? openPrograms.filter(id => id !== program.id)
-                    : [...openPrograms, program.id]
-                )
-              }>
+              onClick={() => toggleProgram(program.id)}>
               <div
                 className={`${styles.gradientText} ${
-                  hoveredProgram === program.id ? styles.highlightedText : ''
+                  hoveredProgram === program.id ||
+                  openPrograms.includes(program.id)
+                    ? styles.highlightedText
+                    : ''
                 }`}>
                 {program.title}
               </div>
@@ -259,6 +260,7 @@ export default function ProgramPage() {
               <div
                 className={`${styles.accordionContent} ${styles.activeContent}`}>
                 <div className={styles.programDetails}>
+                  <p className={styles.programTime}>상시운영</p>
                   <p className={styles.programLocation}>{program.location}</p>
                   <p className={styles.programDescription}>
                     {program.description}
@@ -280,16 +282,13 @@ export default function ProgramPage() {
               }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
               onMouseLeave={() => setHoveredProgram(null)}
-              onClick={() =>
-                setOpenPrograms(
-                  openPrograms.includes(program.id)
-                    ? openPrograms.filter(id => id !== program.id)
-                    : [...openPrograms, program.id]
-                )
-              }>
+              onClick={() => toggleProgram(program.id)}>
               <div
                 className={`${styles.gradientText} ${
-                  hoveredProgram === program.id ? styles.highlightedText : ''
+                  hoveredProgram === program.id ||
+                  openPrograms.includes(program.id)
+                    ? styles.highlightedText
+                    : ''
                 }`}>
                 {program.title}
               </div>
