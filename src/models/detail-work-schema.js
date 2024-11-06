@@ -7,7 +7,6 @@ export const DetailWorkSchema = new Schema({
   category: String,
   oneLiner: String,
 
-  
   description: String,
   mainImg: String,
   openAddress: String,
