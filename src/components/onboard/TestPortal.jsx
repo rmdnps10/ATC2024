@@ -18,7 +18,7 @@ const GOLDENRATIO = 1.61803398875
 // const zPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0)
 // const yPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), 1)
 
-export const App = () => (
+export const Portal = () => (
   //   <Canvas
   //     gl={{ localClippingEnabled: true }}
   //     camera={{ fov: 75, position: [0, 0, 1.5] }}
@@ -29,6 +29,13 @@ export const App = () => (
   //       args={['#f0f0f0']}
   //     />
   <>
+    <CameraControls
+      makeDefault
+      minAzimuthAngle={-Math.PI / 2.5}
+      maxAzimuthAngle={Math.PI / 2.5}
+      minPolarAngle={0.5}
+      maxPolarAngle={Math.PI / 2 - 0.01}
+    />
     <Frame
       id="01"
       name="ATC"
@@ -47,13 +54,6 @@ export const App = () => (
       clip
       position={[0, -2, 0]}
     /> */}
-    <CameraControls
-      makeDefault
-      minAzimuthAngle={-Math.PI / 2.5}
-      maxAzimuthAngle={Math.PI / 2.5}
-      minPolarAngle={0.5}
-      maxPolarAngle={Math.PI / 2}
-    />
   </>
   //   </Canvas>
 )
@@ -96,6 +96,7 @@ function Model({ clip, ...props }) {
       object={fishScene}
       scale={5}
       position={[0, -0.5, -1]}
+      // rotation-y={Math.PI}
     />
   )
 }
