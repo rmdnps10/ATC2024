@@ -24,6 +24,7 @@
 
 .main header {
   padding: 11rem 10rem;
+  word-break: keep-all;
 }
 
 .main header h1 {
@@ -196,10 +197,43 @@
   letter-spacing: -0.4px;
   padding: 1rem 2.5rem;
   border: 1px solid black;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.teamDesc button:hover {
-  opacity: 0.7;
+.teamDesc button::before {
+  z-index: -1;
+  position: absolute;
+  background: var(--linear, linear-gradient(90deg, #35cffa 0%, #7340fb 100%));
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  content: '';
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+.teamDesc button:active {
+  /* color: white; */
+  scale: 0.9;
+}
+.teamDesc button:hover::before {
+  /* opacity: 0.7; */
+  transform: translateX(0%);
+}
+
+.modalPortal {
+  z-index: 200;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000a9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

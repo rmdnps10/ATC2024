@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getWorkDetail } from '@/client-api/getWorkDetail'
 import Image from 'next/image'
+import WorkDetailModal from '@/components/works/WorkDetailModal'
 //
 //
 //
@@ -14,6 +15,7 @@ export default function WorkDetailPage() {
   const router = useRouter()
   const [isClicked, setIsClicked] = useState(false)
   const [detailData, setDetailData] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false)
 
   //data fetching
   useEffect(() => {
@@ -23,7 +25,6 @@ export default function WorkDetailPage() {
         if (data) {
           const parsed = { ...data, category: data.category.split(',') }
           setDetailData(parsed)
-          // console.log(parsed.description.replace(/\n/g, '<br/>'))
         }
       }
       fetchData()
@@ -51,6 +52,10 @@ export default function WorkDetailPage() {
     }, 330)
   }
 
+  const handleCloseModal = () => {
+    setModalOpen(false)
+  }
+
   return (
     <AnimatePresence>
       {!isClicked && (
@@ -63,7 +68,8 @@ export default function WorkDetailPage() {
           {detailData ? (
             <main
               className={styles.main}
-              onClick={handleExit}>
+              // onClick={handleExit}
+            >
               <div className={styles.headerImageDiv}>
                 <Image
                   className={styles.headerImage}
@@ -121,7 +127,7 @@ export default function WorkDetailPage() {
                   <h1>아티스트</h1>
                   <div className={styles.artistDetail}>
                     <div className={styles.teamBox}>
-                      <h2>팀 명</h2>
+                      <h2>{detailData.teamName}</h2>
                       <div className={styles.nameList}>
                         {detailData.artistName?.split(',').map(name => (
                           <span>{name}</span>
@@ -137,9 +143,20 @@ export default function WorkDetailPage() {
                       }}
                     />
                   </div>
-                  <button>아티스트 인터뷰 보기</button>
+                  <button onClick={() => setModalOpen(prev => !prev)}>
+                    아티스트 인터뷰 보기
+                  </button>
                 </div>
               </section>
+              {modalOpen && (
+                <div className={styles.modalPortal}>
+                  <WorkDetailModal
+                    teamName={detailData.teamName}
+                    setModalOpen={handleCloseModal}
+                    interviewText={detailData.interviewText}
+                  />
+                </div>
+              )}
             </main>
           ) : (
             <div>Loading...</div>
