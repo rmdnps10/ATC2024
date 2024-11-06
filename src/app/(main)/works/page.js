@@ -5,10 +5,23 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { worksData } from '@/components/works/MockData'
+import { getAllWorks } from '@/client-api/getAllWorks'
 //
 //
 //
 export default function WorksPage({}) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllWorks()
+      if (data) {
+        // setWorks(data);
+        console.log(data)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   const tabList = [
     '전체',
     '애니메이션',
