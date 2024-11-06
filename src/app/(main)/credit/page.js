@@ -14,12 +14,22 @@ export default function CreditPage() {
       <div className={styles.selectOption}>
         <div>
           <p
+            className={
+              selectedOption === 'ATC STAFF'
+                ? styles.staffVer1
+                : styles.staffVer2
+            }
             onClick={() => {
               setSelectedOption('ATC STAFF')
             }}>
             ATC STAFF
           </p>
           <p
+            className={
+              selectedOption === 'ATC STAFF'
+                ? styles.artistVer1
+                : styles.artistVer2
+            }
             onClick={() => {
               setSelectedOption('ATC ARTIST')
             }}>

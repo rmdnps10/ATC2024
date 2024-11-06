@@ -18,24 +18,23 @@
 }
 
 .selectOption div p {
-  color: white;
-  font-size: 2.4rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   position: absolute;
+  transition: 0.5s;
+  cursor: pointer;
+  padding: 0.5rem;
 }
 .selectOption div p:first-child {
-  top: 1.9rem;
-  left: 5rem;
+  top: 1.5rem;
+  left: 4.5rem;
 }
 
 .selectOption div p:nth-child(2) {
   top: 2.4rem;
   left: 30rem;
   width: max-content;
-  color: #767676;
-  font-size: 1.8rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -46,4 +45,26 @@
 }
 .selectOption div img:last-child {
   align-self: flex-end;
+}
+
+.staffVer1 {
+  color: white;
+  font-size: 2.4rem;
+}
+
+.staffVer2 {
+  transform: translate(-200px, 5px);
+  font-size: 1.8rem;
+  color: #767676;
+}
+
+.artistVer1 {
+  font-size: 1.8rem;
+  color: #767676;
+}
+
+.artistVer2 {
+  transform: translate(-260px, -5px);
+  font-size: 2.4rem;
+  color: white;
 }

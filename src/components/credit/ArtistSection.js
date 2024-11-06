@@ -1,7 +1,4 @@
-import React from 'react'
-
+import styles from './Artist.module.css'
 export default function ArtistSection() {
-  return (
-    <div>ArtistSection</div>
-  )
+  return <div></div>
 }
