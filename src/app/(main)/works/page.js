@@ -178,7 +178,7 @@ export default function WorksPage({}) {
             <Image
               className={styles.image}
               // src={el.thumbnailImg}
-              src={'/images/works/elephant.png'}
+              src={'/images/works/page0.png'}
               alt={el.title}
               fill
             />

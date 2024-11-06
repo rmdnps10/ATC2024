@@ -1,34 +1,39 @@
-"use client";
-import { useParams } from "next/navigation";
-import styles from "./page.module.css";
-import DetailHeader from "@/components/works/DetailHeader";
-import DetailAbout from "@/components/works/DetailAbout";
-import DetailReservation from "@/components/works/DetailReservation";
-import DetailArtist from "@/components/works/DetailArtist";
-import DetailGuestBook from "@/components/works/DetailGuestBook";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { worksData } from "@/components/works/MockData";
+'use client'
+import { useParams } from 'next/navigation'
+import styles from './page.module.css'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { getWorkDetail } from '@/client-api/getWorkDetail'
+import Image from 'next/image'
 //
 //
 //
 export default function WorkDetailPage() {
-  const pathname = useParams();
-  const router = useRouter();
-  const [isClicked, setIsClicked] = useState(false);
-  const [detailData, setDetailData] = useState(null);
+  const pathname = useParams()
+  const router = useRouter()
+  const [isClicked, setIsClicked] = useState(false)
+  const [detailData, setDetailData] = useState(null)
 
+  //data fetching
   useEffect(() => {
     if (pathname.id) {
-      setDetailData(worksData[Number(pathname.id)]);
+      const fetchData = async () => {
+        const data = await getWorkDetail(pathname.id)
+        if (data) {
+          const parsed = { ...data, category: data.category.split(',') }
+          setDetailData(parsed)
+          // console.log(parsed.description.replace(/\n/g, '<br/>'))
+        }
+      }
+      fetchData()
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: -1, left: 0, behavior: "smooth" });
-    }, 100);
+      window.scrollTo({ top: -1, left: 0, behavior: 'smooth' })
+    }, 100)
     // document
     //   .querySelector("meta[name=viewport]")
     //   .setAttribute(
@@ -37,13 +42,13 @@ export default function WorkDetailPage() {
     //       1 / window.devicePixelRatio +
     //       ""
     //   );
-  }, []);
+  }, [])
 
   function handleExit() {
-    setIsClicked(true);
+    setIsClicked(true)
     setTimeout(() => {
-      router.back();
-    }, 330);
+      router.back()
+    }, 330)
   }
 
   return (
@@ -54,42 +59,111 @@ export default function WorkDetailPage() {
           initial={animate.initial}
           animate={animate.animate}
           exit={animate.exit}
-          transition={animate.transition}
-        >
-          <main className={styles.main} onClick={handleExit}>
-            <DetailHeader
-              imgUrl={detailData?.imgUrl}
-              titleKor={detailData?.title.title_kor}
-              titleEng={detailData?.title.title_eng}
-              summary={detailData?.summary}
-              desc={detailData?.desc}
-              urls={detailData?.urls}
-            />
-            <DetailAbout />
-            <DetailReservation />
-            <DetailArtist />
-            <DetailGuestBook />
-          </main>
+          transition={animate.transition}>
+          {detailData ? (
+            <main
+              className={styles.main}
+              onClick={handleExit}>
+              <div className={styles.headerImageDiv}>
+                <Image
+                  className={styles.headerImage}
+                  src={'/images/works/page0.png'}
+                  alt="header image"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+              <header>
+                <h1>{detailData.title}</h1>
+                <h3>{detailData.oneLiner}</h3>
+                <div className={styles.headerDesc}>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: detailData.description.replace(/\n/g, '<br/>')
+                    }}
+                  />
+                  <nav>
+                    <ul>
+                      <li>작품 위치 | {'X000'} ↗</li>
+                      {detailData.openAddress?.split(',').map(_ => (
+                        <li>작품 외부주소 ↗</li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+              </header>
+              <div className={styles.introduceBox}>
+                {'/images/works/page5.png,/images/works/page6.png,/images/works/page9.png,/images/works/page10.png'
+                  .split(',')
+                  .map(el => (
+                    <figure className={styles.introduceImage}>
+                      <Image
+                        // className={styles.headerImage}
+                        src={el}
+                        alt="detail image"
+                        fill
+                        objectFit="contain"
+                      />
+                    </figure>
+                  ))}
+              </div>
+              <section>
+                <figure>
+                  <Image
+                    className={styles.teamImage}
+                    src={'/images/works/elephant2.png'}
+                    alt="artist image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </figure>
+                <div className={styles.teamDesc}>
+                  <h1>아티스트</h1>
+                  <div className={styles.artistDetail}>
+                    <div className={styles.teamBox}>
+                      <h2>팀 명</h2>
+                      <div className={styles.nameList}>
+                        {detailData.artistName?.split(',').map(name => (
+                          <span>{name}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: detailData.artistIntroduction.replace(
+                          /\n/g,
+                          '<br/>'
+                        )
+                      }}
+                    />
+                  </div>
+                  <button>아티스트 인터뷰 보기</button>
+                </div>
+              </section>
+            </main>
+          ) : (
+            <div>Loading...</div>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }
 
 const animate = {
   initial: {
     transform: `translateY(50px)`,
     opacity: 0,
-    transition: `transform 0.33s ease`,
+    transition: `transform 0.33s ease`
   },
   animate: {
     transform: `translateY(0px)`,
     opacity: 1,
-    transition: `transform 0.33s ease`,
+    transition: `transform 0.33s ease`
   },
   exit: {
     transform: `translateY(50px)`,
-    transition: `transform 0.33s ease`,
+    transition: `transform 0.33s ease`
   },
-  transition: { ease: "ease", duration: 0.33 },
-};
+  transition: { ease: 'ease', duration: 0.33 }
+}

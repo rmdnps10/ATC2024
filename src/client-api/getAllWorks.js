@@ -8,4 +8,4 @@ export const getAllWorks = async () => {
   const { data } = await res.json()
   return data
 }
-console.log(process.env.NEXT_PUBLIC_BASE_URL)
+// console.log(process.env.NEXT_PUBLIC_BASE_URL)

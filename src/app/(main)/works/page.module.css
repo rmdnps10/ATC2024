@@ -261,12 +261,6 @@
 .figure figcaption:hover {
   opacity: 1;
 }
-/* .figCategory {
-  display: flex;
-  width: 100%;
-  justify-content: end;
-  color: #686868;
-} */
 
 .figBox {
   height: fit-content;
@@ -276,6 +270,9 @@
 .figTeam {
   font-size: 1.5rem;
   font-family: 'Sandoll Seoul';
+  @media (min-width: 2000px) {
+    font-size: 3rem;
+  }
 }
 
 .figTitle {
@@ -285,8 +282,12 @@
   font-size: 3rem;
   font-weight: 400;
   word-break: break-all;
+  line-height: 3.2rem;
   @media (max-width: 768px) {
     font-size: 2.2rem;
+  }
+  @media (min-width: 2000px) {
+    font-size: 5rem;
   }
 }
 
