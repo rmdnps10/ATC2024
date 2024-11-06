@@ -16,10 +16,10 @@ export const DetailWorkSchema = new Schema({
   artistURL: String,
   artistImg: String,
   artistIntroduction: String,
+  teamName: String,
 
   interviewText: String,
   commentList: Array
-  
 })
 
 export const DetailWork =
