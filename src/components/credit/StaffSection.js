@@ -1,11 +1,25 @@
 import React from 'react'
 import styles from './StaffSection.module.css'
 import StaffImageList from '@/components/credit/StaffImageList'
+import Image from 'next/image'
+import { 스태프정보 } from '@/app/(main)/credit/store/staff'
+
 //
 //
 //
 
 export default function StaffSection() {
+  const {
+    기타팀,
+    기획팀,
+    대외협력팀,
+    디자인팀,
+    수집팀,
+    영상팀,
+    전시팀,
+    작품팀,
+    웹개발팀
+  } = 스태프정보
   return (
     <article className={styles.containerList}>
       <section className={styles.container}>
