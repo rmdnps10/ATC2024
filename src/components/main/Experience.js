@@ -14,6 +14,8 @@ import dynamic from "next/dynamic";
 import CameraController from "./CameraController.js";
 import ThreeText from "./ThreeText.js";
 import Boxes from "./Boxes.js";
+import Floor from "./Floor.js";
+import Model from "./Model.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
 //
@@ -46,16 +48,15 @@ export default function Experience({ accent, scrollPercent }) {
 
   return (
     <>
-      <Perf position="bottom-left" />
+      {/* <Perf position="bottom-left" /> */}
       <color attach="background" args={['white']} />
+      {/* <OrbitControls /> */}
       <CameraController />
 
-      {/* <OrbitControls makeDefault enableDamping dampingFactor={0.01} /> */}
-
-      <Boxes scrollPercent={scrollPercent} />
+      <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
 
       {scrollPercent < 30 && (
-        <Physics timeStep="vary" gravity={[0, 0, 0]}>
+        <Physics gravity={[0, 0, 0]} >
           <Pointer />
           {connectors.map((props, i) => (
             <Sphere key={i} {...props} />
@@ -63,9 +64,15 @@ export default function Experience({ accent, scrollPercent }) {
         </Physics>
       )}
 
-      <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
+      <Boxes scrollPercent={scrollPercent} />
 
       <ThreeText />
+
+      <Physics gravity={[0, -9.8, 0]}>
+        <Floor scroll={scrollPercent} />
+      </Physics>
+
+      {/* <Model /> */}
 
       <Effects />
     </>

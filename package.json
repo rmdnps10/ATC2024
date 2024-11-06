@@ -19,7 +19,6 @@
     "@react-three/postprocessing": "^2.16.2",
     "env-cmd": "^10.1.0",
     "framer-motion": "^11.9.0",
-    "framer-motion-3d": "^11.11.10",
     "gsap": "^3.12.5",
     "leva": "^0.9.34",
     "next": "14.2.5",

@@ -2,7 +2,6 @@
 
 import React, { Suspense } from 'react'
 import { Text } from '@react-three/drei'
-import { BoxGeometry } from 'three'
 //
 //
 //

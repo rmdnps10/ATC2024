@@ -42,7 +42,7 @@ export default function Model(props) {
   // });
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} position={[65, -117, -3]} rotation={[0, 0, 0]}>
       <primitive
         object={fishScene}
         scale={5}
@@ -54,12 +54,12 @@ export default function Model(props) {
         scale={5}
         position={[-1, 1, -5]}
       />
-      <primitive
+      {/* <primitive
         object={mainScene}
         scale={15}
         position={[0, - 1.5, 0]}
       // rotation-y={-Math.PI * 0.3}
-      />
+      /> */}
       <primitive
         object={starMainScene}
         scale={15}
