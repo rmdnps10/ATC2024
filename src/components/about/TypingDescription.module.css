@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'Cafe24Shiningstar';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22.9rem;
+  padding: 13rem;
+  background-color: rgba(255, 255, 255, 0.5);
+
+  font-weight: 200;
+}
+
+.description article {
+  position: relative;
+  padding: 0 3.6rem;
+  width: 60%;
+  height: 22.5rem;
+  background-color: white;
+  font-size: 3.6rem;
+  color: #1160f7;
+}
+.cursor {
+  position: absolute;
+  border-left: 2px solid #000;
+  animation: blink 0.7s infinite;
+  height: 3.8rem;
+  vertical-align: text-top;
+  display: inline-block;
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.description img {
+  vertical-align: middle;
+}
+.SandollFont {
+  font-family: 'Sandoll Seoul';
+}
+.CafeFont {
+  font-family: 'Cafe24Shiningstar';
+}
