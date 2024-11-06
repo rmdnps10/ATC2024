@@ -107,19 +107,17 @@
     fill: rgb(255, 255, 255);
   }
 }
-.main section div span svg path {
+/* .main section div span svg path {
 }
 
 .firstSpan {
-  /* background-color: #dd4ffc; */
 }
 
 .secondSpan {
-  /* background-color: #1160f7; */
 }
 
 .thirdSpan {
-}
+} */
 
 .arrowLeft {
   cursor: pointer;

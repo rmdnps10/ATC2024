@@ -222,7 +222,10 @@
 
 .image {
   position: absolute;
-  border: 1px solid black;
+  border-top: 0.5px solid black;
+  border-bottom: 0.5px solid black;
+  border-left: 0.25px solid black;
+  border-right: 0.25px solid black;
   @media (max-width: 430px) {
     border: white;
   }
