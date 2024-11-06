@@ -5,7 +5,7 @@ export async function GET(request) {
   try {
     await connectDb()
     const data = await DetailWork.find()
-      .select('_id title thumbnailImg category oneLiner artistName') // 필요한 필드만 지정
+      .select('_id title thumbnailImg category oneLiner artistName teamName') // 필요한 필드만 지정
       .exec()
 
     return new Response(JSON.stringify({ data }), {
