@@ -12,7 +12,7 @@ import { Perf } from "r3f-perf";
 import { easing } from "maath";
 import dynamic from "next/dynamic";
 import CameraController from "./CameraController.js";
-import VideoText from "./VideoText.js";
+import ThreeText from "./ThreeText.js";
 import Boxes from "./Boxes.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
@@ -46,11 +46,11 @@ export default function Experience({ accent, scrollPercent }) {
 
   return (
     <>
-      {/* <Perf position="bottom-left" /> */}
-      <color attach="background" args={['#ffffff']} />
+      <Perf position="bottom-left" />
+      <color attach="background" args={['white']} />
       <CameraController />
 
-      {/* <OrbitControls /> */}
+      {/* <OrbitControls makeDefault enableDamping dampingFactor={0.01} /> */}
 
       <Boxes scrollPercent={scrollPercent} />
 
@@ -63,9 +63,9 @@ export default function Experience({ accent, scrollPercent }) {
         </Physics>
       )}
 
-      <Environment resolution={64} preset="studio" environmentIntensity={0.1} />
+      <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
 
-      {/* <VideoText /> */}
+      <ThreeText />
 
       <Effects />
     </>

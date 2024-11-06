@@ -16,15 +16,15 @@ export default function Boxes({ scrollPercent }) {
     const [isAnimating, setIsAnimating] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
 
-    const COLORS = ['#ffffff', '#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff'];
+    const COLORS = ['#ffffff', '#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff', '#ffaaaf'];
 
     const materials = useMemo(() => ({
         center: new THREE.MeshStandardMaterial({
             color: "#ffffff",
-            metalness: 0.7,
+            metalness: 0.8,
             roughness: 0.2,
             emissive: "#ffffff",
-            emissiveIntensity: 0.2,
+            emissiveIntensity: 0.7,
         }),
         faces: COLORS.map(color => new THREE.MeshStandardMaterial({
             color: color,
@@ -46,40 +46,40 @@ export default function Boxes({ scrollPercent }) {
         };
 
         return [
-            // 큐브 초기 위치 조정 해야해요...
+            // 큐브 초기 위치 조정 해야해요... cube의 pos로 위치조정이나 위에 colorIndex에 색상넣어서 인덱스 번호 넣어주면 변경됩니다!
 
             // 중앙 큐브
-            { pos: [0, 0, 0], finalPos: [0, 0, 0], isCenter: true, colorIndex: 0 },
+            { pos: [0, 0, 0], finalPos: [0, 0, 0], isCenter: true, colorIndex: 7 },
 
             // 앞면 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-1, -8, -8], finalPos: [-1, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 2.5, 0], finalPos: [0, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [2, 2.7, 0], finalPos: [1, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-5, 2, 3], finalPos: [-1, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-8, 2.6, 6], finalPos: [0, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [5, 3, 2], finalPos: [1, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-8, 3, 1], finalPos: [-1, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [8, 0, 0], finalPos: [0, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [6, -4, -3], finalPos: [1, -1, 1], isCenter: false, colorIndex: 0 },
             // 중간층 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [4, 0, 0], finalPos: [-1, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [-5, 0, 0], finalPos: [0, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0, -2, 10], finalPos: [1, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 0, -8], finalPos: [-1, 0, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0.05, 0, -15], finalPos: [1, 0, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0.5, -1, 3], finalPos: [-1, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [2, 0, -5], finalPos: [0, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [1, -3.5, 3], finalPos: [1, -1, 0], isCenter: false, colorIndex: 0 },
             // 뒷면 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 0.5, 7], finalPos: [-1, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [10, -8, -15], finalPos: [0, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [20, -12, -15], finalPos: [1, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [38, -22, -18], finalPos: [-1, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [24, -10, -10], finalPos: [0, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [20, -12, -8], finalPos: [1, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [2, -2, -10], finalPos: [-1, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [0, -2.5, 0], finalPos: [0, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [-1, 2, 6], finalPos: [1, -1, -1], isCenter: false, colorIndex: 0 },
         ];
     }, []);
 

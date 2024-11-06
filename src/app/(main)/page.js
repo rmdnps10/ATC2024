@@ -21,7 +21,7 @@ export default function MainPage() {
   const [accent, click] = useReducer(state => ++state % 6, 0)
   const [dpr, setDpr] = useState(1)
   const [scrollPercent, setScrollPercent] = useState(0)
-  const pages = 5
+  const pages = 7
 
   return (
     <Suspense fallback={null}>
@@ -34,7 +34,7 @@ export default function MainPage() {
             antialias: false,
             powerPreference: "high-performance",
           }}
-          camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 100 }}
+          camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 1000 }}
           style={{ scrollbarWidth: 'none' }}>
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />

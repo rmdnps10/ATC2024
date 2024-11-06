@@ -23,5 +23,5 @@
 .canvasContainer {
   opacity: 0;
   touch-action: none;
-  animation: fade-in 5s ease-in-out 2.5s forwards;
+  animation: fade-in 3s ease-in-out 0.5s forwards;
 }
