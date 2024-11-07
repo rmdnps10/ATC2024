@@ -19,7 +19,9 @@ export default function ArtistSection() {
           </div>
           <div className={styles.artistTeam}>
             {아티스트정보[project].map(artist => (
-              <div className={styles.artistIndividual}>
+              <div
+                className={styles.artistIndividual}
+                key={artist}>
                 <p>{artist.이름}</p>
                 <p>{artist.영문명}</p>
               </div>
