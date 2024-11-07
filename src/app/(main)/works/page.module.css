@@ -238,7 +238,7 @@
   opacity: 0;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: start;
+  align-items: flex-start;
   padding: 2.4rem 2rem 5rem 2rem;
   z-index: 3;
   width: 100%;

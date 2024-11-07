@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './WorkDetailModal.module.css'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useParams } from 'next/navigation'
 
 export default function WorkDetailModal({
   interviewText,
@@ -15,16 +16,34 @@ export default function WorkDetailModal({
     visible: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0.8 }
   }
+  const param = useParams()
   const [parsedData, setParsedData] = useState([])
   useEffect(() => {
     const questions = interviewText.split(/Q\.\s+/).slice(1)
-    const parsed = questions.map(question => {
-      const questionText = question
-        .replace(/^\n/, '')
-        .match(/^[^?]*\?|[\s\S]*/g)
-        .filter(Boolean)
+    const parsed = questions.map((question, idx) => {
+      var questionText = question
+      if (param.id === '672ae0ad0c11e50dbd25f955') {
+        //저주받은 동물원
+        if (idx === 5) {
+          questionText = question
+            .replace(/^\n/, '')
+            .split(/(?<=:\))/)
+            .filter(Boolean)
+        } else {
+          questionText = question
+            .replace(/^\n/, '')
+            .split(/(?<=\?\n)/)
+            .filter(Boolean)
+        }
+      } else {
+        questionText = question
+          .replace(/^\n/, '')
+          .split(/(?<=\?\n)/)
+          .filter(Boolean)
+      }
       return questionText
     })
+    console.dir(parsed)
     setParsedData(parsed)
   }, [])
 
@@ -76,7 +95,7 @@ export default function WorkDetailModal({
                 <h4
                   dangerouslySetInnerHTML={{
                     __html: data[1]
-                      .replace(/^\n/, '')
+                      ?.replace(/^\n/, '')
                       .replace(/\n/g, '<br/><br/>')
                   }}
                 />
