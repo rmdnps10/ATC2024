@@ -3,8 +3,12 @@
   margin-top: 0rem;
   overflow: hidden;
   position: relative;
+  background-color: white;
 }
-
+.background {
+  overflow: hidden;
+  pointer-events: none;
+}
 .cyan1 {
   position: absolute;
   width: 50%;
@@ -13,7 +17,6 @@
   filter: blur(150px);
   right: 0;
   transform: translate(10%, 0%);
-  z-index: -1;
 }
 .cyan2 {
   position: absolute;
@@ -24,7 +27,6 @@
   left: 0;
   top: 15%;
   transform: translate(-20%, 0%);
-  z-index: -1;
 }
 .cyan3 {
   position: absolute;
@@ -35,7 +37,6 @@
   right: 0;
   top: 44%;
   transform: translate(25%, 0%);
-  z-index: -1;
 }
 .cyan4 {
   position: absolute;
@@ -46,7 +47,6 @@
   left: 0;
   top: 55%;
   transform: translate(-30%, 0%);
-  z-index: -1;
 }
 .cyan5 {
   position: absolute;
@@ -57,9 +57,7 @@
   left: 0;
   top: 78%;
   transform: translate(-30%, 0%);
-  z-index: -1;
 }
-
 .pink1 {
   position: absolute;
   width: 50%;
@@ -68,7 +66,6 @@
   filter: blur(150px);
   left: 0;
   transform: translate(30%, -80%);
-  z-index: -1;
 }
 .pink2 {
   position: absolute;
@@ -79,7 +76,6 @@
   right: 0;
   top: 16%;
   transform: translate(-40%, 0%);
-  z-index: -1;
 }
 .pink3 {
   position: absolute;
@@ -90,9 +86,7 @@
   left: 0;
   top: 60%;
   transform: translate(-30%, 0%);
-  z-index: -1;
 }
-
 .blue1 {
   position: absolute;
   width: 40%;
@@ -102,7 +96,6 @@
   left: 0;
   top: 30%;
   transform: translate(-40%, 0%);
-  z-index: -1;
 }
 .blue2 {
   position: absolute;
@@ -113,7 +106,6 @@
   right: 0;
   top: 42%;
   transform: translate(-40%, 0%);
-  z-index: -1;
 }
 .blue3 {
   position: absolute;
@@ -124,7 +116,201 @@
   right: 0;
   top: 75%;
   transform: translate(10%, 0%);
-  z-index: -1;
+}
+
+.components {
+  z-index: -2;
+}
+.components img {
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    width: 20%;
+  }
+}
+.components div {
+  @media (max-width: 768px) {
+    width: 1%;
+  }
+}
+.components img:first-child {
+  position: absolute;
+  top: 11%;
+  left: 5%;
+}
+.components img:nth-child(2) {
+  position: absolute;
+  top: 2%;
+  right: 7%;
+}
+.components img:nth-child(3) {
+  position: absolute;
+  top: 25%;
+  right: 3%;
+}
+.components img:nth-child(4) {
+  position: absolute;
+  top: 32%;
+  left: 25%;
+}
+.components img:nth-child(5) {
+  position: absolute;
+  top: -1%;
+  left: 25%;
+}
+.components div:nth-of-type(1) {
+  position: absolute;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  top: 25%;
+  left: 8%;
+  background-color: white;
+}
+.components div:nth-of-type(2) {
+  position: absolute;
+  width: 5.4rem;
+  height: 5.4rem;
+  border-radius: 50%;
+  top: 33%;
+  left: 9%;
+  background-color: white;
+}
+
+.components div:nth-of-type(3) {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  top: 21%;
+  right: 13%;
+  background-color: white;
+}
+.components div:nth-of-type(4) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 11%;
+  right: 12%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(5) {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  top: 13%;
+  right: 15%;
+  background-color: white;
+}
+.components div:nth-of-type(6) {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  top: 2%;
+  right: 23%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(7) {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  top: 6%;
+  right: 10%;
+  background-color: white;
+}
+.components div:nth-of-type(8) {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  top: 5.5%;
+  right: 12%;
+  background-color: white;
+}
+.components div:nth-of-type(9) {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  top: 27%;
+  left: 14%;
+  background-color: white;
+}
+.components div:nth-of-type(10) {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  top: 30%;
+  left: 5%;
+  background-color: white;
+}
+.components div:nth-of-type(11) {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  top: 36%;
+  right: 30%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(12) {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  top: 35%;
+  right: 26%;
+  background-color: white;
+}
+.components div:nth-of-type(13) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 20%;
+  right: 22%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(14) {
+  position: absolute;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  top: 0%;
+  left: 13%;
+  border: 4px solid white;
+}
+.components div:nth-of-type(15) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 2.5%;
+  left: 18%;
+  background-color: white;
+}
+.components div:nth-of-type(16) {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  top: 3%;
+  left: 28%;
+  border: 3px solid white;
+}
+@media (max-width: 768px) {
+  .components img {
+    width: 30%;
+  }
+  .components div {
+    transform: scale(0.5);
+  }
 }
 
 .imageContainer {
@@ -134,30 +320,42 @@
   justify-content: center;
   gap: 5.4rem;
   margin-top: 40.8rem;
+  z-index: 1;
+  @media (max-width: 768px) {
+    margin-top: 16rem;
+    gap: 3.7rem;
+  }
 }
 .typography {
   position: relative;
-  width: 17.8rem; /*반응형 고려?*/
+  width: 10%;
   height: 3.6rem;
 }
 .title {
   position: relative;
-  width: 92rem;
+  width: 48%;
   height: 21.6rem;
 }
-
 .subtitle {
   display: flex;
   justify-content: center;
   padding-top: 30.3rem;
   margin-bottom: 6.8rem;
   font-family: 'Sandoll Seoul';
+  @media (max-width: 768px) {
+    padding-top: 22.6rem;
+    margin-bottom: 4.2rem;
+  }
 }
 
 .subtitle p {
   position: relative;
   width: 60%;
   font-size: 6rem;
+  @media (max-width: 768px) {
+    width: 90%;
+    font-size: 2.8rem;
+  }
 }
 
 .subtitle p::before {
@@ -172,10 +370,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
 }
 .videoContainer {
   width: 60%;
   aspect-ratio: 16 / 9; /*동영상 비율 유지*/
+  z-index: 1;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 }
 .videoContainer iframe {
   width: 100%;
@@ -188,6 +391,12 @@
   justify-content: center;
   margin-bottom: 29.1rem;
   font-family: 'pretendard';
+  z-index: 1;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 11.4rem;
+    margin-bottom: 18.7rem;
+  }
 }
 
 .quote div {
@@ -195,8 +404,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 63.75%;
-  gap: 2.4rem;
+  width: 72%;
+  gap: 11.2rem;
+  @media (max-width: 768px) {
+    width: 100%;
+    gap: 10.4rem;
+  }
 }
 
 .quote blockquote:nth-of-type(1) .quoteTitle::before {
@@ -218,13 +431,27 @@
 
 .quote blockquote:first-child {
   align-self: flex-start;
-  width: 49%;
+  width: 50%;
   font-size: 1.6rem;
+  text-align: right;
+  @media (max-width: 768px) {
+    width: 88%;
+    align-self: center;
+    text-align: justify;
+    font-size: 1.2rem;
+  }
 }
 .quote blockquote:last-child {
   align-self: flex-end;
-  width: 49%;
+  width: 50%;
   font-size: 1.6rem;
+  text-align: left;
+  @media (max-width: 768px) {
+    width: 88%;
+    align-self: center;
+    text-align: justify;
+    font-size: 1.2rem;
+  }
 }
 .quoteTitle {
   position: relative;
@@ -233,80 +460,17 @@
 }
 .quote p:first-child {
   font-size: 3.2rem;
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+  }
 }
+
 .quote blockquote:nth-of-type(1) .quoteTitle {
   text-align: right;
 }
 
 .quote blockquote:nth-of-type(2) .quoteTitle {
   text-align: left;
-  background-color: rgb(206, 248, 248);
-}
-
-.imageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 26.2rem;
-  margin-bottom: 26.1rem;
-}
-
-.videoWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.videoContainer {
-  width: 62.5%;
-  background-color: blueviolet;
-  aspect-ratio: 16 / 9;
-}
-.videoContainer video {
-  width: 100%;
-  height: 100%;
-}
-
-.articles {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 6rem;
-  gap: 2.4rem;
-}
-.articles article {
-  width: 58.8rem;
-  height: 21.6rem;
-  background-color: white;
-  font-size: 1.6rem;
-}
-
-.quote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.4rem;
-}
-.quote blockquote:first-child {
-  align-self: flex-start;
-  width: 58.8rem;
-  margin-top: 27.5rem;
-  background-color: white;
-  font-size: 1.6rem;
-}
-.quote blockquote:last-child {
-  align-self: flex-start;
-  width: 58.8rem;
-  margin-top: 62.4rem;
-  background-color: white;
-  font-size: 1.6rem;
-}
-.quoteTitle {
-  margin-bottom: 5.1rem;
-}
-.quote p:first-child {
-  font-size: 3.2rem;
 }
 
 .sponsorContainer {
@@ -316,6 +480,7 @@
   overflow: hidden;
   width: 100%;
   background-color: antiquewhite;
+  z-index: 1;
 }
 
 .scrollRow.firstRow {
@@ -324,6 +489,7 @@
   width: max-content;
   animation: scrollFirstRow 10s linear infinite;
   background-color: yellowgreen;
+  z-index: 1;
 }
 .scrollRow.secondRow {
   display: flex;
@@ -331,6 +497,7 @@
   width: max-content;
   animation: scrollSecondRow 10s linear infinite reverse;
   background-color: lightcoral;
+  z-index: 1;
 }
 
 @keyframes scrollFirstRow {
@@ -359,18 +526,21 @@
   background-color: palevioletred;
   overflow: hidden;
   flex-shrink: 0;
+  z-index: 1;
 }
 .sponsorBox img {
   width: 70%;
   height: 70%;
   object-fit: contain;
   background-color: azure;
+  z-index: 1;
 }
 
 .credit {
   width: 100%;
   height: 102rem;
   background-color: black;
+  z-index: 1;
 }
 .credit div {
   width: 100%;

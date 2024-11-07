@@ -13,8 +13,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 85%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
       50% 50% at 50% 50%,
       rgba(39, 143, 251, 0.3) 0%,
@@ -32,10 +32,27 @@
     );
   backdrop-filter: blur(200px);
   z-index: 0;
+  @media (max-width: 768px) {
+    background: radial-gradient(
+        80% 80% at 50% 50%,
+        rgba(39, 143, 251, 0.2) 0%,
+        rgba(39, 143, 251, 0) 100%
+      ),
+      radial-gradient(
+        100% 50% at 80% 80%,
+        #7340fb20 0%,
+        rgba(39, 143, 251, 0) 100%
+      ),
+      radial-gradient(
+        100% 50% at 20% 20%,
+        #9734fb20 0%,
+        rgba(39, 143, 251, 0) 100%
+      );
+  }
 }
 
 .box {
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,6 +61,10 @@
   height: 45rem;
   border: 1px solid #303b52;
   z-index: 1;
+  @media (max-width: 768px) {
+    width: 78%;
+    height: 40%;
+  }
 }
 
 .box p:first-child {
@@ -53,6 +74,9 @@
   font-size: 6rem;
   margin-bottom: 1.9rem;
   font-family: 'Sandoll Seoul';
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+  }
 }
 .box p:first-child::after {
   content: '';
@@ -63,6 +87,11 @@
   transform: translateX(-50%);
   border-bottom: 1px solid rgb(255, 255, 255);
 }
+@media (max-width: 768px) {
+  .box p:first-child::after {
+    width: 150%;
+  }
+}
 
 .box p:nth-child(2) {
   text-align: center;
@@ -70,6 +99,10 @@
   font-size: 2rem;
   margin-bottom: 9.3rem;
   font-weight: 200;
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    margin-bottom: 5rem;
+  }
 }
 
 .creditButton {
@@ -78,6 +111,9 @@
   font-family: 'Sandoll Seoul';
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 }
 
 .designedTags {
@@ -108,13 +144,18 @@
   position: absolute;
   width: 11.2rem;
   height: 3.6rem;
-  top: 30%;
-  left: 25%;
+  top: 20%;
+  left: -5%;
   rotate: -12deg;
   background-color: black;
   color: #35cffa;
   border: 1px solid #35cffa;
   font-size: 2rem;
+  @media (max-width: 768px) {
+    width: 7.2rem;
+    height: 2.4rem;
+    font-size: 1rem;
+  }
 }
 
 .designedTags div:nth-child(2) {
@@ -131,6 +172,11 @@
   color: #278ffb;
   border: 1px solid #278ffb;
   font-size: 2rem;
+  @media (max-width: 768px) {
+    width: 7.2rem;
+    height: 2.4rem;
+    font-size: 1rem;
+  }
 }
 
 .designedTags div:last-child {
@@ -147,33 +193,38 @@
   color: #dd4ffc;
   border: 1px solid #dd4ffc;
   font-size: 2rem;
+  @media (max-width: 768px) {
+    width: 7.2rem;
+    height: 2.4rem;
+    font-size: 1rem;
+  }
 }
 
 @keyframes skyblueTag {
   0% {
     transform: translateZ(0) scale(1.5);
-    top: 20%;
-    right: 15%;
+    top: -10%;
+    left: 0%;
     rotate: -15deg;
   }
   100% {
     transform: translateZ(-400px) scale(1);
-    top: 30%;
-    left: 25%;
+    top: 15%;
+    left: -5%;
     rotate: -12deg;
   }
 }
 @keyframes blueTag {
   0% {
     transform: translateZ(0) scale(1.5);
-    top: 80%;
-    right: 15%;
+    top: 100%;
+    left: 0%;
     rotate: -15deg;
   }
   100% {
     transform: translateZ(-400px) scale(1);
-    top: 62%;
-    left: 22%;
+    top: 72%;
+    left: -10%;
     rotate: 20deg;
   }
 }
@@ -181,14 +232,14 @@
 @keyframes pinkTag {
   0% {
     transform: translateZ(0) scale(1.5);
-    top: 45%;
-    right: 15%;
+    top: 42%;
+    right: -25%;
     rotate: -15deg;
   }
   100% {
     transform: translateZ(-400px) scale(1);
     top: 52%;
-    right: 22%;
+    right: -12%;
     rotate: -25deg;
   }
 }

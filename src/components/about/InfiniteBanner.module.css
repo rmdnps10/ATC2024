@@ -4,7 +4,6 @@
   gap: 4rem;
   overflow: hidden;
   width: 100%;
-  /*background-color: antiquewhite;*/
 }
 
 .firstRow {
@@ -48,6 +47,10 @@
   /*background-color: palevioletred;*/
   overflow: hidden;
   flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 15.4rem;
+    height: 8.4rem;
+  }
 }
 .sponsorBox img {
   width: 70%;
@@ -55,13 +58,21 @@
   object-fit: contain;
   background-color: azure;
 }
-
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .text p:first-child {
   position: relative;
   font-size: 6rem;
   text-align: center;
   font-family: 'Sandoll Seoul';
   margin-bottom: 1.6rem;
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+  }
 }
 .text p:first-child::after {
   content: '';
@@ -75,5 +86,8 @@
 .text p:nth-child(2) {
   font-size: 1.6rem;
   text-align: center;
-  font-family: 'Sandoll Seoul';
+  @media (max-width: 768px) {
+    width: 80%;
+    font-size: 1.2rem;
+  }
 }
