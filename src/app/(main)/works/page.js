@@ -92,13 +92,10 @@ export default function WorksPage({}) {
 
   //필터링 탭 초기화
   useEffect(() => {
-    console.log('fileter starat')
-
-    console.log('fileter end')
-
     //스크롤 인식
     const handleScroll = () => {
       setScrollY(window.scrollY)
+      window.localStorage.setItem('scroll', scrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
