@@ -7,11 +7,14 @@ export default function ArtistSection() {
   return (
     <article className={styles.main}>
       {projectList.map(project => (
-        <section className={styles.teamSection}>
+        <section
+          className={styles.teamSection}
+          key={project}>
           <div className={styles.teamArtworkName}>
             <p>{project}</p>
             <Image
               src={'/images/credit/circle.svg'}
+              alt="연결고리"
               width={6}
               height={6}
             />
@@ -21,7 +24,7 @@ export default function ArtistSection() {
             {아티스트정보[project].map(artist => (
               <div
                 className={styles.artistIndividual}
-                key={artist}>
+                key={artist.이름}>
                 <p>{artist.이름}</p>
                 <p>{artist.영문명}</p>
               </div>

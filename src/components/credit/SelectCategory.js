@@ -49,14 +49,32 @@ export default function SelectCategory() {
           ATC ARTIST
         </p>
         <Image
+          className={`${styles.onlyPC} ${styles.leftImage}`}
+          alt="credit option1"
           src="/images/credit/option1.svg"
           width="103"
           height="31"
         />
         <Image
+          className={`${styles.onlyPC} ${styles.rightImage}`}
           src="/images/credit/option2.svg"
+          alt="credit option2"
           width="103"
           height="31"
+        />
+        <Image
+          className={`${styles.onlyMobile} ${styles.leftImage}`}
+          src="/images/credit/m-option1.svg"
+          alt="credit option1"
+          width="66"
+          height="18"
+        />
+        <Image
+          className={`${styles.onlyMobile} ${styles.rightImage}`}
+          src="/images/credit/m-option2.svg"
+          alt="credit option2"
+          width="66"
+          height="18"
         />
       </div>
     </div>
