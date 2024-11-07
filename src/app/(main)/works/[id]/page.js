@@ -68,8 +68,7 @@ export default function WorkDetailPage() {
           {detailData ? (
             <main
               className={styles.main}
-              // onClick={handleExit}
-            >
+              onClick={handleExit}>
               <div className={styles.headerImageDiv}>
                 <Image
                   className={styles.headerImage}

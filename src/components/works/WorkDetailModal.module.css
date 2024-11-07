@@ -38,6 +38,10 @@
   opacity: 0.6;
 }
 
+.exitBtn:active {
+  scale: 0.8;
+}
+
 .wrapper {
   padding: 0;
   width: 100%;

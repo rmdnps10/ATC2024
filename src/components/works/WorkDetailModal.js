@@ -5,6 +5,7 @@ import styles from './WorkDetailModal.module.css'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 export default function WorkDetailModal({
   interviewText,
@@ -18,6 +19,7 @@ export default function WorkDetailModal({
   }
   const param = useParams()
   const [parsedData, setParsedData] = useState([])
+  //데이터 파싱
   useEffect(() => {
     const questions = interviewText.split(/Q\.\s+/).slice(1)
     const parsed = questions.map((question, idx) => {
