@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 //
 //
 
-const initialState = 'ATC STAFF'
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_STAFF':
@@ -19,8 +18,11 @@ function reducer(state, action) {
   }
 }
 
-export default function SelectCategory() {
-  const [selectedOption, dispatch] = useReducer(reducer, initialState)
+export default function SelectCategory({ category }) {
+  const [selectedOption, dispatch] = useReducer(
+    reducer,
+    category === 'staff' ? 'ATC STAFF' : 'ATC ARTIST'
+  )
   const router = useRouter()
 
   return (

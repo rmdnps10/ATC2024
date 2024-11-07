@@ -6,6 +6,7 @@
   gap: 8rem;
   overflow: hidden;
   margin: 0 auto;
+  transition: all 0.5s;
   @media (max-width: 768px) {
     padding-top: 3rem;
   }
