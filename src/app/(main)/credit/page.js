@@ -8,7 +8,7 @@ export default function CreditPage({ searchParams }) {
 
   return (
     <main className={styles.main}>
-      <SelectCategory />
+      <SelectCategory category={category} />
       {category === 'artist' ? <ArtistSection /> : <StaffSection />}
     </main>
   )
