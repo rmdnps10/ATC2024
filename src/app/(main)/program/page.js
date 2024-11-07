@@ -1,13 +1,47 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
-//
-//
-//
+
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
+  const programRefs = useRef({})
+
+  const isMobile =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(max-width: 768px)').matches
+
+  const toggleProgram = id => {
+    if (isMobile) {
+      setOpenPrograms(prevOpenPrograms => {
+        const isOpening = !prevOpenPrograms.includes(id)
+
+        if (isOpening) {
+          programRefs.current[id]?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'nearest'
+          })
+        }
+
+        return isOpening
+          ? [...prevOpenPrograms, id] // 닫혀 있을 경우 열기
+          : prevOpenPrograms.filter(p => p !== id) // 열려 있을 경우 닫기
+      })
+
+      // 아코디언을 닫으면 -> 효과 초기화
+      if (openPrograms.includes(id)) {
+        setHoveredProgram(null)
+      }
+    } else {
+      setOpenPrograms(prevOpenPrograms =>
+        prevOpenPrograms.includes(id)
+          ? prevOpenPrograms.filter(p => p !== id)
+          : [...prevOpenPrograms, id]
+      )
+    }
+  }
 
   const timeToRow = time => {
     const [hour, minute] = time.split(':').map(Number)
@@ -53,9 +87,9 @@ export default function ProgramPage() {
   const alwaysAvailablePrograms = [
     {
       id: 'always1',
-      title: '대협팀 1',
-      location: '서강대학교 하비에르관 4F 신영균스튜디오',
-      description: '상시운영 프로그램 1 설명'
+      title: '점선면 작가의 Drawing Class',
+      location: '서강대학교 하비에르관 5F Fabrication Lab',
+      description: '점선면 작가가 진행하는 드로잉 클래스.'
     },
     {
       id: 'always2',
@@ -102,16 +136,6 @@ export default function ProgramPage() {
   }
 
   const tableData = generateTable()
-  const toggleProgram = id => {
-    setOpenPrograms(
-      openPrograms.includes(id)
-        ? openPrograms.filter(p => p !== id)
-        : [...openPrograms, id]
-    )
-  }
-
-  const getHighlightClass = id =>
-    hoveredProgram === id || openPrograms.includes(id) ? styles.highlighted : ''
 
   return (
     <main className={styles.main}>
@@ -123,7 +147,6 @@ export default function ProgramPage() {
       <div className={styles.blue2}></div>
       <section className={styles.timetableContainer}>
         <div className={styles.gridContainer}>
-          {/* 요일 표시 */}
           <div></div>
           {days.map((day, index) => (
             <div
@@ -134,14 +157,12 @@ export default function ProgramPage() {
           {['15:00', '16:00', '17:00', '18:00', '19:00', '20:00'].map(
             (time, rowIndex) => (
               <React.Fragment key={rowIndex}>
-                {/* 시간 표시 */}
                 <div
                   className={styles.timeLabel}
                   style={{ gridRow: rowIndex + 2 }}>
                   {time}
                 </div>
 
-                {/* 프로그램 데이터 */}
                 {Array(3)
                   .fill(null)
                   .map((_, colIndex) => {
@@ -158,7 +179,8 @@ export default function ProgramPage() {
                             : ''
                         }`}
                         onMouseEnter={() => setHoveredProgram(cellData.id)}
-                        onMouseLeave={() => setHoveredProgram(null)}>
+                        onMouseLeave={() => setHoveredProgram(null)}
+                        onClick={() => toggleProgram(cellData.id)}>
                         <div
                           className={`${styles.gradientText} ${
                             hoveredProgram === cellData.id ||
@@ -195,7 +217,8 @@ export default function ProgramPage() {
                   : ''
               }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
-              onMouseLeave={() => setHoveredProgram(null)}>
+              onMouseLeave={() => setHoveredProgram(null)}
+              onClick={() => toggleProgram(program.id)}>
               <div
                 className={`${styles.gradientText} ${
                   hoveredProgram === program.id ||
@@ -210,16 +233,16 @@ export default function ProgramPage() {
         </div>
       </section>
 
-      {/* 오른쪽 프로그램 목록 */}
       <section className={styles.programContainer}>
-        {alwaysAvailablePrograms.map(program => (
+        {[...alwaysAvailablePrograms, ...programs].map(program => (
           <div
             key={program.id}
+            ref={el => (programRefs.current[program.id] = el)}
             className={`${styles.programItem} ${
               openPrograms.includes(program.id) ? styles.activeShadow : ''
             }`}>
             <div
-              className={`${styles.programHeader}  ${
+              className={`${styles.programHeader} ${
                 openPrograms.includes(program.id) ? styles.activeHeader : ''
               }`}
               onMouseEnter={() => setHoveredProgram(program.id)}
@@ -248,58 +271,14 @@ export default function ProgramPage() {
             </div>
             {openPrograms.includes(program.id) && (
               <div
-                className={`${styles.accordionContent} ${styles.activeContent}`}>
-                <div className={styles.programDetails}>
-                  <p className={styles.programTime}>상시운영</p>
-                  <p className={styles.programLocation}>{program.location}</p>
-                  <p className={styles.programDescription}>
-                    {program.description}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-        {programs.map(program => (
-          <div
-            key={program.id}
-            className={`${styles.programItem} ${
-              openPrograms.includes(program.id) ? styles.activeShadow : ''
-            }`}>
-            <div
-              className={`${styles.programHeader}  ${
-                openPrograms.includes(program.id) ? styles.activeHeader : ''
-              }`}
-              onMouseEnter={() => setHoveredProgram(program.id)}
-              onMouseLeave={() => setHoveredProgram(null)}
-              onClick={() => toggleProgram(program.id)}>
-              <div
-                className={`${styles.gradientText} ${
-                  hoveredProgram === program.id ||
-                  openPrograms.includes(program.id)
-                    ? styles.highlightedText
-                    : ''
+                className={`${styles.accordionContent} ${
+                  openPrograms.includes(program.id) ? styles.activeContent : ''
                 }`}>
-                {program.title}
-              </div>
-              <span
-                className={`${styles.arrow} ${
-                  openPrograms.includes(program.id) ? styles.rotated : ''
-                }`}>
-                <Image
-                  src="/icon/button/toggle.svg"
-                  width={24}
-                  height={24}
-                  alt="Toggle Arrow"
-                />
-              </span>
-            </div>
-            {openPrograms.includes(program.id) && (
-              <div
-                className={`${styles.accordionContent} ${styles.activeContent}`}>
                 <div className={styles.programDetails}>
                   <p className={styles.programTime}>
-                    {program.startTime} - {program.endTime} ({program.day})
+                    {program.startTime
+                      ? `${program.startTime} - ${program.endTime} (${program.day})`
+                      : '상시운영'}
                   </p>
                   <p className={styles.programLocation}>{program.location}</p>
                   <p className={styles.programDescription}>
