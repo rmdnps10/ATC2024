@@ -118,9 +118,6 @@
   transform: translate(10%, 0%);
 }
 
-.components {
-  z-index: -2;
-}
 .components img {
   mix-blend-mode: color-dodge;
   pointer-events: none;
@@ -305,9 +302,6 @@
   border: 3px solid white;
 }
 @media (max-width: 768px) {
-  .components img {
-    width: 30%;
-  }
   .components div {
     transform: scale(0.5);
   }
