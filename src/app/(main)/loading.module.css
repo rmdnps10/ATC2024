@@ -1,0 +1,69 @@
+.loading {
+  background: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+.loading img {
+  position: absolute;
+  top: -1rem;
+  left: 0rem;
+  animation: loadingElephant 0.5s linear infinite;
+}
+
+.loadingText {
+  position: absolute;
+  bottom: 5.4rem;
+  right: 16.2rem;
+  font-family: 'Sandoll Seoul';
+  font-size: 20rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+  color: transparent; /* 텍스트 색상을 투명으로 설정 */
+  overflow: hidden; /* 배경이 텍스트 바깥으로 나가지 않도록 숨김 */
+  background: linear-gradient(
+    90deg,
+    #35cffa 0%,
+    #278ffb 20%,
+    #3c79fb 40%,
+    #dd4ffc 60%,
+    #9734fb 80%,
+    #7340fb 100%
+  ); /* 그라디언트 배경 설정 */
+  background-size: 300%; /* 배경 크기 */
+  background-clip: text; /* 텍스트만 배경 표시 */
+  -webkit-background-clip: text; /* 웹킷 브라우저용 */
+  animation: loadingAnimation 2s linear infinite; /* 애니메이션 적용 */
+}
+
+.loadingText::before {
+  content: 'Loading...'; /* 동일한 텍스트 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none; /* 배경 제거 */
+  color: transparent;
+  -webkit-background-clip: text; /* 텍스트만 배경 표시 */
+  background-clip: text;
+  animation: none; /* 애니메이션 제거 */
+}
+
+@keyframes loadingElephant {
+  0% {
+  }
+  100% {
+    transform: translateX(300px);
+  }
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 0% 50%; /* 배경 위치 초기화 */
+  }
+  100% {
+    background-position: 100% 50%; /* 배경 위치 오른쪽 끝까지 이동 */
+  }
+}
