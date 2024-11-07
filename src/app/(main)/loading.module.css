@@ -35,6 +35,10 @@
   background-clip: text; /* 텍스트만 배경 표시 */
   -webkit-background-clip: text; /* 웹킷 브라우저용 */
   animation: loadingAnimation 2s linear infinite; /* 애니메이션 적용 */
+  @media (max-width: 768px) {
+    right: 0rem;
+    font-size: 10rem;
+  }
 }
 
 .loadingText::before {
