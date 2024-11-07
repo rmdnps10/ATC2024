@@ -1,0 +1,64 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rem;
+  align-items: center;
+  gap: 8rem;
+  margin: 0 auto;
+}
+
+.teamSection {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.teamArtworkName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.8rem;
+  margin: 0 auto;
+  color: #fafafa;
+  font-family: 'Sandoll Seoul';
+  font-size: 4rem;
+}
+
+.teamArtworkName p:first-child {
+  width: 20rem;
+  text-align: right;
+  word-break: keep-all;
+  line-height: 100%;
+}
+
+.teamArtworkName p:nth-child(3) {
+  width: 24rem;
+  text-align: left;
+}
+
+.artistTeam {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.artistIndividual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.artistIndividual p:first-child {
+  font-size: 2rem;
+  color: white;
+  width: 10rem;
+  text-align: right;
+}
+
+.artistIndividual p:nth-child(2) {
+  font-size: 1.6rem;
+  color: #767676;
+  min-width: 15rem;
+  text-align: left;
+}

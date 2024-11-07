@@ -206,10 +206,10 @@ export const 아티스트정보 = {
     {
       이름: '송명은',
       영문명: 'Song Myeongeun',
-      팀이름: '물망초(Forget-me-not)'
+      팀이름: '물망초'
     },
-    { 이름: '최보현', 영문명: 'Choi Bohyun', 팀이름: '물망초(Forget-me-not)' },
-    { 이름: '최윤정', 영문명: 'Choi Yunjeong', 팀이름: '물망초(Forget-me-not)' }
+    { 이름: '최보현', 영문명: 'Choi Bohyun', 팀이름: '물망초' },
+    { 이름: '최윤정', 영문명: 'Choi Yunjeong', 팀이름: '물망초' }
   ],
   'Awake in Veil': [
     { 이름: '김이현', 영문명: 'Yihyeon Kim', 팀이름: '참깨수달' },
@@ -230,7 +230,7 @@ export const 아티스트정보 = {
     { 이름: '이소윤', 영문명: 'Lee Soyoun', 팀이름: 'OWIN' }
   ],
   'Connected Body': [{ 이름: '최소이', 영문명: 'Choi Soi', 팀이름: '-' }],
-  D: [
+  怒世怒世: [
     { 이름: '김민주', 영문명: 'Kim Min Ju', 팀이름: 'SYNC' },
     { 이름: '신우석', 영문명: 'Shin Woo Seok', 팀이름: 'SYNC' },
     { 이름: '이현서', 영문명: 'Lee Hyeon Seo', 팀이름: 'SYNC' }
