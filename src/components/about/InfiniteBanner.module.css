@@ -4,7 +4,10 @@
   gap: 4rem;
   overflow: hidden;
   width: 100%;
-  /*background-color: antiquewhite;*/
+  padding-bottom: 21.3rem;
+  @media (max-width: 768px) {
+    padding-bottom: 11.2rem;
+  }
 }
 
 .firstRow {
@@ -12,14 +15,14 @@
   flex-wrap: nowrap;
   width: max-content;
   animation: scrollFirstRow 10s linear infinite;
-  background-color: yellowgreen;
+  /*background-color: yellowgreen;*/
 }
 .secondRow {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
   animation: scrollSecondRow 10s linear infinite reverse;
-  background-color: lightcoral;
+  /*background-color: lightcoral;*/
 }
 
 @keyframes scrollFirstRow {
@@ -45,23 +48,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /*background-color: palevioletred;*/
   overflow: hidden;
   flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 15.4rem;
+    height: 8.4rem;
+  }
 }
 .sponsorBox img {
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
   background-color: azure;
 }
-
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .text p:first-child {
   position: relative;
   font-size: 6rem;
   text-align: center;
   font-family: 'Sandoll Seoul';
   margin-bottom: 1.6rem;
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+  }
 }
 .text p:first-child::after {
   content: '';
@@ -72,8 +86,9 @@
   transform: translateX(-50%);
   border-bottom: 1px solid black;
 }
-.text p:nth-child(2) {
-  font-size: 1.6rem;
-  text-align: center;
-  font-family: 'Sandoll Seoul';
+
+@media (max-width: 768px) {
+  .text p:first-child::after {
+    width: 7rem;
+  }
 }

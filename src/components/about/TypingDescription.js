@@ -73,7 +73,6 @@ export default function TypingDescription() {
               textIndex = 0
               index++
             }
-
             // 커서를 마지막 텍스트 오른쪽으로
             updateCursorPosition()
           } else if (content.type === 'image') {
@@ -81,9 +80,6 @@ export default function TypingDescription() {
             img.src = content.src
             img.alt = content.alt
             img.className = styles.image
-
-            img.style.width = '7.8rem'
-            img.style.height = '5.6rem'
 
             img.onload = () => {
               // 이미지 로드 후 커서 위치 업데이트하기
