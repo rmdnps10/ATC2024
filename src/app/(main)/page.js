@@ -21,7 +21,7 @@ export default function MainPage() {
   const [accent, click] = useReducer(state => ++state % 6, 0)
   const [dpr, setDpr] = useState(1)
   const [scrollPercent, setScrollPercent] = useState(0)
-  const pages = 7
+  const pages = 4
 
   return (
     <Suspense fallback={null}>

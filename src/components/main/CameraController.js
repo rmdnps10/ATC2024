@@ -14,10 +14,15 @@ export default function CameraController() {
   const xRef = useRef(initialPosition.current.x);
 
   useFrame(() => {
-    const scrollOffset = scroll.offset;
+    let adjustedScrollOffset = scroll.offset;
+
+    // if (scroll.offset >= 0.23 && scroll.offset <= 0.3) {
+    //   adjustedScrollOffset = 0.25 + (scroll.offset - 0.25) * 0.1;
+    // }
+
+    const scrollOffset = adjustedScrollOffset;
     const moveDistance = -120;
     const newY = initialPosition.current.y + scrollOffset * moveDistance;
-    // 스크롤이 87% 이상일 때 x축 이동
     const xMoveDistance = 200;
     let newX = 0;
 

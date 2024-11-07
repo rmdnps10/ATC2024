@@ -4,7 +4,7 @@ import React, { useRef, useMemo, useState, useCallback, useEffect } from 'react'
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
-import { Text } from '@react-three/drei';
+import { Text, useTexture } from '@react-three/drei';
 //
 //
 //
@@ -18,20 +18,22 @@ export default function Boxes({ scrollPercent }) {
 
     const COLORS = ['#ffffff', '#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff', '#ffaaaf'];
 
+    const elephantTexture = useTexture('/images/main/atc24_profile.png');
+    // const elephantTexture = useTexture('/images/main/Asset1.png');
+
     const materials = useMemo(() => ({
         center: new THREE.MeshStandardMaterial({
-            color: "#ffffff",
-            metalness: 0.8,
-            roughness: 0.2,
-            emissive: "#ffffff",
-            emissiveIntensity: 0.7,
+            map: elephantTexture,
+            metalness: 0.2,
+            roughness: 0.8,
+
         }),
         faces: COLORS.map(color => new THREE.MeshStandardMaterial({
             color: color,
             metalness: 0.3,
             roughness: 0.4,
         }))
-    }), []);
+    }), [elephantTexture]);
 
     const geometry = useMemo(() => new THREE.BoxGeometry(1.25, 1.25, 1.25), []);
 
@@ -175,7 +177,7 @@ export default function Boxes({ scrollPercent }) {
 
                         gsap.to(rightTextRef.current, {
                             z: 0,
-                            duration: 5,
+                            duration: 4,
                             ease: "power2.inOut",
                             onUpdate: () => {
                                 setTextPositions(prev => ({
@@ -244,13 +246,13 @@ export default function Boxes({ scrollPercent }) {
                 <Text
                     position={[0, 1.5, 0]}
                     fontSize={0.5}
-                    color="#000000"
+                    color="#333333"
                     anchorX="center"
                     anchorY="middle"
                     visible={!isCompleted}
                     font='/images/main/Pretendard-Bold.woff'
                 >
-                    I'm Elephant.
+                    I'm Elephant Click Me!
                 </Text>
             </group>
         </>

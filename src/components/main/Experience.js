@@ -1,7 +1,7 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useMemo, useState, useCallback } from "react";
+import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   Environment,
@@ -17,6 +17,7 @@ import Boxes from "./Boxes.js";
 import Floor from "./Floor.js";
 import Model from "./Model.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
+import gsap from "gsap";
 //
 //
 //
@@ -45,11 +46,34 @@ const shuffle = (accent = 0) => [
 
 export default function Experience({ accent, scrollPercent }) {
   const connectors = useMemo(() => shuffle(accent), [accent]);
+  const bgRef = useRef();
+
+  useEffect(() => {
+    if (scrollPercent >= 65) {
+      const progress = (scrollPercent - 65) / 35; // 75%에서 100%까지의 진행률 계산
+      gsap.to(bgRef.current, {
+        r: 0,
+        g: 0,
+        b: 0,
+        duration: 1.5,
+        ease: "power2.out",
+        progress: progress
+      });
+    } else {
+      gsap.to(bgRef.current, {
+        r: 1,
+        g: 1,
+        b: 1,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    }
+  }, [scrollPercent]);
 
   return (
     <>
       {/* <Perf position="bottom-left" /> */}
-      <color attach="background" args={['white']} />
+      <color ref={bgRef} attach="background" args={['white']} />
       {/* <OrbitControls /> */}
       <CameraController />
 
@@ -72,7 +96,7 @@ export default function Experience({ accent, scrollPercent }) {
         <Floor scroll={scrollPercent} />
       </Physics>
 
-      {/* <Model /> */}
+      <Model />
 
       <Effects />
     </>
