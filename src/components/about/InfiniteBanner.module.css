@@ -4,6 +4,10 @@
   gap: 4rem;
   overflow: hidden;
   width: 100%;
+  padding-bottom: 21.3rem;
+  @media (max-width: 768px) {
+    padding-bottom: 11.2rem;
+  }
 }
 
 .firstRow {
@@ -11,14 +15,14 @@
   flex-wrap: nowrap;
   width: max-content;
   animation: scrollFirstRow 10s linear infinite;
-  background-color: yellowgreen;
+  /*background-color: yellowgreen;*/
 }
 .secondRow {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
   animation: scrollSecondRow 10s linear infinite reverse;
-  background-color: lightcoral;
+  /*background-color: lightcoral;*/
 }
 
 @keyframes scrollFirstRow {
@@ -44,7 +48,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /*background-color: palevioletred;*/
   overflow: hidden;
   flex-shrink: 0;
   @media (max-width: 768px) {
@@ -53,8 +56,8 @@
   }
 }
 .sponsorBox img {
-  width: 70%;
-  height: 70%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
   background-color: azure;
 }
@@ -71,7 +74,7 @@
   font-family: 'Sandoll Seoul';
   margin-bottom: 1.6rem;
   @media (max-width: 768px) {
-    font-size: 2.8rem;
+    font-size: 3.6rem;
   }
 }
 .text p:first-child::after {
@@ -83,11 +86,9 @@
   transform: translateX(-50%);
   border-bottom: 1px solid black;
 }
-.text p:nth-child(2) {
-  font-size: 1.6rem;
-  text-align: center;
-  @media (max-width: 768px) {
-    width: 80%;
-    font-size: 1.2rem;
+
+@media (max-width: 768px) {
+  .text p:first-child::after {
+    width: 7rem;
   }
 }
