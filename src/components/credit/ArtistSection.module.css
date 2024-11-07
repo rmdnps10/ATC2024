@@ -4,7 +4,11 @@
   padding-top: 10rem;
   align-items: center;
   gap: 8rem;
+  overflow: hidden;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    padding-top: 3rem;
+  }
 }
 
 .teamSection {
@@ -22,6 +26,9 @@
   color: #fafafa;
   font-family: 'Sandoll Seoul';
   font-size: 4rem;
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+  }
 }
 
 .teamArtworkName p:first-child {
@@ -29,17 +36,26 @@
   text-align: right;
   word-break: keep-all;
   line-height: 100%;
+  @media (max-width: 768px) {
+    width: 10rem;
+  }
 }
 
 .teamArtworkName p:nth-child(3) {
   width: 24rem;
   text-align: left;
+  @media (max-width: 768px) {
+    width: 9rem;
+  }
 }
 
 .artistTeam {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 }
 
 .artistIndividual {
@@ -54,11 +70,18 @@
   color: white;
   width: 10rem;
   text-align: right;
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
 }
 
 .artistIndividual p:nth-child(2) {
   font-size: 1.6rem;
   color: #767676;
-  min-width: 15rem;
+  width: 15rem;
   text-align: left;
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    width: 10rem;
+  }
 }
