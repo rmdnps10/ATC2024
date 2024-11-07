@@ -4,7 +4,7 @@ import Image from 'next/image'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
 import TypingDescription from '@/components/about/TypingDescription'
 import ToCreditPage from '@/components/about/ToCreditPage'
-import { Zoom } from 'react-awesome-reveal'
+// import { Zoom } from 'react-awesome-reveal'
 //
 //
 //
