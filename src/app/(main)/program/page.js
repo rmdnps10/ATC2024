@@ -16,18 +16,7 @@ export default function ProgramPage() {
     ) /*나중에 30분 단위 프로그램 고려해야함*/
   }
 
-  const dayToColumn = day => {
-    switch (day) {
-      case '수':
-        return 1
-      case '목':
-        return 2
-      case '금':
-        return 3
-      default:
-        return 0
-    }
-  }
+  const dayToColumn = day => ({ 수: 1, 목: 2, 금: 3 }[day] || 0)
 
   const programs = [
     {
@@ -76,21 +65,17 @@ export default function ProgramPage() {
     }
   ]
 
-  const getDuration = (startTime, endTime) => {
-    const [startHour, startMinute] = startTime.split(':').map(Number)
-    const [endHour, endMinute] = endTime.split(':').map(Number)
-
-    const start = startHour * 60 + startMinute
-    const end = endHour * 60 + endMinute
-
-    return (end - start) / 60
+  const getDuration = (start, end) => {
+    const [startHour, startMinute] = start.split(':').map(Number)
+    const [endHour, endMinute] = end.split(':').map(Number)
+    return (endHour * 60 + endMinute - startHour * 60 - startMinute) / 60
   }
 
   // 요일 데이터 추가
   const days = ['수', '목', '금']
 
   const generateTable = () => {
-    const table = Array.from({ length: 6 }, () => Array(3).fill(null)) // 시간당 1행씩으로 총 6개 행
+    const table = Array.from({ length: 6 }, () => Array(3).fill(null))
 
     programs.forEach(program => {
       const row = timeToRow(program.startTime)
@@ -117,6 +102,16 @@ export default function ProgramPage() {
   }
 
   const tableData = generateTable()
+  const toggleProgram = id => {
+    setOpenPrograms(
+      openPrograms.includes(id)
+        ? openPrograms.filter(p => p !== id)
+        : [...openPrograms, id]
+    )
+  }
+
+  const getHighlightClass = id =>
+    hoveredProgram === id || openPrograms.includes(id) ? styles.highlighted : ''
 
   return (
     <main className={styles.main}>
@@ -136,7 +131,6 @@ export default function ProgramPage() {
               className={styles.dayHeader}></div>
           ))}
 
-          {/* 시간 표시 및 프로그램 셀 */}
           {['15:00', '16:00', '17:00', '18:00', '19:00', '20:00'].map(
             (time, rowIndex) => (
               <React.Fragment key={rowIndex}>
@@ -240,20 +234,16 @@ export default function ProgramPage() {
                 }`}>
                 {program.title}
               </div>
-              <span className={styles.arrow}>
-                {openPrograms.includes(program.id) ? (
-                  <Image
-                    src="/icon/button/toggleUp.svg"
-                    width={24}
-                    height={24}
-                  />
-                ) : (
-                  <Image
-                    src="/icon/button/toggleDown.svg"
-                    width={24}
-                    height={24}
-                  />
-                )}
+              <span
+                className={`${styles.arrow} ${
+                  openPrograms.includes(program.id) ? styles.rotated : ''
+                }`}>
+                <Image
+                  src="/icon/button/toggle.svg"
+                  width={24}
+                  height={24}
+                  alt="Toggle Arrow"
+                />
               </span>
             </div>
             {openPrograms.includes(program.id) && (
@@ -292,20 +282,16 @@ export default function ProgramPage() {
                 }`}>
                 {program.title}
               </div>
-              <span className={styles.arrow}>
-                {openPrograms.includes(program.id) ? (
-                  <Image
-                    src="/icon/button/toggleUp.svg"
-                    width={24}
-                    height={24}
-                  />
-                ) : (
-                  <Image
-                    src="/icon/button/toggleDown.svg"
-                    width={24}
-                    height={24}
-                  />
-                )}
+              <span
+                className={`${styles.arrow} ${
+                  openPrograms.includes(program.id) ? styles.rotated : ''
+                }`}>
+                <Image
+                  src="/icon/button/toggle.svg"
+                  width={24}
+                  height={24}
+                  alt="Toggle Arrow"
+                />
               </span>
             </div>
             {openPrograms.includes(program.id) && (

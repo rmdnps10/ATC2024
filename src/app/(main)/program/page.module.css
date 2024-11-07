@@ -274,8 +274,12 @@
 }
 
 .arrow {
-  display: inline;
-  font-size: 1.6rem;
+  display: inline-block;
+  transition: transform 0.4s ease;
+}
+
+.rotated {
+  transform: rotate(-180deg);
 }
 
 .accordionContent {
