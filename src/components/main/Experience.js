@@ -18,6 +18,7 @@ import Floor from "./Floor.js";
 import Model from "./Model.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 import gsap from "gsap";
+import AtomModel from "./AtomModel.js";
 //
 //
 //
@@ -91,6 +92,8 @@ export default function Experience({ accent, scrollPercent }) {
       <Boxes scrollPercent={scrollPercent} />
 
       <ThreeText />
+
+      <AtomModel />
 
       <Physics gravity={[0, -9.8, 0]}>
         <Floor scroll={scrollPercent} />

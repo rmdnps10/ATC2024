@@ -6,9 +6,9 @@ import { RigidBody } from '@react-three/rapier'
 import { useEffect, useState, useRef, useMemo } from 'react'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
-import { RepeatWrapping } from 'three'
-
-// 개별 컴포넌트 메모이제이션
+//
+//
+//
 const PhysicsBox = memo(function PhysicsBox({ position = [0, 8, 0], textureIndex }) {
     const textures = useLoader(TextureLoader, [
         '/images/main/atc24_profile.png',
@@ -84,7 +84,7 @@ export default function Floor() {
     });
 
     // 상수값 메모이제이션
-    const OBJECT_LIMIT = useMemo(() => 30, []);
+    const OBJECT_LIMIT = useMemo(() => 50, []);
     const SPAWN_INTERVAL = useMemo(() => 700, []);
 
     useEffect(() => {
@@ -129,14 +129,7 @@ export default function Floor() {
         return () => clearInterval(interval);
     }, [OBJECT_LIMIT, SPAWN_INTERVAL]);
 
-    // 텍스처 로딩 최적화
     const textures = useLoader(TextureLoader, ['/images/main/atc24_profile.png'])
-    const processedTextures = useMemo(() => {
-        return textures.map(texture => {
-            texture.repeat.set(1, 1);
-            return texture;
-        });
-    }, [textures]);
 
     return (
         <group position={[58.5, -124, -5]} rotation={[0, -Math.PI / 6, 0]}>
@@ -152,13 +145,13 @@ export default function Floor() {
 
             {/* 뒷벽 */}
             <Wall
-                position={[0, 5, -5]}
+                position={[0, 4.9, -5]}
                 rotation={[0, 0, 0]}
             />
 
             {/* 왼쪽 벽 */}
             <Wall
-                position={[-5, 5, 0]}
+                position={[-5, 4.9, 0]}
                 rotation={[0, Math.PI / 2, 0]}
             />
 
@@ -183,45 +176,6 @@ export default function Floor() {
             {/* 최상층 1개 */}
             <PhysicsBox position={[-3, 2.5, -3]} textureIndex={1} />
 
-            {/* 왼쪽 벽 계단형 박스들 */}
-            {/* 바닥층 9개 */}
-            <PhysicsBox position={[-4, 0.5, -4]} textureIndex={0} />
-            <PhysicsBox position={[-4, 0.5, -3]} textureIndex={1} />
-            <PhysicsBox position={[-4, 0.5, -2]} textureIndex={2} />
-            <PhysicsBox position={[-4, 1.5, -4]} textureIndex={3} />
-            <PhysicsBox position={[-4, 1.5, -3]} textureIndex={0} />
-            <PhysicsBox position={[-4, 1.5, -2]} textureIndex={1} />
-            <PhysicsBox position={[-4, 2.5, -4]} textureIndex={2} />
-            <PhysicsBox position={[-4, 2.5, -3]} textureIndex={3} />
-            <PhysicsBox position={[-4, 2.5, -2]} textureIndex={0} />
-
-            {/* 중간층 4개 */}
-            <PhysicsBox position={[-4, 3.5, -3.5]} textureIndex={1} />
-            <PhysicsBox position={[-4, 3.5, -2.5]} textureIndex={2} />
-            <PhysicsBox position={[-4, 4.5, -3.5]} textureIndex={3} />
-            <PhysicsBox position={[-4, 4.5, -2.5]} textureIndex={0} />
-
-            {/* 최상층 1개 */}
-            <PhysicsBox position={[-4, 5.5, -3]} textureIndex={1} />
-
-            {/* 오른쪽 벽 계단형 박스들 */}
-            {/* 바닥층 9개 */}
-            <PhysicsBox position={[-4, 0.5, -2]} textureIndex={0} />
-            <PhysicsBox position={[-3, 0.5, -2]} textureIndex={1} />
-            <PhysicsBox position={[-2, 0.5, -2]} textureIndex={2} />
-            <PhysicsBox position={[-4, 1.5, -2]} textureIndex={3} />
-            <PhysicsBox position={[-3, 1.5, -2]} textureIndex={0} />
-            <PhysicsBox position={[-2, 1.5, -2]} textureIndex={1} />
-            <PhysicsBox position={[-4, 2.5, -2]} textureIndex={2} />
-            <PhysicsBox position={[-3, 2.5, -2]} textureIndex={3} />
-            <PhysicsBox position={[-2, 2.5, -2]} textureIndex={0} />
-
-            {/* 중간층 4개 */}
-            <PhysicsBox position={[-3.5, 3.5, -2]} textureIndex={1} />
-            <PhysicsBox position={[-2.5, 3.5, -2]} textureIndex={2} />
-            <PhysicsBox position={[-3.5, 4.5, -2]} textureIndex={3} />
-            <PhysicsBox position={[-2.5, 4.5, -2]} textureIndex={0} />
-
             {/* 최상층 1개 */}
             <PhysicsBox position={[-3, 5.5, -2]} textureIndex={1} />
 
@@ -239,13 +193,12 @@ export default function Floor() {
                 <PhysicsStar1 key={id} position={position} />
             ))}
 
-            {/* 케이크 추가 - 바닥 위에 위치 */}
             <PhysicsCake position={[0, 1, 1]} />
 
-            {/* <Text
+            <Text
                 position={[11, 5, -3]}
                 fontSize={2}
-                color="#333333"
+                color="#ffffff"
                 anchorX="center"
                 anchorY="middle"
                 font='/images/main/Pretendard-Bold.woff'
@@ -255,13 +208,13 @@ export default function Floor() {
             <Text
                 position={[11, 5, -3.2]}
                 fontSize={2}
-                color="#777777"
+                color="#ffdddd"
                 anchorX="center"
                 anchorY="middle"
                 font='/images/main/Pretendard-Bold.woff'
             >
                 About
-            </Text> */}
+            </Text>
         </group>
     )
 }

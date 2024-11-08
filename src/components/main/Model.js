@@ -9,7 +9,7 @@ export default function Model(props) {
 
   return (
     <group ref={groupRef} position={[55, -117, 0]} rotation={[0, 0, 0]}>
-      <group scale={15} position={[0, -2.5, 0]} rotation-y={Math.PI / 6}>
+      <group scale={15} position={[0, -3, 0]} rotation-y={Math.PI / 6}>
         <Float speed={3} rotationIntensity={1} floatIntensity={0.1}>
           <MainModel />
         </Float>
@@ -19,10 +19,10 @@ export default function Model(props) {
         rotationIntensity={1}
         floatIntensity={1}
       >
-        <group scale={5} position={[1.5, -1.75, 0]}>
+        <group scale={5} position={[1.5, -2.25, 0]}>
           <FishModel />
         </group>
-        <group scale={5} position={[-1.5, -1.5, 0]}>
+        <group scale={5} position={[-1.5, -2, 0]}>
           <Fish2Model />
         </group>
       </Float>
