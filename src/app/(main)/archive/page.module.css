@@ -1,0 +1,44 @@
+.main {
+  padding-top: 7rem;
+}
+
+.main article {
+  padding: 0 8rem;
+  color: #000;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+  letter-spacing: -0.032rem;
+}
+
+.main article h1 span {
+  display: inline-block;
+  padding-left: 1rem;
+}
+
+.main article p {
+  margin-top: 1rem;
+  max-width: 55rem;
+  word-break: keep-all;
+}
+
+.main article a button {
+  display: inline-block;
+  width: 11.3rem;
+  height: 3.1rem;
+  margin-top: 1.6rem;
+  padding: 0;
+  color: #fff;
+  background-color: black;
+  border-radius: 1rem;
+  cursor: pointer;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6rem;
+  letter-spacing: -0.06rem;
+  flex-shrink: 0;
+}
