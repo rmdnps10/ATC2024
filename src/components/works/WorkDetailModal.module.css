@@ -1,0 +1,149 @@
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: flex-end;
+  width: 72vw;
+  height: 34vw;
+  background-color: black;
+  padding: 2% 5rem 4% 8rem;
+  /* box-shadow: rgba(167, 167, 167, 0.35) 0px 5px 30px; */
+}
+
+.elephantDiv {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 15vw;
+  height: 15vw;
+}
+
+.elephantSpan {
+  /* position: relative; */
+  background-color: aqua;
+  width: 15vw;
+  height: 15vw;
+}
+
+.exitBtn {
+  cursor: pointer;
+}
+
+.exitBtn:hover {
+  opacity: 0.6;
+}
+
+.wrapper {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.wrapper::-webkit-scrollbar {
+  width: 5px; /* 스크롤바 전체 너비 */
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 10px; /* (선택 사항) 스크롤바 손잡이 모서리 둥글게 */
+}
+
+.wrapper::-webkit-scrollbar-track {
+  background-color: #000000; /* (선택 사항) 스크롤 트랙의 배경색 */
+}
+
+.header h1 {
+  color: #fff;
+  font-family: 'Sandoll Seoul';
+  font-size: 7rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -2.4px;
+}
+
+.header h2 {
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+}
+
+.header span:nth-child(2) {
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.5px;
+}
+
+.headerTeam {
+  color: #fff;
+  font-family: 'Sandoll Seoul';
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1.4px;
+}
+
+.body div {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 8rem;
+  margin-bottom: 3rem;
+}
+
+.body div h1 {
+  display: flex;
+  gap: 0.5rem;
+  word-break: keep-all;
+}
+
+.body div h1 span {
+  font-family: 'Sandoll Seoul';
+  font-size: 5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -2.4px;
+  background: var(
+    --grey-linear,
+    linear-gradient(180deg, #8c8c8c 0%, #262626 100%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.body div h1 h3 {
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.6px;
+  margin-top: 3rem;
+  margin-left: 1rem;
+}
+
+.body div h1 h4 {
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.44px;
+  margin-top: 3rem;
+  margin-left: 1rem;
+  padding-right: 2rem;
+}

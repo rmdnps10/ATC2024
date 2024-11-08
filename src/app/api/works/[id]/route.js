@@ -1,15 +1,29 @@
-// 작품 하나의 상세 정보를 몯
 import { connectDb } from '@/lib/connect-db'
 import { DetailWork } from '@/models/detail-work-schema'
-import { Work } from '@/models/work-schema'
+import { ObjectId } from 'mongodb'
 
-export async function GET(request) {
+export async function GET(request, { params }) {
   try {
     await connectDb()
-    // 해당 work id로 필터링. DB접근
-    // const data = await DetailWork.find()
-    return Response.json({ data })
+    const data = await DetailWork.findById(params.id)
+
+    // 문서가 존재하지 않으면 404 반환
+    if (!data) {
+      return new Response(JSON.stringify({ error: 'ID-NOT-FOUND' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
+
+    return new Response(JSON.stringify({ data }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    })
   } catch (error) {
-    return Response.json({ error }, { status: 500 })
+    console.error(error)
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 }
