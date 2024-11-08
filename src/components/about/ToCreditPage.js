@@ -55,12 +55,12 @@ export default function ToCreditPage() {
               height={24}
             />
           </Link>
+          <div className={`${styles.designedTags} ${styles.animate}`}>
+            <div>A & T</div>
+            <div>Atc Staff</div>
+            <div>Artist</div>
+          </div>
         </div>
-      </div>
-      <div className={`${styles.designedTags} ${styles.animate}`}>
-        <div>A & T</div>
-        <div>Atc Staff</div>
-        <div>Artist</div>
       </div>
     </section>
   )
