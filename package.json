@@ -30,6 +30,7 @@
     "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18",
     "react-use": "^17.5.1",
+    "styled-components": "^6.1.13",
     "three": "^0.166.1",
     "vercel": "^37.5.3"
   },
