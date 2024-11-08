@@ -207,6 +207,7 @@ export default function WorksPage({}) {
               src={'/images/works/page0.png'}
               alt={el.title}
               fill
+              objectFit="cover"
             />
             <figcaption>
               <div className={styles.figBox}>

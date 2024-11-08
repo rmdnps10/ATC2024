@@ -49,6 +49,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+.main header h1 span {
+  position: relative;
+}
+
 .main header h3 {
   color: #121212;
   font-family: 'Sandoll Seoul';
@@ -76,6 +80,15 @@
 }
 
 .headerDesc nav ul li {
+  color: #121212;
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+}
+
+.headerDesc nav ul a {
   color: #121212;
   text-align: right;
   font-family: Pretendard;

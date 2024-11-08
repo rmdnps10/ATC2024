@@ -80,7 +80,19 @@ export default function WorkDetailPage() {
                 />
               </div>
               <header>
-                <h1>{detailData.title}</h1>
+                <h1>
+                  {detailData.title}
+                  <span>
+                    <Image
+                      src={'/images/works/elephantIcon.svg'}
+                      alt="elephant Icon"
+                      width={40}
+                      height={40}
+                      priority={false}
+                      style={{ left: '10px' }}
+                    />
+                  </span>
+                </h1>
                 <h3>{detailData.oneLiner}</h3>
                 <div className={styles.headerDesc}>
                   <p
@@ -90,9 +102,13 @@ export default function WorkDetailPage() {
                   />
                   <nav>
                     <ul>
-                      <li>작품 위치 | {'X000'} ↗</li>
-                      {detailData.openAddress?.split(',').map(_ => (
-                        <li>작품 외부주소 ↗</li>
+                      <li>작품 위치 | {detailData.space}</li>
+                      {detailData.openAddress?.split(',').map(el => (
+                        <a
+                          href={el}
+                          target="_blank">
+                          작품 외부주소 ↗
+                        </a>
                       ))}
                     </ul>
                   </nav>
