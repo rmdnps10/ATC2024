@@ -355,4 +355,5 @@
   padding-top: 1.6rem;
   font-size: 1.4rem;
   color: #444444;
+  word-break: keep-all;
 }
