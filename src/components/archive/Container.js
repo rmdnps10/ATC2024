@@ -2,8 +2,9 @@
 import Image from 'next/image'
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
+import Background from './BackgroundModal'
 
-export default function Container() {
+export default function ScrollContainer() {
   const 연표너비 = 5356 * 0.7
   const 연표높이 = 842 * 0.7
 
@@ -19,12 +20,16 @@ export default function Container() {
 
   return (
     <Scrollsection ref={scrollRef}>
+      <Background type={1} />
       <Image
         src="/images/archive/연표.png"
+        alt="atc2024 연표, timeline"
         width={연표너비}
         height={연표높이}
+        priority={true}
       />
       <Elephant
+        alt="atc2024 elephant"
         src={'/images/archive/코끼리.webp'}
         width={171 * 0.5}
         height={163 * 0.5}
@@ -121,6 +126,7 @@ export default function Container() {
         ATC 전시 설치 시작
       </HightButton>
       <Refrigerator
+        alt="atc2024 refrigerator"
         src={'/images/archive/냉장고.png'}
         width={270}
         height={270}
@@ -137,7 +143,7 @@ const Scrollsection = styled.section`
   margin-top: -12rem;
   padding-top: 50px;
   position: relative;
-  z-index: 1;
+  z-index: 1000;
 `
 
 const LowButton = styled.button`
