@@ -141,6 +141,32 @@ table {
   box-sizing: border-box;
 }
 
+/* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
+body {
+  color: grey;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    transparent,
+    #dd4ffc 15%,
+    #1160f7 45%,
+    #7340fb 60%,
+    #35cffa 75%,
+    transparent
+  );
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
 /* 핵심 body의 기본값을 설정합니다. */
 body {
   line-height: 1.5;
