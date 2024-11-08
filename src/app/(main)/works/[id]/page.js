@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { getWorkDetail } from '@/client-api/getWorkDetail'
 import Image from 'next/image'
 import WorkDetailModal from '@/components/works/WorkDetailModal'
+import Loading from '../../loading'
 //
 //
 //
@@ -175,7 +176,9 @@ export default function WorkDetailPage() {
               )}
             </main>
           ) : (
-            <div>Loading...</div>
+            <div>
+              <Loading />
+            </div>
           )}
         </motion.div>
       )}
