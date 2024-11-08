@@ -160,7 +160,7 @@ export default function WorkDetailPage() {
                     />
                   </div>
                   <button onClick={() => setModalOpen(prev => !prev)}>
-                    아티스트 인터뷰 보기
+                    <span>아티스트 인터뷰 보기</span>
                   </button>
                 </div>
               </section>
