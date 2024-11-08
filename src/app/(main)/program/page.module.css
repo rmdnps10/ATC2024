@@ -254,55 +254,87 @@
   margin-bottom: 1rem;
 }
 
+.programAccordion {
+  width: 100%;
+  background-color: white;
+  border-radius: 1rem; /* 기본 둥근 테두리 */
+  transition: all 0.5s ease; /* 부드러운 전환 효과 */
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.programAccordion.open {
+  border-radius: 1rem; /* 열릴 때 둥근 테두리 유지 */
+}
+
 .programHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 10.4rem;
   padding: 2.8rem 3rem;
-  border-radius: 1rem;
-  background-color: white;
   font-size: 4.4rem;
-  color: #444444;
-  transition: background-color 0.3s;
-  font-family: 'Sandoll Seoul';
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
-  @media (max-width: 768px) {
-    font-size: 3rem; /*임의로 줄여놓음*/
-  }
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.5s ease;
+}
+
+.textWrapper {
+  font-size: 1em;
+  color: #444;
+  transition: background 0.5s ease, -webkit-background-clip 0.5s ease;
+}
+
+.textWrapper.gradientText {
+  background: linear-gradient(
+    90deg,
+    #35cffa,
+    #278ffb,
+    #3c79fb,
+    #dd4ffc,
+    #9734fb,
+    #7340fb
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .arrow {
-  display: inline-block;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
-.rotated {
+.arrow.rotated {
   transform: rotate(-180deg);
 }
 
+/* 컨텐츠 */
 .accordionContent {
-  padding: 2rem;
+  max-height: 0; /* 기본 높이 0 */
+  overflow: hidden; /* 닫힌 상태에서 내용 숨김 */
+  padding: 0 3rem;
+  font-size: 1.6rem;
+  color: #444;
   background-color: white;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  @media (max-width: 768px) {
-    padding: 3rem;
-  }
+  border-radius: 0 0 1rem 1rem; /* 하단 둥근 테두리 */
+  transition: max-height 0.5s ease, padding 0.5s ease; /* 슬라이딩 효과 */
+}
+
+/* 열린 컨텐츠 */
+.accordionContent.activeContent {
+  max-height: 50rem;
+  padding: 1.5rem 3rem; /* 열린 상태에서 패딩 추가 */
 }
 
 .programDetails {
   padding: 1rem 0;
 }
-
 .programTime {
   font-size: 1.8rem;
   @media (max-width: 768px) {
     font-size: 1.6rem;
   }
 }
-
 .programLocation {
   position: relative;
   font-size: 2.2rem;
@@ -312,7 +344,6 @@
     font-size: 2.2rem; /*글씨 넘치는 거?*/
   }
 }
-
 .programLocation::before {
   position: absolute;
   content: '';
@@ -324,17 +355,4 @@
   padding-top: 1.6rem;
   font-size: 1.4rem;
   color: #444444;
-}
-
-.activeHeader {
-  border-radius: 1rem 1rem 0 0;
-  box-shadow: none;
-}
-.activeContent {
-  border-radius: 0 0 1rem 1rem;
-  box-shadow: none;
-}
-.activeShadow {
-  border-radius: 1rem;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
 }

@@ -6,34 +6,35 @@ import Image from 'next/image'
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
+  const [animatingPrograms, setAnimatingPrograms] = useState([])
   const programRefs = useRef({})
 
   const isMobile =
     typeof window !== 'undefined' &&
     window.matchMedia('(max-width: 768px)').matches
 
+  const scrollToProgram = id => {
+    programRefs.current[id]?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'nearest'
+    })
+  }
+
   const toggleProgram = id => {
+    setAnimatingPrograms(prev => [...prev, id])
+
     if (isMobile) {
       setOpenPrograms(prevOpenPrograms => {
         const isOpening = !prevOpenPrograms.includes(id)
-
-        if (isOpening) {
-          programRefs.current[id]?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'nearest'
-          })
-        }
+        if (isOpening) scrollToProgram(id)
 
         return isOpening
-          ? [...prevOpenPrograms, id] // 닫혀 있을 경우 열기
-          : prevOpenPrograms.filter(p => p !== id) // 열려 있을 경우 닫기
+          ? [...prevOpenPrograms, id]
+          : prevOpenPrograms.filter(p => p !== id)
       })
 
-      // 아코디언을 닫으면 -> 효과 초기화
-      if (openPrograms.includes(id)) {
-        setHoveredProgram(null)
-      }
+      if (openPrograms.includes(id)) setHoveredProgram(null)
     } else {
       setOpenPrograms(prevOpenPrograms =>
         prevOpenPrograms.includes(id)
@@ -105,7 +106,6 @@ export default function ProgramPage() {
     return (endHour * 60 + endMinute - startHour * 60 - startMinute) / 60
   }
 
-  // 요일 데이터 추가
   const days = ['수', '목', '금']
 
   const generateTable = () => {
@@ -153,7 +153,6 @@ export default function ProgramPage() {
               key={index}
               className={styles.dayHeader}></div>
           ))}
-
           {['15:00', '16:00', '17:00', '18:00', '19:00', '20:00'].map(
             (time, rowIndex) => (
               <React.Fragment key={rowIndex}>
@@ -162,13 +161,11 @@ export default function ProgramPage() {
                   style={{ gridRow: rowIndex + 2 }}>
                   {time}
                 </div>
-
                 {Array(3)
                   .fill(null)
                   .map((_, colIndex) => {
                     const cellData = tableData[rowIndex][colIndex]
                     if (cellData === 'skip') return null
-
                     return cellData ? (
                       <div
                         key={colIndex}
@@ -232,31 +229,28 @@ export default function ProgramPage() {
           ))}
         </div>
       </section>
-
       <section className={styles.programContainer}>
         {[...alwaysAvailablePrograms, ...programs].map(program => (
           <div
             key={program.id}
             ref={el => (programRefs.current[program.id] = el)}
-            className={`${styles.programItem} ${
-              openPrograms.includes(program.id) ? styles.activeShadow : ''
-            }`}>
+            className={`${styles.programAccordion} ${
+              openPrograms.includes(program.id) ? styles.open : ''
+            }`}
+            onMouseEnter={() => setHoveredProgram(program.id)}
+            onMouseLeave={() => setHoveredProgram(null)}>
             <div
-              className={`${styles.programHeader} ${
-                openPrograms.includes(program.id) ? styles.activeHeader : ''
-              }`}
-              onMouseEnter={() => setHoveredProgram(program.id)}
-              onMouseLeave={() => setHoveredProgram(null)}
+              className={styles.programHeader}
               onClick={() => toggleProgram(program.id)}>
-              <div
-                className={`${styles.gradientText} ${
+              <span
+                className={`${styles.textWrapper} ${
                   hoveredProgram === program.id ||
                   openPrograms.includes(program.id)
-                    ? styles.highlightedText
+                    ? styles.gradientText
                     : ''
                 }`}>
                 {program.title}
-              </div>
+              </span>
               <span
                 className={`${styles.arrow} ${
                   openPrograms.includes(program.id) ? styles.rotated : ''
@@ -269,24 +263,26 @@ export default function ProgramPage() {
                 />
               </span>
             </div>
-            {openPrograms.includes(program.id) && (
-              <div
-                className={`${styles.accordionContent} ${
-                  openPrograms.includes(program.id) ? styles.activeContent : ''
-                }`}>
-                <div className={styles.programDetails}>
-                  <p className={styles.programTime}>
-                    {program.startTime
-                      ? `${program.startTime} - ${program.endTime} (${program.day})`
-                      : '상시운영'}
-                  </p>
-                  <p className={styles.programLocation}>{program.location}</p>
-                  <p className={styles.programDescription}>
-                    {program.description}
-                  </p>
-                </div>
+
+            <div
+              className={`${styles.accordionContent} ${
+                openPrograms.includes(program.id) ? styles.activeContent : ''
+              }`}
+              style={{
+                maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
+              }}>
+              <div className={styles.programDetails}>
+                <p className={styles.programTime}>
+                  {program.startTime
+                    ? `${program.startTime} - ${program.endTime} (${program.day})`
+                    : '상시운영'}
+                </p>
+                <p className={styles.programLocation}>{program.location}</p>
+                <p className={styles.programDescription}>
+                  {program.description}
+                </p>
               </div>
-            )}
+            </div>
           </div>
         ))}
       </section>
