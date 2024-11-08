@@ -1,0 +1,6 @@
+.scrollContainer {
+  width: 99%;
+  margin: 0 auto;
+  overflow: scroll;
+  margin-top: -12rem;
+}

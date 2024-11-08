@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link'
+import Container from '@/components/archive/Container'
 
 export default function ArchivePage() {
   return (
@@ -26,6 +27,7 @@ export default function ArchivePage() {
           <button>ATC 크레딧</button>
         </Link>
       </article>
+      <Container />
     </main>
   )
 }
