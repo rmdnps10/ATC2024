@@ -154,7 +154,6 @@
   width: 100%;
   background-color: inherit;
   transition: height 0.4s;
-  border-top: 1px solid white;
 }
 
 .mobileMenu nav li {
