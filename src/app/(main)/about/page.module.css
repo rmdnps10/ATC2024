@@ -389,9 +389,9 @@
 }
 
 .quote {
-  margin-top: 24.1rem;
   display: flex;
   justify-content: center;
+  margin-top: 24.1rem;
   margin-bottom: 29.1rem;
   font-family: 'pretendard';
   z-index: 1;
