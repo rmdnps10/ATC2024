@@ -257,28 +257,41 @@
 .programAccordion {
   width: 100%;
   background-color: white;
-  border-radius: 1rem; /* 기본 둥근 테두리 */
-  transition: all 0.5s ease; /* 부드러운 전환 효과 */
+  border-radius: 1rem;
+  transition: all 0.5s ease;
   margin-bottom: 1.5rem;
   overflow: hidden;
   cursor: pointer;
-}
-
-.programAccordion.open {
-  border-radius: 1rem; /* 열릴 때 둥근 테두리 유지 */
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .programHeader {
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 2.8rem 3rem;
   font-size: 4.4rem;
   cursor: pointer;
   background-color: white;
   transition: background-color 0.5s ease;
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
 }
 
+.programHeader span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: text-overflow 0.5s ease;
+  width: 95%;
+}
+
+.programAccordion.open .programHeader span:first-child {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
 .textWrapper {
   font-size: 1em;
   color: #444;
@@ -301,6 +314,9 @@
 }
 
 .arrow {
+  position: absolute;
+  top: 2.8rem;
+  right: 3rem;
   transition: transform 0.5s ease;
 }
 
@@ -308,22 +324,20 @@
   transform: rotate(-180deg);
 }
 
-/* 컨텐츠 */
 .accordionContent {
-  max-height: 0; /* 기본 높이 0 */
-  overflow: hidden; /* 닫힌 상태에서 내용 숨김 */
+  max-height: 0;
+  overflow: hidden;
   padding: 0 3rem;
   font-size: 1.6rem;
   color: #444;
   background-color: white;
-  border-radius: 0 0 1rem 1rem; /* 하단 둥근 테두리 */
-  transition: max-height 0.5s ease, padding 0.5s ease; /* 슬라이딩 효과 */
+  border-radius: 0 0 1rem 1rem;
+  transition: max-height 0.5s ease, padding 0.5s ease;
 }
 
-/* 열린 컨텐츠 */
 .accordionContent.activeContent {
   max-height: 50rem;
-  padding: 1.5rem 3rem; /* 열린 상태에서 패딩 추가 */
+  padding: 1.5rem 3rem;
 }
 
 .programDetails {
@@ -341,7 +355,7 @@
   font-weight: 600;
   margin-bottom: 0.8rem;
   @media (max-width: 768px) {
-    font-size: 2.2rem; /*글씨 넘치는 거?*/
+    font-size: 2.2rem;
   }
 }
 .programLocation::before {

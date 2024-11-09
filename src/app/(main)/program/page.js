@@ -56,7 +56,7 @@ export default function ProgramPage() {
   const programs = [
     {
       id: 'program1',
-      title: '그래서 그놈의 융합이 뭔데?',
+      title: '그래서 그놈의 융합이 뭔데? - 노상호 작가 강연',
       day: '수',
       startTime: '19:00',
       endTime: '20:00',
@@ -66,7 +66,7 @@ export default function ProgramPage() {
     },
     {
       id: 'program2',
-      title: '트러블과 함께 전시하기',
+      title: '트러블과 함께 전시하기 - 이수영 백남준아트센터 큐레이터 강연',
       day: '목',
       startTime: '19:00',
       endTime: '20:00',
@@ -76,7 +76,7 @@ export default function ProgramPage() {
     },
     {
       id: 'program3',
-      title: '기술 비평에 창작을 할애하기',
+      title: '기술 비평에 창작을 할애하기 - 포킹룸 강민형 기획자 강연',
       day: '금',
       startTime: '19:00',
       endTime: '20:00',
