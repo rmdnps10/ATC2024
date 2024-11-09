@@ -17,6 +17,7 @@ export default function Page() {
         nextPortalRef={nextPortalRef}
         prevPortalRef={prevPortalRef}
         centerPortalRef={centerPortalRef}
+        rigActive={rigActive}
       />
 
       {/* rigActive가 true일 때만 버튼 표시 */}
@@ -26,21 +27,21 @@ export default function Page() {
             <button
               className={styles.portalButton}
               onClick={() => prevPortalRef.current()}>
-              b
+              {'<'}
             </button>
           </div>
           <div className={styles.portalNavigationRight}>
             <button
               className={styles.portalButton}
               onClick={() => nextPortalRef.current()}>
-              n
+              {'>'}
             </button>
           </div>
           <div className={styles.portalNavigationBottom}>
             <button
               className={styles.portalButton}
               onClick={() => centerPortalRef.current()}>
-              center
+              O
             </button>
           </div>
         </>

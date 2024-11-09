@@ -9,7 +9,8 @@ export default function Experience({
   setRigActive,
   nextPortalRef,
   prevPortalRef,
-  centerPortalRef
+  centerPortalRef,
+  rigActive
 }) {
   return (
     <Canvas camera={{ position: [0, 10, 750], fov: 55, near: 1, far: 20000 }}>
@@ -21,6 +22,7 @@ export default function Experience({
           nextPortalRef={nextPortalRef}
           prevPortalRef={prevPortalRef}
           centerPortalRef={centerPortalRef}
+          rigActive={rigActive}
         />
       </Suspense>
     </Canvas>

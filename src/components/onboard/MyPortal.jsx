@@ -1,4 +1,8 @@
+'use client'
+
+// MyPortal.jsx
 import {
+  Html,
   CameraControls,
   useGLTF,
   useAnimations,
@@ -11,10 +15,12 @@ import { geometry } from 'maath'
 import CameraAnimation from './CameraAnimation'
 import CameraRig from './CameraRig'
 import gsap from 'gsap'
+import styles from './MyPortal.module.css'
 
 extend(geometry)
 
 export default function MyPortal({
+  rigActive,
   setRigActive,
   nextPortalRef,
   prevPortalRef,
@@ -26,26 +32,39 @@ export default function MyPortal({
   const [currentPortal, setCurrentPortal] = useState(0)
   const controlsRef = useRef()
   const portalRefs = [useRef(), useRef(), useRef()]
+  const blendValues = useRef([0, 0, 0]) // 각 포털의 Blend 값을 저장
 
   const portalPositions = [
     {
       position: new THREE.Vector3(-35, 20, 15),
-      focus: new THREE.Vector3(-35, 20, 0)
+      focus: new THREE.Vector3(-35, 20, 0),
+      description: 'ATC FILM',
+      link: 'https://www.youtube.com/'
     },
     {
       position: new THREE.Vector3(0, 20, 15),
-      focus: new THREE.Vector3(0, 20, 0)
+      focus: new THREE.Vector3(0, 20, 0),
+      description: 'ATC WEB',
+      link: './..'
     },
     {
       position: new THREE.Vector3(35, 20, 15),
-      focus: new THREE.Vector3(35, 20, 0)
+      focus: new THREE.Vector3(35, 20, 0),
+      description: 'ATC INSTAGRAM',
+      link: 'https://www.instagram.com/atc.sogang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
     }
   ]
 
   const updateBlendValues = blendValue => {
-    portalRefs.forEach(ref => {
+    portalRefs.forEach((ref, index) => {
       if (ref.current) {
-        gsap.to(ref.current, { blend: blendValue, duration: 1 })
+        gsap.to(ref.current, {
+          blend: blendValue,
+          duration: 1,
+          onComplete: () => {
+            blendValues.current[i] = blendValue // 애니메이션이 끝난 후 확실히 갱신
+          }
+        })
       }
     })
   }
@@ -108,13 +127,44 @@ export default function MyPortal({
         enabled={animationComplete}
         minAzimuthAngle={-Math.PI / 2.5 + 0.5}
         maxAzimuthAngle={Math.PI / 2.5 - 0.5}
-        minPolarAngle={0.5}
+        minPolarAngle={0.5 + 0.5}
         maxPolarAngle={Math.PI / 2 - 0.01}
         dollySpeed={0}
         truckSpeed={0}
       />
+
+      {rigActive && (
+        <Html
+          position={[
+            portalPositions[currentPortal].position.x,
+            portalPositions[currentPortal].position.y,
+            portalPositions[currentPortal].position.z - 30
+          ]}
+          center>
+          <div className={styles.portalDescription}>
+            {portalPositions[currentPortal].description}
+            <button
+              className={styles.portalLinkButton}
+              onClick={e => {
+                e.stopPropagation()
+                if (currentPortal === 1) {
+                  // Portal2일 때만 리다이렉션
+                  window.location.href = portalPositions[currentPortal].link // 원하는 내부 경로
+                } else if (portalPositions[currentPortal].link) {
+                  // 외부 링크가 있을 때만 새 탭에서 열기
+                  window.open(portalPositions[currentPortal].link, '_blank')
+                }
+              }}>
+              Go
+            </button>
+          </div>
+        </Html>
+      )}
+
       <Portal1
         ref={portalRefs[0]}
+        rigActive={rigActive}
+        blend={blendValues.current[0]}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(-35, 20, 15))
@@ -128,6 +178,8 @@ export default function MyPortal({
       />
       <Portal2
         ref={portalRefs[1]}
+        rigActive={rigActive}
+        blend={blendValues.current[1]}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(0, 20, 15))
@@ -141,6 +193,8 @@ export default function MyPortal({
       />
       <Portal3
         ref={portalRefs[2]}
+        rigActive={rigActive}
+        blend={blendValues.current[2]}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(35, 20, 15))
@@ -156,7 +210,7 @@ export default function MyPortal({
   )
 }
 
-const Portal1 = forwardRef(({ onClick }, ref) => (
+const Portal1 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   <group position={[-35, 0, 0]}>
     <mesh
       name={'Film'}
@@ -165,7 +219,7 @@ const Portal1 = forwardRef(({ onClick }, ref) => (
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
       <MeshPortalMaterial
         ref={ref}
-        blend={0}>
+        blend={blend}>
         <color
           attach="background"
           args={['#005afb']}
@@ -176,7 +230,7 @@ const Portal1 = forwardRef(({ onClick }, ref) => (
   </group>
 ))
 
-const Portal2 = forwardRef(({ onClick }, ref) => (
+const Portal2 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   <group position={[0, 0, 0]}>
     <mesh
       name={'MainPage'}
@@ -185,7 +239,7 @@ const Portal2 = forwardRef(({ onClick }, ref) => (
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
       <MeshPortalMaterial
         ref={ref}
-        blend={0}>
+        blend={blend}>
         <color
           attach="background"
           args={['#FFFFFF']}
@@ -196,7 +250,7 @@ const Portal2 = forwardRef(({ onClick }, ref) => (
   </group>
 ))
 
-const Portal3 = forwardRef(({ onClick }, ref) => (
+const Portal3 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   <group position={[35, 0, 0]}>
     <mesh
       name={'Instagram'}
@@ -205,7 +259,7 @@ const Portal3 = forwardRef(({ onClick }, ref) => (
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
       <MeshPortalMaterial
         ref={ref}
-        blend={0}>
+        blend={blend}>
         <color
           attach="background"
           args={['#7334ff']}
@@ -246,12 +300,12 @@ function FishModel({ clip, color = '#000000', ...props }) {
       ref={fishRef}
       object={fishScene}
       scale={75}
-      position={[0, -5, -10]}
+      position={[0, -5, -5]}
     />
   )
 }
 
-function CakeModel({ clip, color = '#25CEFC', ...props }) {
+function CakeModel({ blend, rigActive, clip, color = '#25CEFC', ...props }) {
   const { scene } = useGLTF('./model/ATC_cake.glb')
   const CakeRef = useRef()
 
@@ -259,7 +313,7 @@ function CakeModel({ clip, color = '#25CEFC', ...props }) {
   useEffect(() => {
     scene.traverse(child => {
       if (child.isMesh) {
-        child.material = new THREE.MeshBasicMaterial({ color }) // 임의 색상 적용
+        child.material = new THREE.MeshBasicMaterial({ color })
       }
     })
   }, [scene, color])
@@ -267,7 +321,6 @@ function CakeModel({ clip, color = '#25CEFC', ...props }) {
   // 회전 애니메이션
   useFrame(() => {
     if (CakeRef.current) {
-      //   CakeRef.current.rotation.x += -0.005
       CakeRef.current.rotation.y += 0.01
       CakeRef.current.rotation.z += -0.01
     }
@@ -278,8 +331,7 @@ function CakeModel({ clip, color = '#25CEFC', ...props }) {
       ref={CakeRef}
       object={scene}
       scale={40}
-      position={[0, 0, -10]}
-      {...props}
+      position={[0, 0, -5]}
     />
   )
 }
@@ -302,7 +354,7 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
     if (StarRef.current) {
       //   StarRef.current.rotation.x += -0.005
       StarRef.current.rotation.y += 0.01
-      StarRef.current.rotation.z += 0.01
+      //   StarRef.current.rotation.z += 0.01
     }
   })
 
@@ -310,8 +362,8 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
     <primitive
       ref={StarRef}
       object={scene}
-      scale={5}
-      position={[0, 0, -10]}
+      scale={7}
+      position={[0, 0, -5]}
       rotation-z={Math.PI * 0.5}
       {...props}
     />
