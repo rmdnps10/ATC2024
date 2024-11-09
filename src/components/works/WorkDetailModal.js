@@ -5,8 +5,10 @@ import styles from './WorkDetailModal.module.css'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
-
+// import { useRouter } from 'next/router'
+//
+//
+//
 export default function WorkDetailModal({
   interviewText,
   setModalOpen,

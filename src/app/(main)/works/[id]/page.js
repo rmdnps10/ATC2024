@@ -8,6 +8,7 @@ import { getWorkDetail } from '@/client-api/getWorkDetail'
 import Image from 'next/image'
 import WorkDetailModal from '@/components/works/WorkDetailModal'
 import Loading from '../../loading'
+import GuestBook from '@/components/works/GuestBook'
 //
 //
 //
@@ -90,6 +91,7 @@ export default function WorkDetailPage() {
                   src={'/images/works/page0.png'}
                   alt="header image"
                   layout="fill"
+                  // placeholder="blur"
                   objectFit="cover"
                 />
               </div>
@@ -98,7 +100,7 @@ export default function WorkDetailPage() {
                   {detailData.title}
                   <span>
                     <Image
-                      src={'/images/works/elephantIcon.svg'}
+                      src={'/images/works/branding7.svg'}
                       alt="elephant Icon"
                       width={40}
                       height={40}
@@ -139,6 +141,7 @@ export default function WorkDetailPage() {
                         alt="detail image"
                         fill
                         objectFit="contain"
+                        // placeholder="blur"
                       />
                     </figure>
                   ))}
@@ -151,6 +154,7 @@ export default function WorkDetailPage() {
                     alt="artist image"
                     layout="fill"
                     objectFit="cover"
+                    // placeholder="blur"
                   />
                 </figure>
                 <div className={styles.teamDesc}>
@@ -184,6 +188,7 @@ export default function WorkDetailPage() {
                   required
                   id="name"
                   placeholder="닉네임"
+                  maxLength={6}
                   onChange={e => handleNameChange(e)}
                 />
                 <textarea
@@ -197,6 +202,7 @@ export default function WorkDetailPage() {
                   </span>
                 </div>
               </form>
+              <GuestBook comment={detailData.commentList} />
               {modalOpen && (
                 <div className={styles.modalPortal}>
                   <WorkDetailModal

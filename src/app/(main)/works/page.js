@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 // import { worksData } from '@/components/works/MockData'
 import { getAllWorks } from '@/client-api/getAllWorks'
+// import { getPlaiceholder } from 'plaiceholder'
 //
 //
 //
@@ -23,6 +24,7 @@ export default function WorksPage({}) {
     '비디오',
     '웹사이트'
   ]
+  // const { base64 } = await getPlaiceholder(buffer)
   const router = useRouter()
   const tabRefs = useRef([])
   const indicatorRefs = useRef([])
@@ -202,6 +204,8 @@ export default function WorksPage({}) {
             className={styles.figure}
             key={el._id}>
             <Image
+              // placeholder="blur"
+              // blurDataURL={base64}
               className={styles.image}
               // src={el.thumbnailImg}
               src={'/images/works/page0.png'}
