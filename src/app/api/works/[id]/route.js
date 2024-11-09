@@ -30,7 +30,7 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await connectDb()
-    const { comment } = await request.json()
+    const { name, comment } = await request.json()
     const { id } = await params
     const data = await DetailWork.findById(id)
 
@@ -40,8 +40,9 @@ export async function PUT(request, { params }) {
         headers: { 'Content-Type': 'application/json' }
       })
     }
+    const date = new Date().toISOString().split('T')[0].replace(/-/g, '.')
 
-    data.commentList.push(comment)
+    data.commentList.push({ name, comment, date })
     await data.save()
 
     return new Response(JSON.stringify({ data }), {
