@@ -17,7 +17,8 @@ export default function WorkDetailPage() {
   const [isClicked, setIsClicked] = useState(false)
   const [detailData, setDetailData] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
-
+  const [nickname, setNickname] = useState('')
+  const [content, setContent] = useState('')
   //data fetching
   useEffect(() => {
     if (pathname.id) {
@@ -55,6 +56,18 @@ export default function WorkDetailPage() {
 
   const handleCloseModal = () => {
     setModalOpen(false)
+  }
+
+  const handleNameChange = e => {
+    setNickname(e.target.value)
+  }
+
+  const handleContentChange = e => {
+    setContent(e.target.value)
+  }
+
+  function handleSubmit() {
+    //db에 올리기
   }
 
   return (
@@ -165,6 +178,25 @@ export default function WorkDetailPage() {
                   </button>
                 </div>
               </section>
+              <form>
+                <input
+                  type="name"
+                  required
+                  id="name"
+                  placeholder="닉네임"
+                  onChange={e => handleNameChange(e)}
+                />
+                <textarea
+                  required
+                  id="content"
+                  onChange={e => handleContentChange(e)}
+                />
+                <div>
+                  <span onClick={() => handleSubmit()}>
+                    <div>방명록 작성하기</div>
+                  </span>
+                </div>
+              </form>
               {modalOpen && (
                 <div className={styles.modalPortal}>
                   <WorkDetailModal

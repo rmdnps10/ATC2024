@@ -262,6 +262,100 @@
   -webkit-text-fill-color: transparent;
 }
 
+.main form {
+  width: 100%;
+  padding: 8rem 10rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.main form input {
+  border: none;
+  border: 1px solid #767676;
+  padding: 2rem 1.5rem;
+}
+
+.main form input:first-child {
+  width: 25rem;
+  height: 3rem;
+  border-radius: 0;
+  letter-spacing: 0.1rem;
+}
+
+.main form textarea {
+  width: 100%;
+  height: 20rem;
+  border-radius: 0;
+  border: none;
+  border: 1px solid #767676;
+  padding: 2rem 1.5rem;
+  resize: none;
+  font-family: 'Pretendard';
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+}
+
+.main form textarea:focus {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px 2px #ae90fe;
+}
+
+.main form div {
+  width: 100%;
+  /* padding: 0 10rem; */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.main form div span {
+  border-radius: 5rem;
+  border: 1px solid #121212;
+  width: 15rem;
+  height: 4rem;
+  color: #121212;
+  font-family: Pretendard;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.main form div span div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main form div span:hover {
+  padding: 0;
+  border: 1px solid transparent;
+  background-image: linear-gradient(#ffffff, #ffffff),
+    linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.main form div span:hover > div {
+  background: linear-gradient(
+    90deg,
+    #35cffa 0%,
+    #278ffb 20%,
+    #3c79fb 40%,
+    #dd4ffc 60%,
+    #9734fb 80%,
+    #7340fb 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .modalPortal {
   z-index: 200;
   width: 100vw;
