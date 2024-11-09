@@ -9,6 +9,8 @@ import Image from 'next/image'
 import WorkDetailModal from '@/components/works/WorkDetailModal'
 import Loading from '../../loading'
 import GuestBook from '@/components/works/GuestBook'
+import { putWorkDetail } from '@/client-api/putWorkDetail'
+import { log } from 'three/webgpu'
 //
 //
 //
@@ -36,7 +38,7 @@ export default function WorkDetailPage() {
 
   useEffect(() => {
     setTimeout(() => {
-      window.scrollTo({ top: -1, left: 0, behavior: 'smooth' })
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }, 100)
     // document
     //   .querySelector("meta[name=viewport]")
@@ -69,6 +71,30 @@ export default function WorkDetailPage() {
 
   function handleSubmit() {
     //db에 올리기
+    try {
+      if (pathname.id) {
+        const postData = async () => {
+          const updatedData = await putWorkDetail({
+            id: pathname.id,
+            name: nickname,
+            comment: content
+          })
+
+          if (updatedData) {
+            setDetailData(prevData => ({
+              ...prevData,
+              commentList: updatedData.commentList // 업데이트된 commentList
+            }))
+          }
+        }
+        postData()
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setContent('')
+      setNickname('')
+    }
   }
 
   return (
@@ -119,8 +145,9 @@ export default function WorkDetailPage() {
                   <nav>
                     <ul>
                       <li>작품 위치 | {detailData.space}</li>
-                      {detailData.openAddress?.split(',').map(el => (
+                      {detailData.openAddress?.split(',').map((el, key) => (
                         <a
+                          key={key}
                           href={el}
                           target="_blank">
                           작품 외부주소 ↗
@@ -133,10 +160,11 @@ export default function WorkDetailPage() {
               <div className={styles.introduceBox}>
                 {'/images/works/page5.png,/images/works/page6.png,/images/works/page9.png,/images/works/page10.png'
                   .split(',')
-                  .map(el => (
+                  .map((el, key) => (
                     <figure className={styles.introduceImage}>
                       <Image
                         // className={styles.headerImage}
+                        key={key}
                         src={el}
                         alt="detail image"
                         fill
@@ -163,8 +191,8 @@ export default function WorkDetailPage() {
                     <div className={styles.teamBox}>
                       <h2>{detailData.teamName}</h2>
                       <div className={styles.nameList}>
-                        {detailData.artistName?.split(',').map(name => (
-                          <span>{name}</span>
+                        {detailData.artistName?.split(',').map((name, key) => (
+                          <span key={key}>{name}</span>
                         ))}
                       </div>
                     </div>
@@ -187,12 +215,14 @@ export default function WorkDetailPage() {
                   type="name"
                   required
                   id="name"
+                  value={nickname}
                   placeholder="닉네임"
                   maxLength={6}
                   onChange={e => handleNameChange(e)}
                 />
                 <textarea
                   required
+                  value={content}
                   id="content"
                   onChange={e => handleContentChange(e)}
                 />

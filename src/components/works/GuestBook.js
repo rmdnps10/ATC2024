@@ -63,8 +63,8 @@ function GuestBook({ comment }) {
   const [commentList, setCommentList] = useState(null)
   const [randomNums, setRandomNums] = useState([])
   useEffect(() => {
-    //1. data fetching + 상태 관리 업데이트
-    setCommentList(data)
+    //1.상태 관리 업데이트
+    setCommentList(comment)
     //2. data 길이 계산
     const length = data.length
     //3. length만큼 랜덤 숫자 배열에 넣기
@@ -74,7 +74,7 @@ function GuestBook({ comment }) {
     )
     console.log(generatedRandoms)
     setRandomNums(generatedRandoms)
-  }, [])
+  }, [comment])
 
   return (
     <div className={styles.wrapper}>
