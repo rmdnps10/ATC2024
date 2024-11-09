@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 // import { worksData } from '@/components/works/MockData'
 import { getAllWorks } from '@/client-api/getAllWorks'
+import { title } from 'framer-motion/client'
 // import { getPlaiceholder } from 'plaiceholder'
 //
 //
@@ -50,6 +51,15 @@ export default function WorksPage({}) {
               return el
             }
           })
+          console.log(
+            parsed.map(el => {
+              const res = {
+                title: el.title,
+                name: el.teamName
+              }
+              return res
+            })
+          )
           setDefaultWorks(parsed)
           setFilteredWorks(parsed)
 

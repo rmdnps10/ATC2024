@@ -15,7 +15,7 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 100px;
+  font-size: 8rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
@@ -136,23 +136,74 @@
 }
 
 .selectedCircleInfo {
-  width: 219px;
-  height: 74px;
-  position: fixed;
+  transition: opacity 0.3s ease-in;
+  opacity: 0;
+  visibility: hidden; /* 기본값 */
+  width: 15vw;
+  height: auto;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: rgb(0, 0, 0);
   z-index: 10000000;
   color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+.selectedCircleInfo.visible {
+  opacity: 1;
+  visibility: visible; /* 보일 때 */
+}
+
+.selectedCircleInfo.hidden {
+  opacity: 0;
+  visibility: hidden; /* 숨길 때 */
+}
+
+.selectedCircleInfo div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selectedCircleInfo img {
+  right: 0;
+  cursor: pointer;
+}
+
+.selectedCircleInfo img:hover {
+  opacity: 0.7;
+}
+
+.popupImage {
+  width: 15px;
+  height: fit-content;
+  position: relative;
+}
+
+.popupImage img {
+  right: 0;
+}
+
+.popupTeam {
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 10px; /* 100% */
+}
+.popupTitle {
+  color: #fff;
   text-align: center;
   font-family: 'Sandoll Seoul';
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
-  line-height: 10px; /* 28.571% */
 }
 
 .line {
