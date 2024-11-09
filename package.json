@@ -19,9 +19,9 @@
     "@react-three/postprocessing": "^2.16.2",
     "env-cmd": "^10.1.0",
     "framer-motion": "^11.9.0",
-    "framer-motion-3d": "^11.11.10",
     "gsap": "^3.12.5",
     "leva": "^0.9.34",
+    "net": "^1.0.2",
     "next": "14.2.5",
     "postprocessing": "^6.36.3",
     "r3f-perf": "^7.2.1",
@@ -29,6 +29,7 @@
     "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18",
     "react-use": "^17.5.1",
+    "styled-components": "^6.1.13",
     "three": "^0.166.1",
     "vercel": "^37.5.3"
   },

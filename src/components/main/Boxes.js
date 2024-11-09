@@ -1,33 +1,37 @@
+'use client';
+
 import React, { useRef, useMemo, useState, useCallback, useEffect } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
-import { Text } from '@react-three/drei';
-
+import { Text, useTexture } from '@react-three/drei';
+//
+//
+//
 export default function Boxes({ scrollPercent }) {
     const boxRefs = useRef([]);
     const groupRef = useRef();
     const SPACING = 1.25;
-    const SIZE = 3;
     const [isAnimating, setIsAnimating] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
 
-    const COLORS = ['#ffffff', '#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff'];
+    const COLORS = ['#ffffff'];
+
+    const elephantTexture = useTexture('/images/main/atc24_profile.png');
 
     const materials = useMemo(() => ({
         center: new THREE.MeshStandardMaterial({
-            color: "#ffffff",
-            metalness: 0.7,
-            roughness: 0.2,
-            emissive: "#ffffff",
-            emissiveIntensity: 0.2,
+            map: elephantTexture,
+            metalness: 0.2,
+            roughness: 0.8,
+
         }),
         faces: COLORS.map(color => new THREE.MeshStandardMaterial({
             color: color,
             metalness: 0.3,
             roughness: 0.4,
         }))
-    }), []);
+    }), [elephantTexture]);
 
     const geometry = useMemo(() => new THREE.BoxGeometry(1.25, 1.25, 1.25), []);
 
@@ -42,37 +46,40 @@ export default function Boxes({ scrollPercent }) {
         };
 
         return [
+            // 큐브 초기 위치 조정 해야해요... cube의 pos로 위치조정이나 위에 colorIndex에 색상넣어서 인덱스 번호 넣어주면 변경됩니다!
+
             // 중앙 큐브
-            { pos: [0, 0, 0], finalPos: [0, 0, 0], isCenter: true, colorIndex: 0 },
+            { pos: [0, 0, 0], finalPos: [0, 0, 0], isCenter: true, colorIndex: 7 },
+
             // 앞면 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, 1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-1, -8, -8], finalPos: [-1, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 2.5, 0], finalPos: [0, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [2, 2.7, 0], finalPos: [1, 1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-5, 2, 3], finalPos: [-1, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-8, 2.6, 6], finalPos: [0, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [5, 3, 2], finalPos: [1, 0, 1], isCenter: false, colorIndex: 0 },
+            { pos: [-8, 3, 1], finalPos: [-1, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [8, 0, 0], finalPos: [0, -1, 1], isCenter: false, colorIndex: 0 },
+            { pos: [6, -4, -3], finalPos: [1, -1, 1], isCenter: false, colorIndex: 0 },
             // 중간층 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, 0], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [4, 0, 0], finalPos: [-1, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [-5, 0, 0], finalPos: [0, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0, -2, 10], finalPos: [1, 1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 0, -8], finalPos: [-1, 0, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0.05, 0, -15], finalPos: [1, 0, 0], isCenter: false, colorIndex: 0 },
+            { pos: [0.5, -1, 3], finalPos: [-1, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [2, 0, -5], finalPos: [0, -1, 0], isCenter: false, colorIndex: 0 },
+            { pos: [1, -3.5, 3], finalPos: [1, -1, 0], isCenter: false, colorIndex: 0 },
             // 뒷면 큐브들
-            { pos: getRandomPosition(), finalPos: [-1, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, 0, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [-1, -1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [0, -1, -1], isCenter: false, colorIndex: 0 },
-            { pos: getRandomPosition(), finalPos: [1, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [-2, 0.5, 7], finalPos: [-1, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [10, -8, -15], finalPos: [0, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [20, -12, -15], finalPos: [1, 1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [38, -22, -18], finalPos: [-1, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [24, -10, -10], finalPos: [0, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [20, -12, -8], finalPos: [1, 0, -1], isCenter: false, colorIndex: 0 },
+            { pos: [2, -2, -10], finalPos: [-1, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [0, -2.5, 0], finalPos: [0, -1, -1], isCenter: false, colorIndex: 0 },
+            { pos: [-1, 2, 6], finalPos: [1, -1, -1], isCenter: false, colorIndex: 0 },
         ];
     }, []);
 
@@ -154,9 +161,8 @@ export default function Boxes({ scrollPercent }) {
                         setIsCompleted(true);
                         setIsAnimating(false);
 
-                        // 텍스트 애니메이션 - z축으로 이동
                         gsap.to(leftTextRef.current, {
-                            z: 0, // z축으로 0으로 이동
+                            z: 0,
                             duration: 2.5,
                             ease: "power2.inOut",
                             onUpdate: () => {
@@ -168,8 +174,8 @@ export default function Boxes({ scrollPercent }) {
                         });
 
                         gsap.to(rightTextRef.current, {
-                            z: 0, // z축으로 0으로 이동
-                            duration: 5,
+                            z: 0,
+                            duration: 4,
                             ease: "power2.inOut",
                             onUpdate: () => {
                                 setTextPositions(prev => ({
@@ -184,6 +190,20 @@ export default function Boxes({ scrollPercent }) {
         });
     }, [finalPositions, isAnimating]);
 
+    // useEffect를 추가하여 화면 크기 감지
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <>
             <directionalLight position={[3, 3, 1]} intensity={3} color="#333388" />
@@ -195,8 +215,12 @@ export default function Boxes({ scrollPercent }) {
                 scale={2}
             >
                 <Text
-                    position={textPositions.left}
-                    fontSize={1.25}
+                    position={[
+                        isMobile ? 0 : textPositions.left[0],
+                        textPositions.left[1],
+                        textPositions.left[2]
+                    ]}
+                    fontSize={isMobile ? 0.85 : 1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"
@@ -206,8 +230,12 @@ export default function Boxes({ scrollPercent }) {
                     How To Put An Elephant
                 </Text>
                 <Text
-                    position={textPositions.right}
-                    fontSize={1.25}
+                    position={[
+                        isMobile ? 0 : textPositions.right[0],
+                        textPositions.right[1],
+                        textPositions.right[2]
+                    ]}
+                    fontSize={isMobile ? 0.85 : 1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"
@@ -238,13 +266,13 @@ export default function Boxes({ scrollPercent }) {
                 <Text
                     position={[0, 1.5, 0]}
                     fontSize={0.5}
-                    color="#000000"
+                    color="#333333"
                     anchorX="center"
                     anchorY="middle"
                     visible={!isCompleted}
                     font='/images/main/Pretendard-Bold.woff'
                 >
-                    I'm Elephant.
+                    I'm Elephant Click Me!
                 </Text>
             </group>
         </>

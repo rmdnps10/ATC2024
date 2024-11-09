@@ -4,7 +4,8 @@ import styles from './page.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { worksData } from '@/components/works/MockData'
+// import { worksData } from '@/components/works/MockData'
+import { getAllWorks } from '@/client-api/getAllWorks'
 //
 //
 //
@@ -13,8 +14,8 @@ export default function WorksPage({}) {
     '전체',
     '애니메이션',
     '설치미술',
-    '미디어 아트',
-    '인터렉티브 아트',
+    '미디어아트',
+    '인터랙티브아트',
     '사운드',
     '입체조형',
     '애플리케이션',
@@ -28,10 +29,12 @@ export default function WorksPage({}) {
   const tabListRef = useRef()
   const [tabSelected, setTabSelected] = useState('ALL')
   const [clickedId, setClickedId] = useState(null)
-  const [works, setWorks] = useState(worksData)
+  const [defaultWorks, setDefaultWorks] = useState([])
+  const [filteredWorks, setFilteredWorks] = useState([])
   const [scrollY, setScrollY] = useState(0)
+
+  //필터링 탭 초기화
   useEffect(() => {
-    //필터링 탭에 useRef
     indicatorRefs.current.forEach((indiRef, indiIdx) => {
       if (indiRef) {
         indiRef.style.opacity = indiIdx === 0 ? '1' : '0'
@@ -61,6 +64,23 @@ export default function WorksPage({}) {
     }
   }, [])
 
+  //db 연결
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllWorks()
+      if (data) {
+        const parsed = data.map(el => {
+          el.category = el.category.split(',')
+          return el
+        })
+        setDefaultWorks(parsed)
+        setFilteredWorks(parsed)
+      }
+    }
+    fetchData()
+  }, [])
+
+  //work 요소 클릭 시
   function handleWorkClick(key) {
     setClickedId(key)
     setTimeout(() => {
@@ -68,6 +88,7 @@ export default function WorksPage({}) {
     }, 300)
   }
 
+  //필터링 탭 클릭 시
   function handleTabClick(key) {
     tabRefs.current.forEach((ref, idx) => {
       if (ref) {
@@ -89,10 +110,12 @@ export default function WorksPage({}) {
     setTabSelected(key)
     if (key === 0) {
       //all을 선택하면 가져온 데이터 모두로 set
-      setWorks(worksData)
+      setFilteredWorks(defaultWorks)
     } else {
       //category와 string이 맞으면 필터링
-      setWorks(worksData.filter(el => el.category === tabList[key]))
+      setFilteredWorks(
+        defaultWorks.filter(el => el.category.includes(tabList[key]))
+      )
     }
   }
 
@@ -141,28 +164,29 @@ export default function WorksPage({}) {
         </ul>
       </nav>
       <section>
-        {works.map(el => (
+        {filteredWorks?.map(el => (
           <motion.div
             layout
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            layoutId={el.id}
-            onClick={() => handleWorkClick(el.id)}
+            layoutId={el._id}
+            onClick={() => handleWorkClick(el._id)}
             className={styles.figure}
-            key={el.id}>
+            key={el._id}>
             <Image
               className={styles.image}
-              src={el.imgUrl}
-              alt={el.title.title_kor}
+              // src={el.thumbnailImg}
+              src={'/images/works/page0.png'}
+              alt={el.title}
               fill
             />
             <figcaption>
               <div className={styles.figBox}>
-                <span className={styles.figTeam}>{el.team.team_kor}</span>
-                <span className={styles.figTitle}>{el.title.title_kor}</span>
-                <span className={styles.figDesc}>{el.desc}</span>
+                <span className={styles.figTeam}>{el.teamName}</span>
+                <span className={styles.figTitle}>{el.title}</span>
+                <span className={styles.figDesc}>{el.oneLiner}</span>
               </div>
             </figcaption>
           </motion.div>
