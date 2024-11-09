@@ -36,6 +36,7 @@ export default function MyPortal() {
       )}
       <CameraControls
         ref={controlsRef} // CameraControls에 대한 참조
+        enabled={animationComplete}
         minAzimuthAngle={-Math.PI / 2.5 + 0.5}
         maxAzimuthAngle={Math.PI / 2.5 - 0.5}
         minPolarAngle={0.5}
