@@ -1,22 +1,71 @@
-import { useGLTF, useAnimations, MeshPortalMaterial } from '@react-three/drei'
-import { useEffect, useRef } from 'react'
+import {
+  CameraControls,
+  useGLTF,
+  useAnimations,
+  MeshPortalMaterial
+} from '@react-three/drei'
+import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { extend, useFrame } from '@react-three/fiber'
+import { useFrame, extend } from '@react-three/fiber'
 import { geometry } from 'maath'
+import CameraAnimation from './CameraAnimation'
+import CameraRig from './CameraRig'
 
 extend(geometry)
 
 export default function MyPortal() {
+  const [targetPosition, setTargetPosition] = useState(null)
+  const [targetFocus, setTargetFocus] = useState(null)
+  const [animationComplete, setAnimationComplete] = useState(false) // 애니메이션 완료 상태
+  const controlsRef = useRef() // CameraControls의 공통 참조
+
   return (
     <>
-      <Portal1 />
-      <Portal2 />
-      <Portal3 />
+      {/* 카메라 애니메이션 컴포넌트 */}
+      <CameraAnimation
+        controlsRef={controlsRef}
+        onAnimationComplete={() => setAnimationComplete(true)}
+      />
+      {/* 애니메이션 완료 후에만 CameraRig 활성화 */}
+      {animationComplete && (
+        <CameraRig
+          controlsRef={controlsRef} // CameraControls 참조 전달
+          targetPosition={targetPosition}
+          targetFocus={targetFocus}
+        />
+      )}
+      <CameraControls
+        ref={controlsRef} // CameraControls에 대한 참조
+        minAzimuthAngle={-Math.PI / 2.5 + 0.5}
+        maxAzimuthAngle={Math.PI / 2.5 - 0.5}
+        minPolarAngle={0.5}
+        maxPolarAngle={Math.PI / 2 - 0.01}
+        dollySpeed={0} // 마우스 휠 줌 비활성화
+        truckSpeed={0} // 우클릭 팬 비활성화
+      />
+      <Portal1
+        onClick={() => {
+          setTargetPosition(new THREE.Vector3(-30, 20, 10))
+          setTargetFocus(new THREE.Vector3(-30, 20, 0))
+        }}
+      />
+      <Portal2
+        onClick={() => {
+          setTargetPosition(new THREE.Vector3(0, 20, 10))
+          setTargetFocus(new THREE.Vector3(0, 20, -10))
+        }}
+      />
+      <Portal3
+        onClick={() => {
+          setTargetPosition(new THREE.Vector3(30, 20, 10))
+          setTargetFocus(new THREE.Vector3(30, 20, 0))
+        }}
+      />
     </>
   )
 }
 
-function Portal1() {
+function Portal1({ onClick }) {
   const portalRef = useRef()
   const GOLDENRATIO = 1.61803398875
 
@@ -25,25 +74,17 @@ function Portal1() {
       position={[-30, 0, 0]}
       rotation={[0, 0.5, 0]}>
       <mesh
-        name={1}
-        position={[0, 20, 0]}>
+        name={'Film'}
+        position={[0, 20, 0]}
+        onClick={onClick}>
         <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
         <MeshPortalMaterial
           ref={portalRef}
-          blend={0}
-          // events={true}
-          // side={THREE.DoubleSide}
-        >
+          blend={0}>
           <color
             attach="background"
             args={['#005afb']}
           />
-          {/* <mesh position={[0, 0, -10]}>
-            <boxGeometry args={[2, 10, 2]} />
-            <meshBasicMaterial color={'#25CEFC'} />
-          </mesh> */}
-          {/* <ambientLight />
-          <directionalLight position={[0, 0, 15]} /> */}
           <CakeModel />
         </MeshPortalMaterial>
       </mesh>
@@ -51,7 +92,8 @@ function Portal1() {
   )
 }
 
-function Portal2() {
+// Portal2와 Portal3도 동일하게 onClick 이벤트 설정
+function Portal2({ onClick }) {
   const portalRef = useRef()
   const GOLDENRATIO = 1.61803398875
 
@@ -60,21 +102,17 @@ function Portal2() {
       position={[0, 0, -10]}
       rotation={[0, 0, 0]}>
       <mesh
-        name={2}
-        position={[0, 20, 0]}>
+        name={'MainPage'}
+        position={[0, 20, 0]}
+        onClick={onClick}>
         <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
         <MeshPortalMaterial
           ref={portalRef}
-          blend={0}
-          // events={true}
-          // side={THREE.DoubleSide}
-        >
+          blend={0}>
           <color
             attach="background"
             args={['#FFFFFF']}
           />
-          {/* <ambientLight />
-          <directionalLight position={[0, 0, 15]} /> */}
           <FishModel />
         </MeshPortalMaterial>
       </mesh>
@@ -82,7 +120,7 @@ function Portal2() {
   )
 }
 
-function Portal3() {
+function Portal3({ onClick }) {
   const portalRef = useRef()
   const GOLDENRATIO = 1.61803398875
 
@@ -91,23 +129,17 @@ function Portal3() {
       position={[30, 0, 0]}
       rotation={[0, -0.5, 0]}>
       <mesh
-        name={3}
-        position={[0, 20, 0]}>
+        name={'Instagram'}
+        position={[0, 20, 0]}
+        onClick={onClick}>
         <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
         <MeshPortalMaterial
           ref={portalRef}
-          blend={0}
-          // events={true}
-          // side={THREE.DoubleSide}
-        >
+          blend={0}>
           <color
             attach="background"
             args={['#7334ff']}
           />
-          {/* <mesh position={[0, 0, -10]}>
-            <boxGeometry args={[2, 10, 2]} />
-            <meshBasicMaterial color={'#de45ff'} />
-          </mesh> */}
           <StarModel />
         </MeshPortalMaterial>
       </mesh>
@@ -201,7 +233,7 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
     if (StarRef.current) {
       //   StarRef.current.rotation.x += -0.005
       StarRef.current.rotation.y += 0.01
-      StarRef.current.rotation.z += -0.005
+      StarRef.current.rotation.z += 0.005
     }
   })
 
