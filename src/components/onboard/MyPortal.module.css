@@ -1,0 +1,22 @@
+/* MyPortal.module.css */
+.portalNavigationLeft {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.portalNavigationRight {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.portalButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}

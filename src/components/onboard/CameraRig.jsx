@@ -1,9 +1,14 @@
-// CameraRig.jsx
 import { useEffect } from 'react'
 
-function CameraRig({ controlsRef, targetPosition, targetFocus }) {
+function CameraRig({
+  controlsRef,
+  targetPosition,
+  targetFocus,
+  enabled,
+  onRigActivate
+}) {
   useEffect(() => {
-    if (controlsRef.current && targetPosition && targetFocus) {
+    if (controlsRef.current && targetPosition && targetFocus && enabled) {
       controlsRef.current.setLookAt(
         targetPosition.x,
         targetPosition.y,
@@ -13,8 +18,9 @@ function CameraRig({ controlsRef, targetPosition, targetFocus }) {
         targetFocus.z,
         true
       )
+      onRigActivate?.() // CameraRig 활성화 시 콜백 호출
     }
-  }, [controlsRef, targetPosition, targetFocus])
+  }, [controlsRef, targetPosition, targetFocus, enabled, onRigActivate])
 
   return null
 }

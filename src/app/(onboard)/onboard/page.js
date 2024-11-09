@@ -1,13 +1,41 @@
-// page.js
 'use client'
 
-import styles from './page.module.css'
+import { useRef, useState, useEffect } from 'react'
 import Experience from '@/components/onboard/Experience'
+import styles from './page.module.css'
 
-export default function OnBoardPage() {
+export default function Page() {
+  const [rigActive, setRigActive] = useState(false) // CameraRig 활성화 상태 관리
+  const nextPortalRef = useRef(null)
+  const prevPortalRef = useRef(null)
+
   return (
     <div className={styles.root}>
-      <Experience />
+      <Experience
+        setRigActive={setRigActive}
+        nextPortalRef={nextPortalRef}
+        prevPortalRef={prevPortalRef}
+      />
+
+      {/* rigActive가 true일 때만 버튼 표시 */}
+      {rigActive && (
+        <>
+          <div className={styles.portalNavigationLeft}>
+            <button
+              className={styles.portalButton}
+              onClick={() => prevPortalRef.current()}>
+              b
+            </button>
+          </div>
+          <div className={styles.portalNavigationRight}>
+            <button
+              className={styles.portalButton}
+              onClick={() => nextPortalRef.current()}>
+              n
+            </button>
+          </div>
+        </>
+      )}
     </div>
   )
 }

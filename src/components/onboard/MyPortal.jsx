@@ -2,7 +2,8 @@ import {
   CameraControls,
   useGLTF,
   useAnimations,
-  MeshPortalMaterial
+  MeshPortalMaterial,
+  Html // Html 컴포넌트를 import
 } from '@react-three/drei'
 import { useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
@@ -10,31 +11,74 @@ import { useFrame, extend } from '@react-three/fiber'
 import { geometry } from 'maath'
 import CameraAnimation from './CameraAnimation'
 import CameraRig from './CameraRig'
+import styles from './MyPortal.module.css' // CSS 모듈 import
 
 extend(geometry)
 
-export default function MyPortal() {
+export default function MyPortal({
+  setRigActive,
+  nextPortalRef,
+  prevPortalRef
+}) {
   const [targetPosition, setTargetPosition] = useState(null)
   const [targetFocus, setTargetFocus] = useState(null)
-  const [animationComplete, setAnimationComplete] = useState(false) // 애니메이션 완료 상태
+  const [animationComplete, setAnimationComplete] = useState(false)
+  const [currentPortal, setCurrentPortal] = useState(0)
   const controlsRef = useRef() // CameraControls의 공통 참조
+
+  const portalPositions = [
+    {
+      position: new THREE.Vector3(-30, 20, 10),
+      focus: new THREE.Vector3(-30, 20, 0)
+    },
+    {
+      position: new THREE.Vector3(0, 20, 10),
+      focus: new THREE.Vector3(0, 20, -10)
+    },
+    {
+      position: new THREE.Vector3(30, 20, 10),
+      focus: new THREE.Vector3(30, 20, 0)
+    }
+  ]
+
+  const goToNextPortal = () => {
+    const nextIndex = (currentPortal + 1) % portalPositions.length
+    setCurrentPortal(nextIndex)
+    setTargetPosition(portalPositions[nextIndex].position)
+    setTargetFocus(portalPositions[nextIndex].focus)
+    setRigActive(true)
+  }
+
+  const goToPreviousPortal = () => {
+    const prevIndex =
+      (currentPortal - 1 + portalPositions.length) % portalPositions.length
+    setCurrentPortal(prevIndex)
+    setTargetPosition(portalPositions[prevIndex].position)
+    setTargetFocus(portalPositions[prevIndex].focus)
+    setRigActive(true)
+  }
+
+  // nextPortalRef와 prevPortalRef에 포탈 전환 함수 할당
+  useEffect(() => {
+    nextPortalRef.current = goToNextPortal
+    prevPortalRef.current = goToPreviousPortal
+  }, [nextPortalRef, prevPortalRef, goToNextPortal, goToPreviousPortal])
 
   return (
     <>
-      {/* 카메라 애니메이션 컴포넌트 */}
       <CameraAnimation
         controlsRef={controlsRef}
         onAnimationComplete={() => setAnimationComplete(true)}
       />
-      {/* 애니메이션 완료 후에만 CameraRig 활성화 */}
       <CameraRig
-        controlsRef={controlsRef} // CameraControls 참조 전달
+        controlsRef={controlsRef}
         enabled={animationComplete}
         targetPosition={targetPosition}
         targetFocus={targetFocus}
+        onRigActivate={() => setRigActive(true)} // CameraRig 활성화 시 상태 변경
       />
       <CameraControls
-        ref={controlsRef} // CameraControls에 대한 참조
+        ref={controlsRef}
         enabled={animationComplete}
         minAzimuthAngle={-Math.PI / 2.5 + 0.5}
         maxAzimuthAngle={Math.PI / 2.5 - 0.5}
@@ -47,18 +91,24 @@ export default function MyPortal() {
         onClick={() => {
           setTargetPosition(new THREE.Vector3(-30, 20, 10))
           setTargetFocus(new THREE.Vector3(-30, 20, 0))
+          setCurrentPortal(0)
+          setRigActive(true)
         }}
       />
       <Portal2
         onClick={() => {
           setTargetPosition(new THREE.Vector3(0, 20, 10))
           setTargetFocus(new THREE.Vector3(0, 20, -10))
+          setCurrentPortal(1)
+          setRigActive(true)
         }}
       />
       <Portal3
         onClick={() => {
           setTargetPosition(new THREE.Vector3(30, 20, 10))
           setTargetFocus(new THREE.Vector3(30, 20, 0))
+          setCurrentPortal(2)
+          setRigActive(true)
         }}
       />
     </>
