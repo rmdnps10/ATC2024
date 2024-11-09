@@ -59,6 +59,11 @@
   gap: 14px;
 }
 
+.typography {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
 .line {
   width: 1px;
   height: 20px;
@@ -72,6 +77,9 @@
     #278ffb 80%,
     #35cffa
   );
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 .line.active {
   background-color: white;

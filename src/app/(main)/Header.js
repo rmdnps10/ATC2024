@@ -68,12 +68,12 @@ export default function Header() {
           onMouseLeave={() => {
             setIsShowMouseEnterAnimation(false)
             setIsShowMouseLeaveAnimation(true)
-          }}
-          onClick={handleClick}>
+          }}>
           <Image
             src="/icon/logo/atc-typography.svg"
             alt="2024 atc 공식 타이포그래피"
             width={80}
+            className={styles.typography}
             priority
             height={30}
           />
