@@ -243,7 +243,7 @@ function FishModel({ clip, color = '#000000', ...props }) {
       ref={fishRef}
       object={fishScene}
       scale={75}
-      position={[0, -5, -15]}
+      position={[0, -5, -10]}
     />
   )
 }
@@ -266,7 +266,7 @@ function CakeModel({ clip, color = '#25CEFC', ...props }) {
     if (CakeRef.current) {
       //   CakeRef.current.rotation.x += -0.005
       CakeRef.current.rotation.y += 0.01
-      CakeRef.current.rotation.z += -0.005
+      CakeRef.current.rotation.z += -0.01
     }
   })
 
@@ -275,7 +275,7 @@ function CakeModel({ clip, color = '#25CEFC', ...props }) {
       ref={CakeRef}
       object={scene}
       scale={40}
-      position={[0, 0, -15]}
+      position={[0, 0, -10]}
       {...props}
     />
   )
@@ -299,7 +299,7 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
     if (StarRef.current) {
       //   StarRef.current.rotation.x += -0.005
       StarRef.current.rotation.y += 0.01
-      StarRef.current.rotation.z += 0.005
+      StarRef.current.rotation.z += 0.01
     }
   })
 
@@ -308,7 +308,7 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
       ref={StarRef}
       object={scene}
       scale={5}
-      position={[0, 0, -15]}
+      position={[0, 0, -10]}
       rotation-z={Math.PI * 0.5}
       {...props}
     />
