@@ -1,8 +1,7 @@
 import { useThree, useFrame } from '@react-three/fiber'
-import { EffectComposer, RenderPass, EffectPass, BloomEffect, ToneMappingEffect, FXAAEffect } from 'postprocessing'
-import { useEffect, useState, useMemo } from 'react'
-import { SSGIEffect, VelocityDepthNormalPass } from './v2'
-import * as THREE from 'three'
+import { EffectComposer, RenderPass, EffectPass, ToneMappingEffect, FXAAEffect } from 'postprocessing'
+import { useEffect, useState } from 'react'
+import { SSGIEffect, VelocityDepthNormalPass } from './v2.js'
 //
 //
 //
