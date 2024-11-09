@@ -77,38 +77,6 @@ export default function Header() {
             priority
             height={30}
           />
-          <div
-            className={`${styles.line} ${
-              isOpenMobileMenu && styles.active
-            }`}></div>
-
-          {isShowMouseEnterAnimation ? (
-            <Image
-              className={styles.transition}
-              src="/icon/logo/transition/atc-elephant.webp"
-              unoptimized
-              alt="2024 atc 공식 로고 - 로고에서 코끼리로"
-              width={35}
-              height={35}
-            />
-          ) : isShowMouseLeaveAnimation ? (
-            <Image
-              className={styles.transition}
-              src="/icon/logo/transition/elephant-atc.webp"
-              unoptimized
-              alt="2024 atc 공식 로고 - 코끼리에서 로고로"
-              width={35}
-              height={35}
-            />
-          ) : (
-            <Image
-              src="/icon/logo/atc-symbol.svg"
-              priority
-              alt="2024 atc 공식 로고"
-              width={30}
-              height={40}
-            />
-          )}
         </Link>
       </div>
 
