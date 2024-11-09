@@ -27,9 +27,6 @@ export default function ScrollContainer() {
   const handleClickButton = (x, y) => {
     moveElephant(x)
     setImageIndex(y)
-    setTimeout(() => {
-      setIsModalOpen(true)
-    }, 500)
   }
 
   const closeModal = () => {
