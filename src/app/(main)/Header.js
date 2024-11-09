@@ -33,6 +33,26 @@ export default function Header() {
     }
   }, [])
 
+  const handleClick = event => {
+    event.preventDefault()
+    const targetDate = new Date('2024-11-18T12:00:00')
+    const now = new Date()
+    const timeDifference = targetDate - now
+
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+    const hours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    )
+    const minutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
+    )
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000)
+
+    alert(
+      `웹사이트 오픈까지 ${days}일 ${hours}시간 ${minutes}분 ${seconds}초 남았습니다. `
+    )
+  }
+
   return (
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
@@ -48,7 +68,8 @@ export default function Header() {
           onMouseLeave={() => {
             setIsShowMouseEnterAnimation(false)
             setIsShowMouseLeaveAnimation(true)
-          }}>
+          }}
+          onClick={handleClick}>
           <Image
             src="/icon/logo/atc-typography.svg"
             alt="2024 atc 공식 타이포그래피"
@@ -96,6 +117,7 @@ export default function Header() {
           <li key={link}>
             <Link
               href={link}
+              onClick={handleClick}
               className={pathname === link ? styles.activeText : ''}>
               {link.charAt(1).toUpperCase() + link.slice(2)}
             </Link>
@@ -121,19 +143,39 @@ export default function Header() {
         }}>
         <nav onClick={toggleIsShowMobileMenu}>
           <li>
-            <Link href={'/about'}>ABOUT</Link>
+            <Link
+              href={'/about'}
+              onClick={handleClick}>
+              ABOUT
+            </Link>
           </li>
           <li>
-            <Link href={'/works'}>WORK</Link>
+            <Link
+              href={'/works'}
+              onClick={handleClick}>
+              WORK
+            </Link>
           </li>
           <li>
-            <Link href={'/program'}>PROGRAM</Link>
+            <Link
+              href={'/program'}
+              onClick={handleClick}>
+              PROGRAM
+            </Link>
           </li>
           <li>
-            <Link href={'/archive'}>ARCHIVE</Link>
+            <Link
+              href={'/archive'}
+              onClick={handleClick}>
+              ARCHIVE
+            </Link>
           </li>
           <li>
-            <Link href={'/map'}>MAPS</Link>
+            <Link
+              href={'/map'}
+              onClick={handleClick}>
+              MAPS
+            </Link>
           </li>
         </nav>
       </section>
