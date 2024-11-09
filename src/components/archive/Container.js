@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
+import { set } from 'mongoose'
 
 export default function ScrollContainer() {
   const TIMELINE_WIDTH = 5356 * 0.7
@@ -27,6 +28,7 @@ export default function ScrollContainer() {
   const handleClickButton = (x, y) => {
     moveElephant(x)
     setImageIndex(y)
+    setIsModalOpen(true)
   }
 
   const closeModal = () => {
