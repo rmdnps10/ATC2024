@@ -27,13 +27,12 @@ export default function MyPortal() {
         onAnimationComplete={() => setAnimationComplete(true)}
       />
       {/* 애니메이션 완료 후에만 CameraRig 활성화 */}
-      {animationComplete && (
-        <CameraRig
-          controlsRef={controlsRef} // CameraControls 참조 전달
-          targetPosition={targetPosition}
-          targetFocus={targetFocus}
-        />
-      )}
+      <CameraRig
+        controlsRef={controlsRef} // CameraControls 참조 전달
+        enabled={animationComplete}
+        targetPosition={targetPosition}
+        targetFocus={targetFocus}
+      />
       <CameraControls
         ref={controlsRef} // CameraControls에 대한 참조
         enabled={animationComplete}
@@ -73,7 +72,8 @@ function Portal1({ onClick }) {
   return (
     <group
       position={[-30, 0, 0]}
-      rotation={[0, 0.5, 0]}>
+      //   rotation={[0, 0.5, 0]}
+    >
       <mesh
         name={'Film'}
         position={[0, 20, 0]}
@@ -100,7 +100,7 @@ function Portal2({ onClick }) {
 
   return (
     <group
-      position={[0, 0, -10]}
+      position={[0, 0, 0]}
       rotation={[0, 0, 0]}>
       <mesh
         name={'MainPage'}
@@ -128,7 +128,8 @@ function Portal3({ onClick }) {
   return (
     <group
       position={[30, 0, 0]}
-      rotation={[0, -0.5, 0]}>
+      //   rotation={[0, -0.5, 0]}
+    >
       <mesh
         name={'Instagram'}
         position={[0, 20, 0]}
