@@ -14,15 +14,13 @@
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  animation: scrollFirstRow 10s linear infinite;
-  /*background-color: yellowgreen;*/
+  animation: scrollFirstRow 15s linear infinite;
 }
 .secondRow {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  animation: scrollSecondRow 10s linear infinite reverse;
-  /*background-color: lightcoral;*/
+  animation: scrollSecondRow 15s linear infinite reverse;
 }
 
 @keyframes scrollFirstRow {
@@ -56,10 +54,9 @@
   }
 }
 .sponsorBox img {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   object-fit: contain;
-  background-color: azure;
 }
 .text {
   display: flex;
