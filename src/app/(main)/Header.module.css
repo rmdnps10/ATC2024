@@ -60,12 +60,16 @@
 }
 
 .symbol {
+  width: 30px;
+  height: 40px;
   @media (min-width: 768px) {
     display: none;
   }
 }
 
 .typography {
+  width: 80px;
+  height: 30px;
   @media (max-width: 768px) {
     display: none;
   }

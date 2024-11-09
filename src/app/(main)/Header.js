@@ -65,21 +65,17 @@ export default function Header() {
             setIsShowMouseEnterAnimation(false)
             setIsShowMouseLeaveAnimation(true)
           }}>
-          <Image
+          <img
             className={styles.typography}
             src="/icon/logo/atc-typography.svg"
             priority
             alt="2024 atc 공식 타이포그래피"
-            width={80}
-            height={30}
           />
-          <Image
+          <img
             className={styles.symbol}
             src="/icon/logo/atc-symbol.svg"
             priority
             alt="2024 atc 공식 로고"
-            width={30}
-            height={40}
           />
         </Link>
       </div>
