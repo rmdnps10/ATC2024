@@ -3,15 +3,16 @@ import {
   useGLTF,
   useAnimations,
   MeshPortalMaterial,
-  Html // Html 컴포넌트를 import
+  Html
 } from '@react-three/drei'
-import { useState, useEffect, useRef } from 'react'
+import { forwardRef, useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
 import { geometry } from 'maath'
 import CameraAnimation from './CameraAnimation'
 import CameraRig from './CameraRig'
-import styles from './MyPortal.module.css' // CSS 모듈 import
+import gsap from 'gsap'
+import styles from './MyPortal.module.css'
 
 extend(geometry)
 
@@ -25,7 +26,8 @@ export default function MyPortal({
   const [targetFocus, setTargetFocus] = useState(null)
   const [animationComplete, setAnimationComplete] = useState(false)
   const [currentPortal, setCurrentPortal] = useState(0)
-  const controlsRef = useRef() // CameraControls의 공통 참조
+  const controlsRef = useRef()
+  const portalRefs = [useRef(), useRef(), useRef()]
 
   const portalPositions = [
     {
@@ -42,26 +44,39 @@ export default function MyPortal({
     }
   ]
 
+  const updateBlendValues = blendValue => {
+    portalRefs.forEach(ref => {
+      if (ref.current) {
+        gsap.to(ref.current, { blend: blendValue, duration: 1 })
+      }
+    })
+  }
+
   const goToNextPortal = () => {
+    updateBlendValues(0)
     const nextIndex = (currentPortal + 1) % portalPositions.length
     setCurrentPortal(nextIndex)
     setTargetPosition(portalPositions[nextIndex].position)
     setTargetFocus(portalPositions[nextIndex].focus)
     setRigActive(true)
+    gsap.to(portalRefs[nextIndex].current, { blend: 1, duration: 1 })
   }
 
   const goToPreviousPortal = () => {
+    updateBlendValues(0)
     const prevIndex =
       (currentPortal - 1 + portalPositions.length) % portalPositions.length
     setCurrentPortal(prevIndex)
     setTargetPosition(portalPositions[prevIndex].position)
     setTargetFocus(portalPositions[prevIndex].focus)
     setRigActive(true)
+    gsap.to(portalRefs[prevIndex].current, { blend: 1, duration: 1 })
   }
 
   const goToCenterPortal = () => {
     setTargetPosition(new THREE.Vector3(0, 10, 100))
     setTargetFocus(new THREE.Vector3(0, 20, -10))
+    updateBlendValues(0)
     setRigActive(false)
   }
 
@@ -89,7 +104,6 @@ export default function MyPortal({
         enabled={animationComplete}
         targetPosition={targetPosition}
         targetFocus={targetFocus}
-        // onRigActivate={() => setRigActive(true)} // CameraRig 활성화 시 상태 변경
       />
       <CameraControls
         ref={controlsRef}
@@ -98,30 +112,39 @@ export default function MyPortal({
         maxAzimuthAngle={Math.PI / 2.5 - 0.5}
         minPolarAngle={0.5}
         maxPolarAngle={Math.PI / 2 - 0.01}
-        dollySpeed={0} // 마우스 휠 줌 비활성화
-        truckSpeed={0} // 우클릭 팬 비활성화
+        dollySpeed={0}
+        truckSpeed={0}
       />
       <Portal1
+        ref={portalRefs[0]}
         onClick={() => {
           setTargetPosition(new THREE.Vector3(-40, 20, 15))
           setTargetFocus(new THREE.Vector3(-40, 20, 0))
           setCurrentPortal(0)
+          updateBlendValues(0)
+          gsap.to(portalRefs[0].current, { blend: 1, duration: 1 })
           setRigActive(true)
         }}
       />
       <Portal2
+        ref={portalRefs[1]}
         onClick={() => {
           setTargetPosition(new THREE.Vector3(0, 20, 15))
           setTargetFocus(new THREE.Vector3(0, 20, 0))
           setCurrentPortal(1)
+          updateBlendValues(0)
+          gsap.to(portalRefs[1].current, { blend: 1, duration: 1 })
           setRigActive(true)
         }}
       />
       <Portal3
+        ref={portalRefs[2]}
         onClick={() => {
           setTargetPosition(new THREE.Vector3(40, 20, 15))
-          setTargetFocus(new THREE.Vector3(30, 20, 0))
+          setTargetFocus(new THREE.Vector3(40, 20, 0))
           setCurrentPortal(2)
+          updateBlendValues(0)
+          gsap.to(portalRefs[2].current, { blend: 1, duration: 1 })
           setRigActive(true)
         }}
       />
@@ -129,89 +152,65 @@ export default function MyPortal({
   )
 }
 
-function Portal1({ onClick }) {
-  const portalRef = useRef()
-  const GOLDENRATIO = 1.61803398875
+const Portal1 = forwardRef(({ onClick }, ref) => (
+  <group position={[-40, 0, 0]}>
+    <mesh
+      name={'Film'}
+      position={[0, 20, 0]}
+      onClick={onClick}>
+      <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
+      <MeshPortalMaterial
+        ref={ref}
+        blend={0}>
+        <color
+          attach="background"
+          args={['#005afb']}
+        />
+        <CakeModel />
+      </MeshPortalMaterial>
+    </mesh>
+  </group>
+))
 
-  return (
-    <group
-      position={[-40, 0, 0]}
-      //   rotation={[0, 0.5, 0]}
-    >
-      <mesh
-        name={'Film'}
-        position={[0, 20, 0]}
-        onClick={onClick}>
-        <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
-        <MeshPortalMaterial
-          ref={portalRef}
-          blend={0}>
-          <color
-            attach="background"
-            args={['#005afb']}
-          />
-          <CakeModel />
-        </MeshPortalMaterial>
-      </mesh>
-    </group>
-  )
-}
+const Portal2 = forwardRef(({ onClick }, ref) => (
+  <group position={[0, 0, 0]}>
+    <mesh
+      name={'MainPage'}
+      position={[0, 20, 0]}
+      onClick={onClick}>
+      <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
+      <MeshPortalMaterial
+        ref={ref}
+        blend={0}>
+        <color
+          attach="background"
+          args={['#FFFFFF']}
+        />
+        <FishModel />
+      </MeshPortalMaterial>
+    </mesh>
+  </group>
+))
 
-// Portal2와 Portal3도 동일하게 onClick 이벤트 설정
-function Portal2({ onClick }) {
-  const portalRef = useRef()
-  const GOLDENRATIO = 1.61803398875
-
-  return (
-    <group
-      position={[0, 0, 0]}
-      rotation={[0, 0, 0]}>
-      <mesh
-        name={'MainPage'}
-        position={[0, 20, 0]}
-        onClick={onClick}>
-        <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
-        <MeshPortalMaterial
-          ref={portalRef}
-          blend={0}>
-          <color
-            attach="background"
-            args={['#FFFFFF']}
-          />
-          <FishModel />
-        </MeshPortalMaterial>
-      </mesh>
-    </group>
-  )
-}
-
-function Portal3({ onClick }) {
-  const portalRef = useRef()
-  const GOLDENRATIO = 1.61803398875
-
-  return (
-    <group
-      position={[40, 0, 0]}
-      //   rotation={[0, -0.5, 0]}
-    >
-      <mesh
-        name={'Instagram'}
-        position={[0, 20, 0]}
-        onClick={onClick}>
-        <roundedPlaneGeometry args={[20, 20 * GOLDENRATIO, 3]} />
-        <MeshPortalMaterial
-          ref={portalRef}
-          blend={0}>
-          <color
-            attach="background"
-            args={['#7334ff']}
-          />
-          <StarModel />
-        </MeshPortalMaterial>
-      </mesh>
-    </group>
-  )
-}
+const Portal3 = forwardRef(({ onClick }, ref) => (
+  <group position={[40, 0, 0]}>
+    <mesh
+      name={'Instagram'}
+      position={[0, 20, 0]}
+      onClick={onClick}>
+      <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
+      <MeshPortalMaterial
+        ref={ref}
+        blend={0}>
+        <color
+          attach="background"
+          args={['#7334ff']}
+        />
+        <StarModel />
+      </MeshPortalMaterial>
+    </mesh>
+  </group>
+))
 
 function FishModel({ clip, color = '#000000', ...props }) {
   const { scene: fishScene, animations: fishAnimations } = useGLTF(
