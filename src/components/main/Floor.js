@@ -132,7 +132,7 @@ export default function Floor() {
     const textures = useLoader(TextureLoader, ['/images/main/atc24_profile.png'])
 
     return (
-        <group position={[58.5, -124, -5]} rotation={[0, -Math.PI / 6, 0]}>
+        <group position={[58.5 + 3, -124, -5]} rotation={[0, -Math.PI / 6, 0]}>
             <directionalLight position={[3, 10, 0]} intensity={10} />
             <pointLight position={[5, 10, 0]} intensity={100} color="red" />
 
@@ -194,32 +194,10 @@ export default function Floor() {
             ))}
 
             <PhysicsCake position={[0, 1, 1]} />
-
-            <Text
-                position={[11, 5, -3]}
-                fontSize={2}
-                color="#ffffff"
-                anchorX="center"
-                anchorY="middle"
-                font='/images/main/Pretendard-Bold.woff'
-            >
-                About
-            </Text>
-            <Text
-                position={[11, 5, -3.2]}
-                fontSize={2}
-                color="#ffdddd"
-                anchorX="center"
-                anchorY="middle"
-                font='/images/main/Pretendard-Bold.woff'
-            >
-                About
-            </Text>
         </group>
     )
 }
 
-// 성능 최적화를 위한 모델 프리로드
 useGLTF.preload('/model/cake.glb')
 useGLTF.preload('/model/star1.glb')
 useGLTF.preload('/model/star3.glb')

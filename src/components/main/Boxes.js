@@ -12,14 +12,12 @@ export default function Boxes({ scrollPercent }) {
     const boxRefs = useRef([]);
     const groupRef = useRef();
     const SPACING = 1.25;
-    const SIZE = 3;
     const [isAnimating, setIsAnimating] = useState(false);
     const [isCompleted, setIsCompleted] = useState(false);
 
-    const COLORS = ['#ffffff', '#25cefc', '#168cff', '#005afb', '#df45ff', '#9822ff', '#7344ff', '#ffaaaf'];
+    const COLORS = ['#ffffff'];
 
     const elephantTexture = useTexture('/images/main/atc24_profile.png');
-    // const elephantTexture = useTexture('/images/main/Asset1.png');
 
     const materials = useMemo(() => ({
         center: new THREE.MeshStandardMaterial({
@@ -192,6 +190,20 @@ export default function Boxes({ scrollPercent }) {
         });
     }, [finalPositions, isAnimating]);
 
+    // useEffect를 추가하여 화면 크기 감지
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <>
             <directionalLight position={[3, 3, 1]} intensity={3} color="#333388" />
@@ -203,8 +215,12 @@ export default function Boxes({ scrollPercent }) {
                 scale={2}
             >
                 <Text
-                    position={textPositions.left}
-                    fontSize={1.25}
+                    position={[
+                        isMobile ? 0 : textPositions.left[0],
+                        textPositions.left[1],
+                        textPositions.left[2]
+                    ]}
+                    fontSize={isMobile ? 0.85 : 1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"
@@ -214,8 +230,12 @@ export default function Boxes({ scrollPercent }) {
                     How To Put An Elephant
                 </Text>
                 <Text
-                    position={textPositions.right}
-                    fontSize={1.25}
+                    position={[
+                        isMobile ? 0 : textPositions.right[0],
+                        textPositions.right[1],
+                        textPositions.right[2]
+                    ]}
+                    fontSize={isMobile ? 0.85 : 1.25}
                     color="#333333"
                     anchorX="center"
                     anchorY="middle"

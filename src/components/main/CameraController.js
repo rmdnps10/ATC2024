@@ -16,13 +16,9 @@ export default function CameraController() {
   useFrame(() => {
     let adjustedScrollOffset = scroll.offset;
 
-    // if (scroll.offset >= 0.23 && scroll.offset <= 0.3) {
-    //   adjustedScrollOffset = 0.25 + (scroll.offset - 0.25) * 0.1;
-    // }
-
     const scrollOffset = adjustedScrollOffset;
     const moveDistance = -120;
-    const newY = initialPosition.current.y + scrollOffset * moveDistance;
+    let newY = initialPosition.current.y + scrollOffset * moveDistance;
     const xMoveDistance = 200;
     let newX = 0;
 
@@ -33,6 +29,7 @@ export default function CameraController() {
       newX = initialPosition.current.x + xMoveDistance * xProgress;
       xRef.current = newX;
     } else if (scrollOffset > 0.625) {
+      newY = initialPosition.current.y + scrollOffset * moveDistance;
       newX = 63.5;
     } else {
       newX = xRef.current;

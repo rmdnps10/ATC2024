@@ -3,12 +3,9 @@
 import * as THREE from "three";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import {
-  Environment,
-  OrbitControls,
-} from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
-import { Perf } from "r3f-perf";
+import gsap from "gsap";
 import { easing } from "maath";
 import dynamic from "next/dynamic";
 import CameraController from "./CameraController.js";
@@ -17,8 +14,6 @@ import Boxes from "./Boxes.js";
 import Floor from "./Floor.js";
 import Model from "./Model.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
-import gsap from "gsap";
-import AtomModel from "./AtomModel.js";
 //
 //
 //
@@ -50,8 +45,8 @@ export default function Experience({ accent, scrollPercent }) {
   const bgRef = useRef();
 
   useEffect(() => {
-    if (scrollPercent >= 65) {
-      const progress = (scrollPercent - 65) / 35; // 75%에서 100%까지의 진행률 계산
+    if (scrollPercent >= 85) {
+      const progress = (scrollPercent - 85) / 15; // 75%에서 100%까지의 진행률 계산
       gsap.to(bgRef.current, {
         r: 0,
         g: 0,
@@ -75,7 +70,6 @@ export default function Experience({ accent, scrollPercent }) {
     <>
       {/* <Perf position="bottom-left" /> */}
       <color ref={bgRef} attach="background" args={['white']} />
-      {/* <OrbitControls /> */}
       <CameraController />
 
       <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
@@ -93,11 +87,11 @@ export default function Experience({ accent, scrollPercent }) {
 
       <ThreeText />
 
-      <AtomModel />
-
-      <Physics gravity={[0, -9.8, 0]}>
-        <Floor scroll={scrollPercent} />
-      </Physics>
+      {scrollPercent >= 75 && (
+        <Physics gravity={[0, -9.8, 0]}>
+          <Floor scroll={scrollPercent} />
+        </Physics>
+      )}
 
       <Model />
 

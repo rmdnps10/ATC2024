@@ -21,20 +21,28 @@ export default function MainPage() {
   const [accent, click] = useReducer(state => ++state % 6, 0)
   const [dpr, setDpr] = useState(1)
   const [scrollPercent, setScrollPercent] = useState(0)
+  const [cameraZ, setCameraZ] = useState(50)
+  const [isMobile, setIsMobile] = useState(false)
   const pages = 4
+
+  useEffect(() => {
+    const mobileCheck = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    setIsMobile(mobileCheck)
+    setCameraZ(mobileCheck ? 90 : 50)
+  }, [])
 
   return (
     <Suspense fallback={null}>
       <div className={styles.canvasContainer} onClick={click}>
-        <CustomCursor />
+        {!isMobile && <CustomCursor />}
         <Canvas
           frameloop="always"
           dpr={dpr}
           gl={{
-            antialias: false,
+            antialias: true,
             powerPreference: "high-performance",
           }}
-          camera={{ position: [0, 0, 50], fov: 17.5, near: 10, far: 1000 }}
+          camera={{ position: [0, 0, cameraZ], fov: 17.5, near: 10, far: 1000 }}
           style={{ scrollbarWidth: 'none' }}>
           <AdaptiveDpr pixelated />
           <AdaptiveEvents />

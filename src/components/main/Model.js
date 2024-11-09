@@ -8,7 +8,7 @@ export default function Model(props) {
   const groupRef = useRef();
 
   return (
-    <group ref={groupRef} position={[55, -117, 0]} rotation={[0, 0, 0]}>
+    <group ref={groupRef} position={[55 + 5, -117, 0]} rotation={[0, 0, 0]}>
       <group scale={15} position={[0, -3, 0]} rotation-y={Math.PI / 6}>
         <Float speed={3} rotationIntensity={1} floatIntensity={0.1}>
           <MainModel />
