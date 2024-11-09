@@ -1,0 +1,94 @@
+.sponsorContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 21.3rem;
+  @media (max-width: 768px) {
+    padding-bottom: 11.2rem;
+  }
+}
+
+.firstRow {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollFirstRow 10s linear infinite;
+  /*background-color: yellowgreen;*/
+}
+.secondRow {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollSecondRow 10s linear infinite reverse;
+  /*background-color: lightcoral;*/
+}
+
+@keyframes scrollFirstRow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes scrollSecondRow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.sponsorBox {
+  width: 33rem;
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  @media (max-width: 768px) {
+    width: 15.4rem;
+    height: 8.4rem;
+  }
+}
+.sponsorBox img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  background-color: azure;
+}
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.text p:first-child {
+  position: relative;
+  font-size: 6rem;
+  text-align: center;
+  font-family: 'Sandoll Seoul';
+  margin-bottom: 1.6rem;
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+  }
+}
+.text p:first-child::after {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  border-bottom: 1px solid black;
+}
+
+@media (max-width: 768px) {
+  .text p:first-child::after {
+    width: 7rem;
+  }
+}

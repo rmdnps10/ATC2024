@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'Cafe24Shiningstar';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.description {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22.9rem;
+  padding: 13rem 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-weight: 200;
+  @media (max-width: 768px) {
+    margin-top: 6.2rem;
+    padding: 4rem 0;
+  }
+}
+
+.description article {
+  position: relative;
+  line-height: 180%;
+  padding: 0 3.6rem;
+  width: 60%;
+  z-index: 10;
+  font-size: 3.6rem;
+  color: #1160f7;
+  @media (max-width: 768px) {
+    line-height: 180%;
+    width: 80%;
+    font-size: 1.2rem;
+    padding: 0 2.4rem;
+  }
+}
+.cursor {
+  position: absolute;
+  border-left: 2px solid #000;
+  animation: blink 0.7s infinite;
+  height: 3.8rem;
+  vertical-align: text-top;
+  display: inline-block;
+  @media (max-width: 768px) {
+    height: 1.4rem;
+    border-left: 1px solid #000;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.description img {
+  vertical-align: middle;
+  width: 7.8rem;
+  height: 5.6rem;
+  @media (max-width: 768px) {
+    width: 2.8rem;
+    height: 2rem;
+  }
+}
+.SandollFont {
+  font-family: 'Sandoll Seoul';
+  font-size: 4rem;
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+}
+.CafeFont {
+  font-family: 'Cafe24Shiningstar';
+}

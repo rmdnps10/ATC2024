@@ -1,148 +1,558 @@
 .main {
-    width: 100vw;
-    margin-top: 0rem;
-    overflow: hidden;
-    background-color: rgb(206, 248, 248);
+  width: 100vw;
+  margin-top: 0rem;
+  overflow: hidden;
+  position: relative;
+  background-color: white;
+}
+.background {
+  overflow: hidden;
+  pointer-events: none;
+}
+.cyan1,
+.cyan2,
+.cyan3,
+.cyan4,
+.cyan5,
+.pink1,
+.pink2,
+.pink3,
+.blue1,
+.blue2,
+.blue3 {
+  position: absolute;
+  filter: blur(150px);
+}
+.cyan1 {
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  right: 0;
+  transform: translate(10%, 0);
+}
+.cyan2 {
+  width: 40%;
+  height: 12%;
+  background-color: #35cffa40;
+  left: 0;
+  top: 15%;
+  transform: translate(-20%, 0);
+}
+.cyan3 {
+  width: 40%;
+  height: 20%;
+  background-color: #35cffa40;
+  right: 0;
+  top: 44%;
+  transform: translate(25%, 0);
+}
+.cyan4 {
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  left: 0;
+  top: 55%;
+  transform: translate(-30%, 0);
+}
+.cyan5 {
+  width: 50%;
+  height: 10%;
+  background-color: #35cffa40;
+  left: 0;
+  top: 78%;
+  transform: translate(-30%, 0);
+}
+.pink1 {
+  width: 50%;
+  height: 50vh;
+  background-color: #dd4ffc30;
+  left: 0;
+  transform: translate(30%, -80%);
+}
+.pink2 {
+  width: 40%;
+  height: 25%;
+  background-color: #dd4ffc25;
+  right: 0;
+  top: 16%;
+  transform: translate(-40%, 0);
+}
+.pink3 {
+  width: 50%;
+  height: 15%;
+  background-color: #dd4ffc25;
+  left: 0;
+  top: 60%;
+  transform: translate(-30%, 0);
+}
+.blue1 {
+  width: 40%;
+  height: 10%;
+  background-color: #1160f720;
+  left: 0;
+  top: 30%;
+  transform: translate(-40%, 0);
+}
+.blue2 {
+  width: 40%;
+  height: 10%;
+  background-color: #1160f730;
+  right: 0;
+  top: 42%;
+  transform: translate(-40%, 0);
+}
+.blue3 {
+  width: 50%;
+  height: 10%;
+  background-color: #1160f730;
+  right: 0;
+  top: 75%;
+  transform: translate(10%, 0);
+}
+
+.components img {
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .components img {
+    width: 20%;
+  }
+  .components div {
+    transform: scale(0.5);
+  }
+}
+
+.components img:first-child {
+  position: absolute;
+  top: 11%;
+  left: 5%;
+}
+.components img:nth-child(2) {
+  position: absolute;
+  top: 2%;
+  right: 7%;
+}
+.components img:nth-child(3) {
+  position: absolute;
+  top: 25%;
+  right: 3%;
+}
+.components img:nth-child(4) {
+  position: absolute;
+  top: 32%;
+  left: 25%;
+}
+.components img:nth-child(5) {
+  position: absolute;
+  top: -1%;
+  left: 25%;
+}
+.components div:nth-of-type(1) {
+  position: absolute;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  top: 25%;
+  left: 8%;
+  background-color: white;
+}
+.components div:nth-of-type(2) {
+  position: absolute;
+  width: 5.4rem;
+  height: 5.4rem;
+  border-radius: 50%;
+  top: 33%;
+  left: 9%;
+  background-color: white;
+}
+
+.components div:nth-of-type(3) {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  top: 21%;
+  right: 13%;
+  background-color: white;
+}
+.components div:nth-of-type(4) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 11%;
+  right: 12%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(5) {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  top: 13%;
+  right: 15%;
+  background-color: white;
+}
+.components div:nth-of-type(6) {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  top: 2%;
+  right: 23%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(7) {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  top: 6%;
+  right: 10%;
+  background-color: white;
+}
+.components div:nth-of-type(8) {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  top: 5.5%;
+  right: 12%;
+  background-color: white;
+}
+.components div:nth-of-type(9) {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  top: 27%;
+  left: 14%;
+  background-color: white;
+}
+.components div:nth-of-type(10) {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  top: 30%;
+  left: 5%;
+  background-color: white;
+}
+.components div:nth-of-type(11) {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  top: 36%;
+  right: 30%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(12) {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  top: 35%;
+  right: 26%;
+  background-color: white;
+}
+.components div:nth-of-type(13) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 20%;
+  right: 22%;
+  border: 3px solid white;
+}
+.components div:nth-of-type(14) {
+  position: absolute;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  top: 0%;
+  left: 13%;
+  border: 4px solid white;
+}
+.components div:nth-of-type(15) {
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  top: 2.5%;
+  left: 18%;
+  background-color: white;
+}
+.components div:nth-of-type(16) {
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  top: 3%;
+  left: 28%;
+  border: 3px solid white;
 }
 
 .imageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 26.2rem;
-    margin-bottom: 26.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5.4rem;
+  margin-top: 40.8rem;
+  z-index: 1;
+  @media (max-width: 768px) {
+    margin-top: 16rem;
+    gap: 3.7rem;
+  }
+}
+.typography,
+.title {
+  position: relative;
+}
+.typography {
+  width: 10%;
+  height: 3.6rem;
+}
+.title {
+  width: 48%;
+  height: 21.6rem;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: center;
+  padding-top: 30.3rem;
+  margin-bottom: 6.8rem;
+  font-family: 'Sandoll Seoul';
+}
+
+.subtitle p {
+  position: relative;
+  width: 60%;
+  font-size: 6rem;
+}
+
+.subtitle p::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  border-bottom: 1px solid black;
+}
+
+@media (max-width: 768px) {
+  .subtitle {
+    padding-top: 22.6rem;
+    margin-bottom: 4.2rem;
+  }
+  .subtitle p {
+    width: 80%;
+    font-size: 2.8rem;
+  }
 }
 
 .videoWrapper {
-    display: flex; 
-    align-items: center;
-    justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 .videoContainer {
-    width: 62.5%;
-    background-color: blueviolet;
-    aspect-ratio: 16 / 9;
+  width: 60%;
+  aspect-ratio: 16 / 9; /*동영상 비율 유지*/
+  z-index: 1;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 }
-.videoContainer video {
-    width: 100%;
-    height: 100%;
-}
-
-.articles {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6rem;
-    gap: 2.4rem;
-}
-.articles article { 
-    width: 58.8rem;
-    height: 21.6rem;
-    background-color: white;
-    font-size: 1.6rem;
+.videoContainer iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .quote {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2.4rem; 
+  margin-top: 24.1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 29.1rem;
+  font-family: 'pretendard';
+  z-index: 1;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 11.4rem;
+    margin-bottom: 18.7rem;
+  }
 }
-.quote blockquote:first-child{
-    align-self: flex-start;
-    width: 58.8rem;
-    margin-top: 27.5rem;
-    background-color: white;
-    font-size: 1.6rem;
+
+.quote div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 72%;
+  gap: 11.2rem;
+  @media (max-width: 768px) {
+    width: 100%;
+    gap: 10.4rem;
+  }
 }
-.quote blockquote:last-child{
-    align-self: flex-start;
-    width: 58.8rem;
-    margin-top: 62.4rem;
-    background-color: white;
-    font-size: 1.6rem;
+
+.quote blockquote:nth-of-type(1) .quoteTitle::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid black;
+}
+
+.quote blockquote:nth-of-type(2) .quoteTitle::before {
+  content: '';
+  position: absolute;
+  width: 15.5rem;
+  bottom: 0;
+  border-bottom: 1px solid black;
+}
+@media (max-width: 768px) {
+  .subtitle p::before {
+    width: 7rem;
+  }
+  .quote blockquote:nth-of-type(1) .quoteTitle::before {
+    width: 7rem;
+  }
+  .quote blockquote:nth-of-type(2) .quoteTitle::before {
+    width: 7rem;
+  }
+}
+.quote blockquote:first-child {
+  align-self: flex-start;
+  width: 50%;
+  font-size: 1.6rem;
+  text-align: right;
+  word-break: keep-all;
+  @media (max-width: 768px) {
+    width: 85%;
+    align-self: center;
+    font-size: 1.2rem;
+  }
+}
+.quote blockquote:last-child {
+  align-self: flex-end;
+  width: 50%;
+  font-size: 1.6rem;
+  text-align: left;
+  word-break: keep-all;
+  @media (max-width: 768px) {
+    width: 85%;
+    align-self: center;
+    font-size: 1.2rem;
+  }
 }
 .quoteTitle {
-    margin-bottom: 5.1rem;
+  position: relative;
+  margin-bottom: 1.6rem;
+  font-family: 'Sandoll Seoul';
 }
 .quote p:first-child {
-    font-size: 3.2rem;
+  font-size: 3.2rem;
+  @media (max-width: 768px) {
+    font-size: 2.8rem;
+  }
+}
+
+.quote blockquote:nth-of-type(1) .quoteTitle {
+  text-align: right;
+}
+
+.quote blockquote:nth-of-type(2) .quoteTitle {
+  text-align: left;
 }
 
 .sponsorContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    overflow: hidden;
-    width: 100%;
-    background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  overflow: hidden;
+  width: 100%;
+  background-color: antiquewhite;
+  z-index: 1;
 }
 
 .scrollRow.firstRow {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    animation: scrollFirstRow 10s linear infinite;
-    background-color: yellowgreen;
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollFirstRow 10s linear infinite;
+  background-color: yellowgreen;
+  z-index: 1;
 }
 .scrollRow.secondRow {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    animation: scrollSecondRow 10s linear infinite reverse;
-    background-color: lightcoral;
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  animation: scrollSecondRow 10s linear infinite reverse;
+  background-color: lightcoral;
+  z-index: 1;
 }
 
 @keyframes scrollFirstRow {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 @keyframes scrollSecondRow {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .sponsorBox {
-    width: 33rem;
-    height: 18rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: palevioletred;
-    overflow: hidden;
-    flex-shrink: 0;
+  width: 33rem;
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: palevioletred;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
 }
 .sponsorBox img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-    background-color: azure;
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  background-color: azure;
+  z-index: 1;
 }
 
 .credit {
-    width: 100%;
-    height: 102rem;
-    background-color: black;
+  width: 100%;
+  height: 102rem;
+  background-color: black;
+  z-index: 1;
 }
 .credit div {
-    width: 100%;
-    height: 94.7rem;
-    border-radius: 160.3rem;
-    opacity: 0.3;
-    background: radial-gradient(50% 50% at 50% 50%, rgba(39, 143, 251, 0.90) 0%, rgba(39, 143, 251, 0.00) 100%);
-    filter: blur(10rem);
+  width: 100%;
+  height: 94.7rem;
+  border-radius: 160.3rem;
+  opacity: 0.3;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(39, 143, 251, 0.9) 0%,
+    rgba(39, 143, 251, 0) 100%
+  );
+  filter: blur(10rem);
 }
 .credit p {
-    justify-content: center;
-    color: white;
+  justify-content: center;
+  color: white;
 }
