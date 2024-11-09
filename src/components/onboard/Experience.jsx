@@ -1,11 +1,10 @@
 'use client'
 
 import Ocean from './Ocean'
-import { Portal } from './TestPortal'
+import MyPortal from './MyPortal'
 import CameraAnimation from './CameraAnimation'
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { App } from './EnterPortal'
 
 export default function Experience() {
   return (
@@ -13,8 +12,7 @@ export default function Experience() {
       <CameraAnimation />
       <Suspense fallback={null}>
         <Ocean />
-        <App />
-        {/* <Portal /> */}
+        <MyPortal />
       </Suspense>
     </Canvas>
   )
