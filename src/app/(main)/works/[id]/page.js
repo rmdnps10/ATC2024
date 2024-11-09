@@ -67,7 +67,7 @@ export default function WorkDetailPage() {
   function handleSubmit() {
     //db에 올리기
     try {
-      if (pathname.id) {
+      if (pathname.id && nickname && content) {
         const postData = async () => {
           const updatedData = await putWorkDetail({
             id: pathname.id,
@@ -83,6 +83,9 @@ export default function WorkDetailPage() {
           }
         }
         postData()
+      } else {
+        alert('닉네임 또는 방명록 내용을 채워주세요.')
+        return
       }
     } catch (e) {
       console.error(e)
