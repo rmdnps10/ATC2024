@@ -7,10 +7,6 @@ import { usePathname } from 'next/navigation'
 import { useLockBodyScroll } from 'react-use'
 
 export default function Header() {
-  const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] =
-    useState(false)
-  const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] =
-    useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   const pathname = usePathname()
@@ -76,6 +72,15 @@ export default function Header() {
             className={styles.typography}
             priority
             height={30}
+          />
+
+          <Image
+            className={styles.symbol}
+            src="/icon/logo/atc-symbol.svg"
+            priority
+            alt="2024 atc 공식 로고"
+            width={30}
+            height={40}
           />
         </Link>
       </div>

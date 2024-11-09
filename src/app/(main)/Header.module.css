@@ -59,6 +59,12 @@
   gap: 14px;
 }
 
+.symbol {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 .typography {
   @media (max-width: 768px) {
     display: none;
