@@ -18,7 +18,7 @@ export default function CameraAnimation() {
       gsap.to(camera.position, {
         x: 0,
         y: 10,
-        z: 100,
+        z: 75,
         duration: 5, // 5초간 애니메이션
         ease: 'power2.inOut',
         onComplete: () => {
@@ -47,8 +47,8 @@ export default function CameraAnimation() {
       <CameraControls
         ref={controlsRef} // CameraControls에 대한 참조
         enabled={controlsEnabled} // 애니메이션 중에는 비활성화, 끝난 후 활성화
-        minAzimuthAngle={-Math.PI / 2.5}
-        maxAzimuthAngle={Math.PI / 2.5}
+        minAzimuthAngle={-Math.PI / 2.5 + 0.25}
+        maxAzimuthAngle={Math.PI / 2.5 - 0.25}
         minPolarAngle={0.5}
         maxPolarAngle={Math.PI / 2 - 0.01}
         dollySpeed={0} // 마우스 휠 줌 비활성화
