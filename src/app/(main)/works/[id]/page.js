@@ -29,6 +29,9 @@ export default function WorkDetailPage() {
         const data = await getWorkDetail(pathname.id)
         if (data) {
           const parsed = { ...data, category: data.category.split(',') }
+          if (parsed._id === '672cea5b0c11e50dbd25fa13') {
+            parsed.title = parsed.title.split('(')[0]
+          }
           setDetailData(parsed)
         }
       }
@@ -40,14 +43,6 @@ export default function WorkDetailPage() {
     setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }, 100)
-    // document
-    //   .querySelector("meta[name=viewport]")
-    //   .setAttribute(
-    //     "content",
-    //     "width=device-width, user-scalable=no, initial-scale=" +
-    //       1 / window.devicePixelRatio +
-    //       ""
-    //   );
   }, [])
 
   function handleExit() {
@@ -120,19 +115,28 @@ export default function WorkDetailPage() {
                   // placeholder="blur"
                   objectFit="cover"
                 />
+                <Image
+                  onClick={() => handleExit()}
+                  className={styles.back}
+                  width={30}
+                  height={30}
+                  src="/images/works/back.svg"
+                  alt="back"
+                />
               </div>
               <header>
                 <h1>
-                  {detailData.title}
+                  <span>{detailData.title}</span>
                   <span>
-                    <Image
-                      src={'/images/works/branding7.svg'}
-                      alt="elephant Icon"
-                      width={40}
-                      height={40}
-                      priority={false}
-                      style={{ left: '10px' }}
-                    />
+                    <div>
+                      <Image
+                        src={'/images/works/branding7.svg'}
+                        alt="elephant Icon"
+                        width={40}
+                        height={40}
+                        priority={false}
+                      />
+                    </div>
                   </span>
                 </h1>
                 <h3>{detailData.oneLiner}</h3>
@@ -161,7 +165,9 @@ export default function WorkDetailPage() {
                 {'/images/works/page5.png,/images/works/page6.png,/images/works/page9.png,/images/works/page10.png'
                   .split(',')
                   .map((el, key) => (
-                    <figure className={styles.introduceImage}>
+                    <figure
+                      key={key}
+                      className={styles.introduceImage}>
                       <Image
                         // className={styles.headerImage}
                         key={key}
@@ -175,6 +181,7 @@ export default function WorkDetailPage() {
                   ))}
               </div>
               <section>
+                <h1 className={styles.maxMobile}>아티스트</h1>
                 <figure>
                   <Image
                     className={styles.teamImage}

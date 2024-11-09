@@ -43,7 +43,12 @@ export default function WorksPage({}) {
         if (data) {
           const parsed = data.map(el => {
             el.category = el.category.split(',')
-            return el
+            if (el._id === '672cea5b0c11e50dbd25fa13') {
+              el.title = el.title.split('(')[0]
+              return el
+            } else {
+              return el
+            }
           })
           setDefaultWorks(parsed)
           setFilteredWorks(parsed)

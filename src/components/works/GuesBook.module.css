@@ -1,5 +1,8 @@
 .wrapper {
   padding: 2rem 0 2rem 10rem;
+  @media (max-width: 430px) {
+    padding-left: 3rem;
+  }
 }
 
 .smallWrapper {
@@ -26,6 +29,9 @@
 .row {
   display: flex;
   gap: 4rem;
+  @media (max-width: 430px) {
+    gap: 2rem;
+  }
 }
 
 .row:first-child {
@@ -45,6 +51,10 @@
     linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  @media (max-width: 430px) {
+    width: 40vw;
+    height: 20rem;
+  }
 }
 
 .commentInBox {
@@ -54,6 +64,9 @@
   height: 100%;
   padding: 4rem 4rem;
   overflow-y: scroll;
+  @media (max-width: 430px) {
+    padding: 3rem 2rem;
+  }
 }
 
 .commentInBox::-webkit-scrollbar {
@@ -66,6 +79,11 @@
   left: 5%;
   width: 4.5vw;
   height: 4.5vw;
+  @media (max-width: 430px) {
+    width: 8vw;
+    height: 8vw;
+    top: -4vw;
+  }
 }
 .imageContainer img {
 }
@@ -82,6 +100,9 @@
   line-height: normal;
   letter-spacing: -1px;
   text-wrap: nowrap;
+  @media (max-width: 430px) {
+    font-size: 5vw;
+  }
 }
 
 .comment p {
@@ -92,9 +113,13 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: -0.3px;
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
+  }
 }
 
 .comment h3 {
+  width: 100%;
   color: #121212;
   font-family: Pretendard;
   font-size: 1.5rem;
@@ -103,4 +128,9 @@
   line-height: normal;
   letter-spacing: -0.3px;
   margin-top: 2rem;
+  text-wrap: wrap;
+  word-break: break-all;
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
+  }
 }

@@ -36,7 +36,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   @media (max-width: 430px) {
-    font-size: 6rem;
+    font-size: 4rem;
   }
 }
 
@@ -210,7 +210,7 @@
   height: 23.4vw;
   display: flex;
   position: relative;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     width: 25vw;
     height: 41.4vw;
   }
@@ -246,10 +246,10 @@
   letter-spacing: -0.8px;
   cursor: pointer;
   transition: opacity 0.3s ease-in;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     opacity: 1;
     background-color: white;
-    height: 25%;
+    height: 35%;
     position: absolute;
     bottom: 0px;
     justify-content: center;
@@ -283,7 +283,7 @@
   font-weight: 400;
   word-break: break-all;
   line-height: 3.2rem;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     font-size: 2.2rem;
   }
   @media (min-width: 2000px) {
@@ -294,7 +294,7 @@
 .figDesc {
   margin-top: 2.4rem;
   font-size: 1.2rem;
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 }
