@@ -2,8 +2,7 @@ import {
   CameraControls,
   useGLTF,
   useAnimations,
-  MeshPortalMaterial,
-  Html
+  MeshPortalMaterial
 } from '@react-three/drei'
 import { forwardRef, useState, useEffect, useRef } from 'react'
 import * as THREE from 'three'
@@ -12,7 +11,6 @@ import { geometry } from 'maath'
 import CameraAnimation from './CameraAnimation'
 import CameraRig from './CameraRig'
 import gsap from 'gsap'
-import styles from './MyPortal.module.css'
 
 extend(geometry)
 
@@ -31,16 +29,16 @@ export default function MyPortal({
 
   const portalPositions = [
     {
-      position: new THREE.Vector3(-40, 20, 15),
-      focus: new THREE.Vector3(-40, 20, 0)
+      position: new THREE.Vector3(-35, 20, 15),
+      focus: new THREE.Vector3(-35, 20, 0)
     },
     {
       position: new THREE.Vector3(0, 20, 15),
       focus: new THREE.Vector3(0, 20, 0)
     },
     {
-      position: new THREE.Vector3(40, 20, 15),
-      focus: new THREE.Vector3(40, 20, 0)
+      position: new THREE.Vector3(35, 20, 15),
+      focus: new THREE.Vector3(35, 20, 0)
     }
   ]
 
@@ -118,34 +116,40 @@ export default function MyPortal({
       <Portal1
         ref={portalRefs[0]}
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(-40, 20, 15))
-          setTargetFocus(new THREE.Vector3(-40, 20, 0))
-          setCurrentPortal(0)
-          updateBlendValues(0)
-          gsap.to(portalRefs[0].current, { blend: 1, duration: 1 })
-          setRigActive(true)
+          if (animationComplete) {
+            setTargetPosition(new THREE.Vector3(-35, 20, 15))
+            setTargetFocus(new THREE.Vector3(-35, 20, 0))
+            setCurrentPortal(0)
+            updateBlendValues(0)
+            gsap.to(portalRefs[0].current, { blend: 1, duration: 1 })
+            setRigActive(true)
+          }
         }}
       />
       <Portal2
         ref={portalRefs[1]}
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(0, 20, 15))
-          setTargetFocus(new THREE.Vector3(0, 20, 0))
-          setCurrentPortal(1)
-          updateBlendValues(0)
-          gsap.to(portalRefs[1].current, { blend: 1, duration: 1 })
-          setRigActive(true)
+          if (animationComplete) {
+            setTargetPosition(new THREE.Vector3(0, 20, 15))
+            setTargetFocus(new THREE.Vector3(0, 20, 0))
+            setCurrentPortal(1)
+            updateBlendValues(0)
+            gsap.to(portalRefs[1].current, { blend: 1, duration: 1 })
+            setRigActive(true)
+          }
         }}
       />
       <Portal3
         ref={portalRefs[2]}
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(40, 20, 15))
-          setTargetFocus(new THREE.Vector3(40, 20, 0))
-          setCurrentPortal(2)
-          updateBlendValues(0)
-          gsap.to(portalRefs[2].current, { blend: 1, duration: 1 })
-          setRigActive(true)
+          if (animationComplete) {
+            setTargetPosition(new THREE.Vector3(35, 20, 15))
+            setTargetFocus(new THREE.Vector3(35, 20, 0))
+            setCurrentPortal(2)
+            updateBlendValues(0)
+            gsap.to(portalRefs[2].current, { blend: 1, duration: 1 })
+            setRigActive(true)
+          }
         }}
       />
     </>
@@ -153,7 +157,7 @@ export default function MyPortal({
 }
 
 const Portal1 = forwardRef(({ onClick }, ref) => (
-  <group position={[-40, 0, 0]}>
+  <group position={[-35, 0, 0]}>
     <mesh
       name={'Film'}
       position={[0, 20, 0]}
@@ -193,7 +197,7 @@ const Portal2 = forwardRef(({ onClick }, ref) => (
 ))
 
 const Portal3 = forwardRef(({ onClick }, ref) => (
-  <group position={[40, 0, 0]}>
+  <group position={[35, 0, 0]}>
     <mesh
       name={'Instagram'}
       position={[0, 20, 0]}
