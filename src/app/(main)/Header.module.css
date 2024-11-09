@@ -65,6 +65,7 @@
   }
 }
 .line {
+  display: none;
   width: 1px;
   height: 20px;
   margin-bottom: 4px;
@@ -87,6 +88,7 @@
 
 .transition {
   padding-bottom: 5px;
+  display: none;
 }
 
 .activeText {
