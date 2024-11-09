@@ -8,6 +8,7 @@ export default function Page() {
   const [rigActive, setRigActive] = useState(false) // CameraRig 활성화 상태 관리
   const nextPortalRef = useRef(null)
   const prevPortalRef = useRef(null)
+  const centerPortalRef = useRef(null)
 
   return (
     <div className={styles.root}>
@@ -15,6 +16,7 @@ export default function Page() {
         setRigActive={setRigActive}
         nextPortalRef={nextPortalRef}
         prevPortalRef={prevPortalRef}
+        centerPortalRef={centerPortalRef}
       />
 
       {/* rigActive가 true일 때만 버튼 표시 */}
@@ -32,6 +34,13 @@ export default function Page() {
               className={styles.portalButton}
               onClick={() => nextPortalRef.current()}>
               n
+            </button>
+          </div>
+          <div className={styles.portalNavigationBottom}>
+            <button
+              className={styles.portalButton}
+              onClick={() => centerPortalRef.current()}>
+              center
             </button>
           </div>
         </>

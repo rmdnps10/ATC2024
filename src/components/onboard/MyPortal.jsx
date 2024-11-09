@@ -18,7 +18,8 @@ extend(geometry)
 export default function MyPortal({
   setRigActive,
   nextPortalRef,
-  prevPortalRef
+  prevPortalRef,
+  centerPortalRef
 }) {
   const [targetPosition, setTargetPosition] = useState(null)
   const [targetFocus, setTargetFocus] = useState(null)
@@ -28,16 +29,16 @@ export default function MyPortal({
 
   const portalPositions = [
     {
-      position: new THREE.Vector3(-30, 20, 10),
-      focus: new THREE.Vector3(-30, 20, 0)
+      position: new THREE.Vector3(-40, 20, 15),
+      focus: new THREE.Vector3(-40, 20, 0)
     },
     {
-      position: new THREE.Vector3(0, 20, 10),
-      focus: new THREE.Vector3(0, 20, -10)
+      position: new THREE.Vector3(0, 20, 15),
+      focus: new THREE.Vector3(0, 20, 0)
     },
     {
-      position: new THREE.Vector3(30, 20, 10),
-      focus: new THREE.Vector3(30, 20, 0)
+      position: new THREE.Vector3(40, 20, 15),
+      focus: new THREE.Vector3(40, 20, 0)
     }
   ]
 
@@ -58,11 +59,24 @@ export default function MyPortal({
     setRigActive(true)
   }
 
-  // nextPortalRef와 prevPortalRef에 포탈 전환 함수 할당
+  const goToCenterPortal = () => {
+    setTargetPosition(new THREE.Vector3(0, 10, 100))
+    setTargetFocus(new THREE.Vector3(0, 20, -10))
+    setRigActive(false)
+  }
+
   useEffect(() => {
     nextPortalRef.current = goToNextPortal
     prevPortalRef.current = goToPreviousPortal
-  }, [nextPortalRef, prevPortalRef, goToNextPortal, goToPreviousPortal])
+    centerPortalRef.current = goToCenterPortal
+  }, [
+    nextPortalRef,
+    prevPortalRef,
+    centerPortalRef,
+    goToNextPortal,
+    goToPreviousPortal,
+    goToCenterPortal
+  ])
 
   return (
     <>
@@ -75,7 +89,7 @@ export default function MyPortal({
         enabled={animationComplete}
         targetPosition={targetPosition}
         targetFocus={targetFocus}
-        onRigActivate={() => setRigActive(true)} // CameraRig 활성화 시 상태 변경
+        // onRigActivate={() => setRigActive(true)} // CameraRig 활성화 시 상태 변경
       />
       <CameraControls
         ref={controlsRef}
@@ -89,23 +103,23 @@ export default function MyPortal({
       />
       <Portal1
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(-30, 20, 10))
-          setTargetFocus(new THREE.Vector3(-30, 20, 0))
+          setTargetPosition(new THREE.Vector3(-40, 20, 15))
+          setTargetFocus(new THREE.Vector3(-40, 20, 0))
           setCurrentPortal(0)
           setRigActive(true)
         }}
       />
       <Portal2
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(0, 20, 10))
-          setTargetFocus(new THREE.Vector3(0, 20, -10))
+          setTargetPosition(new THREE.Vector3(0, 20, 15))
+          setTargetFocus(new THREE.Vector3(0, 20, 0))
           setCurrentPortal(1)
           setRigActive(true)
         }}
       />
       <Portal3
         onClick={() => {
-          setTargetPosition(new THREE.Vector3(30, 20, 10))
+          setTargetPosition(new THREE.Vector3(40, 20, 15))
           setTargetFocus(new THREE.Vector3(30, 20, 0))
           setCurrentPortal(2)
           setRigActive(true)
@@ -121,7 +135,7 @@ function Portal1({ onClick }) {
 
   return (
     <group
-      position={[-30, 0, 0]}
+      position={[-40, 0, 0]}
       //   rotation={[0, 0.5, 0]}
     >
       <mesh
@@ -177,7 +191,7 @@ function Portal3({ onClick }) {
 
   return (
     <group
-      position={[30, 0, 0]}
+      position={[40, 0, 0]}
       //   rotation={[0, -0.5, 0]}
     >
       <mesh

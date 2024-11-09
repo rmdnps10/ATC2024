@@ -8,10 +8,9 @@ import { Canvas } from '@react-three/fiber'
 export default function Experience({
   setRigActive,
   nextPortalRef,
-  prevPortalRef
+  prevPortalRef,
+  centerPortalRef
 }) {
-  const [rigActive, setRigActiveInternal] = useState(false)
-
   return (
     <Canvas camera={{ position: [0, 10, 750], fov: 55, near: 1, far: 20000 }}>
       {/* <CameraAnimation /> */}
@@ -21,6 +20,7 @@ export default function Experience({
           setRigActive={setRigActive}
           nextPortalRef={nextPortalRef}
           prevPortalRef={prevPortalRef}
+          centerPortalRef={centerPortalRef}
         />
       </Suspense>
     </Canvas>
