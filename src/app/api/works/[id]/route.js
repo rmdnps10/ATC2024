@@ -30,8 +30,8 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   try {
     await connectDb()
-    const { id, comment } = await request.json()
-
+    const { comment } = await request.json()
+    const { id } = await params
     const data = await DetailWork.findById(id)
 
     if (!data) {
