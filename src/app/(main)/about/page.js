@@ -76,16 +76,25 @@ export default function AboutPage() {
       <section className={styles.imageContainer}>
         <div className={styles.typography}>
           <Image
-            src="icon/logo/atc-typography.svg"
+            src="/icon/logo/atc-typography.svg"
             alt="2024 atc 공식 타이포그래피"
             layout="fill"
           />
         </div>
         <div className={styles.title}>
           <Image
-            src="icon/logo/atc-title.svg"
+            src="/icon/logo/atc_slogan_horizontal_black.png"
             alt="2024 atc 공식 타이틀"
-            layout="fill"
+            layout="responsive"
+            width={920}
+            height={216}
+          />
+          <Image
+            src="/icon/logo/atc_slogan_vertical_black.png"
+            alt="2024 atc 공식 타이틀"
+            layout="responsive"
+            width={244}
+            height={114}
           />
         </div>
       </section>

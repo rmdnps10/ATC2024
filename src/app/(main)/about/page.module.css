@@ -317,10 +317,25 @@
   height: 3.6rem;
 }
 .title {
-  width: 48%;
+  width: 80rem;
   height: 21.6rem;
 }
 
+.title img:last-child {
+  display: none;
+}
+@media (max-width: 768px) {
+  .title {
+    width: 24.4rem;
+    height: 11.4rem;
+  }
+  .title img:first-child {
+    display: none;
+  }
+  .title img:last-child {
+    display: block;
+  }
+}
 .subtitle {
   display: flex;
   justify-content: center;
