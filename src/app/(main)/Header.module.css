@@ -3,13 +3,17 @@
   display: flex;
   padding: 0 2.5rem;
   position: fixed;
-  z-index: 999;
+  z-index: 9999;
   height: 6.5rem;
   align-items: center;
   gap: 5.1rem;
   backdrop-filter: blur(20px);
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.header.scrolled {
   background-color: rgba(255, 255, 255, 0.8);
-  transition: 1s;
 }
 
 .header ul {
@@ -142,11 +146,6 @@
   width: 100%;
   background-color: inherit;
   transition: height 0.4s;
-  border-top: 1px solid white;
-}
-
-.mobileMenu nav {
-  margin-top: 12rem;
 }
 
 .mobileMenu nav li {

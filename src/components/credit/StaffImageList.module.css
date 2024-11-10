@@ -11,6 +11,7 @@
 }
 .imageContainerItem {
   position: relative;
+  min-width: 300px;
 }
 
 .imageContainerItem img {

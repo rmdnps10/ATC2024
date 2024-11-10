@@ -1,19 +1,18 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useMemo, useState, useCallback } from "react";
+import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import {
-  Environment,
-  OrbitControls,
-} from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
-import { Perf } from "r3f-perf";
+import gsap from "gsap";
 import { easing } from "maath";
 import dynamic from "next/dynamic";
 import CameraController from "./CameraController.js";
-import VideoText from "./VideoText.js";
+import ThreeText from "./ThreeText.js";
 import Boxes from "./Boxes.js";
+import Floor from "./Floor.js";
+import Model from "./Model.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
 //
@@ -43,19 +42,40 @@ const shuffle = (accent = 0) => [
 
 export default function Experience({ accent, scrollPercent }) {
   const connectors = useMemo(() => shuffle(accent), [accent]);
+  const bgRef = useRef();
+
+  useEffect(() => {
+    if (scrollPercent >= 85) {
+      const progress = (scrollPercent - 85) / 15; // 75%에서 100%까지의 진행률 계산
+      gsap.to(bgRef.current, {
+        r: 0,
+        g: 0,
+        b: 0,
+        duration: 1.5,
+        ease: "power2.out",
+        progress: progress
+      });
+    } else {
+      gsap.to(bgRef.current, {
+        r: 1,
+        g: 1,
+        b: 1,
+        duration: 1.5,
+        ease: "power2.out"
+      });
+    }
+  }, [scrollPercent]);
 
   return (
     <>
       {/* <Perf position="bottom-left" /> */}
-      <color attach="background" args={['#ffffff']} />
+      <color ref={bgRef} attach="background" args={['white']} />
       <CameraController />
 
-      {/* <OrbitControls /> */}
-
-      <Boxes scrollPercent={scrollPercent} />
+      <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
 
       {scrollPercent < 30 && (
-        <Physics timeStep="vary" gravity={[0, 0, 0]}>
+        <Physics gravity={[0, 0, 0]} >
           <Pointer />
           {connectors.map((props, i) => (
             <Sphere key={i} {...props} />
@@ -63,9 +83,17 @@ export default function Experience({ accent, scrollPercent }) {
         </Physics>
       )}
 
-      <Environment resolution={64} preset="studio" environmentIntensity={0.1} />
+      <Boxes scrollPercent={scrollPercent} />
 
-      {/* <VideoText /> */}
+      <ThreeText />
+
+      {scrollPercent >= 75 && (
+        <Physics gravity={[0, -9.8, 0]}>
+          <Floor scroll={scrollPercent} />
+        </Physics>
+      )}
+
+      <Model />
 
       <Effects />
     </>

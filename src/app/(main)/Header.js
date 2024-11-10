@@ -1,18 +1,17 @@
 'use client'
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState, useEffect } from 'react'
 import styles from './Header.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useLockBodyScroll } from 'react-use'
-//
-//
-//
+
 export default function Header() {
   const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] =
     useState(false)
   const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] =
     useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const pathname = usePathname()
   const isPathCredit = pathname === '/credit'
@@ -22,9 +21,21 @@ export default function Header() {
   }, false)
 
   useLockBodyScroll(isOpenMobileMenu)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
     <header
-      className={styles.header}
+      className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
       style={{
         backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
       }}>

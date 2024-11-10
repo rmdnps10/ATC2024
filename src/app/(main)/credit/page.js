@@ -1,3 +1,4 @@
+'use client'
 import styles from './page.module.css'
 import StaffSection from '@/components/credit/StaffSection'
 import ArtistSection from '@/components/credit/ArtistSection'
@@ -13,3 +14,4 @@ export default function CreditPage({ searchParams }) {
     </main>
   )
 }
+  
