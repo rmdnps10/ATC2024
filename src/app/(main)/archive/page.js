@@ -12,9 +12,18 @@ export default function ArchivePage() {
           <Image
             src={'/images/archive/atc-slogan-black.png'}
             alt="코끼리를 냉장고에 넣는법"
+            priority={true}
             width={402}
             height={54}
           />
+          <Image
+            src={'/icon/logo/atc_slogan_vertical_black.png'}
+            alt="코끼리를 냉장고에 넣는법"
+            priority={true}
+            width={150}
+            height={120}
+          />
+
           <span>의 작업과정을 소개합니다.</span>
         </h1>
         <p>

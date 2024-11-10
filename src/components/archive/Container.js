@@ -102,6 +102,9 @@ const ScrollSection = styled.section`
   &::-webkit-scrollbar-thumb {
     background: #000;
   }
+
+  @media (max-width: 768px) {
+  }
 `
 
 const LowButton = styled.button`
