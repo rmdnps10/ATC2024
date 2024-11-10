@@ -56,7 +56,7 @@ const StyledFixNav = styled.nav`
   z-index: 100;
   .up-arrow {
     margin-bottom: -0.5rem;
-  }
+  } 
   @media (max-width: 768px) {
     bottom: 0px;
     right: 0px;
