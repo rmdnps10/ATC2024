@@ -13,6 +13,13 @@
   position: relative;
 }
 
+.imageContainerItem img {
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 210px;
+  }
+}
+
 .overlay {
   padding: 2rem;
   position: absolute;
@@ -27,6 +34,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    background-color: none;
+    left: 160px;
+    opacity: 1;
+  }
 }
 .imageContainerItem:hover .overlay {
   opacity: 1;
@@ -40,6 +52,9 @@
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.028rem;
+  @media (max-width: 768px) {
+    text-align: left;
+  }
 }
 .staffInfo p {
   font-size: 1.6rem;

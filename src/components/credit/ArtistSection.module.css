@@ -1,0 +1,88 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rem;
+  align-items: center;
+  gap: 8rem;
+  overflow: hidden;
+  margin: 0 auto;
+  transition: all 0.5s;
+  @media (max-width: 768px) {
+    padding-top: 3rem;
+  }
+}
+
+.teamSection {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.teamArtworkName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.8rem;
+  margin: 0 auto;
+  color: #fafafa;
+  font-family: 'Sandoll Seoul';
+  font-size: 4rem;
+  @media (max-width: 768px) {
+    font-size: 3.6rem;
+  }
+}
+
+.teamArtworkName p:first-child {
+  width: 20rem;
+  text-align: right;
+  word-break: keep-all;
+  line-height: 100%;
+  @media (max-width: 768px) {
+    width: 10rem;
+  }
+}
+
+.teamArtworkName p:nth-child(3) {
+  width: 24rem;
+  text-align: left;
+  @media (max-width: 768px) {
+    width: 9rem;
+  }
+}
+
+.artistTeam {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
+}
+
+.artistIndividual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.artistIndividual p:first-child {
+  font-size: 2rem;
+  color: white;
+  width: 10rem;
+  text-align: right;
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+}
+
+.artistIndividual p:nth-child(2) {
+  font-size: 1.6rem;
+  color: #767676;
+  width: 15rem;
+  text-align: left;
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    width: 10rem;
+  }
+}

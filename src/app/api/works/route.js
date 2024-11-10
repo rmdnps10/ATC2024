@@ -1,13 +1,22 @@
-// 작품 목록을 모두 가져오는 api
 import { connectDb } from '@/lib/connect-db'
-import { Work } from '@/models/work-schema'
+import { DetailWork } from '@/models/detail-work-schema'
 
 export async function GET(request) {
   try {
     await connectDb()
-    const data = await Work.find()
-    return Response.json({ data })
+    const data = await DetailWork.find()
+      .select('_id title thumbnailImg category oneLiner artistName teamName') // 필요한 필드만 지정
+      .exec()
+
+    return new Response(JSON.stringify({ data }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    })
   } catch (error) {
-    return Response.json({ error }, { status: 500 })
+    console.error(error)
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 }
