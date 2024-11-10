@@ -2,35 +2,58 @@ import React from 'react'
 import { useLockBodyScroll } from 'react-use'
 import styled from 'styled-components'
 import Image from 'next/image'
-import { archiveStore } from '@/app/(main)/archive/archiveStore'
-
-export default function BackgroundModal({ type }) {
+import { archiveStore } from '@/app/(main)/archive/store/archiveStore'
+import { elephantPositions } from '@/app/(main)/archive/store/elephantPositions'
+//
+//
+//
+export default function BackgroundModal({
+  moveElephant,
+  closeModal,
+  imageIndex,
+  setImageIndex
+}) {
   useLockBodyScroll()
+
+  const handleClickArrow = direction => {
+    const newIndex = imageIndex + direction
+    setImageIndex(newIndex)
+    moveElephant(elephantPositions[newIndex])
+  }
+
+  const imageThreshold = archiveStore.length
+  const currentImage = archiveStore[imageIndex]
+
   return (
     <Darkscreen>
-      <LeftArrow
+      <Arrow
         src="/icon/button/left-arrow.svg"
         alt="이전 사진"
+        onClick={() => handleClickArrow(-1)}
+        $visible={imageIndex !== 0}
       />
       <section>
         <CloseX
           src="/icon/button/close.png"
           alt="닫기"
+          onClick={closeModal}
         />
-        <div class="image-container">
+        <div className="image-container">
           <Image
             style={{ objectFit: 'cover' }}
-            src={archiveStore[type].imageUrl}
+            src={currentImage?.imageUrl}
+            priority={true}
             fill={true}
-            alt={archiveStore[type].caption}
+            alt={currentImage?.caption}
           />
         </div>
-        <figcaption>{archiveStore[type].caption}</figcaption>
+        <figcaption>{currentImage?.caption}</figcaption>
       </section>
-
-      <RightArrow
+      <Arrow
         src="/icon/button/right-arrow.svg"
         alt="다음 사진"
+        onClick={() => handleClickArrow(1)}
+        $visible={imageIndex !== imageThreshold - 1}
       />
     </Darkscreen>
   )
@@ -64,10 +87,13 @@ const Darkscreen = styled.div`
 
 const CloseX = styled.img`
   position: absolute;
+  cursor: pointer;
   top: -50px;
   right: -50px;
   width: 30px;
 `
 
-const RightArrow = styled.img``
-const LeftArrow = styled.img``
+const Arrow = styled.img`
+  cursor: pointer;
+  visibility: ${props => (props.$visible ? 'visible' : 'hidden')};
+`

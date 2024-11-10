@@ -34,11 +34,13 @@
   border-radius: 1rem;
   cursor: pointer;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1.6rem;
   letter-spacing: -0.06rem;
   flex-shrink: 0;
+  z-index: 5000;
+  position: relative;
+  border: none;
 }
