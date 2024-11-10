@@ -27,12 +27,12 @@
 .mobileOnly {
   display: none;
   @media screen and (max-width: 768px) {
-    display: block;
+    display: inline-block;
   }
 }
 
 .pcOnly {
-  display: block;
+  display: inline-block;
   @media screen and (max-width: 768px) {
     display: none;
   }

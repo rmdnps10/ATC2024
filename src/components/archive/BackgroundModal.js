@@ -80,7 +80,7 @@ const Darkscreen = styled.div`
     width: 30vw;
     height: 70vh;
     object-fit: cover;
-    @media (max-width: 1080px) {
+    @media (max-width: 1300px) {
       width: 70vw;
     }
   }

@@ -4,7 +4,6 @@ import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
-import { set } from 'mongoose'
 import ModalPortal from './ModalPortal'
 
 export default function ScrollContainer() {
