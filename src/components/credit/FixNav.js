@@ -53,11 +53,17 @@ export default function FixNav() {
 
 const StyledFixNav = styled.nav`
   position: fixed;
-  top: 100px;
-  right: 50px;
   z-index: 100;
   .up-arrow {
     margin-bottom: -0.5rem;
+  }
+  @media (max-width: 768px) {
+    bottom: 0px;
+    right: 0px;
+  }
+  @media (min-width: 768px) {
+    top: 100px;
+    right: 50px;
   }
 `
 
