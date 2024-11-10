@@ -327,13 +327,19 @@
 }
 @media (max-width: 768px) {
   .typography {
-    width: 7.5rem;
+    width: 15%;
+    min-width: 7.5rem;
   }
   .title img:first-child {
     display: none;
   }
   .title img:last-child {
     display: block;
+  }
+}
+@media (max-width: 425px) {
+  .typography {
+    width: 7.5rem;
   }
 }
 .subtitle {
@@ -393,7 +399,6 @@
   justify-content: center;
   margin-top: 24.1rem;
   margin-bottom: 29.1rem;
-  font-family: 'pretendard';
   z-index: 1;
   @media (max-width: 768px) {
     flex-direction: column;
