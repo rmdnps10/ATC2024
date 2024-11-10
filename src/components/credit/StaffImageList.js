@@ -17,6 +17,10 @@ export default function StaffImageList({ teamName, teamType, memberList }) {
         width="200"
         height="280"
       />
+      <div
+        className={`${styles.imageDivideLine} ${
+          isLeader && styles.leader
+        }`}></div>
       <div className={styles.overlay}>
         <div className={styles.staffId}>
           {member.인스타그램 ? '@' + member.인스타그램 : ''}
