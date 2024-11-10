@@ -187,10 +187,10 @@ export default function StaffSection() {
           memberList={작품팀}
         />
       </section>
-      <section className={styles.container}>
+      <section className={styles.container} id="회계">
         <div className={styles.title}>
           <Image
-            src="/icon/symbol/symbol1.svg"
+            src="/icon/symbol/symbol3.svg"
             alt="회계"
             width="28"
             height="28"
