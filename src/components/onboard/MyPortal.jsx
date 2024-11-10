@@ -1,6 +1,3 @@
-'use client'
-
-// MyPortal.jsx
 import {
   Html,
   CameraControls,
@@ -30,6 +27,7 @@ export default function MyPortal({
   const [targetFocus, setTargetFocus] = useState(null)
   const [animationComplete, setAnimationComplete] = useState(false)
   const [currentPortal, setCurrentPortal] = useState(0)
+  const [isHovered, setIsHovered] = useState(false) // 전체 hover 상태 관리
   const controlsRef = useRef()
   const portalRefs = [useRef(), useRef(), useRef()]
   const blendValues = useRef([0, 0, 0]) // 각 포털의 Blend 값을 저장
@@ -62,7 +60,7 @@ export default function MyPortal({
           blend: blendValue,
           duration: 1,
           onComplete: () => {
-            blendValues.current[i] = blendValue // 애니메이션이 끝난 후 확실히 갱신
+            blendValues.current[i] = blendValue
           }
         })
       }
@@ -148,16 +146,26 @@ export default function MyPortal({
               onClick={e => {
                 e.stopPropagation()
                 if (currentPortal === 1) {
-                  // Portal2일 때만 리다이렉션
-                  window.location.href = portalPositions[currentPortal].link // 원하는 내부 경로
+                  window.location.href = portalPositions[currentPortal].link
                 } else if (portalPositions[currentPortal].link) {
-                  // 외부 링크가 있을 때만 새 탭에서 열기
                   window.open(portalPositions[currentPortal].link, '_blank')
                 }
               }}>
               Go
             </button>
           </div>
+          {/* 커서 hover 상태 확인 */}
+          <div
+            className={isHovered ? styles.hoverCursor : ''}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              pointerEvents: 'none'
+            }}
+          />
         </Html>
       )}
 
@@ -165,6 +173,8 @@ export default function MyPortal({
         ref={portalRefs[0]}
         rigActive={rigActive}
         blend={blendValues.current[0]}
+        onPointerOver={() => setIsHovered(true)}
+        onPointerOut={() => setIsHovered(false)}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(-35, 20, 15))
@@ -180,6 +190,8 @@ export default function MyPortal({
         ref={portalRefs[1]}
         rigActive={rigActive}
         blend={blendValues.current[1]}
+        onPointerOver={() => setIsHovered(true)}
+        onPointerOut={() => setIsHovered(false)}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(0, 20, 15))
@@ -195,6 +207,8 @@ export default function MyPortal({
         ref={portalRefs[2]}
         rigActive={rigActive}
         blend={blendValues.current[2]}
+        onPointerOver={() => setIsHovered(true)}
+        onPointerOut={() => setIsHovered(false)}
         onClick={() => {
           if (animationComplete) {
             setTargetPosition(new THREE.Vector3(35, 20, 15))
