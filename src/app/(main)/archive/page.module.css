@@ -24,14 +24,16 @@
   }
 }
 
-.main article h1 img:first-child {
-  @media (max-width: 768px) {
-    display: none;
+.mobileOnly {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: block;
   }
 }
 
-.main article h1 img:nth-child(2) {
-  @media (min-width: 768px) {
+.pcOnly {
+  display: block;
+  @media screen and (max-width: 768px) {
     display: none;
   }
 }
@@ -64,6 +66,5 @@
   border: none;
   @media (max-width: 768px) {
     z-index: 2000;
-    
   }
 }
