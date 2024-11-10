@@ -55,6 +55,7 @@
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
     "r3f-perf": "^7.2.1",
+    "styled-components": "^6.1.13",
     "three": "^0.169.0"
   }
 }
