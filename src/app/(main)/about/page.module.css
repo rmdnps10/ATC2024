@@ -317,17 +317,17 @@
   height: 3.6rem;
 }
 .title {
-  width: 80rem;
-  height: 21.6rem;
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
 
 .title img:last-child {
   display: none;
 }
 @media (max-width: 768px) {
-  .title {
-    width: 24.4rem;
-    height: 11.4rem;
+  .typography {
+    width: 7.5rem;
   }
   .title img:first-child {
     display: none;
