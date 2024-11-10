@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 // import { worksData } from '@/components/works/MockData'
 import { getAllWorks } from '@/client-api/getAllWorks'
+import { title } from 'framer-motion/client'
+// import { getPlaiceholder } from 'plaiceholder'
 //
 //
 //
@@ -23,61 +25,99 @@ export default function WorksPage({}) {
     '비디오',
     '웹사이트'
   ]
+  // const { base64 } = await getPlaiceholder(buffer)
   const router = useRouter()
   const tabRefs = useRef([])
   const indicatorRefs = useRef([])
   const tabListRef = useRef()
-  const [tabSelected, setTabSelected] = useState('ALL')
+  const [tabSelected, setTabSelected] = useState(0)
   const [clickedId, setClickedId] = useState(null)
   const [defaultWorks, setDefaultWorks] = useState([])
   const [filteredWorks, setFilteredWorks] = useState([])
   const [scrollY, setScrollY] = useState(0)
 
+  //db 연결
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllWorks()
+        if (data) {
+          const parsed = data.map(el => {
+            el.category = el.category.split(',')
+            if (el._id === '672cea5b0c11e50dbd25fa13') {
+              el.title = el.title.split('(')[0]
+              return el
+            } else {
+              return el
+            }
+          })
+          console.log(
+            parsed.map(el => {
+              const res = {
+                title: el.title,
+                name: el.teamName
+              }
+              return res
+            })
+          )
+          setDefaultWorks(parsed)
+          setFilteredWorks(parsed)
+
+          const storageTab = window.localStorage.getItem('tab')
+          function handleRef(key) {
+            indicatorRefs.current.forEach((indiRef, indiIdx) => {
+              if (indiRef) {
+                indiRef.style.opacity = indiIdx === key ? '1' : '0'
+              }
+            })
+            tabRefs.current.forEach((ref, idx) => {
+              if (ref) {
+                ref.style.fontWeight = idx === key ? '600' : '500'
+                ref.style.color = idx === key ? 'black' : '#767676'
+                ref.style.background =
+                  idx === key
+                    ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
+                    : 'none'
+                ref.style.backgroundClip = idx === key ? 'text' : 'none'
+                ref.style.webkitBackgroundClip = idx === key ? 'text' : 'none'
+                ref.style.webkitTextFillColor =
+                  idx === key ? 'transparent' : 'inherit'
+              }
+            })
+          }
+          const initialTab = storageTab !== null ? parseInt(storageTab, 10) : 0
+
+          handleRef(initialTab)
+
+          if (initialTab === 0) {
+            setFilteredWorks(parsed)
+          } else {
+            setFilteredWorks(
+              parsed.filter(el => el.category.includes(tabList[initialTab]))
+            )
+          }
+          setTabSelected(initialTab)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+    console.log('db end')
+  }, [])
+
   //필터링 탭 초기화
   useEffect(() => {
-    indicatorRefs.current.forEach((indiRef, indiIdx) => {
-      if (indiRef) {
-        indiRef.style.opacity = indiIdx === 0 ? '1' : '0'
-      }
-    })
-    tabRefs.current.forEach((ref, idx) => {
-      if (ref) {
-        ref.style.fontWeight = idx === 0 ? '600' : '500'
-        ref.style.color = idx === 0 ? 'black' : '#767676'
-        ref.style.background =
-          idx === 0
-            ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
-            : 'none'
-        ref.style.backgroundClip = idx === 0 ? 'text' : 'none'
-        ref.style.webkitBackgroundClip = idx === 0 ? 'text' : 'none'
-        ref.style.webkitTextFillColor = idx === 0 ? 'transparent' : 'inherit'
-      }
-    })
-
     //스크롤 인식
     const handleScroll = () => {
       setScrollY(window.scrollY)
+      window.localStorage.setItem('scroll', scrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
-
-  //db 연결
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllWorks()
-      if (data) {
-        const parsed = data.map(el => {
-          el.category = el.category.split(',')
-          return el
-        })
-        setDefaultWorks(parsed)
-        setFilteredWorks(parsed)
-      }
-    }
-    fetchData()
   }, [])
 
   //work 요소 클릭 시
@@ -108,6 +148,9 @@ export default function WorksPage({}) {
       }
     })
     setTabSelected(key)
+
+    window.localStorage.setItem('tab', key)
+
     if (key === 0) {
       //all을 선택하면 가져온 데이터 모두로 set
       setFilteredWorks(defaultWorks)
@@ -176,11 +219,14 @@ export default function WorksPage({}) {
             className={styles.figure}
             key={el._id}>
             <Image
+              // placeholder="blur"
+              // blurDataURL={base64}
               className={styles.image}
               // src={el.thumbnailImg}
               src={'/images/works/page0.png'}
               alt={el.title}
               fill
+              objectFit="cover"
             />
             <figcaption>
               <div className={styles.figBox}>
