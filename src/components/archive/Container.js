@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
 import { set } from 'mongoose'
+import ModalPortal from './ModalPortal'
 
 export default function ScrollContainer() {
   const TIMELINE_WIDTH = 5356 * 0.7
@@ -38,12 +39,14 @@ export default function ScrollContainer() {
   return (
     <ScrollSection ref={scrollRef}>
       {isModalOpen && (
-        <BackgroundModal
-          moveElephant={moveElephant}
-          closeModal={closeModal}
-          imageIndex={imageIndex}
-          setImageIndex={setImageIndex}
-        />
+        <ModalPortal>
+          <BackgroundModal
+            moveElephant={moveElephant}
+            closeModal={closeModal}
+            imageIndex={imageIndex}
+            setImageIndex={setImageIndex}
+          />
+        </ModalPortal>
       )}
 
       <Image
