@@ -1,8 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import styles from './TypingDescription.module.css'
-//
-//
-//
+
 export default function TypingDescription() {
   const typingContent = [
     { type: 'text', text: "'코끼리를 냉장고에 넣는 방법'", font: 'Sandoll' },
@@ -40,97 +39,89 @@ export default function TypingDescription() {
     { type: 'text', text: '하고자 합니다.', font: 'Pretendard' }
   ]
 
-  let index = 0
-  let textIndex = 0
-  const typingSpeed = 50
-  const sectionRef = useRef(null)
-  const cursorRef = useRef(null)
+  const [renderedContent, setRenderedContent] = useState([])
+  const [typingIndex, setTypingIndex] = useState({ current: 0, charIndex: 0 })
+  const typingInterval = useRef(null)
 
   useEffect(() => {
-    const targetElement = document.querySelector(
-      `.${styles.description} article`
-    )
-    if (!targetElement) return
-
     const startTypingEffect = () => {
-      const interval = setInterval(() => {
-        if (index < typingContent.length) {
-          const content = typingContent[index]
+      typingInterval.current = setInterval(() => {
+        const { current, charIndex } = typingIndex
 
-          if (content.type === 'text') {
-            if (textIndex < content.text.length) {
-              const span = document.createElement('span')
-              span.className =
+        if (current >= typingContent.length) {
+          clearInterval(typingInterval.current)
+          return
+        }
+
+        const currentContent = typingContent[current]
+
+        if (currentContent.type === 'text') {
+          if (charIndex < currentContent.text.length) {
+            setRenderedContent(prev => {
+              const updated = [...prev]
+              if (updated[current]?.type === 'text') {
+                updated[current].text = currentContent.text.slice(
+                  0,
+                  charIndex + 1
+                )
+              } else {
+                updated.push({
+                  type: 'text',
+                  text: currentContent.text.slice(0, charIndex + 1),
+                  font: currentContent.font
+                })
+              }
+              return updated
+            })
+            setTypingIndex({ current, charIndex: charIndex + 1 })
+          } else {
+            setTypingIndex({ current: current + 1, charIndex: 0 })
+          }
+        } else if (currentContent.type === 'image') {
+          setRenderedContent(prev => [
+            ...prev,
+            { type: 'image', src: currentContent.src, alt: currentContent.alt }
+          ])
+          setTypingIndex({ current: current + 1, charIndex: 0 })
+        }
+      }, 100)
+    }
+
+    startTypingEffect()
+
+    return () => {
+      clearInterval(typingInterval.current)
+    }
+  }, [typingIndex])
+
+  return (
+    <section className={styles.description}>
+      <article>
+        {renderedContent.map((content, index) =>
+          content.type === 'text' ? (
+            <span
+              key={`text-${index}`}
+              className={
                 content.font === 'Sandoll'
                   ? styles.SandollFont
                   : content.font === 'Pretendard'
                   ? styles.PretendardFont
                   : styles.CafeFont
-              span.textContent = content.text.charAt(textIndex)
-              targetElement.appendChild(span)
-              textIndex++
-            } else {
-              textIndex = 0
-              index++
-            }
-            // 커서를 마지막 텍스트 오른쪽으로
-            updateCursorPosition()
-          } else if (content.type === 'image') {
-            const img = document.createElement('img')
-            img.src = content.src
-            img.alt = content.alt
-            img.className = styles.image
-
-            img.onload = () => {
-              // 이미지 로드 후 커서 위치 업데이트하기
-              updateCursorPosition()
-            }
-
-            targetElement.appendChild(img)
-            index++
-          }
-        } else {
-          clearInterval(interval)
-        }
-      }, typingSpeed)
-    }
-
-    const updateCursorPosition = () => {
-      const lastElement = targetElement.lastChild
-      if (lastElement && cursorRef.current) {
-        const rect = lastElement.getBoundingClientRect()
-        const parentRect = targetElement.getBoundingClientRect()
-
-        cursorRef.current.style.top = `${rect.top - parentRect.top}px`
-        cursorRef.current.style.left = `${rect.right - parentRect.left}px`
-      }
-    }
-
-    const observer = new IntersectionObserver(
-      entries => {
-        if (entries[0].isIntersecting) {
-          startTypingEffect()
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.8 }
-    )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <section
-      ref={sectionRef}
-      className={styles.description}>
-      <article>
-        <span
-          ref={cursorRef}
-          className={styles.cursor}></span>{' '}
+              }>
+              {content.text}
+            </span>
+          ) : (
+            <Image
+              key={`image-${index}`}
+              src={content.src}
+              alt={content.alt}
+              width={78}
+              height={56}
+              priority
+              className={styles.image}
+            />
+          )
+        )}
       </article>
     </section>
   )

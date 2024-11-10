@@ -1,20 +1,12 @@
-@font-face {
-  font-family: 'Cafe24Shiningstar';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Shiningstar.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .description {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   margin-top: 22.9rem;
   padding: 13rem 0;
-  background-color: rgba(255, 255, 255, 0.5);
   font-weight: 200;
+  background-color: rgba(255, 255, 255, 0.5);
   @media (max-width: 768px) {
     margin-top: 6.2rem;
     padding: 4rem 0;
@@ -25,29 +17,34 @@
   position: relative;
   width: 60%;
   padding: 0 3.6rem;
-  z-index: 10;
   font-size: 3.6rem;
   line-height: 180%;
   color: #1160f7;
   @media (max-width: 768px) {
     width: 80%;
-    padding: 0 2.4rem;
     font-size: 1.2rem;
+    padding: 0 2.4rem;
     line-height: 200%;
   }
 }
-.cursor {
-  position: absolute;
+
+.description article::after {
+  content: '';
   display: inline-block;
+  position: relative;
+  width: 0.2rem;
   height: 3.8rem;
-  border-left: 2px solid #000;
-  vertical-align: text-top;
+  background-color: black;
   animation: blink 0.7s infinite;
-  @media (max-width: 768px) {
+  vertical-align: middle; /* 텍스트 기준으로 정렬 */
+}
+@media (max-width: 768px) {
+  .description article::after {
     height: 1.4rem;
-    border-left: 1px solid #000;
+    width: 0.1rem;
   }
 }
+
 @keyframes blink {
   0% {
     opacity: 1;
@@ -59,6 +56,7 @@
     opacity: 1;
   }
 }
+
 .description img {
   vertical-align: middle;
   width: 7.8rem;
@@ -68,6 +66,7 @@
     height: 2rem;
   }
 }
+
 .SandollFont {
   font-family: 'Sandoll Seoul';
   font-size: 4rem;
@@ -75,6 +74,7 @@
     font-size: 1.6rem;
   }
 }
+
 .CafeFont {
   font-family: 'Cafe24Shiningstar';
 }
