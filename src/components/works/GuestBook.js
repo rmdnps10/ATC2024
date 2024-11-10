@@ -6,73 +6,18 @@ import React, { useEffect, useState } from 'react'
 //
 //
 function GuestBook({ comment }) {
-  const data = [
-    {
-      name: '이것은 여섯글',
-      date: '20241120',
-      comment:
-        "one's commentone's commentone's commentone's commentone's commentone's commentone's commentone's commentone's commentone's commentone's commentone's comment"
-    },
-    {
-      name: 'two',
-      date: '20241120',
-      comment:
-        "two's commenttwo's commenttwo's commenttwo's commenttwo's commenttwo's commenttwo's commenttwo's commentvtwo's commenttwo's commenttwo's commenttwo's comment"
-    },
-    {
-      name: 'three',
-      date: '20241120',
-      comment: "three's comment"
-    },
-    {
-      name: 'four',
-      date: '20241120',
-      comment: "four's comment"
-    },
-    {
-      name: 'five',
-      date: '20241120',
-      comment: "five's comment"
-    },
-    {
-      name: 'six',
-      date: '20241120',
-      comment: "six's comment"
-    },
-    {
-      name: 'seven',
-      date: '20241120',
-      comment: "seven's comment"
-    },
-    {
-      name: 'eight',
-      date: '20241120',
-      comment: "eight's comment"
-    },
-    {
-      name: 'nine',
-      date: '20241120',
-      comment: "nine's comment"
-    },
-    {
-      name: 'ten',
-      date: '20241120',
-      comment: "ten's comment"
-    }
-  ]
   const [commentList, setCommentList] = useState(null)
   const [randomNums, setRandomNums] = useState([])
   useEffect(() => {
     //1.상태 관리 업데이트
     setCommentList(comment)
     //2. data 길이 계산
-    const length = data.length
+    const length = comment.length
     //3. length만큼 랜덤 숫자 배열에 넣기
     const generatedRandoms = Array.from(
       { length },
       () => Math.floor(Math.random() * 7) + 1
     )
-    console.log(generatedRandoms)
     setRandomNums(generatedRandoms)
   }, [comment])
 
@@ -106,7 +51,6 @@ function GuestBook({ comment }) {
             else return null
           })}
         </div>
-
         <div className={styles.row}>
           {commentList?.map((el, idx) => {
             if (idx % 2 === 1)

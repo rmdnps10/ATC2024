@@ -11,6 +11,10 @@
   overflow-x: scroll;
   gap: 8rem;
   padding: 6rem 0;
+  @media (max-width: 430px) {
+    gap: 4rem;
+    padding: 1rem 0;
+  }
 }
 
 .smallWrapper::-webkit-scrollbar {
@@ -53,7 +57,7 @@
   background-clip: content-box, border-box;
   @media (max-width: 430px) {
     width: 40vw;
-    height: 20rem;
+    height: 18rem;
   }
 }
 
@@ -101,7 +105,7 @@
   letter-spacing: -1px;
   text-wrap: nowrap;
   @media (max-width: 430px) {
-    font-size: 5vw;
+    font-size: 2.5rem;
   }
 }
 
@@ -114,7 +118,7 @@
   line-height: normal;
   letter-spacing: -0.3px;
   @media (max-width: 430px) {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -131,6 +135,6 @@
   text-wrap: wrap;
   word-break: break-all;
   @media (max-width: 430px) {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }

@@ -36,7 +36,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   @media (max-width: 430px) {
-    font-size: 4rem;
+    font-size: 6rem;
   }
 }
 
@@ -49,7 +49,9 @@
   line-height: 150%;
   letter-spacing: -0.4px;
   @media (max-width: 430px) {
-    font-size: 1rem;
+    font-size: 1.4rem;
+    max-width: 80%;
+    word-break: keep-all;
     transform: translateY(-2rem);
   }
 }
@@ -73,7 +75,7 @@
   letter-spacing: -0.38px;
   padding: 1rem 2rem 1rem 0;
   @media (max-width: 430px) {
-    font-size: 1rem;
+    font-size: 1.4rem;
     padding: 2rem 0;
   }
 }
@@ -103,7 +105,7 @@
     height: 6rem;
   }
   @media (max-width: 430px) {
-    height: 7rem;
+    height: 9rem;
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -122,7 +124,7 @@
     font-size: 1.8rem;
   }
   @media (max-width: 430px) {
-    font-size: 0.8rem;
+    font-size: 1.4rem;
   }
 }
 
@@ -194,15 +196,8 @@
 
 .main section {
   width: 100%;
-  /* height: 100%; */
-  /* overflow-x: hidden; */
-  /* overflow-y: scroll; */
   display: flex;
   flex-wrap: wrap;
-  /* overscroll-behavior: contain;
-  &::-webkit-scrollbar {
-    display: none;
-  } */
 }
 
 .figure {
@@ -267,11 +262,15 @@
   display: flex;
   flex-direction: column;
 }
+
 .figTeam {
   font-size: 1.5rem;
   font-family: 'Sandoll Seoul';
   @media (min-width: 2000px) {
     font-size: 3rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.6rem;
   }
 }
 
@@ -288,6 +287,10 @@
   }
   @media (min-width: 2000px) {
     font-size: 5rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 3.8rem;
+    line-height: 3.8rem;
   }
 }
 
@@ -306,6 +309,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .animateBox {

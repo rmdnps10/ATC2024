@@ -127,7 +127,6 @@
     font-size: 2rem;
     line-height: 2.3rem;
     max-width: 80%;
-    font-weight: 600;
   }
 }
 
@@ -290,7 +289,6 @@
   line-height: normal;
   @media (max-width: 430px) {
     font-size: 3rem;
-    font-weight: 600;
   }
 }
 

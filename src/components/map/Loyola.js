@@ -91,6 +91,6 @@ export const LoyolaSVG = forwardRef((props, ref) => (
 ))
 
 export const loyolaData = [
-  { team: '-', title: '파동' },
-  { team: '-', title: '면풍' }
+  { team: '-', title: '파동', _id: '' },
+  { team: '컨택', title: '면풍', _id: '672cea5b0c11e50dbd25fa32' }
 ]
