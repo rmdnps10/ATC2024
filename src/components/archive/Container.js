@@ -93,6 +93,18 @@ const ScrollSection = styled.section`
   padding-top: 50px;
   position: relative;
   z-index: 1000;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; /* 또는 트랙에 추가한다 */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+
+  @media (max-width: 768px) {
+  }
 `
 
 const LowButton = styled.button`

@@ -10,11 +10,30 @@
   font-weight: 500;
   line-height: 160%;
   letter-spacing: -0.032rem;
+  @media (max-width: 768px) {
+    padding-left: 3rem;
+    padding-right: 2rem;
+  }
 }
 
 .main article h1 span {
   display: inline-block;
   padding-left: 1rem;
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
+}
+
+.main article h1 img:first-child {
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.main article h1 img:nth-child(2) {
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .main article p {
@@ -43,4 +62,8 @@
   z-index: 5000;
   position: relative;
   border: none;
+  @media (max-width: 768px) {
+    z-index: 2000;
+    
+  }
 }

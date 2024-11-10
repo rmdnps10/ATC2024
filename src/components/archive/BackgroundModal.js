@@ -82,6 +82,9 @@ const Darkscreen = styled.div`
     width: 30vw;
     height: 70vh;
     object-fit: cover;
+    @media (max-width: 1080px) {
+      width: 70vw;
+    }
   }
 `
 
@@ -96,4 +99,7 @@ const CloseX = styled.img`
 const Arrow = styled.img`
   cursor: pointer;
   visibility: ${props => (props.$visible ? 'visible' : 'hidden')};
+  @media (max-width: 768px) {
+    width: 50px;
+  }
 `
