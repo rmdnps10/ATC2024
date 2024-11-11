@@ -63,9 +63,7 @@ export default function ScrollContainer() {
   }, [])
 
   return (
-    <ScrollSection
-      ref={scrollRef}
-      tabIndex={0}>
+    <ScrollSection ref={scrollRef}>
       {isModalOpen && (
         <ModalPortal>
           <BackgroundModal
@@ -150,6 +148,9 @@ const LowButton = styled.button`
   background: #fff;
   border: none;
   cursor: pointer;
+  &:hover {
+    filter: brightness(70%);
+  }
 `
 
 const HighButton = styled(LowButton)`
