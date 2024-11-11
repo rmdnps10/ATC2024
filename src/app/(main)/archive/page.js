@@ -8,6 +8,11 @@ export default function ArchivePage() {
   return (
     <>
       <main className={styles.main}>
+        <img
+          className={styles.background}
+          src="/images/archive/gradient.png"
+          alt="배경이미지"
+        />
         <article>
           <h1>
             <div className={styles.pcOnly}>
