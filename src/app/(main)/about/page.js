@@ -86,15 +86,15 @@ export default function AboutPage() {
             src="/icon/logo/atc_slogan_horizontal_black.png"
             alt="2024 atc 공식 타이틀"
             layout="responsive"
-            width={920}
-            height={216}
+            width={924}
+            height={126}
           />
           <Image
             src="/icon/logo/atc_slogan_vertical_black.png"
             alt="2024 atc 공식 타이틀"
             layout="responsive"
-            width={244}
-            height={114}
+            width={542}
+            height={444}
           />
         </div>
       </section>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import styles from './InfiniteBanner.module.css'
 import Image from 'next/image'
-
+//
+//
+//
 export default function InfiniteBanner() {
   const sponsors = [
     { name: '교육부', link: null },
