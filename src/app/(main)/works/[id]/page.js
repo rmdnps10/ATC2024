@@ -10,7 +10,6 @@ import WorkDetailModal from '@/components/works/WorkDetailModal'
 import Loading from '../../loading'
 import GuestBook from '@/components/works/GuestBook'
 import { putWorkDetail } from '@/client-api/putWorkDetail'
-import { log } from 'three/webgpu'
 //
 //
 //

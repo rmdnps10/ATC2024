@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
-import { set } from 'mongoose'
+import ModalPortal from './ModalPortal'
 
 export default function ScrollContainer() {
   const TIMELINE_WIDTH = 5356 * 0.7
@@ -38,12 +38,14 @@ export default function ScrollContainer() {
   return (
     <ScrollSection ref={scrollRef}>
       {isModalOpen && (
-        <BackgroundModal
-          moveElephant={moveElephant}
-          closeModal={closeModal}
-          imageIndex={imageIndex}
-          setImageIndex={setImageIndex}
-        />
+        <ModalPortal>
+          <BackgroundModal
+            moveElephant={moveElephant}
+            closeModal={closeModal}
+            imageIndex={imageIndex}
+            setImageIndex={setImageIndex}
+          />
+        </ModalPortal>
       )}
 
       <Image
@@ -93,6 +95,18 @@ const ScrollSection = styled.section`
   padding-top: 50px;
   position: relative;
   z-index: 1000;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+    height: 8px;
+    background-color: #aaa; /* 또는 트랙에 추가한다 */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+
+  @media (max-width: 768px) {
+  }
 `
 
 const LowButton = styled.button`

@@ -51,19 +51,10 @@ export default function WorksPage({}) {
               return el
             }
           })
-          console.log(
-            parsed.map(el => {
-              const res = {
-                title: el.title,
-                name: el.teamName
-              }
-              return res
-            })
-          )
           setDefaultWorks(parsed)
           setFilteredWorks(parsed)
 
-          const storageTab = window.localStorage.getItem('tab')
+          const storageTab = window.sessionStorage.getItem('tab')
           function handleRef(key) {
             indicatorRefs.current.forEach((indiRef, indiIdx) => {
               if (indiRef) {
@@ -104,7 +95,6 @@ export default function WorksPage({}) {
     }
 
     fetchData()
-    console.log('db end')
   }, [])
 
   //필터링 탭 초기화
@@ -112,7 +102,7 @@ export default function WorksPage({}) {
     //스크롤 인식
     const handleScroll = () => {
       setScrollY(window.scrollY)
-      window.localStorage.setItem('scroll', scrollY)
+      window.sessionStorage.setItem('scroll', scrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
@@ -149,7 +139,7 @@ export default function WorksPage({}) {
     })
     setTabSelected(key)
 
-    window.localStorage.setItem('tab', key)
+    window.sessionStorage.setItem('tab', key)
 
     if (key === 0) {
       //all을 선택하면 가져온 데이터 모두로 set

@@ -100,13 +100,15 @@
   align-items: flex-end;
   @media (max-width: 430px) {
     margin-top: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
 .header span:nth-child(1) {
   letter-spacing: 0.2rem;
   @media (max-width: 430px) {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -119,8 +121,10 @@
   line-height: normal;
   letter-spacing: -0.5px;
   @media (max-width: 430px) {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    margin-left: 5rem;
+    word-break: keep-all;
   }
 }
 

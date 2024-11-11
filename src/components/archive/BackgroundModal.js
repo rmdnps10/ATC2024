@@ -65,12 +65,10 @@ const Darkscreen = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 100;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   section {
     position: relative;
   }
@@ -82,6 +80,9 @@ const Darkscreen = styled.div`
     width: 30vw;
     height: 70vh;
     object-fit: cover;
+    @media (max-width: 1300px) {
+      width: 70vw;
+    }
   }
 `
 
@@ -96,4 +97,7 @@ const CloseX = styled.img`
 const Arrow = styled.img`
   cursor: pointer;
   visibility: ${props => (props.$visible ? 'visible' : 'hidden')};
+  @media (max-width: 768px) {
+    width: 50px;
+  }
 `

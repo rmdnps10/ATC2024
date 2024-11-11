@@ -3,7 +3,10 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 0 8rem 0 8rem;
+  padding: 0 8rem;
+  @media (max-width: 430px) {
+    padding: 0 4rem;
+  }
 }
 
 .main header {
@@ -20,6 +23,11 @@
   font-weight: 400;
   line-height: 150%; /* 150px */
   letter-spacing: -2px;
+  @media (max-width: 431px) {
+    color: #000;
+    font-size: 3rem;
+    letter-spacing: -0.9px;
+  }
 }
 
 .headerDesc {
@@ -29,6 +37,11 @@
   font-weight: 400;
   line-height: 30px; /* 136.364% */
   letter-spacing: -0.66px;
+  @media (max-width: 431px) {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.4rem;
+  }
 }
 
 .spanRainbow {
@@ -47,6 +60,9 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (max-width: 431px) {
+    font-size: 24px;
+  }
 }
 
 .spanBold {
@@ -61,6 +77,7 @@
   gap: 5rem;
   padding-top: 5rem;
   position: relative;
+  overflow: hidden;
 }
 
 .main section ul {
@@ -68,6 +85,9 @@
   gap: 3rem;
   font-size: 2rem;
   color: #a5a5a5;
+  @media (max-width: 431px) {
+    display: none;
+  }
 }
 
 .main section ul span {
@@ -86,14 +106,37 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  @media (max-width: 431px) {
+    flex-direction: column;
+  }
 }
 
 .main section div span {
   position: relative;
   flex: 0 0 100%;
-  height: 100%;
+  height: 90%;
   transform: translateX(100%);
   transition: transform 0.3s ease-in;
+  @media (max-width: 431px) {
+    flex-basis: 30%;
+    transform: translateX(0);
+  }
+}
+
+.main section div span p {
+  display: none;
+  @media (max-width: 431px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
 }
 
 .main section div span svg {
@@ -134,22 +177,29 @@
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-100%, -50%);
+  /* transform: translate(-100%, -50%); */
+  @media (max-width: 431px) {
+    display: none;
+  }
 }
 
 .arrowRight {
+  z-index: 2000;
   cursor: pointer;
   position: absolute;
   top: 50%;
   right: 0;
-  transform: translate(100%, -50%) rotate(180deg);
+  transform: rotate(180deg);
+  @media (max-width: 431px) {
+    display: none;
+  }
 }
 
 .selectedCircleInfo {
   transition: opacity 0.3s ease-in;
   opacity: 0;
   visibility: hidden; /* 기본값 */
-  width: 15vw;
+  width: 16vw;
   height: auto;
   position: absolute;
   top: 0;
@@ -161,6 +211,20 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 2rem;
+  @media (max-width: 430px) {
+    display: none;
+  }
+}
+
+.selectedCircleInfo button {
+  border: 0.5px solid white;
+  background-color: #000;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.selectedCircleInfo button:hover {
 }
 
 .selectedCircleInfo.visible {
@@ -214,6 +278,7 @@
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
+  word-break: break-all;
 }
 
 .line {
