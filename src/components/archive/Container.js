@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
@@ -23,12 +23,25 @@ export default function ScrollContainer() {
       setTimeout(() => {
         if (scrollRef.current) {
           scrollRef.current.scrollTo({
-            left: x - 100,
+            left: x,
             behavior: 'smooth'
           })
         }
         resolve()
       }, 500)
+    })
+  }
+
+  const handleKeyDown = e => {
+    setImageIndex(prevIndex => {
+      if (e.key === 'ArrowRight' && prevIndex < buttons.length - 1) {
+        moveElephant(buttons[prevIndex + 1].left)
+        return prevIndex + 1
+      } else if (e.key === 'ArrowLeft' && prevIndex > 0) {
+        moveElephant(buttons[prevIndex - 1].left)
+        return prevIndex - 1
+      }
+      return prevIndex
     })
   }
 
@@ -42,8 +55,17 @@ export default function ScrollContainer() {
     setIsModalOpen(false)
   }
 
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
-    <ScrollSection ref={scrollRef}>
+    <ScrollSection
+      ref={scrollRef}
+      tabIndex={0}>
       {isModalOpen && (
         <ModalPortal>
           <BackgroundModal
@@ -104,8 +126,8 @@ const ScrollSection = styled.section`
   z-index: 1000;
   &::-webkit-scrollbar {
     display: block;
-    width: 5px;
-    height: 8px;
+    width: 10px;
+    height: 20px;
     background-color: #aaa; /* 또는 트랙에 추가한다 */
   }
   &::-webkit-scrollbar-thumb {
