@@ -148,16 +148,6 @@
   color: #35cffa;
   border: 1px solid #35cffa;
   font-size: 2rem;
-  @media (max-width: 768px) {
-    width: 9.3rem;
-    height: 3rem;
-    font-size: 1.5rem;
-  }
-  @media (max-width: 425px) {
-    width: 7.2rem;
-    height: 2.4rem;
-    font-size: 1rem;
-  }
 }
 
 .designedTags div:nth-child(2) {
@@ -171,16 +161,6 @@
   color: #278ffb;
   border: 1px solid #278ffb;
   font-size: 2rem;
-  @media (max-width: 768px) {
-    width: 9.3rem;
-    height: 3rem;
-    font-size: 1.5rem;
-  }
-  @media (max-width: 425px) {
-    width: 7.2rem;
-    height: 2.4rem;
-    font-size: 1rem;
-  }
 }
 
 .designedTags div:last-child {
@@ -194,12 +174,37 @@
   color: #dd4ffc;
   border: 1px solid #dd4ffc;
   font-size: 2rem;
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
+  .designedTags div:first-child {
     width: 9.3rem;
     height: 3rem;
     font-size: 1.5rem;
   }
-  @media (max-width: 425px) {
+  .designedTags div:nth-child(2) {
+    width: 9.3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  .designedTags div:last-child {
+    width: 9.3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 425px) {
+  .designedTags div:first-child {
+    width: 7.2rem;
+    height: 2.4rem;
+    font-size: 1rem;
+  }
+  .designedTags div:nth-child(2) {
+    width: 7.2rem;
+    height: 2.4rem;
+    font-size: 1rem;
+  }
+  .designedTags div:last-child {
     width: 7.2rem;
     height: 2.4rem;
     font-size: 1rem;
