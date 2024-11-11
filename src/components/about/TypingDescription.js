@@ -1,7 +1,10 @@
+'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import styles from './TypingDescription.module.css'
-
+//
+//
+//
 export default function TypingDescription() {
   const typingContent = [
     { type: 'text', text: "'코끼리를 냉장고에 넣는 방법'", font: 'Sandoll' },
@@ -35,15 +38,24 @@ export default function TypingDescription() {
       alt: '별 이미지'
     },
     { type: 'text', text: '을 통해 이 물음에 ', font: 'Pretendard' },
-    { type: 'text', text: '답', font: 'Pretendard' },
+    { type: 'text', text: '답', font: 'Sandoll' },
     { type: 'text', text: '하고자 합니다.', font: 'Pretendard' }
   ]
 
   const [renderedContent, setRenderedContent] = useState([])
   const [typingIndex, setTypingIndex] = useState({ current: 0, charIndex: 0 })
+  const [isTypingStarted, setIsTypingStarted] = useState(false)
+  const [isClient, setIsClient] = useState(false) // 클라이언트 확인용 상태 추가
   const typingInterval = useRef(null)
+  const sectionRef = useRef(null)
 
   useEffect(() => {
+    setIsClient(true) // 클라이언트에서만 실행되도록 설정
+  }, [])
+
+  useEffect(() => {
+    if (!isTypingStarted || !isClient) return
+
     const startTypingEffect = () => {
       typingInterval.current = setInterval(() => {
         const { current, charIndex } = typingIndex
@@ -92,10 +104,37 @@ export default function TypingDescription() {
     return () => {
       clearInterval(typingInterval.current)
     }
-  }, [typingIndex])
+  }, [typingIndex, isTypingStarted, isClient])
+
+  useEffect(() => {
+    if (!isClient) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTypingStarted(true)
+        }
+      },
+      { threshold: 0.8 } // 요소가 80% 이상 보이면 트리거
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [isClient])
+
+  if (!isClient) return null // 클라이언트에서만 렌더링
 
   return (
-    <section className={styles.description}>
+    <section
+      ref={sectionRef}
+      className={styles.description}>
       <article>
         {renderedContent.map((content, index) =>
           content.type === 'text' ? (
