@@ -17,16 +17,23 @@ export default function ScrollContainer() {
 
   const scrollRef = useRef(null)
 
-  const moveElephant = x => {
+  const moveElephant = async x => {
     setPosition(x)
-    scrollRef.current.scrollTo({
-      left: x,
-      behavior: 'smooth'
+    await new Promise(resolve => {
+      setTimeout(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTo({
+            left: x - 100,
+            behavior: 'smooth'
+          })
+        }
+        resolve()
+      }, 500)
     })
   }
 
-  const handleClickButton = (x, y) => {
-    moveElephant(x)
+  const handleClickButton = async (x, y) => {
+    await moveElephant(x)
     setImageIndex(y)
     setIsModalOpen(true)
   }
