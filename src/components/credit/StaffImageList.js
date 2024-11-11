@@ -12,9 +12,10 @@ export default function StaffImageList({ teamName, teamType, memberList }) {
         isLeader ? styles.leader : ''
       }`}>
       <Image
-        src={`/images/staff-profile/${teamType}/${teamType}_${member.이름}.png`}
+        src={`/images/staff-profile/${teamType}/${teamType}_${member.이름}.jpg`}
         alt={member.이름}
-        width="200"
+        priority={true}
+        width="186"
         height="280"
       />
       <div
