@@ -48,9 +48,7 @@ export default function ProgramPage() {
 
   const timeToRow = time => {
     const [hour, minute] = time.split(':').map(Number)
-    return (
-      hour - 15 + (minute === 30 ? 1 : 0) + 1
-    ) /*나중에 30분 단위 프로그램 고려해야함*/
+    return hour - 14
   }
 
   const dayToColumn = day => ({ 수: 1, 목: 2, 금: 3 }[day] || 0)
@@ -104,42 +102,21 @@ export default function ProgramPage() {
     }
   ]
 
-  const getDuration = (start, end) => {
-    const [startHour, startMinute] = start.split(':').map(Number)
-    const [endHour, endMinute] = end.split(':').map(Number)
-    return (endHour * 60 + endMinute - startHour * 60 - startMinute) / 60
-  }
-
   const days = ['수', '목', '금']
 
-  const generateTable = () => {
-    const table = Array.from({ length: 6 }, () => Array(3).fill(null))
-
-    programs.forEach(program => {
-      const row = timeToRow(program.startTime)
-      const col = dayToColumn(program.day)
-      const rowspan = getDuration(program.startTime, program.endTime)
-
-      if (row > 0 && col > 0 && row <= table.length && col <= table[0].length) {
-        if (table[row - 1][col - 1] === null) {
-          table[row - 1][col - 1] = {
-            title: program.title,
-            id: program.id,
-            rowspan
-          }
-          for (let i = 1; i < rowspan; i++) {
-            if (table[row - 1 + i]) {
-              table[row - 1 + i][col - 1] = 'skip'
-            }
-          }
-        }
-      }
-    })
-
-    return table
-  }
-
-  const tableData = generateTable()
+  const tableData = [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+    [null, null, null],
+    [
+      { title: '그래서 그놈의 융합이 뭔데?', id: 'program1', rowspan: 2 },
+      { title: '트러블과 함께 전시하기', id: 'program2', rowspan: 2 },
+      { title: '기술 비평에 창작을 할애하기', id: 'program3', rowspan: 2 }
+    ],
+    [null, null, null],
+    [null, null, null]
+  ]
 
   return (
     <main className={styles.main}>
@@ -169,7 +146,6 @@ export default function ProgramPage() {
                   .fill(null)
                   .map((_, colIndex) => {
                     const cellData = tableData[rowIndex][colIndex]
-                    if (cellData === 'skip') return null
                     return cellData ? (
                       <div
                         key={colIndex}
