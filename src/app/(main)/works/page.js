@@ -188,7 +188,11 @@ export default function WorksPage({}) {
               key={key}
               ref={el => (tabRefs.current[key] = el)}
               onClick={() => handleTabClick(key)}>
-              <span>{el}</span>
+              {el === '인터랙티브아트' || el === '애플리케이션' ? (
+                <span className={styles.long}>{el}</span>
+              ) : (
+                <span>{el}</span>
+              )}
               <div
                 className="indicator"
                 ref={el => (indicatorRefs.current[key] = el)}></div>
