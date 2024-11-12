@@ -480,7 +480,7 @@
   font-family: 'Sandoll Seoul';
 }
 .quote p:first-child {
-  font-size: 3.2rem;
+  font-size: 6rem;
   @media (max-width: 768px) {
     font-size: 2.8rem;
   }
