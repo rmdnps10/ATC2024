@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link'
@@ -7,6 +8,11 @@ export default function ArchivePage() {
   return (
     <>
       <main className={styles.main}>
+        <img
+          className={styles.background}
+          src="/images/archive/gradient.png"
+          alt="배경이미지"
+        />
         <article>
           <h1>
             <div className={styles.pcOnly}>

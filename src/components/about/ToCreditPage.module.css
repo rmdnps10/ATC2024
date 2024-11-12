@@ -144,14 +144,16 @@
   position: absolute;
   width: 11.2rem;
   height: 3.6rem;
-  top: 20%;
-  left: -5%;
-  rotate: -12deg;
   background-color: black;
   color: #35cffa;
   border: 1px solid #35cffa;
   font-size: 2rem;
   @media (max-width: 768px) {
+    width: 9.3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  @media (max-width: 425px) {
     width: 7.2rem;
     height: 2.4rem;
     font-size: 1rem;
@@ -165,14 +167,16 @@
   position: absolute;
   width: 14.2rem;
   height: 3.6rem;
-  top: 62%;
-  left: 22%;
-  rotate: 20deg;
   background-color: black;
   color: #278ffb;
   border: 1px solid #278ffb;
   font-size: 2rem;
   @media (max-width: 768px) {
+    width: 9.3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  @media (max-width: 425px) {
     width: 7.2rem;
     height: 2.4rem;
     font-size: 1rem;
@@ -186,14 +190,16 @@
   position: absolute;
   width: 11.2rem;
   height: 3.6rem;
-  top: 52%;
-  right: 22%;
-  rotate: -25deg;
   background-color: black;
   color: #dd4ffc;
   border: 1px solid #dd4ffc;
   font-size: 2rem;
   @media (max-width: 768px) {
+    width: 9.3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+  @media (max-width: 425px) {
     width: 7.2rem;
     height: 2.4rem;
     font-size: 1rem;
