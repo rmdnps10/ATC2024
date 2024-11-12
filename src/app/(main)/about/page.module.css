@@ -47,17 +47,17 @@
   transform: translate(25%, 0);
 }
 .cyan4 {
-  width: 50%;
-  height: 10%;
+  width: 60%;
+  height: 15%;
   background-color: #35cffa40;
   left: 0;
-  top: 55%;
+  top: 46%;
   transform: translate(-30%, 0);
 }
 .cyan5 {
-  width: 50%;
+  width: 60%;
   height: 10%;
-  background-color: #35cffa40;
+  background-color: #35cffa30;
   left: 0;
   top: 78%;
   transform: translate(-30%, 0);
@@ -79,10 +79,10 @@
 }
 .pink3 {
   width: 50%;
-  height: 15%;
+  height: 18%;
   background-color: #dd4ffc25;
   left: 0;
-  top: 60%;
+  top: 55%;
   transform: translate(-30%, 0);
 }
 .blue1 {
@@ -326,7 +326,7 @@
   display: none;
 }
 @media (max-width: 1300px) {
-  .title {
+  .title img:first-child {
     min-width: 55rem;
   }
 }
@@ -483,8 +483,6 @@
   position: relative;
   margin-bottom: 1.6rem;
   font-family: 'Sandoll Seoul';
-}
-.quote p:first-child {
   font-size: 6rem;
   @media (max-width: 768px) {
     font-size: 2.8rem;
@@ -497,4 +495,44 @@
 
 .quote blockquote:nth-of-type(2) .quoteTitle {
   text-align: left;
+}
+.quote blockquote {
+  position: relative;
+}
+.quote blockquote:first-child img {
+  position: absolute;
+  left: 0;
+  top: -11.8rem;
+  z-index: 1;
+}
+.quote blockquote:last-child img {
+  position: absolute;
+  right: 0;
+  transform: rotate(180deg);
+  bottom: -11.8rem;
+  z-index: 1;
+}
+@media (max-width: 1300px) {
+  .quote blockquote:first-child img {
+    width: 9.8rem;
+    height: 8.4rem;
+    top: -10rem;
+  }
+  .quote blockquote:last-child img {
+    width: 9.8rem;
+    height: 8.4rem;
+    bottom: -10rem;
+  }
+}
+@media (max-width: 768px) {
+  .quote blockquote:first-child img {
+    width: 8rem;
+    height: 6.9rem;
+    top: -3rem;
+  }
+  .quote blockquote:last-child img {
+    width: 8rem;
+    height: 6.9rem;
+    bottom: -6.9rem;
+  }
 }

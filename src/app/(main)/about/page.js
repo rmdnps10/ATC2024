@@ -116,6 +116,12 @@ export default function AboutPage() {
       <section className={styles.quote}>
         <div>
           <blockquote>
+            <Image
+              src="images/about/quotation.svg"
+              alt="쉼표 아이콘"
+              width={123}
+              height={106}
+            />
             <p className={styles.quoteTitle}>최용순 교수님 축사</p>
             <p>
               서강대학교 Art & Technology 학과에서 《코끼리를 냉장고에 넣는
@@ -161,6 +167,12 @@ export default function AboutPage() {
               관에서도 진행됩니다. 부담 없이 방문해주세요. 많은 관심
               부탁드립니다. 감사합니다.
             </p>
+            <Image
+              src="images/about/quotation.svg"
+              alt="쉼표 아이콘"
+              width={123}
+              height={106}
+            />
           </blockquote>
         </div>
       </section>
