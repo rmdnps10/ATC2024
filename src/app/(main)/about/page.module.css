@@ -325,6 +325,11 @@
 .title img:last-child {
   display: none;
 }
+@media (max-width: 1300px) {
+  .title {
+    min-width: 55rem;
+  }
+}
 @media (max-width: 768px) {
   .typography {
     width: 15%;

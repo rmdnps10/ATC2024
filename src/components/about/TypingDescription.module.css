@@ -28,7 +28,16 @@
   font-size: 3.6rem;
   line-height: 180%;
   color: #1160f7;
-  @media (max-width: 768px) {
+}
+@media (max-width: 1300px) {
+  /*추후 산돌폰트 적용 후 몇줄 나오는지 확인*/
+  .description article {
+    width: 75%;
+    font-size: 3vw;
+  }
+}
+@media (max-width: 768px) {
+  .description article {
     width: 80%;
     font-size: 1.2rem;
     padding: 0 2.4rem;
@@ -69,7 +78,15 @@
   vertical-align: middle;
   width: 7.8rem;
   height: 5.6rem;
-  @media (max-width: 768px) {
+}
+@media (max-width: 1300px) {
+  .description img {
+    width: 4.8rem;
+    height: 3.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .description img {
     width: 2.8rem;
     height: 2rem;
   }
