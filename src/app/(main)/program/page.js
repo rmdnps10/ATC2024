@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
+import { style } from 'framer-motion/client'
 //
 //
 //
@@ -169,7 +170,6 @@ export default function ProgramPage() {
           {['15:00', '16:00', '17:00', '18:00', '19:00', '20:00'].map(
             (time, rowIndex) => (
               <React.Fragment key={rowIndex}>
-                {/* 시간 라벨 */}
                 <div
                   className={styles.timeLabel}
                   style={{ gridRow: rowIndex + 2 }}>
@@ -290,61 +290,92 @@ export default function ProgramPage() {
         </div>
       </section>
       <section className={styles.programContainer}>
-        {[...alwaysAvailablePrograms, ...programs].map(program => (
+        {[
+          { title: '강연', programs: programs },
+          { title: '부스', programs: alwaysAvailablePrograms }
+        ].map(group => (
           <div
-            key={program.id}
-            ref={el => (programRefs.current[program.id] = el)}
-            className={`${styles.programAccordion} ${
-              openPrograms.includes(program.id) ? styles.open : ''
-            }`}
-            onMouseEnter={() => setHoveredProgram(program.id)}
-            onMouseLeave={() => setHoveredProgram(null)}>
-            <div
-              className={styles.programHeader}
-              onClick={() => toggleProgram(program.id)}>
-              <span
-                className={`${styles.textWrapper} ${
-                  hoveredProgram === program.id ||
-                  openPrograms.includes(program.id)
-                    ? styles.gradientText
-                    : ''
-                }`}>
-                {program.title}
-              </span>
-              <span
-                className={`${styles.arrow} ${
-                  openPrograms.includes(program.id) ? styles.rotated : ''
-                }`}>
+            key={group.title}
+            className={styles.groups}>
+            <div className={styles.headerGroup}>
+              {group.title === '강연' ? (
                 <Image
-                  src="/icon/button/toggle.svg"
-                  width={24}
-                  height={24}
-                  alt="Toggle Arrow"
+                  src="images/program/subComponent1.svg"
+                  alt="2024 atc 서브 컴포넌트 - 강연"
+                  width={34}
+                  height={34}
                 />
-              </span>
+              ) : (
+                <Image
+                  src="images/program/subComponent2.svg"
+                  alt="2024 atc 서브 컴포넌트 - 부스"
+                  width={34}
+                  height={34}
+                />
+              )}
+              <p className={styles.groupTitle}>{group.title}</p>
             </div>
+            {group.programs.map(program => (
+              <div
+                key={program.id}
+                ref={el => (programRefs.current[program.id] = el)}
+                className={`${styles.programAccordion} ${
+                  openPrograms.includes(program.id) ? styles.open : ''
+                }`}
+                onMouseEnter={() => setHoveredProgram(program.id)}
+                onMouseLeave={() => setHoveredProgram(null)}>
+                <div
+                  className={styles.programHeader}
+                  onClick={() => toggleProgram(program.id)}>
+                  <span
+                    className={`${styles.textWrapper} ${
+                      hoveredProgram === program.id ||
+                      openPrograms.includes(program.id)
+                        ? styles.gradientText
+                        : ''
+                    }`}>
+                    {program.title}
+                  </span>
+                  <span
+                    className={`${styles.arrow} ${
+                      openPrograms.includes(program.id) ? styles.rotated : ''
+                    }`}>
+                    <Image
+                      src="/icon/button/toggle.svg"
+                      width={24}
+                      height={24}
+                      alt="Toggle Arrow"
+                    />
+                  </span>
+                </div>
 
-            <div
-              className={`${styles.accordionContent} ${
-                openPrograms.includes(program.id) ? styles.activeContent : ''
-              }`}
-              style={{
-                maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
-              }}>
-              <div className={styles.innerContent}>
-                <div className={styles.programDetails}>
-                  <p className={styles.programTime}>
-                    {program.startTime
-                      ? `${program.startTime} - ${program.endTime} (${program.day}), ${program.name}`
-                      : '상시운영'}
-                  </p>
-                  <p className={styles.programLocation}>{program.location}</p>
-                  <p className={styles.programDescription}>
-                    {program.description}
-                  </p>
+                <div
+                  className={`${styles.accordionContent} ${
+                    openPrograms.includes(program.id)
+                      ? styles.activeContent
+                      : ''
+                  }`}
+                  style={{
+                    maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
+                  }}>
+                  <div className={styles.innerContent}>
+                    <div className={styles.programDetails}>
+                      <p className={styles.programTime}>
+                        {program.startTime
+                          ? `${program.startTime} - ${program.endTime} (${program.day}), ${program.name}`
+                          : '상시운영'}
+                      </p>
+                      <p className={styles.programLocation}>
+                        {program.location}
+                      </p>
+                      <p className={styles.programDescription}>
+                        {program.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         ))}
       </section>
