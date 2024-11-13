@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './Overlay.module.css';
+import { useRouter } from 'next/navigation';
 //
 //
 //
@@ -27,6 +28,8 @@ export default function Overlay({ scrollPercent }) {
     : 0;
 
   const [countdown, setCountdown] = useState('');
+
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -55,6 +58,20 @@ export default function Overlay({ scrollPercent }) {
   const countdownOpacity = scrollPercent >= 95
     ? (scrollPercent - 95) / 5  // 90%에서 95% 사이에 서서히 나타나도록
     : 0;
+
+  const [showDelayedContent, setShowDelayedContent] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (scrollPercent >= 95) {
+      timer = setTimeout(() => {
+        setShowDelayedContent(true);
+      }, 1700); // 1.7초 딜레이
+    } else {
+      setShowDelayedContent(false);
+    }
+    return () => clearTimeout(timer);
+  }, [scrollPercent]);
 
   return (
     <>
@@ -94,31 +111,17 @@ export default function Overlay({ scrollPercent }) {
         Art&Technology<br></br>Conference<br></br>2024
       </div>
 
-      {scrollPercent >= 85 && (
+      {scrollPercent >= 95 && (
         <>
-          <div className={`${styles.finalOverlay} ${scrollPercent >= 95 ? styles.visible : ''}`}
-            style={{
-              userSelect: 'none',
-              pointerEvents: 'none'
-            }}
-          >
-            <div className={styles.conferenceText}>
-              Art&Technology<br></br>Conference 2024
-            </div>
-            <div className={styles.openingText}>
-              웹 사이트 오픈까지
-            </div>
-          </div>
-
           <div
-            className={`${styles.countdownText} ${scrollPercent >= 97 ? styles.visible : ''}`}
-            style={{
-              userSelect: 'none',
-              pointerEvents: 'none',
-              opacity: countdownOpacity  // opacity 적용
-            }}
+            className={`${styles.transitionOverlay} ${showDelayedContent ? styles.fadeIn : ''}`}
           >
-            {countdown}
+            <button
+              className={`${styles.aboutButton} ${showDelayedContent ? styles.fadeIn : ''}`}
+              onClick={() => router.push('/about')}
+            >
+              ABOUT
+            </button>
           </div>
         </>
       )}
