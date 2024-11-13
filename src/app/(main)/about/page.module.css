@@ -136,12 +136,12 @@
 }
 .components img:nth-child(3) {
   position: absolute;
-  top: 25%;
+  top: 23%;
   right: 3%;
 }
 .components img:nth-child(4) {
   position: absolute;
-  top: 32%;
+  top: 28%;
   left: 25%;
 }
 .components img:nth-child(5) {
@@ -160,18 +160,18 @@
 }
 .components div:nth-of-type(2) {
   position: absolute;
-  width: 5.4rem;
-  height: 5.4rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
-  top: 33%;
+  top: 32%;
   left: 9%;
   background-color: white;
 }
 
 .components div:nth-of-type(3) {
   position: absolute;
-  width: 8rem;
-  height: 8rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
   top: 21%;
   right: 13%;
