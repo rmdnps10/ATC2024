@@ -85,9 +85,6 @@
   grid-template-rows: auto repeat(6, 1fr);
   height: 85%;
   font-size: 2rem;
-  @media (max-width: 768px) {
-    grid-template-columns: 20% 1fr 1fr 1fr;
-  }
 }
 
 .alwaysTableContainer {
@@ -95,7 +92,12 @@
   grid-template-columns: 15% 1fr 1fr;
   margin-top: 1rem;
   height: 12%;
-  @media (max-width: 768px) {
+}
+@media (max-width: 425px) {
+  .gridContainer {
+    grid-template-columns: 20% 1fr 1fr 1fr;
+  }
+  .alwaysTableContainer {
     grid-template-columns: 20% 1fr 1fr;
   }
 }
@@ -145,9 +147,6 @@
   text-align: right;
   color: #333333;
   transform: translate(0, -8%);
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
 }
 
 .alwaysLabel {
@@ -158,11 +157,28 @@
   font-size: 1.8rem;
   text-align: right;
   color: #333333;
-  @media (max-width: 768px) {
+}
+@media (max-width: 1300px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
+    font-size: max(1rem, 1.3vw);
+  }
+}
+@media (max-width: 768px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
+    font-size: min(1.8rem, 3vw);
+  }
+}
+@media (max-width: 425px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
     font-size: 1.2rem;
   }
 }
-
 .programCell {
   display: flex;
   justify-content: center;
@@ -187,6 +203,9 @@
   word-break: keep-all;
   @media (max-width: 768px) {
     padding: 0.5rem;
+    font-size: max(1.4rem, 2.5vw);
+  }
+  @media (max-width: 425px) {
     font-size: 1.4rem;
   }
 }
@@ -283,8 +302,8 @@
 }
 
 .textWrapper {
+  max-width: max-content;
   font-size: 1em;
-  color: #444;
   transition: background 0.5s ease, -webkit-background-clip 0.5s ease;
 }
 .textWrapper.gradientText {
