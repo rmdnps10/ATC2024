@@ -4,10 +4,7 @@ import styles from './page.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-// import { worksData } from '@/components/works/MockData'
 import { getAllWorks } from '@/client-api/getAllWorks'
-import { title } from 'framer-motion/client'
-// import { getPlaiceholder } from 'plaiceholder'
 //
 //
 //
@@ -174,7 +171,10 @@ export default function WorksPage({}) {
             이 <span>방식</span>
             은 각기 다를 것입니다. 어떤 이는 냉장고를 확장하고, 다른 이는 코끼리를 축소합니다. 
             <br />
-            또 어떤 이는 그 사이의 빈 공간을 새롭게 정의합니다. 어쩌면 세상에 없던것을 가져오는 사람도 있을지 모릅니다.
+            또 어떤 이는 그 사이의 빈 공간을 새롭게 정의합니다. 
+            <span className={styles.omit}>
+              어쩌면 세상에 없던것을 가져오는 사람도 있을지 모릅니다.
+            </span>
             <br />
             이 전시는 그 아트&테크놀로지에 속한 <span>아테커</span>
              각자의 <span>방법</span>을 보여주는 공간입니다.

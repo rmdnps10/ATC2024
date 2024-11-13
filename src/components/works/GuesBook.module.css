@@ -1,6 +1,6 @@
 .wrapper {
   padding: 2rem 0 2rem 10rem;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     padding-left: 3rem;
   }
 }
@@ -9,15 +9,17 @@
   display: flex;
   flex-direction: column;
   overflow-x: scroll;
+  overscroll-behavior-x: contain;
   gap: 8rem;
   padding: 6rem 0;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     gap: 4rem;
     padding: 1rem 0;
   }
 }
 
 .smallWrapper::-webkit-scrollbar {
+  display: flex;
   height: 8px;
 }
 
@@ -33,7 +35,7 @@
 .row {
   display: flex;
   gap: 4rem;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     gap: 2rem;
   }
 }
@@ -55,6 +57,14 @@
     linear-gradient(90deg, #dd4ffc 0%, #1160f7 31%, #7340fb 64.5%, #35cffa 100%);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  @media (max-width: 1024px) {
+    width: 25vw;
+    height: 18rem;
+  }
+  @media (max-width: 768px) {
+    width: 33vw;
+    height: 18rem;
+  }
   @media (max-width: 430px) {
     width: 40vw;
     height: 18rem;
@@ -68,7 +78,7 @@
   height: 100%;
   padding: 4rem 4rem;
   overflow-y: scroll;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     padding: 3rem 2rem;
   }
 }
@@ -83,7 +93,7 @@
   left: 5%;
   width: 4.5vw;
   height: 4.5vw;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     width: 8vw;
     height: 8vw;
     top: -4vw;
@@ -104,7 +114,7 @@
   line-height: normal;
   letter-spacing: -1px;
   text-wrap: nowrap;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     font-size: 2.5rem;
   }
 }
@@ -117,7 +127,7 @@
   font-weight: 600;
   line-height: normal;
   letter-spacing: -0.3px;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     font-size: 1.4rem;
   }
 }
@@ -134,7 +144,7 @@
   margin-top: 2rem;
   text-wrap: wrap;
   word-break: break-all;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     font-size: 1.4rem;
   }
 }
