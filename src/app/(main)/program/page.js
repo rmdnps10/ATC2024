@@ -331,16 +331,18 @@ export default function ProgramPage() {
               style={{
                 maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
               }}>
-              <div className={styles.programDetails}>
-                <p className={styles.programTime}>
-                  {program.startTime
-                    ? `${program.startTime} - ${program.endTime} (${program.day}), ${program.name}`
-                    : '상시운영'}
-                </p>
-                <p className={styles.programLocation}>{program.location}</p>
-                <p className={styles.programDescription}>
-                  {program.description}
-                </p>
+              <div className={styles.innerContent}>
+                <div className={styles.programDetails}>
+                  <p className={styles.programTime}>
+                    {program.startTime
+                      ? `${program.startTime} - ${program.endTime} (${program.day}), ${program.name}`
+                      : '상시운영'}
+                  </p>
+                  <p className={styles.programLocation}>{program.location}</p>
+                  <p className={styles.programDescription}>
+                    {program.description}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
