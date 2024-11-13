@@ -225,7 +225,20 @@ export default function WorksPage({}) {
             <figcaption>
               <div className={styles.figBox}>
                 <span className={styles.figTeam}>{el.teamName}</span>
-                <span className={styles.figTitle}>{el.title}</span>
+                {el._id === '672cea5b0c11e50dbd25fa34' ? (
+                  <span className={styles.figTitle}>怒世怒世</span>
+                ) : null}
+                {el._id === '672cea5b0c11e50dbd25fa2b' ? (
+                  <span className={styles.figTitle}>소음疏音</span>
+                ) : null}
+                {el._id !== '672cea5b0c11e50dbd25fa34' &&
+                el._id !== '672cea5b0c11e50dbd25fa2b' ? (
+                  <span
+                    style={{ fontFamily: 'Sandoll Seoul' }}
+                    className={styles.figTitle}>
+                    {el.title}
+                  </span>
+                ) : null}
                 <span className={styles.figDesc}>{el.oneLiner}</span>
               </div>
             </figcaption>
