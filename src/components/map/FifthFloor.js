@@ -712,31 +712,63 @@ export const FifthFloorSVG = forwardRef((props, ref) => (
 ))
 
 export const fifthData = [
-  { team: '끼리코(eleFUNt)', title: '코끼리' },
-  { team: '도토리', title: 'The Journey Home' },
-  { team: '물망초(Forget-me-not)', title: '해피하비' },
-  { team: 'SBB', title: '저주받은 동물원' },
-  { team: '푸르미르 전', title: '푸르미르 전' },
-  { team: 'ROFFI', title: '블루 네거티브' },
-  { team: 'BBB', title: '모노웨이브' },
-  { team: 'Compass+', title: '심층화' },
-  { team: '스프라이트', title: '응시' },
-  { team: '나들목', title: '교차로' },
-  { team: 'DPMGLZ', title: '썩지 않게 아주 오래' },
-  { team: 'DWTB', title: 'Home Sweet Home' },
-  { team: 'Glance', title: '절대 음악' },
-  { team: '아마따', title: '지락을 모랄것가' },
-  { team: 'OWIN', title: 'Bring to LIGHT' },
-  { team: '와일드터키', title: '4XX Not Found' },
-  { team: 'Team Fate', title: '필연과 우연' },
-  { team: '장효선', title: '천국을 지켜라!' },
-  { team: '팀 오디티', title: '페일워치' },
-  { team: '오리너구리', title: '내 말을 들어줘' },
-  { team: '헷찌허그', title: '코끼리가 냉장고에 도착하는 N가지 방법' },
-  { team: '참깨수달', title: 'Awake in Veil' },
-  { team: '네발자전거', title: '반향' },
-  { team: 'Undefined', title: '수집팀' }, // '수집팀'의 정확한 team을 찾을 수 없음
-  { team: 'Undefined', title: '대외 협력팀' }, // '대외 협력팀'의 정확한 team을 찾을 수 없음
-  { team: '파브리카', title: '파브리카 하우스' },
-  { team: 'Jade Mosstang', title: 'YETi' }
+  { team: '끼리코(eleFUNt)', title: '코끼리', _id: '672cea5b0c11e50dbd25fa0b' },
+  {
+    team: '도토리',
+    title: 'The Journey Home',
+    _id: '672cea5b0c11e50dbd25fa1a'
+  },
+  {
+    team: '물망초(Forget-me-not)',
+    title: '해피하비',
+    _id: '672cea5b0c11e50dbd25fa11'
+  },
+  { team: 'SBB', title: '저주받은 동물원', _id: '672cea5b0c11e50dbd25fa13' },
+  {
+    team: '푸르미르 전',
+    title: '푸르미르 전',
+    _id: '672cea5b0c11e50dbd25fa26'
+  },
+  { team: 'ROFFI', title: '블루 네거티브', _id: '672cea5b0c11e50dbd25fa0d' },
+  { team: 'BBB', title: '모노웨이브', _id: '672cea5b0c11e50dbd25fa20' },
+  { team: 'Compass+', title: '심층화', _id: '672cea5b0c11e50dbd25fa05' },
+  { team: '스프라이트', title: '응시', _id: '672cea5b0c11e50dbd25fa25' },
+  { team: '나들목', title: '교차로', _id: '672cea5b0c11e50dbd25fa35' },
+  {
+    team: 'DPMGLZ',
+    title: '썩지 않게 아주 오래',
+    _id: '672cea5b0c11e50dbd25fa04'
+  },
+  { team: 'DWTB', title: 'Home Sweet Home', _id: '672cea5b0c11e50dbd25fa09' },
+  { team: 'Glance', title: '절대 음악', _id: '672cea5b0c11e50dbd25fa27' },
+  { team: '아마따', title: '지락을 모랄것가', _id: '672cea5b0c11e50dbd25fa14' },
+  { team: 'OWIN', title: 'Bring to LIGHT', _id: '672cea5b0c11e50dbd25fa16' },
+  {
+    team: '와일드터키',
+    title: '4XX Not Found',
+    _id: '672cea5b0c11e50dbd25fa1f'
+  },
+  { team: 'Team Fate', title: '필연과 우연', _id: '672cea5b0c11e50dbd25fa19' },
+  { team: '장효선', title: '천국을 지켜라!', _id: '672cea5b0c11e50dbd25fa17' },
+  { team: '팀 오디티', title: '페일워치', _id: '672cea5b0c11e50dbd25fa1d' },
+  {
+    team: '오리너구리',
+    title: '내 말을 들어줘',
+    _id: '672cea5b0c11e50dbd25fa03'
+  },
+  {
+    team: '헷찌허그',
+    title: '코끼리가 냉장고에 도착하는 N가지 방법',
+    _id: '672cea5b0c11e50dbd25fa0b'
+  },
+  { team: '참깨수달', title: 'Awake in Veil', _id: '672cea5b0c11e50dbd25fa1b' },
+  { team: '네발자전거', title: '반향', _id: '672cea5b0c11e50dbd25fa29' },
+  { team: 'Undefined', title: '수집팀', _id: '' }, // '수집팀'의 정확한 team을 찾을 수 없음
+  { team: 'Undefined', title: '대외 협력팀', _id: '' }, // '대외 협력팀'의 정확한 team을 찾을 수 없음
+  {
+    team: '파브리카',
+    title: '파브리카 하우스',
+    id: '672cea5b0c11e50dbd25fa0c'
+  },
+  { team: 'Jade Mosstang', title: 'YETi', _id: '672cea5b0c11e50dbd25fa12' }
 ]

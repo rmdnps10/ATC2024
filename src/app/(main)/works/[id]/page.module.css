@@ -20,16 +20,19 @@
   position: relative;
   background-color: rgb(0, 0, 0);
   filter: opacity(0.8);
+  @media (max-width: 768px) {
+    height: 30vw;
+  }
   @media (max-width: 430px) {
     height: 50vw;
   }
 }
 
 .main header {
-  padding: 11rem 10rem;
+  padding: 5rem 10rem;
   word-break: keep-all;
   position: relative;
-  @media (max-width: 430px) {
+  @media (max-width: 1024px) {
     padding: 2rem 3rem;
   }
 }
@@ -81,6 +84,10 @@
     width: 80%;
     font-size: 8rem;
   }
+  @media (max-width: 768px) {
+    width: 80%;
+    font-size: 6.5rem;
+  }
   @media (max-width: 430px) {
     font-size: 5rem;
     width: 80%;
@@ -123,18 +130,24 @@
   line-height: 3rem;
   margin-bottom: 5rem;
   max-width: 50%;
-  @media (max-width: 430px) {
-    font-size: 2rem;
+  @media (max-width: 768px) {
+    font-size: 2.4rem;
     line-height: 2.3rem;
-    max-width: 80%;
-    font-weight: 600;
+    max-width: 90%;
+    margin-bottom: 3rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 2.4rem;
+    line-height: 2.3rem;
+    max-width: 90%;
+    margin-bottom: 2rem;
   }
 }
 
 .headerDesc {
   display: flex;
   justify-content: space-between;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     flex-direction: column;
   }
 }
@@ -143,12 +156,11 @@
   text-wrap: wrap;
   max-width: 40%;
   color: #121212;
-  font-family: Pretendard;
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
   word-break: keep-all;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     max-width: 80%;
   }
 }
@@ -156,7 +168,7 @@
 .headerDesc nav ul {
   display: flex;
   flex-direction: column;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     margin-top: 5rem;
     align-items: flex-start;
     gap: 1rem;
@@ -166,7 +178,6 @@
 .headerDesc nav ul li {
   color: #121212;
   text-align: right;
-  font-family: Pretendard;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.4px;
@@ -175,7 +186,6 @@
 .headerDesc nav ul a {
   color: #121212;
   text-align: right;
-  font-family: Pretendard;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: -0.4px;
@@ -189,17 +199,20 @@
   gap: 5rem;
   flex-direction: column;
   justify-content: flex-start;
-  @media (max-width: 430px) {
+  @media (max-width: 1024px) {
     padding: 0 3rem;
   }
 }
 
 .introduceImage {
   width: 100%;
-  height: 150vh;
+  height: 100vh;
   position: relative;
   @media (max-width: 1024px) {
-    height: 60vh;
+    height: 90vh;
+  }
+  @media (max-width: 640px) {
+    height: 50vh;
   }
   @media (max-width: 430px) {
     height: 30vh;
@@ -211,7 +224,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     padding: 5rem 3rem;
     flex-direction: column;
     align-items: flex-end;
@@ -226,7 +239,7 @@
   border-radius: 50%;
   background-color: black;
   flex-shrink: 0;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     width: 100%;
     border-radius: 0;
     height: 30vw;
@@ -244,7 +257,7 @@
   font-weight: 400;
   line-height: 4rem; /* 57.143% */
   border-bottom: 1px solid #333333;
-  @media (min-width: 431px) {
+  @media (min-width: 768px) {
     display: none;
   }
 }
@@ -254,7 +267,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     margin-top: 3rem;
   }
 }
@@ -269,7 +282,7 @@
   font-weight: 400;
   line-height: 4rem; /* 57.143% */
   border-bottom: 1px solid #333333;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -288,9 +301,8 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     font-size: 3rem;
-    font-weight: 600;
   }
 }
 
@@ -299,7 +311,7 @@
   gap: 1rem;
   flex-direction: column;
   align-items: flex-end;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     gap: 2rem;
   }
 }
@@ -319,6 +331,10 @@
   margin-bottom: 2rem;
   flex-wrap: wrap;
   max-width: 40vw;
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    max-width: 80vw;
+  }
   @media (max-width: 430px) {
     font-size: 1.8rem;
     max-width: 80vw;
@@ -329,25 +345,23 @@
   max-width: 20vw;
   color: #000;
   text-align: right;
-  font-family: Pretendard;
   font-size: 1.3rem;
   font-weight: 400;
   line-height: 1.8rem;
   letter-spacing: -0.6px;
   word-break: keep-all;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     max-width: 80vw;
     font-size: 1.3rem;
   }
 }
 
 .teamDesc button {
-  width: 15rem;
+  width: 20vw;
   height: 3.5rem;
   margin-top: 5rem;
   color: #121212;
-  font-family: Pretendard;
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -362,8 +376,10 @@
   justify-content: center;
   align-items: center;
   padding: 0;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     margin-top: 2rem;
+    font-size: 1rem;
+    width: 15rem;
   }
 }
 
@@ -409,7 +425,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  @media (max-width: 430px) {
+  @media (max-width: 768px) {
     padding: 5rem 3rem;
   }
 }
@@ -435,7 +451,6 @@
   border: 1px solid #767676;
   padding: 2rem 1.5rem;
   resize: none;
-  font-family: 'Pretendard';
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
   @media (max-width: 430px) {
@@ -464,7 +479,6 @@
   width: 15rem;
   height: 4rem;
   color: #121212;
-  font-family: Pretendard;
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 600;

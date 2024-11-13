@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import BackgroundModal from './BackgroundModal'
 import { buttons } from '@/app/(main)/archive/store/buttonPosition'
-import { set } from 'mongoose'
+import ModalPortal from './ModalPortal'
 
 export default function ScrollContainer() {
   const TIMELINE_WIDTH = 5356 * 0.7
@@ -17,16 +17,36 @@ export default function ScrollContainer() {
 
   const scrollRef = useRef(null)
 
-  const moveElephant = x => {
+  const moveElephant = async x => {
     setPosition(x)
-    scrollRef.current.scrollTo({
-      left: x,
-      behavior: 'smooth'
+    await new Promise(resolve => {
+      setTimeout(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTo({
+            left: x,
+            behavior: 'smooth'
+          })
+        }
+        resolve()
+      }, 500)
     })
   }
 
-  const handleClickButton = (x, y) => {
-    moveElephant(x)
+  const handleKeyDown = e => {
+    setImageIndex(prevIndex => {
+      if (e.key === 'ArrowRight' && prevIndex < buttons.length - 1) {
+        moveElephant(buttons[prevIndex + 1].left)
+        return prevIndex + 1
+      } else if (e.key === 'ArrowLeft' && prevIndex > 0) {
+        moveElephant(buttons[prevIndex - 1].left)
+        return prevIndex - 1
+      }
+      return prevIndex
+    })
+  }
+
+  const handleClickButton = async (x, y) => {
+    await moveElephant(x)
     setImageIndex(y)
     setIsModalOpen(true)
   }
@@ -35,15 +55,24 @@ export default function ScrollContainer() {
     setIsModalOpen(false)
   }
 
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
     <ScrollSection ref={scrollRef}>
       {isModalOpen && (
-        <BackgroundModal
-          moveElephant={moveElephant}
-          closeModal={closeModal}
-          imageIndex={imageIndex}
-          setImageIndex={setImageIndex}
-        />
+        <ModalPortal>
+          <BackgroundModal
+            moveElephant={moveElephant}
+            closeModal={closeModal}
+            imageIndex={imageIndex}
+            setImageIndex={setImageIndex}
+          />
+        </ModalPortal>
       )}
 
       <Image
@@ -95,8 +124,8 @@ const ScrollSection = styled.section`
   z-index: 1000;
   &::-webkit-scrollbar {
     display: block;
-    width: 5px;
-    height: 8px;
+    width: 10px;
+    height: 20px;
     background-color: #aaa; /* 또는 트랙에 추가한다 */
   }
   &::-webkit-scrollbar-thumb {
@@ -119,6 +148,9 @@ const LowButton = styled.button`
   background: #fff;
   border: none;
   cursor: pointer;
+  &:hover {
+    filter: brightness(70%);
+  }
 `
 
 const HighButton = styled(LowButton)`

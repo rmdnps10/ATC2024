@@ -101,6 +101,7 @@
     grid-template-columns: 20% 1fr 1fr;
   }
 }
+
 .alwaysProgramCell {
   display: flex;
   justify-content: center;
