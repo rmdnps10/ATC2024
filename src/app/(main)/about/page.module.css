@@ -300,11 +300,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
   gap: 5.4rem;
-  margin-top: 40.8rem;
   z-index: 1;
   @media (max-width: 768px) {
-    margin-top: 16rem;
+    height: 80vh;
     gap: 3.7rem;
   }
 }
@@ -326,14 +327,20 @@
   display: none;
 }
 @media (max-width: 1300px) {
+  .typography {
+    min-width: 10rem;
+  }
   .title img:first-child {
-    min-width: 55rem;
+    min-width: 50rem;
   }
 }
 @media (max-width: 768px) {
   .typography {
     width: 15%;
     min-width: 7.5rem;
+  }
+  .title {
+    max-width: 35rem;
   }
   .title img:first-child {
     display: none;
@@ -350,7 +357,6 @@
 .subtitle {
   display: flex;
   justify-content: center;
-  padding-top: 30.3rem;
   margin-bottom: 6.8rem;
   font-family: 'Sandoll Seoul';
 }
@@ -368,10 +374,25 @@
   bottom: 0;
   border-bottom: 1px solid black;
 }
-
+@media (max-width: 1300px) {
+  .subtitle {
+    margin-bottom: 5rem;
+  }
+  .subtitle p {
+    font-size: 4.5vw;
+  }
+}
 @media (max-width: 768px) {
   .subtitle {
-    padding-top: 22.6rem;
+    margin-bottom: 4.2rem;
+  }
+  .subtitle p {
+    width: 80%;
+    font-size: 4rem;
+  }
+}
+@media (max-width: 425px) {
+  .subtitle {
     margin-bottom: 4.2rem;
   }
   .subtitle p {
