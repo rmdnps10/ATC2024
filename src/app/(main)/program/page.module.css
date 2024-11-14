@@ -280,6 +280,9 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 2.4rem;
+  @media (max-width: 768px) {
+    margin-bottom: 1.8rem;
+  }
 }
 .groupTitle {
   font-size: 4.6rem;
