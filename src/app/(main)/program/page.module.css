@@ -202,6 +202,8 @@
   font-size: 1.8rem;
   padding: 1rem;
   word-break: keep-all;
+  cursor: pointer;
+  transition: all 0.3s ease;
   @media (max-width: 768px) {
     padding: 0.5rem;
     font-size: max(1.4rem, 2.5vw);
@@ -226,7 +228,7 @@
   height: 100%;
   border: 1px solid #1160f7;
   background-color: #f1fcff;
-  transition: opacity 0.3s ease, background-color 0.3s ease, border 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .highlightedText {
