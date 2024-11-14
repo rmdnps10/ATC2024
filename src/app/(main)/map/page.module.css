@@ -3,7 +3,10 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 0 8rem 0 8rem;
+  padding: 0 8rem;
+  @media (max-width: 768px) {
+    padding: 0rem 4rem;
+  }
 }
 
 .main header {
@@ -15,23 +18,62 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 8rem;
+  font-size: 7cqh;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
   letter-spacing: -2px;
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    text-align: center;
+    color: #000;
+    font-size: 5rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  @media (max-width: 768px) {
+    color: #000;
+    font-size: 3rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 430px) {
+    color: #000;
+    font-size: 2.2rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .headerDesc {
-  font-family: Pretendard;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
   line-height: 30px; /* 136.364% */
+  color: #000;
   letter-spacing: -0.66px;
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 2rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.6rem;
+  }
 }
 
 .spanRainbow {
+  word-break: keep-all;
   font-family: 'Sandoll Seoul';
   font-size: 36px;
   font-style: normal;
@@ -47,6 +89,12 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (max-width: 1024px) {
+    font-size: 24px;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.8rem;
+  }
 }
 
 .spanBold {
@@ -61,13 +109,22 @@
   gap: 5rem;
   padding-top: 5rem;
   position: relative;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    padding: 0;
+    height: 100vh;
+    overflow: visible;
+  }
 }
 
 .main section ul {
   display: flex;
   gap: 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #a5a5a5;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .main section ul span {
@@ -86,14 +143,39 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    overflow: visible;
+    height: 100vh;
+  }
 }
 
 .main section div span {
   position: relative;
   flex: 0 0 100%;
-  height: 100%;
+  height: 90%;
   transform: translateX(100%);
   transition: transform 0.3s ease-in;
+  @media (max-width: 768px) {
+    height: 100vh;
+    flex: 0 0 30%;
+    transform: translateX(0);
+  }
+}
+
+.main section div span p {
+  display: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
 }
 
 .main section div span svg {
@@ -132,24 +214,36 @@
 .arrowLeft {
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(-100%, -50%);
+  top: 70%;
+  left: 2rem;
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .arrowRight {
+  z-index: 2000;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(100%, -50%) rotate(180deg);
+  top: 70%;
+  right: 2rem;
+  transform: rotate(180deg);
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .selectedCircleInfo {
   transition: opacity 0.3s ease-in;
   opacity: 0;
   visibility: hidden; /* 기본값 */
-  width: 15vw;
+  width: 16vw;
   height: auto;
   position: absolute;
   top: 0;
@@ -161,6 +255,20 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 2rem;
+  @media (max-width: 1024px) {
+    width: 35vw;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.selectedCircleInfo button {
+  border: 0.5px solid white;
+  background-color: #000;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 
 .selectedCircleInfo.visible {
@@ -201,11 +309,13 @@
 .popupTeam {
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
   line-height: 10px; /* 100% */
+  @media (max-width: 1024px) {
+    font-size: 10px;
+  }
 }
 .popupTitle {
   color: #fff;
@@ -214,6 +324,10 @@
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
+  word-break: break-all;
+  @media (max-width: 1024px) {
+    font-size: 24px;
+  }
 }
 
 .line {

@@ -3,7 +3,7 @@
 import * as THREE from "three";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
+import { Environment, OrbitControls } from "@react-three/drei";
 import { BallCollider, Physics, RigidBody } from "@react-three/rapier";
 import gsap from "gsap";
 import { easing } from "maath";
@@ -13,6 +13,7 @@ import ThreeText from "./ThreeText.js";
 import Boxes from "./Boxes.js";
 import Floor from "./Floor.js";
 import Model from "./Model.js";
+import ScrollArrow from "./ScrollArrow.js";
 const Effects = dynamic(() => import("./Effects.js"), { ssr: false });
 //
 //
@@ -71,6 +72,7 @@ export default function Experience({ accent, scrollPercent }) {
       {/* <Perf position="bottom-left" /> */}
       <color ref={bgRef} attach="background" args={['white']} />
       <CameraController />
+      {/* <OrbitControls /> */}
 
       <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
 
@@ -94,6 +96,8 @@ export default function Experience({ accent, scrollPercent }) {
       )}
 
       <Model />
+
+      <ScrollArrow isVisible={scrollPercent >= 98} />
 
       <Effects />
     </>

@@ -181,7 +181,7 @@ export default function ProgramPage() {
                   .fill(null)
                   .map((_, colIndex) => {
                     const cellData = tableData[rowIndex][colIndex]
-
+                    
                     if (cellData && cellData.rowspan) {
                       const isStartRow =
                         tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id

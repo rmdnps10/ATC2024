@@ -1,5 +1,15 @@
 .main {
   padding-top: 7rem;
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main article {
@@ -24,14 +34,16 @@
   }
 }
 
-.main article h1 img:first-child {
-  @media (max-width: 768px) {
-    display: none;
+.mobileOnly {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: inline-block;
   }
 }
 
-.main article h1 img:nth-child(2) {
-  @media (min-width: 768px) {
+.pcOnly {
+  display: inline-block;
+  @media screen and (max-width: 768px) {
     display: none;
   }
 }
@@ -64,6 +76,5 @@
   border: none;
   @media (max-width: 768px) {
     z-index: 2000;
-    
   }
 }

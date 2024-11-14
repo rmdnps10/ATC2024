@@ -1,7 +1,7 @@
 'use client'
 
 import { memo } from 'react'
-import { Text, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import { useEffect, useState, useRef, useMemo } from 'react'
 import { useLoader } from '@react-three/fiber'
@@ -75,6 +75,8 @@ const PhysicsCake = memo(function PhysicsCake({ position = [0, 0.5, 0] }) {
 })
 
 export default function Floor() {
+    const [showArrow, setShowArrow] = useState(false);
+
     // 상태 관리 최적화
     const [objects, setObjects] = useState({
         boxes: [],
@@ -132,7 +134,7 @@ export default function Floor() {
     const textures = useLoader(TextureLoader, ['/images/main/atc24_profile.png'])
 
     return (
-        <group position={[58.5 + 3, -124, -5]} rotation={[0, -Math.PI / 6, 0]}>
+        <group position={[58.5 + 1, -124, -5]} rotation={[0, -Math.PI / 6, 0]}>
             <directionalLight position={[3, 10, 0]} intensity={10} />
             <pointLight position={[5, 10, 0]} intensity={100} color="red" />
 

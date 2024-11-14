@@ -6,10 +6,12 @@ import { useEffect, useRef, useState } from 'react'
 import { fourthData, FourthFloorSVG } from '@/components/map/FourthFloor'
 import { fifthData, FifthFloorSVG } from '@/components/map/FifthFloor'
 import { loyolaData, LoyolaSVG } from '@/components/map/Loyola'
+import { useRouter } from 'next/navigation'
 //
 //
 //
 export default function Home() {
+  const router = useRouter()
   const tabList = ['하비에르관 4F', '하비에르관 5F', '로욜라도서관 1관']
   const [selectedTab, setSelectedTab] = useState(0)
   const tabRefs = useRef([])
@@ -126,6 +128,30 @@ export default function Home() {
           {selectedTab === 1 ? fifthData[selectedCircle]?.title : null}
           {selectedTab === 2 ? loyolaData[selectedCircle]?.title : null}
         </span>
+        {selectedTab === 0 ? (
+          <button
+            onClick={() =>
+              router.push(`/works/${fourthData[selectedCircle]._id}`)
+            }>
+            보러가기
+          </button>
+        ) : null}
+        {selectedTab === 1 ? (
+          <button
+            onClick={() =>
+              router.push(`/works/${fifthData[selectedCircle]._id}`)
+            }>
+            보러가기
+          </button>
+        ) : null}
+        {selectedTab === 2 ? (
+          <button
+            onClick={() =>
+              router.push(`/works/${loyolaData[selectedCircle]._id}`)
+            }>
+            보러가기
+          </button>
+        ) : null}
       </h6>
 
       <header>
@@ -168,57 +194,42 @@ export default function Home() {
             ref={el => (mapRefs.current[0] = el)}
             className={styles.firstSpan}>
             <FourthFloorSVG />
+            <p>{tabList[0]}</p>
           </span>
           <span
             ref={el => (mapRefs.current[1] = el)}
             className={styles.secondSpan}>
             <FifthFloorSVG />
+            <p>{tabList[1]}</p>
           </span>
           <span
             ref={el => (mapRefs.current[2] = el)}
             className={styles.thirdSpan}>
             <LoyolaSVG />
+            <p>{tabList[2]}</p>
           </span>
         </div>
-        {selectedTab === 0 ? null : (
-          <Image
-            onClick={() => handleTabClick((selectedTab + 2) % 3)}
-            className={styles.arrowLeft}
-            src={'/images/map/Arrow_right.png'}
-            alt="arrow-left"
-            width={50}
-            height={50}
-          />
-        )}
-        {selectedTab === 2 ? null : (
-          <Image
-            onClick={() => handleTabClick((selectedTab + 1) % 3)}
-            className={styles.arrowRight}
-            src={'/images/map/Arrow_right.png'}
-            alt="arrow-right"
-            width={50}
-            height={50}
-          />
-        )}
-        {/* <svg className={styles.line}>
-          {selectedPos && (
-            <line
-              x1={selectedPos.x * 0.3} //up
-              y1={selectedPos.y * 0.3}
-              // x2={map(selectedPos.x, 46, 1343, 176, 919)}
-              x2={selectedPos.x}
-              // y2={map(selectedPos.y, 102, 456, 441, 640)}
-              y2={selectedPos.y}
-              // x1={200}
-              // y1={200}
-              // x2={400}
-              // y2={400}
-              stroke="black"
-              strokeWidth="2"
-            />
-          )}
-        </svg> */}
       </section>
+      {selectedTab === 0 ? null : (
+        <Image
+          onClick={() => handleTabClick((selectedTab + 2) % 3)}
+          className={styles.arrowLeft}
+          src={'/images/map/Arrow_right.png'}
+          alt="arrow-left"
+          width={50}
+          height={50}
+        />
+      )}
+      {selectedTab === 2 ? null : (
+        <Image
+          onClick={() => handleTabClick((selectedTab + 1) % 3)}
+          className={styles.arrowRight}
+          src={'/images/map/Arrow_right.png'}
+          alt="arrow-right"
+          width={50}
+          height={50}
+        />
+      )}
     </main>
   )
 }

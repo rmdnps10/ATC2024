@@ -1,0 +1,20 @@
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading img {
+  position: absolute;
+  bottom: -1rem;
+  right: 0rem;
+  animation: loadingElephant 0.5s linear infinite;
+  @media (max-width: 768px) {
+    position: relative;
+    width: 80%;
+  }
+}
