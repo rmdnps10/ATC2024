@@ -21,6 +21,7 @@ export default function WorkDetailPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [nickname, setNickname] = useState('')
   const [content, setContent] = useState('')
+  const [modalData, setModalData] = useState(null)
   //data fetching
   useEffect(() => {
     if (pathname.id) {
@@ -32,6 +33,11 @@ export default function WorkDetailPage() {
             parsed.title = parsed.title.split('(')[0]
           }
           setDetailData(parsed)
+          const modal = {
+            teamName: parsed.teamName,
+            interviewText: parsed.interviewText
+          }
+          setModalData(modal)
         }
       }
       fetchData()
@@ -242,15 +248,6 @@ export default function WorkDetailPage() {
                 </div>
               </form>
               <GuestBook comment={detailData.commentList} />
-              {modalOpen && (
-                <div className={styles.modalPortal}>
-                  <WorkDetailModal
-                    teamName={detailData.teamName}
-                    setModalOpen={handleCloseModal}
-                    interviewText={detailData.interviewText}
-                  />
-                </div>
-              )}
             </main>
           ) : (
             <div>
@@ -259,6 +256,19 @@ export default function WorkDetailPage() {
           )}
         </motion.div>
       )}
+      <div
+        id="modal-root"
+        style={{ zIndex: 9999, position: 'relative' }}>
+        {modalOpen && (
+          <div className={styles.modalPortal}>
+            <WorkDetailModal
+              teamName={modalData.teamName}
+              setModalOpen={handleCloseModal}
+              interviewText={modalData.interviewText}
+            />
+          </div>
+        )}
+      </div>
     </AnimatePresence>
   )
 }

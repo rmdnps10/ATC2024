@@ -18,7 +18,7 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 7cqh;
+  font-size: 7rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
@@ -34,14 +34,14 @@
   }
   @media (max-width: 768px) {
     color: #000;
-    font-size: 3rem;
+    font-size: 5rem;
     letter-spacing: -0.9px;
     display: flex;
     justify-content: center;
   }
   @media (max-width: 430px) {
     color: #000;
-    font-size: 2.2rem;
+    font-size: 13vw;
     letter-spacing: -0.9px;
     display: flex;
     justify-content: center;
@@ -143,10 +143,16 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  padding: 0 0 3rem 0;
   @media (max-width: 768px) {
     flex-direction: column;
     overflow: visible;
     height: 100vh;
+    gap: 3rem;
+  }
+  @media (max-width: 430px) {
+    height: 70vh;
+    gap: 3rem;
   }
 }
 
@@ -161,6 +167,11 @@
     flex: 0 0 30%;
     transform: translateX(0);
   }
+  @media (max-width: 430px) {
+    height: 50vh;
+    flex: 0 0 20%;
+    transform: translateX(0);
+  }
 }
 
 .main section div span p {
@@ -171,10 +182,13 @@
     justify-content: center;
     color: #000;
     text-align: center;
-    font-size: 10px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
   }
 }
 
@@ -324,7 +338,7 @@
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
-  word-break: break-all;
+  word-break: keep-all;
   @media (max-width: 1024px) {
     font-size: 24px;
   }
