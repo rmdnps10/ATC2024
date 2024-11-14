@@ -18,7 +18,7 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 7cqh;
+  font-size: 7rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
@@ -34,14 +34,14 @@
   }
   @media (max-width: 768px) {
     color: #000;
-    font-size: 3rem;
+    font-size: 5rem;
     letter-spacing: -0.9px;
     display: flex;
     justify-content: center;
   }
   @media (max-width: 430px) {
     color: #000;
-    font-size: 2.2rem;
+    font-size: 13vw;
     letter-spacing: -0.9px;
     display: flex;
     justify-content: center;
@@ -52,7 +52,7 @@
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 136.364% */
+  line-height: 3rem; /* 136.364% */
   color: #000;
   letter-spacing: -0.66px;
   word-break: keep-all;
@@ -101,6 +101,24 @@
   font-weight: 600;
 }
 
+.spanHighLight {
+  font-weight: 600;
+  margin-right: 0.35rem;
+  background: linear-gradient(90deg, #dd4ffc 0%, #7340fb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.spanMobile {
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
 .main section {
   width: 100%;
   height: 60%;
@@ -143,10 +161,16 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  padding: 0 0 3rem 0;
   @media (max-width: 768px) {
     flex-direction: column;
     overflow: visible;
     height: 100vh;
+    gap: 3rem;
+  }
+  @media (max-width: 430px) {
+    height: 70vh;
+    gap: 3rem;
   }
 }
 
@@ -161,6 +185,11 @@
     flex: 0 0 30%;
     transform: translateX(0);
   }
+  @media (max-width: 430px) {
+    height: 50vh;
+    flex: 0 0 20%;
+    transform: translateX(0);
+  }
 }
 
 .main section div span p {
@@ -171,10 +200,13 @@
     justify-content: center;
     color: #000;
     text-align: center;
-    font-size: 10px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
   }
 }
 
@@ -185,6 +217,7 @@
 
 .main section div span svg circle {
   cursor: pointer;
+  position: relative;
 }
 
 .main section div span svg circle:hover {
@@ -197,7 +230,7 @@
 
 .main section div span svg path,
 .main section div span svg circle {
-  transition: fill 0.3s ease-in;
+  transition: fill 0.1s ease-in;
 }
 /* .main section div span svg path {
 }
@@ -256,7 +289,7 @@
   align-items: flex-start;
   padding: 2rem;
   @media (max-width: 1024px) {
-    width: 35vw;
+    width: 25vw;
   }
   @media (max-width: 768px) {
     display: none;
@@ -313,20 +346,23 @@
   font-style: normal;
   font-weight: 600;
   line-height: 10px; /* 100% */
+  margin-bottom: 1rem;
   @media (max-width: 1024px) {
     font-size: 10px;
   }
 }
 .popupTitle {
   color: #fff;
-  text-align: center;
+  text-align: start;
   font-family: 'Sandoll Seoul';
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
-  word-break: break-all;
+  word-break: keep-all;
+  line-height: 3rem;
+  margin-bottom: 1rem;
   @media (max-width: 1024px) {
-    font-size: 24px;
+    font-size: 30px;
   }
 }
 
