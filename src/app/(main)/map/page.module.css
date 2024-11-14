@@ -52,7 +52,7 @@
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 136.364% */
+  line-height: 3rem; /* 136.364% */
   color: #000;
   letter-spacing: -0.66px;
   word-break: keep-all;
@@ -99,6 +99,24 @@
 
 .spanBold {
   font-weight: 600;
+}
+
+.spanHighLight {
+  font-weight: 600;
+  margin-right: 0.35rem;
+  background: linear-gradient(90deg, #dd4ffc 0%, #7340fb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.spanMobile {
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .main section {
@@ -199,6 +217,7 @@
 
 .main section div span svg circle {
   cursor: pointer;
+  position: relative;
 }
 
 .main section div span svg circle:hover {
@@ -211,7 +230,7 @@
 
 .main section div span svg path,
 .main section div span svg circle {
-  transition: fill 0.3s ease-in;
+  transition: fill 0.1s ease-in;
 }
 /* .main section div span svg path {
 }
@@ -270,7 +289,7 @@
   align-items: flex-start;
   padding: 2rem;
   @media (max-width: 1024px) {
-    width: 35vw;
+    width: 25vw;
   }
   @media (max-width: 768px) {
     display: none;
@@ -327,20 +346,23 @@
   font-style: normal;
   font-weight: 600;
   line-height: 10px; /* 100% */
+  margin-bottom: 1rem;
   @media (max-width: 1024px) {
     font-size: 10px;
   }
 }
 .popupTitle {
   color: #fff;
-  text-align: center;
+  text-align: start;
   font-family: 'Sandoll Seoul';
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
   word-break: keep-all;
+  line-height: 3rem;
+  margin-bottom: 1rem;
   @media (max-width: 1024px) {
-    font-size: 24px;
+    font-size: 30px;
   }
 }
 

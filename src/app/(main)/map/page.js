@@ -130,25 +130,19 @@ export default function Home() {
         </span>
         {selectedTab === 0 ? (
           <button
-            onClick={() =>
-              router.push(`/works/${fourthData[selectedCircle]._id}`)
-            }>
+            onClick={() => router.push(`${fourthData[selectedCircle]._id}`)}>
             보러가기
           </button>
         ) : null}
         {selectedTab === 1 ? (
           <button
-            onClick={() =>
-              router.push(`/works/${fifthData[selectedCircle]._id}`)
-            }>
+            onClick={() => router.push(`${fifthData[selectedCircle]._id}`)}>
             보러가기
           </button>
         ) : null}
         {selectedTab === 2 ? (
           <button
-            onClick={() =>
-              router.push(`/works/${loyolaData[selectedCircle]._id}`)
-            }>
+            onClick={() => router.push(`${loyolaData[selectedCircle]._id}`)}>
             보러가기
           </button>
         ) : null}
@@ -166,7 +160,9 @@ export default function Home() {
             하비에르관(X관) 4층&5층과 로욜라도서관 1층
           </span>
           에서 진행됩니다.
-          <br /> 아래 지도에서 공간 별로 전시되는 작품들을 클릭해보세요!
+          <br /> 아래 지도에서 공간 별로 전시되는 작품들을{' '}
+          <span className={styles.spanHighLight}>CLICK</span>
+          <span className={styles.spanMobile}>확인</span>해보세요!
         </div>
       </header>
       <section>
