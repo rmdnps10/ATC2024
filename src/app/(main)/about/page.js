@@ -1,13 +1,21 @@
-'use client'
 import styles from './page.module.css'
 import Image from 'next/image'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
 import TypingDescription from '@/components/about/TypingDescription'
 import ToCreditPage from '@/components/about/ToCreditPage'
-// import { Zoom } from 'react-awesome-reveal'
 //
 //
 //
+export const metadata = {
+  title: 'About · 코끼리를 냉장고에 넣는 방법',
+  metadataBase: new URL('https://www.atc2024.site/'),
+  description:
+    '2024년 Art&Technology 컨퍼런스의 소개 페이지입니다. ATC 2024의 주제와 관련된 소개 영상과 축사를 확인해보세요!'
+}
+//
+//
+//
+
 export default function AboutPage() {
   return (
     <main className={styles.main}>
@@ -77,16 +85,25 @@ export default function AboutPage() {
       <section className={styles.imageContainer}>
         <div className={styles.typography}>
           <Image
-            src="icon/logo/atc-typography.svg"
+            src="/icon/logo/atc-typography.svg"
             alt="2024 atc 공식 타이포그래피"
             layout="fill"
           />
         </div>
         <div className={styles.title}>
           <Image
-            src="icon/logo/atc-title.svg"
+            src="/icon/logo/atc_slogan_horizontal_black.png"
             alt="2024 atc 공식 타이틀"
-            layout="fill"
+            layout="responsive"
+            width={924}
+            height={126}
+          />
+          <Image
+            src="/icon/logo/atc_slogan_vertical_black.png"
+            alt="2024 atc 공식 타이틀"
+            layout="responsive"
+            width={542}
+            height={444}
           />
         </div>
       </section>
@@ -108,6 +125,12 @@ export default function AboutPage() {
       <section className={styles.quote}>
         <div>
           <blockquote>
+            <Image
+              src="images/about/quotation.svg"
+              alt="쉼표 아이콘"
+              width={123}
+              height={106}
+            />
             <p className={styles.quoteTitle}>최용순 교수님 축사</p>
             <p>
               서강대학교 Art & Technology 학과에서 《코끼리를 냉장고에 넣는
@@ -136,14 +159,29 @@ export default function AboutPage() {
           <blockquote>
             <p className={styles.quoteTitle}>Director 한마디</p>
             <p>
-              제작에 기여한 사람들, 회사, 또는 단체를 인정하고 감사하는 역할을
-              합니다. 크레딧은 보통 디자인, 개발, 콘텐츠 작성, 사진, 영상, 음악
-              등 다양한 분야에서 기여한 이들의 이름을 포함합니다. 이는
-              방문자에게 웹사이트의 제작 배경을 이해시키고, 기여자들에게 공로를
-              인정하는 중요한 부분입니다. 또한, 크레딧은 웹사이트의 신뢰성을
-              높여주며, 기여자들이 자신의 작업을 포트폴리오에 포함할 수 있는
-              근거가 됩니다.
+              <span>
+                반갑습니다 ! ATC2024 : 코끼리를 냉장고에 넣는 법의 크리에이티브
+                디렉터를 맡은 임동준입니다.
+              </span>
+              <br />
+              <br />
+              아트&테크놀로지는 무엇을 하는 학과일까요? 4학년이 된 지금도 이
+              질문에 답하기에 참 많은 생각이 스쳐갑니다. 명쾌한 한 문장으로
+              설명하기는 어려워도 ‘코끼리를 냉장고에 넣는 방법’ 그 문장이 질문과
+              닮아있다는 생각을 합니다. 이 문장은 보는 사람으로 하여금 독특하고
+              이상한 생각을 하게 만들더라구요. <br />
+              <br />
+              많은 아테커가 모여, 전시를 만들었습니다. 평소 낯설었던 아텍에 대해
+              알아가는 자리가 되었으면 합니다. 웹 뿐만아니라 서강대학교 하비에르
+              관에서도 진행됩니다. 부담 없이 방문해주세요. 많은 관심
+              부탁드립니다. 감사합니다.
             </p>
+            <Image
+              src="images/about/quotation.svg"
+              alt="쉼표 아이콘"
+              width={123}
+              height={106}
+            />
           </blockquote>
         </div>
       </section>

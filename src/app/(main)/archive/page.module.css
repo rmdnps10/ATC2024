@@ -1,5 +1,15 @@
 .main {
   padding-top: 7rem;
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main article {
@@ -10,11 +20,32 @@
   font-weight: 500;
   line-height: 160%;
   letter-spacing: -0.032rem;
+  @media (max-width: 768px) {
+    padding-left: 3rem;
+    padding-right: 2rem;
+  }
 }
 
 .main article h1 span {
   display: inline-block;
   padding-left: 1rem;
+  @media (max-width: 768px) {
+    padding-left: 0;
+  }
+}
+
+.mobileOnly {
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: inline-block;
+  }
+}
+
+.pcOnly {
+  display: inline-block;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 
 .main article p {
@@ -34,11 +65,16 @@
   border-radius: 1rem;
   cursor: pointer;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.2rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1.6rem;
   letter-spacing: -0.06rem;
   flex-shrink: 0;
+  z-index: 5000;
+  position: relative;
+  border: none;
+  @media (max-width: 768px) {
+    z-index: 2000;
+  }
 }

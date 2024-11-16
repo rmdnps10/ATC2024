@@ -144,7 +144,6 @@ export default function WorkDetailPage() {
                         alt="elephant Icon"
                         width={40}
                         height={40}
-                        priority={false}
                       />
                     </div>
                   </span>

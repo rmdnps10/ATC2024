@@ -1,141 +1,119 @@
 'use client'
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import Background from './BackgroundModal'
+import BackgroundModal from './BackgroundModal'
+import { buttons } from '@/app/(main)/archive/store/buttonPosition'
+import ModalPortal from './ModalPortal'
 
 export default function ScrollContainer() {
-  const 연표너비 = 5356 * 0.7
-  const 연표높이 = 842 * 0.7
+  const TIMELINE_WIDTH = 5356 * 0.7
+  const TIMELINE_HEIGHT = 842 * 0.7
+  const IMAGE_THRESHOLD = 15
 
   const [position, setPosition] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [imageIndex, setImageIndex] = useState(0)
+
   const scrollRef = useRef(null)
-  const handleButtonClick = x => {
+
+  const moveElephant = async x => {
     setPosition(x)
-    scrollRef.current.scrollTo({
-      left: x,
-      behavior: 'smooth'
+    await new Promise(resolve => {
+      setTimeout(() => {
+        if (scrollRef.current) {
+          scrollRef.current.scrollTo({
+            left: x,
+            behavior: 'smooth'
+          })
+        }
+        resolve()
+      }, 500)
     })
   }
 
+  const handleKeyDown = e => {
+    setImageIndex(prevIndex => {
+      if (e.key === 'ArrowRight' && prevIndex < buttons.length - 1) {
+        moveElephant(buttons[prevIndex + 1].left)
+        return prevIndex + 1
+      } else if (e.key === 'ArrowLeft' && prevIndex > 0) {
+        moveElephant(buttons[prevIndex - 1].left)
+        return prevIndex - 1
+      }
+      return prevIndex
+    })
+  }
+
+  const handleClickButton = async (x, y) => {
+    await moveElephant(x)
+    setImageIndex(y)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   return (
-    <Scrollsection ref={scrollRef}>
-      <Background type={1} />
+    <ScrollSection ref={scrollRef}>
+      {isModalOpen && (
+        <ModalPortal>
+          <BackgroundModal
+            moveElephant={moveElephant}
+            closeModal={closeModal}
+            imageIndex={imageIndex}
+            setImageIndex={setImageIndex}
+          />
+        </ModalPortal>
+      )}
+
       <Image
         src="/images/archive/연표.png"
         alt="atc2024 연표, timeline"
-        width={연표너비}
-        height={연표높이}
-        priority={true}
+        width={TIMELINE_WIDTH}
+        height={TIMELINE_HEIGHT}
+        priority
       />
       <Elephant
         alt="atc2024 elephant"
-        src={'/images/archive/코끼리.webp'}
+        src="/images/archive/코끼리.webp"
         width={171 * 0.5}
         height={163 * 0.5}
         position={position}
       />
-      <LowButton
-        $top={430}
-        $left={40}
-        onClick={() => handleButtonClick(40)}>
-        Creative Director 선정
-      </LowButton>
-      <LowButton
-        $top={360}
-        $left={300}
-        onClick={() => handleButtonClick(300)}>
-        STAFF 모집
-      </LowButton>
-      <LowButton
-        $top={390}
-        $left={490}
-        onClick={() => handleButtonClick(490)}>
-        ATC 킥오프
-      </LowButton>
-      <LowButton
-        $top={320}
-        $left={680}
-        onClick={() => handleButtonClick(680)}>
-        팀별 첫 회의
-      </LowButton>
-      <LowButton
-        $top={380}
-        $left={880}
-        onClick={() => handleButtonClick(880)}>
-        주제문 확정
-      </LowButton>
-      <LowButton
-        $top={420}
-        $left={1020}
-        onClick={() => handleButtonClick(1020)}>
-        아티스트 모집
-      </LowButton>
-      <LowButton
-        $top={350}
-        $left={1190}
-        onClick={() => handleButtonClick(1190)}>
-        브랜딩 완성
-      </LowButton>
-      <LowButton
-        $top={300}
-        $left={1420}
-        onClick={() => handleButtonClick(1420)}>
-        아티스트 교류의 날
-      </LowButton>
-      <LowButton
-        $top={320}
-        $left={1720}
-        onClick={() => handleButtonClick(1720)}>
-        스태프 프로필 촬영
-      </LowButton>
-      <LowButton
-        $top={240}
-        $left={1860}
-        onClick={() => handleButtonClick(1860)}>
-        외부 인사 미팅
-      </LowButton>
-      <HightButton
-        $top={100}
-        $left={2450}
-        onClick={() => handleButtonClick(2450)}>
-        팀장단 인터뷰
-      </HightButton>
-      <HightButton
-        $top={10}
-        $left={2580}
-        onClick={() => handleButtonClick(2580)}>
-        작품팀 작품 완성
-      </HightButton>
-      <HightButton
-        $top={50}
-        $left={2780}
-        onClick={() => handleButtonClick(2780)}>
-        웹페이지 배포 완성
-      </HightButton>
-      <HightButton
-        $top={-10}
-        $left={2950}
-        onClick={() => handleButtonClick(2950)}>
-        영상팀 영상 완성
-      </HightButton>
-      <HightButton
-        $top={70}
-        $left={3050}
-        onClick={() => handleButtonClick(3050)}>
-        ATC 전시 설치 시작
-      </HightButton>
+      {buttons.map((button, index) => {
+        const ButtonComponent =
+          button.type === 'LowButton' ? LowButton : HighButton
+        return (
+          <ButtonComponent
+            key={index}
+            $top={button.top}
+            $left={button.left}
+            onClick={() => handleClickButton(button.left, index)}>
+            {button.text}
+          </ButtonComponent>
+        )
+      })}
       <Refrigerator
         alt="atc2024 refrigerator"
-        src={'/images/archive/냉장고.png'}
+        src="/images/archive/냉장고.png"
         width={270}
         height={270}
+        onClick={() => handleClickButton(3450, IMAGE_THRESHOLD)}
       />
-    </Scrollsection>
+    </ScrollSection>
   )
 }
 
-const Scrollsection = styled.section`
+const ScrollSection = styled.section`
   width: 99%;
   margin: 0 auto;
   overflow-x: scroll;
@@ -144,6 +122,18 @@ const Scrollsection = styled.section`
   padding-top: 50px;
   position: relative;
   z-index: 1000;
+  &::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 20px;
+    background-color: #aaa; /* 또는 트랙에 추가한다 */
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #000;
+  }
+
+  @media (max-width: 768px) {
+  }
 `
 
 const LowButton = styled.button`
@@ -158,20 +148,20 @@ const LowButton = styled.button`
   background: #fff;
   border: none;
   cursor: pointer;
+  &:hover {
+    filter: brightness(70%);
+  }
 `
 
-const HightButton = styled(LowButton)`
-  background: var(
-    --linear,
-    linear-gradient(
-      90deg,
-      #35cffa 0%,
-      #278ffb 20%,
-      #3c79fb 40%,
-      #dd4ffc 60%,
-      #9734fb 80%,
-      #7340fb 100%
-    )
+const HighButton = styled(LowButton)`
+  background: linear-gradient(
+    90deg,
+    #35cffa 0%,
+    #278ffb 20%,
+    #3c79fb 40%,
+    #dd4ffc 60%,
+    #9734fb 80%,
+    #7340fb 100%
   );
   color: white;
 `
@@ -182,6 +172,7 @@ const Elephant = styled(Image)`
   left: 10px;
   transform: ${props => `translateX(${props.position}px)`};
   transition: 0.5s ease;
+  z-index: 11;
 `
 
 const Refrigerator = styled(Image)`
@@ -190,4 +181,5 @@ const Refrigerator = styled(Image)`
   left: -50px;
   transform: translateX(3440px);
   z-index: 10;
+  cursor: pointer;
 `

@@ -143,11 +143,11 @@ table {
 
 /* ( 크롬, 사파리, 오페라, 엣지 ) 동작 */
 body {
-  color: grey;
+  color: black;
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
   background-color: white;
 }
@@ -161,9 +161,9 @@ body {
     #35cffa 75%,
     transparent
   );
-}
+} */
 
-div::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 

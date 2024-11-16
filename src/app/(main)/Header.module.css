@@ -3,7 +3,7 @@
   display: flex;
   padding: 0 2.5rem;
   position: fixed;
-  z-index: 999;
+  z-index: 9999;
   height: 6.5rem;
   align-items: center;
   gap: 5.1rem;
@@ -28,7 +28,6 @@
 .header ul li {
   font-size: 1.6rem;
   font-weight: 500;
-  font-family: Pretendard;
   font-weight: 400;
 }
 
@@ -48,15 +47,24 @@
   -webkit-text-fill-color: transparent;
 }
 
-.logo {
+.mobileLogo {
   padding-bottom: 10px;
 }
 
-.logo a {
+.mobileLogo a {
   height: 40px;
   display: flex;
   align-items: flex-end;
   gap: 14px;
+}
+
+.mobileLogo a img {
+  width: 32px;
+  height: 32px;
+}
+
+.logo a img {
+  width: 80px;
 }
 
 .line {
@@ -146,11 +154,6 @@
   width: 100%;
   background-color: inherit;
   transition: height 0.4s;
-  border-top: 1px solid white;
-}
-
-.mobileMenu nav {
-  margin-top: 12rem;
 }
 
 .mobileMenu nav li {

@@ -14,7 +14,7 @@ export default function Home() {
   const router = useRouter()
   const tabList = ['하비에르관 4F', '하비에르관 5F', '로욜라도서관 1관']
   const [selectedTab, setSelectedTab] = useState(0)
-  const tabRefs = useRef([])
+  const tabRefs = useRef([])  
   const mapRefs = useRef([])
   const boxRef = useRef(null)
   const [popupOpen, setPopupOpen] = useState(false)

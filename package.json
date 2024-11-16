@@ -15,12 +15,13 @@
     }
   },
   "dependencies": {
+    "@pmndrs/assets": "^1.7.0",
     "@react-three/drei": "^9.108.1",
     "@react-three/postprocessing": "^2.16.2",
+    "@types/three": "^0.169.0",
     "classnames": "^2.5.1",
     "env-cmd": "^10.1.0",
     "framer-motion": "^11.9.0",
-    "framer-motion-3d": "^11.11.10",
     "gsap": "^3.12.5",
     "leva": "^0.9.34",
     "net": "^1.0.2",
@@ -30,10 +31,11 @@
     "react": "^18",
     "react-awesome-reveal": "^4.2.14",
     "react-dom": "^18",
+    "react-scripts": "^5.0.1",
     "react-use": "^17.5.1",
-    "styled-components": "^6.1.13",
-    "three": "^0.166.1",
-    "vercel": "^37.5.3"
+    "three-stdlib": "^2.33.0",
+    "vercel": "^37.5.3",
+    "wouter": "^3.3.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.0.0",
@@ -53,6 +55,7 @@
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
     "r3f-perf": "^7.2.1",
+    "styled-components": "^6.1.13",
     "three": "^0.169.0"
   }
 }
