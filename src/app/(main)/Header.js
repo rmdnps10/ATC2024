@@ -32,7 +32,7 @@ export default function Header() {
       <Link href={'/'}>
         {isMobile ? (
           <img
-            src={'icon/logo/atc-symbol.svg'}
+            src={'/icon/logo/atc-symbol.svg'}
             alt="2024 atc 공식 로고 심볼"
             priority
           />
@@ -40,10 +40,10 @@ export default function Header() {
           <img
             src={
               isShowMouseEnterAnimation
-                ? 'icon/logo/transition/atc2024-elephant.webp'
+                ? '/icon/logo/transition/atc2024-elephant.webp'
                 : isShowMouseLeaveAnimation
-                ? 'icon/logo/transition/elephant-atc2024.webp'
-                : 'icon/logo/atc-typography.svg'
+                ? '/icon/logo/transition/elephant-atc2024.webp'
+                : '/icon/logo/atc-typography.svg'
             }
             alt={
               isShowMouseEnterAnimation
