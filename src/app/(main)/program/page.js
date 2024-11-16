@@ -1,8 +1,10 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
-
+//
+//
+//
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
@@ -12,36 +14,39 @@ export default function ProgramPage() {
     typeof window !== 'undefined' &&
     window.matchMedia('(max-width: 768px)').matches
 
-  const scrollToProgram = id => {
+  const scrollToProgram = useCallback(id => {
     programRefs.current[id]?.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
       inline: 'nearest'
     })
-  }
+  }, [])
 
-  const toggleProgram = id => {
-    if (isMobile) {
-      setOpenPrograms(prevOpenPrograms => {
-        const isOpening = !prevOpenPrograms.includes(id)
-        if (isOpening) {
-          requestAnimationFrame(() => scrollToProgram(id))
+  const toggleProgram = useCallback(
+    id => {
+      if (isMobile) {
+        setOpenPrograms(prevOpenPrograms => {
+          const isOpening = !prevOpenPrograms.includes(id)
+          if (isOpening) {
+            requestAnimationFrame(() => scrollToProgram(id))
+          }
+          return isOpening
+            ? [...prevOpenPrograms, id]
+            : prevOpenPrograms.filter(p => p !== id)
+        })
+        if (openPrograms.includes(id)) {
+          requestAnimationFrame(() => setHoveredProgram(null))
         }
-        return isOpening
-          ? [...prevOpenPrograms, id]
-          : prevOpenPrograms.filter(p => p !== id)
-      })
-      if (openPrograms.includes(id)) {
-        requestAnimationFrame(() => setHoveredProgram(null))
+      } else {
+        setOpenPrograms(prevOpenPrograms =>
+          prevOpenPrograms.includes(id)
+            ? prevOpenPrograms.filter(p => p !== id)
+            : [...prevOpenPrograms, id]
+        )
       }
-    } else {
-      setOpenPrograms(prevOpenPrograms =>
-        prevOpenPrograms.includes(id)
-          ? prevOpenPrograms.filter(p => p !== id)
-          : [...prevOpenPrograms, id]
-      )
-    }
-  }
+    },
+    [isMobile, openPrograms, scrollToProgram]
+  )
 
   const programs = [
     {
