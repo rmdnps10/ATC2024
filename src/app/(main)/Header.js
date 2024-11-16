@@ -2,139 +2,91 @@
 import React, { useReducer, useState, useEffect } from 'react'
 import styles from './Header.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useLockBodyScroll } from 'react-use'
+import { useMedia, useLockBodyScroll } from 'react-use'
 
 export default function Header() {
-  const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] =
-    useState(false)
-  const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] =
-    useState(false)
+  const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] = useState(false)
+  const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-
   const pathname = usePathname()
   const isPathCredit = pathname === '/credit'
-
-  const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(state => {
-    return !state
-  }, false)
+  const isMobile = useMedia('(max-width: 768px)')
+  const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(state => !state, false)
 
   useLockBodyScroll(isOpenMobileMenu)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 100)
     window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const renderAtcLogo = isMobile => (
+    <div className={isMobile ? styles.mobileLogo : styles.logo}>
+      <Link href={'/'}>
+        {isMobile ? (
+          <img src={'icon/logo/atc-symbol.svg'} alt="2024 atc 공식 로고 심볼" priority />
+        ) : (
+          <img
+            src={
+              isShowMouseEnterAnimation
+                ? 'icon/logo/transition/atc2024-elephant.webp'
+                : isShowMouseLeaveAnimation
+                ? 'icon/logo/transition/elephant-atc2024.webp'
+                : 'icon/logo/atc-typography.svg'
+            }
+            alt={
+              isShowMouseEnterAnimation
+                ? 'Mouse Enter Animation'
+                : isShowMouseLeaveAnimation
+                ? 'Mouse Leave Animation'
+                : 'atc2024 타이포그래피'
+            }
+            onMouseEnter={() => setIsShowMouseEnterAnimation(true)}
+            onMouseLeave={() => {
+              setIsShowMouseEnterAnimation(false)
+              setIsShowMouseLeaveAnimation(true)
+            }}
+          />
+        )}
+      </Link>
+    </div>
+  )
 
   return (
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
-      style={{
-        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
-      }}>
-      <div className={styles.logo}>
-        <Link
-          href={'/'}
-          onMouseEnter={() => {
-            setIsShowMouseEnterAnimation(true)
-          }}
-          onMouseLeave={() => {
-            setIsShowMouseEnterAnimation(false)
-            setIsShowMouseLeaveAnimation(true)
-          }}>
-          <Image
-            src="/icon/logo/atc-typography.svg"
-            alt="2024 atc 공식 타이포그래피"
-            width={80}
-            priority
-            height={30}
-          />
-          <div
-            className={`${styles.line} ${
-              isOpenMobileMenu && styles.active
-            }`}></div>
-
-          {isShowMouseEnterAnimation ? (
-            <Image
-              className={styles.transition}
-              src="/icon/logo/transition/atc-elephant.webp"
-              unoptimized
-              alt="2024 atc 공식 로고 - 로고에서 코끼리로"
-              width={35}
-              height={35}
-            />
-          ) : isShowMouseLeaveAnimation ? (
-            <Image
-              className={styles.transition}
-              src="/icon/logo/transition/elephant-atc.webp"
-              unoptimized
-              alt="2024 atc 공식 로고 - 코끼리에서 로고로"
-              width={35}
-              height={35}
-            />
-          ) : (
-            <Image
-              src="/icon/logo/atc-symbol.svg"
-              priority
-              alt="2024 atc 공식 로고"
-              width={30}
-              height={40}
-            />
-          )}
-        </Link>
-      </div>
-
+      style={{ backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black' }}
+    >
+      {renderAtcLogo(isMobile)}
       <ul>
         {['/about', '/works', '/program', '/archive', '/map'].map(link => (
           <li key={link}>
-            <Link
-              href={link}
-              className={pathname === link ? styles.activeText : ''}>
+            <Link href={link} className={pathname === link ? styles.activeText : ''}>
               {link.charAt(1).toUpperCase() + link.slice(2)}
             </Link>
           </li>
         ))}
       </ul>
-
       <div
-        className={`${styles.hamburgerMenu} ${
-          isOpenMobileMenu && styles.active
-        }`}
-        onClick={toggleIsShowMobileMenu}>
+        className={`${styles.hamburgerMenu} ${isOpenMobileMenu && styles.active}`}
+        onClick={toggleIsShowMobileMenu}
+      >
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
       </div>
-
       <section
         className={styles.mobileMenu}
-        style={{
-          overflow: 'hidden',
-          height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0'
-        }}>
+        style={{ overflow: 'hidden', height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0' }}
+      >
         <nav onClick={toggleIsShowMobileMenu}>
-          <li>
-            <Link href={'/about'}>ABOUT</Link>
-          </li>
-          <li>
-            <Link href={'/works'}>WORK</Link>
-          </li>
-          <li>
-            <Link href={'/program'}>PROGRAM</Link>
-          </li>
-          <li>
-            <Link href={'/archive'}>ARCHIVE</Link>
-          </li>
-          <li>
-            <Link href={'/map'}>MAPS</Link>
-          </li>
+          {['/about', '/works', '/program', '/archive', '/map'].map(link => (
+            <li key={link}>
+              <Link href={link}>{link.slice(1).toUpperCase()}</Link>
+            </li>
+          ))}
         </nav>
       </section>
     </header>
