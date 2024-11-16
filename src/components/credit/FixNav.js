@@ -28,8 +28,10 @@ export default function FixNav() {
 
         <SlideMenuList isHover={isHover}>
           {teamList.map(team => (
-            <a href={`#${team}`}>
-              <Team key={team}>{team}</Team>
+            <a
+              href={`#${team}`}
+              key={team}>
+              <Team>{team}</Team>
             </a>
           ))}
         </SlideMenuList>
@@ -56,7 +58,7 @@ const StyledFixNav = styled.nav`
   z-index: 100;
   .up-arrow {
     margin-bottom: -0.5rem;
-  } 
+  }
   @media (max-width: 768px) {
     bottom: 0px;
     right: 0px;
