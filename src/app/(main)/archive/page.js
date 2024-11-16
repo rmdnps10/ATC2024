@@ -1,9 +1,19 @@
-'use client'
 import Image from 'next/image'
 import styles from './page.module.css'
 import Link from 'next/link'
 import ScrollContainer from '@/components/archive/Container'
-
+//
+//
+//
+export const metadata = {
+  title: 'Archive · 코끼리를 냉장고에 넣는 방법',
+  metadataBase: new URL('https://www.atc2024.site/'),
+  description:
+    '2024년 Art&Technology 컨퍼런스의 작업과정을 소개합니다. 가로 스크롤을 통해 시간 순서대로 2024 ATC가 만들어진 과정을 감상하실 수 있습니다.'
+}
+//
+//
+//
 export default function ArchivePage() {
   return (
     <>

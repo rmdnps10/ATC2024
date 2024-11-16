@@ -62,10 +62,10 @@ export default function MyPortal({
           blend: blendValue,
           duration: 1,
           onComplete: () => {
-            blendValues.current[i] = blendValue // 애니메이션이 끝난 후 확실히 갱신
+            blendValues.current[index] = blendValue // 애니메이션이 끝난 후 확실히 갱신
           }
         })
-      }
+      } 
     })
   }
 
@@ -155,7 +155,7 @@ export default function MyPortal({
                   window.open(portalPositions[currentPortal].link, '_blank')
                 }
               }}>
-              Go
+              Go !
             </button>
           </div>
         </Html>
