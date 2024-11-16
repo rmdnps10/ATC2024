@@ -10,20 +10,11 @@ import { useRouter } from 'next/navigation'
 //
 //
 //
-export const metadata = {
-  title: 'Maps · 코끼리를 냉장고에 넣는 방법',
-  metadataBase: new URL('https://www.atc2024.site/'),
-  description:
-    '2024년 Art&Technology 컨퍼런스의 오프라인 지도입니다. 각 공간별 전시작품을 확인해보세요!'
-}
-//
-//
-//
 export default function Home() {
   const router = useRouter()
   const tabList = ['하비에르관 4F', '하비에르관 5F', '로욜라도서관 1관']
   const [selectedTab, setSelectedTab] = useState(0)
-  const tabRefs = useRef([])
+  const tabRefs = useRef([])  
   const mapRefs = useRef([])
   const boxRef = useRef(null)
   const [popupOpen, setPopupOpen] = useState(false)
