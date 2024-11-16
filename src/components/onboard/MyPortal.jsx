@@ -155,7 +155,7 @@ export default function MyPortal({
                   window.open(portalPositions[currentPortal].link, '_blank')
                 }
               }}>
-              Go
+              Go !
             </button>
           </div>
         </Html>
