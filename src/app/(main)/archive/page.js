@@ -19,7 +19,7 @@ export default function ArchivePage() {
               <Image
                 src={'/images/archive/atc-slogan-black.png'}
                 alt="코끼리를 냉장고에 넣는법"
-                priority={true}
+                priority
                 width={402}
                 height={54}
               />
@@ -28,7 +28,7 @@ export default function ArchivePage() {
               <Image
                 src={'/icon/logo/atc_slogan_vertical_black.png'}
                 alt="코끼리를 냉장고에 넣는법"
-                priority={true}
+                priority
                 width={150}
                 height={120}
               />

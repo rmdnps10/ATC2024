@@ -14,7 +14,7 @@ export default function StaffImageList({ teamName, teamType, memberList }) {
       <Image
         src={`/images/staff-profile/${teamType}/${teamType}_${member.이름}.jpg`}
         alt={member.이름}
-        priority={true}
+        priority
         width="186"
         height="280"
       />
