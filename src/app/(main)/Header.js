@@ -6,13 +6,18 @@ import { usePathname } from 'next/navigation'
 import { useMedia, useLockBodyScroll } from 'react-use'
 
 export default function Header() {
-  const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] = useState(false)
-  const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] = useState(false)
+  const [isShowMouseEnterAnimation, setIsShowMouseEnterAnimation] =
+    useState(false)
+  const [isShowMouseLeaveAnimation, setIsShowMouseLeaveAnimation] =
+    useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const isPathCredit = pathname === '/credit'
   const isMobile = useMedia('(max-width: 768px)')
-  const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(state => !state, false)
+  const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(
+    state => !state,
+    false
+  )
 
   useLockBodyScroll(isOpenMobileMenu)
 
@@ -26,7 +31,11 @@ export default function Header() {
     <div className={isMobile ? styles.mobileLogo : styles.logo}>
       <Link href={'/'}>
         {isMobile ? (
-          <img src={'icon/logo/atc-symbol.svg'} alt="2024 atc 공식 로고 심볼" priority />
+          <img
+            src={'icon/logo/atc-symbol.svg'}
+            alt="2024 atc 공식 로고 심볼"
+            priority
+          />
         ) : (
           <img
             src={
@@ -57,30 +66,36 @@ export default function Header() {
   return (
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
-      style={{ backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black' }}
-    >
+      style={{
+        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
+      }}>
       {renderAtcLogo(isMobile)}
       <ul>
         {['/about', '/works', '/program', '/archive', '/map'].map(link => (
           <li key={link}>
-            <Link href={link} className={pathname === link ? styles.activeText : ''}>
+            <Link
+              href={link}
+              className={pathname === link ? styles.activeText : ''}>
               {link.charAt(1).toUpperCase() + link.slice(2)}
             </Link>
           </li>
         ))}
       </ul>
       <div
-        className={`${styles.hamburgerMenu} ${isOpenMobileMenu && styles.active}`}
-        onClick={toggleIsShowMobileMenu}
-      >
+        className={`${styles.hamburgerMenu} ${
+          isOpenMobileMenu && styles.active
+        }`}
+        onClick={toggleIsShowMobileMenu}>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
         <div className={styles.bar}></div>
       </div>
       <section
         className={styles.mobileMenu}
-        style={{ overflow: 'hidden', height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0' }}
-      >
+        style={{
+          overflow: 'hidden',
+          height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0'
+        }}>
         <nav onClick={toggleIsShowMobileMenu}>
           {['/about', '/works', '/program', '/archive', '/map'].map(link => (
             <li key={link}>
