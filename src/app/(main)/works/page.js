@@ -213,8 +213,8 @@ export default function WorksPage({}) {
             className={styles.figure}
             key={el._id}>
             <Image
-              // placeholder="blur"
-              // blurDataURL={base64}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
               className={styles.image}
               // src={el.thumbnailImg}
               src={'/images/works/page0.png'}

@@ -120,6 +120,8 @@ export default function WorkDetailPage() {
                   src={'/images/works/page0.png'}
                   alt="header image"
                   layout="fill"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
                   // placeholder="blur"
                   objectFit="cover"
                 />
@@ -178,6 +180,8 @@ export default function WorkDetailPage() {
                       className={styles.introduceImage}>
                       <Image
                         // className={styles.headerImage}
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
                         key={key}
                         src={el}
                         alt="detail image"
@@ -197,6 +201,8 @@ export default function WorkDetailPage() {
                     alt="artist image"
                     layout="fill"
                     objectFit="cover"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
                     // placeholder="blur"
                   />
                 </figure>
