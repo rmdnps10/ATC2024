@@ -2,14 +2,10 @@
 import React, { useState, useRef } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
-import { style } from 'framer-motion/client'
-//
-//
-//
+
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
-  const [animatingPrograms, setAnimatingPrograms] = useState([])
   const programRefs = useRef({})
 
   const isMobile =
@@ -25,18 +21,14 @@ export default function ProgramPage() {
   }
 
   const toggleProgram = id => {
-    setAnimatingPrograms(prev => [...prev, id])
-
     if (isMobile) {
       setOpenPrograms(prevOpenPrograms => {
         const isOpening = !prevOpenPrograms.includes(id)
         if (isOpening) scrollToProgram(id)
-
         return isOpening
           ? [...prevOpenPrograms, id]
           : prevOpenPrograms.filter(p => p !== id)
       })
-
       if (openPrograms.includes(id)) setHoveredProgram(null)
     } else {
       setOpenPrograms(prevOpenPrograms =>
@@ -93,6 +85,7 @@ export default function ProgramPage() {
         "'우리는 코끼리가 될 수도 있고 냉장고를 만들 수도 있다.' 다양한 여러가지 표현방법을 통해 나의 빈칸을 채워봅시다. 그리는 과정을 통해 우리의 가능성과 꿈, 여백의 아름다움에 대한 이야기를 나눕니다."
     }
   ]
+
   const alwaysAvailablePrograms = [
     {
       id: 'always1',
@@ -151,6 +144,71 @@ export default function ProgramPage() {
     [null, null, null]
   ]
 
+  const renderProgramCell = (cellData, rowIndex, colIndex) => {
+    if (cellData && cellData.rowspan) {
+      const isStartRow = tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id
+      if (isStartRow) {
+        return (
+          <div
+            key={`merged-${rowIndex}-${colIndex}`}
+            className={`${styles.programCellStyled} ${
+              hoveredProgram === cellData.id ||
+              openPrograms.includes(cellData.id)
+                ? styles.highlightedBackground
+                : ''
+            }`}
+            style={{ gridRow: 'span 3', gridColumn: colIndex + 2 }}
+            onMouseEnter={() => setHoveredProgram(cellData.id)}
+            onMouseLeave={() => setHoveredProgram(null)}
+            onClick={() => toggleProgram(cellData.id)}>
+            <div
+              className={`${styles.gradientText} ${
+                hoveredProgram === cellData.id ||
+                openPrograms.includes(cellData.id)
+                  ? styles.highlightedText
+                  : ''
+              }`}>
+              {cellData.title}
+            </div>
+          </div>
+        )
+      }
+      return null
+    }
+
+    if (!cellData) {
+      return (
+        <div
+          key={`empty-${rowIndex}-${colIndex}`}
+          className={styles.programCell}
+          style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}></div>
+      )
+    }
+
+    return (
+      <div
+        key={`${rowIndex}-${colIndex}`}
+        className={`${styles.programCellStyled} ${
+          hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+            ? styles.highlightedBackground
+            : ''
+        }`}
+        style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}
+        onMouseEnter={() => setHoveredProgram(cellData.id)}
+        onMouseLeave={() => setHoveredProgram(null)}
+        onClick={() => toggleProgram(cellData.id)}>
+        <div
+          className={`${styles.gradientText} ${
+            hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+              ? styles.highlightedText
+              : ''
+          }`}>
+          {cellData.title}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.cyan1}></div>
@@ -175,89 +233,15 @@ export default function ProgramPage() {
                   style={{ gridRow: rowIndex + 2 }}>
                   {time}
                 </div>
-
-                {/* 프로그램 셀 */}
                 {Array(3)
                   .fill(null)
-                  .map((_, colIndex) => {
-                    const cellData = tableData[rowIndex][colIndex]
-                    
-                    if (cellData && cellData.rowspan) {
-                      const isStartRow =
-                        tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id
-
-                      if (isStartRow) {
-                        return (
-                          <div
-                            key={`merged-${rowIndex}-${colIndex}`}
-                            className={`${styles.programCellStyled} ${
-                              hoveredProgram === cellData.id ||
-                              openPrograms.includes(cellData.id)
-                                ? styles.highlightedBackground
-                                : ''
-                            }`}
-                            style={{
-                              gridRow: 'span 3',
-                              gridColumn: colIndex + 2
-                            }}
-                            onMouseEnter={() => setHoveredProgram(cellData.id)}
-                            onMouseLeave={() => setHoveredProgram(null)}
-                            onClick={() => toggleProgram(cellData.id)}>
-                            <div
-                              className={`${styles.gradientText} ${
-                                hoveredProgram === cellData.id ||
-                                openPrograms.includes(cellData.id)
-                                  ? styles.highlightedText
-                                  : ''
-                              }`}>
-                              {cellData.title}
-                            </div>
-                          </div>
-                        )
-                      }
-                      return null
-                    }
-
-                    if (!cellData) {
-                      return (
-                        <div
-                          key={`empty-${rowIndex}-${colIndex}`}
-                          className={styles.programCell}
-                          style={{
-                            gridColumn: colIndex + 2,
-                            gridRow: rowIndex + 2
-                          }}></div>
-                      )
-                    }
-
-                    return (
-                      <div
-                        key={`${rowIndex}-${colIndex}`}
-                        className={`${styles.programCellStyled} ${
-                          hoveredProgram === cellData.id ||
-                          openPrograms.includes(cellData.id)
-                            ? styles.highlightedBackground
-                            : ''
-                        }`}
-                        style={{
-                          gridColumn: colIndex + 2,
-                          gridRow: rowIndex + 2
-                        }}
-                        onMouseEnter={() => setHoveredProgram(cellData.id)}
-                        onMouseLeave={() => setHoveredProgram(null)}
-                        onClick={() => toggleProgram(cellData.id)}>
-                        <div
-                          className={`${styles.gradientText} ${
-                            hoveredProgram === cellData.id ||
-                            openPrograms.includes(cellData.id)
-                              ? styles.highlightedText
-                              : ''
-                          }`}>
-                          {cellData.title}
-                        </div>
-                      </div>
+                  .map((_, colIndex) =>
+                    renderProgramCell(
+                      tableData[rowIndex][colIndex],
+                      rowIndex,
+                      colIndex
                     )
-                  })}
+                  )}
               </React.Fragment>
             )
           )}
@@ -298,21 +282,14 @@ export default function ProgramPage() {
             key={group.title}
             className={styles.groups}>
             <div className={styles.headerGroup}>
-              {group.title === '강연' ? (
-                <Image
-                  src="images/program/subComponent1.svg"
-                  alt="2024 atc 서브 컴포넌트 - 강연"
-                  width={34}
-                  height={34}
-                />
-              ) : (
-                <Image
-                  src="images/program/subComponent2.svg"
-                  alt="2024 atc 서브 컴포넌트 - 부스"
-                  width={34}
-                  height={34}
-                />
-              )}
+              <Image
+                src={`images/program/subComponent${
+                  group.title === '강연' ? '1' : '2'
+                }.svg`}
+                alt={`2024 atc 서브 컴포넌트 - ${group.title}`}
+                width={34}
+                height={34}
+              />
               <p className={styles.groupTitle}>{group.title}</p>
             </div>
             {group.programs.map(program => (
@@ -348,7 +325,6 @@ export default function ProgramPage() {
                     />
                   </span>
                 </div>
-
                 <div
                   className={`${styles.accordionContent} ${
                     openPrograms.includes(program.id)
