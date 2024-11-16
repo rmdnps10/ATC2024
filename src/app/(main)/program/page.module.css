@@ -387,4 +387,5 @@
   font-size: 1.4rem;
   color: #444444;
   word-break: keep-all;
+  white-space: pre-line;
 }
