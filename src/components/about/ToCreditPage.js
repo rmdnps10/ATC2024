@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef } from 'react'
 import styles from './ToCreditPage.module.css'
 import Link from 'next/link'

@@ -1,4 +1,3 @@
-'use client'
 import styles from './page.module.css'
 import Image from 'next/image'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
@@ -7,6 +6,16 @@ import ToCreditPage from '@/components/about/ToCreditPage'
 //
 //
 //
+export const metadata = {
+  title: 'About · 코끼리를 냉장고에 넣는 방법',
+  metadataBase: new URL('https://www.atc2024.site/'),
+  description:
+    '2024년 Art&Technology 컨퍼런스의 소개 페이지입니다. ATC 2024의 주제와 관련된 소개 영상과 축사를 확인해보세요!'
+}
+//
+//
+//
+
 export default function AboutPage() {
   return (
     <main className={styles.main}>
