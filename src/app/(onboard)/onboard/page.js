@@ -27,14 +27,20 @@ export default function Page() {
             <button
               className={styles.portalButton}
               onClick={() => prevPortalRef.current()}>
-              {'<'}
+              <img
+                src="/icon/button/left-arrow.svg"
+                alt="왼쪽 아이콘"
+              />
             </button>
           </div>
           <div className={styles.portalNavigationRight}>
             <button
               className={styles.portalButton}
               onClick={() => nextPortalRef.current()}>
-              {'>'}
+              <img
+                src="/icon/button/right-arrow.svg"
+                alt="오른쪽 아이콘"
+              />
             </button>
           </div>
           <div className={styles.portalNavigationBottom}>

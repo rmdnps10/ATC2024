@@ -62,10 +62,10 @@ export default function MyPortal({
           blend: blendValue,
           duration: 1,
           onComplete: () => {
-            blendValues.current[i] = blendValue // 애니메이션이 끝난 후 확실히 갱신
+            blendValues.current[index] = blendValue // 애니메이션이 끝난 후 확실히 갱신
           }
         })
-      }
+      } 
     })
   }
 

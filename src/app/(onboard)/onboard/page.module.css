@@ -33,18 +33,33 @@
 }
 
 .portalButton {
-  padding: 8px 16px;
   font-size: 1rem;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.15); /* 반투명한 배경 */
   border: 1px solid rgba(255, 255, 255, 0.25); /* 부드러운 테두리 */
-  border-radius: 80px; /* 더 둥근 모서리 */
+  border-radius: 10px; /* 더 둥근 모서리 */
   color: #fff; /* 글자색 */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  @media screen and (min-width: 768px) {
+    padding: 8px 16px;
+  }
+}
+
+.portalButton img {
+  width: 20px;
+  height: 20px;
+  @media screen and (min-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .portalButton:hover {
   background-color: rgba(255, 255, 255, 0.3); /* hover 시 조금 더 선명하게 */
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.portalButton:focus {
+  outline: none; /* 클릭되었을 때 border 안나타나도록 */
 }
