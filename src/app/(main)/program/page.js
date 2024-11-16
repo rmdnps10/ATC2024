@@ -24,12 +24,16 @@ export default function ProgramPage() {
     if (isMobile) {
       setOpenPrograms(prevOpenPrograms => {
         const isOpening = !prevOpenPrograms.includes(id)
-        if (isOpening) scrollToProgram(id)
+        if (isOpening) {
+          requestAnimationFrame(() => scrollToProgram(id))
+        }
         return isOpening
           ? [...prevOpenPrograms, id]
           : prevOpenPrograms.filter(p => p !== id)
       })
-      if (openPrograms.includes(id)) setHoveredProgram(null)
+      if (openPrograms.includes(id)) {
+        requestAnimationFrame(() => setHoveredProgram(null))
+      }
     } else {
       setOpenPrograms(prevOpenPrograms =>
         prevOpenPrograms.includes(id)
@@ -127,7 +131,7 @@ export default function ProgramPage() {
     [
       null,
       {
-        title: 'MAKE BLANK',
+        title: '[MAKE BLANK]',
         id: 'program4',
         rowspan: 3
       },
