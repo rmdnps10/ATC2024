@@ -3,7 +3,10 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 0 8rem 0 8rem;
+  padding: 0 8rem;
+  @media (max-width: 768px) {
+    padding: 0rem 4rem;
+  }
 }
 
 .main header {
@@ -15,23 +18,62 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 100px;
+  font-size: 7rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
   letter-spacing: -2px;
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    text-align: center;
+    color: #000;
+    font-size: 5rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  @media (max-width: 768px) {
+    color: #000;
+    font-size: 5rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 430px) {
+    color: #000;
+    font-size: 13vw;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .headerDesc {
-  font-family: Pretendard;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 136.364% */
+  line-height: 3rem; /* 136.364% */
+  color: #000;
   letter-spacing: -0.66px;
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 2rem;
+  }
+  @media (max-width: 430px) {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.6rem;
+  }
 }
 
 .spanRainbow {
+  word-break: keep-all;
   font-family: 'Sandoll Seoul';
   font-size: 36px;
   font-style: normal;
@@ -47,10 +89,34 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (max-width: 1024px) {
+    font-size: 24px;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.8rem;
+  }
 }
 
 .spanBold {
   font-weight: 600;
+}
+
+.spanHighLight {
+  font-weight: 600;
+  margin-right: 0.35rem;
+  background: linear-gradient(90deg, #dd4ffc 0%, #7340fb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.spanMobile {
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .main section {
@@ -61,13 +127,22 @@
   gap: 5rem;
   padding-top: 5rem;
   position: relative;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    padding: 0;
+    height: 100vh;
+    overflow: visible;
+  }
 }
 
 .main section ul {
   display: flex;
   gap: 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #a5a5a5;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .main section ul span {
@@ -86,14 +161,53 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  padding: 0 0 3rem 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    overflow: visible;
+    height: 100vh;
+    gap: 3rem;
+  }
+  @media (max-width: 430px) {
+    height: 70vh;
+    gap: 3rem;
+  }
 }
 
 .main section div span {
   position: relative;
   flex: 0 0 100%;
-  height: 100%;
+  height: 90%;
   transform: translateX(100%);
   transition: transform 0.3s ease-in;
+  @media (max-width: 768px) {
+    height: 100vh;
+    flex: 0 0 30%;
+    transform: translateX(0);
+  }
+  @media (max-width: 430px) {
+    height: 50vh;
+    flex: 0 0 20%;
+    transform: translateX(0);
+  }
+}
+
+.main section div span p {
+  display: none;
+  @media (max-width: 768px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
+  }
 }
 
 .main section div span svg {
@@ -103,9 +217,20 @@
 
 .main section div span svg circle {
   cursor: pointer;
-  &:hover {
-    fill: rgb(255, 255, 255);
-  }
+  position: relative;
+}
+
+.main section div span svg circle:hover {
+  fill: rgb(0, 0, 0);
+}
+
+.main section div span svg circle:hover + path {
+  fill: white;
+}
+
+.main section div span svg path,
+.main section div span svg circle {
+  transition: fill 0.1s ease-in;
 }
 /* .main section div span svg path {
 }
@@ -122,37 +247,123 @@
 .arrowLeft {
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translate(-100%, -50%);
+  top: 70%;
+  left: 2rem;
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .arrowRight {
+  z-index: 2000;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translate(100%, -50%) rotate(180deg);
+  top: 70%;
+  right: 2rem;
+  transform: rotate(180deg);
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .selectedCircleInfo {
-  width: 219px;
-  height: 74px;
-  position: fixed;
+  transition: opacity 0.3s ease-in;
+  opacity: 0;
+  visibility: hidden; /* 기본값 */
+  width: 16vw;
+  height: auto;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: rgb(0, 0, 0);
   z-index: 10000000;
   color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  @media (max-width: 1024px) {
+    width: 25vw;
+  }
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.selectedCircleInfo button {
+  border: 0.5px solid white;
+  background-color: #000;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.selectedCircleInfo.visible {
+  opacity: 1;
+  visibility: visible; /* 보일 때 */
+}
+
+.selectedCircleInfo.hidden {
+  opacity: 0;
+  visibility: hidden; /* 숨길 때 */
+}
+
+.selectedCircleInfo div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selectedCircleInfo img {
+  right: 0;
+  cursor: pointer;
+}
+
+.selectedCircleInfo img:hover {
+  opacity: 0.7;
+}
+
+.popupImage {
+  width: 15px;
+  height: fit-content;
+  position: relative;
+}
+
+.popupImage img {
+  right: 0;
+}
+
+.popupTeam {
+  color: #fff;
   text-align: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 10px; /* 100% */
+  margin-bottom: 1rem;
+  @media (max-width: 1024px) {
+    font-size: 10px;
+  }
+}
+.popupTitle {
+  color: #fff;
+  text-align: start;
   font-family: 'Sandoll Seoul';
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
-  line-height: 10px; /* 28.571% */
+  word-break: keep-all;
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  @media (max-width: 1024px) {
+    font-size: 30px;
+  }
 }
 
 .line {

@@ -3,6 +3,7 @@ import styles from './StaffSection.module.css'
 import StaffImageList from '@/components/credit/StaffImageList'
 import Image from 'next/image'
 import { 스태프정보 } from '@/app/(main)/credit/store/staff'
+import FixNav from './FixNav'
 
 //
 //
@@ -10,7 +11,7 @@ import { 스태프정보 } from '@/app/(main)/credit/store/staff'
 
 export default function StaffSection() {
   const {
-    기타팀,
+    크디,
     기획팀,
     대외협력팀,
     디자인팀,
@@ -18,14 +19,18 @@ export default function StaffSection() {
     영상팀,
     전시팀,
     작품팀,
-    웹개발팀
+    웹개발팀,
+    회계
   } = 스태프정보
   return (
     <article className={styles.containerList}>
-      <section className={styles.container}>
+      <FixNav />
+      <section
+        className={styles.container}
+        id="크디">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol9.svg"
+            src="/icon/logo/atc-symbol.svg"
             alt="Creative Director"
             width="28"
             height="28"
@@ -35,13 +40,15 @@ export default function StaffSection() {
         <StaffImageList
           teamName={'Creative Director'}
           teamType={'기타'}
-          memberList={기타팀.slice(0, 1)}
+          memberList={크디}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="웹개발팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol8.svg"
+            src="/icon/symbol/symbol8.svg"
             alt="웹개발팀"
             width="28"
             height="28"
@@ -54,10 +61,12 @@ export default function StaffSection() {
           memberList={웹개발팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="기획팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol7.svg"
+            src="/icon/symbol/symbol7.svg"
             alt="기획팀"
             width="28"
             height="28"
@@ -70,10 +79,12 @@ export default function StaffSection() {
           memberList={기획팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="디자인팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol6.svg"
+            src="/icon/symbol/symbol6.svg"
             alt="디자인팀"
             width="28"
             height="28"
@@ -86,10 +97,12 @@ export default function StaffSection() {
           memberList={디자인팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="대외협력팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol5.svg"
+            src="/icon/symbol/symbol5.svg"
             alt="대외협력팀"
             width="28"
             height="28"
@@ -102,10 +115,12 @@ export default function StaffSection() {
           memberList={대외협력팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="수집팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol4.svg"
+            src="/icon/symbol/symbol4.svg"
             alt="수집팀"
             width="28"
             height="28"
@@ -118,10 +133,12 @@ export default function StaffSection() {
           memberList={수집팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="영상팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol3.svg"
+            src="/icon/symbol/symbol3.svg"
             alt="영상팀"
             width="28"
             height="28"
@@ -134,10 +151,12 @@ export default function StaffSection() {
           memberList={영상팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="전시팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol2.svg"
+            src="/icon/symbol/symbol2.svg"
             alt="전시팀"
             width="28"
             height="28"
@@ -150,10 +169,12 @@ export default function StaffSection() {
           memberList={전시팀}
         />
       </section>
-      <section className={styles.container}>
+      <section
+        className={styles.container}
+        id="작품팀">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol1.svg"
+            src="/icon/symbol/symbol1.svg"
             alt="작품팀"
             width="28"
             height="28"
@@ -166,10 +187,10 @@ export default function StaffSection() {
           memberList={작품팀}
         />
       </section>
-      <section className={styles.container}>
+      <section className={styles.container} id="회계">
         <div className={styles.title}>
           <Image
-            src="/images/credit/symbol1.svg"
+            src="/icon/symbol/symbol3.svg"
             alt="회계"
             width="28"
             height="28"
@@ -179,7 +200,7 @@ export default function StaffSection() {
         <StaffImageList
           teamName={'회계'}
           teamType={'기타'}
-          memberList={기타팀.slice(1)}
+          memberList={회계}
         />
       </section>
     </article>

@@ -7,13 +7,43 @@ export async function GET(request, { params }) {
     await connectDb()
     const data = await DetailWork.findById(params.id)
 
-    // 문서가 존재하지 않으면 404 반환
     if (!data) {
       return new Response(JSON.stringify({ error: 'ID-NOT-FOUND' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' }
       })
     }
+
+    return new Response(JSON.stringify({ data }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    })
+  } catch (error) {
+    console.error(error)
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
+  }
+}
+
+export async function PUT(request, { params }) {
+  try {
+    await connectDb()
+    const { name, comment } = await request.json()
+    const { id } = await params
+    const data = await DetailWork.findById(id)
+
+    if (!data) {
+      return new Response(JSON.stringify({ error: 'ID-NOT-FOUND' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' }
+      })
+    }
+    const date = new Date().toISOString().split('T')[0].replace(/-/g, '.')
+
+    data.commentList.push({ name, comment, date })
+    await data.save()
 
     return new Response(JSON.stringify({ data }), {
       status: 200,
