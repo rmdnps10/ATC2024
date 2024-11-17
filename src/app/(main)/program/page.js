@@ -339,10 +339,7 @@ export default function ProgramPage() {
                     openPrograms.includes(program.id)
                       ? styles.activeContent
                       : ''
-                  }`}
-                  style={{
-                    maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
-                  }}>
+                  }`}>
                   <div className={styles.innerContent}>
                     <div className={styles.programDetails}>
                       <p className={styles.programTime}>
