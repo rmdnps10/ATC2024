@@ -55,6 +55,60 @@
   pointer-events: none;
   text-align: left;
   z-index: 100;
+  opacity: 0;
+}
+
+.centerText.visible {
+  opacity: 1;
+}
+
+.finalOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.finalOverlay.visible {
+  opacity: 1;
+}
+
+.conferenceText {
+  text-align: center;
+  font-size: 8rem;
+  line-height: 0.9;
+  margin-bottom: 1rem;
+  color: white;
+  opacity: 0.8;
+  font-family: 'Sandoll Seoul';
+}
+
+.countdownText {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  text-align: center;
+  font-size: 15rem;
+  line-height: 0.7;
+  color: white;
+  font-family: 'Sandoll Seoul';
+  opacity: 0.8;
+}
+
+.openingText {
+  text-align: center;
+  font-size: 8rem;
+  line-height: 0.9;
+  color: white;
+  opacity: 0.8;
+  font-family: 'Sandoll Seoul';
+  margin-bottom: 1rem;
 }
 
 /* 모바일 반응형 스타일 추가 */
@@ -76,12 +130,27 @@
   .centerText {
     left: 50%;
     max-width: 90vw;
-    font-size: 4rem;
+    font-size: 7rem;
     text-align: left;
+  }
+
+  .conferenceText {
+    font-size: 5rem;
+    line-height: 0.8;
+  }
+
+  .countdownText {
+    font-size: 5rem;
+    bottom: 15vh;
+  }
+
+  .openingText {
+    font-size: 5rem;
+    line-height: 0.9;
   }
 }
 
-/* 작은 모바일 화면용 추가 스타일 */
+/* 작 모바일 화면용 추가 스타일 */
 @media screen and (max-width: 480px) {
   .box {
     width: 12px;
@@ -94,6 +163,119 @@
   }
 
   .centerText {
+    font-size: 6rem;
+  }
+
+  .conferenceText {
     font-size: 3rem;
+    line-height: 0.9;
+  }
+
+  .countdownText {
+    font-size: 4rem;
+    bottom: 15vh;
+  }
+
+  .openingText {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+}
+
+.transitionOverlay {
+  position: fixed;
+  bottom: 3vh;
+  right: 12vh;
+  text-align: right;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.transitionOverlay.fadeIn {
+  opacity: 1;
+}
+
+.aboutButton {
+  font-family: 'Sandoll Seoul';
+  font-size: 35rem;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 20px 40px;
+  opacity: 0;
+  transition: 0.5s ease-in-out;
+  text-align: right;
+}
+
+.aboutButton:hover {
+  transform: scale(1.05);
+}
+
+.aboutButton.fadeIn {
+  opacity: 0.9;
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 768px) {
+  .transitionOverlay {
+    bottom: 4vh;
+    right: 4vh;
+  }
+
+  .aboutButton {
+    font-size: 15rem;
+    padding: 15px 30px;
+  }
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 480px) {
+  .transitionOverlay {
+    bottom: 28vh;
+    right: 1vh;
+  }
+
+  .aboutButton {
+    font-size: 15rem;
+    padding: 10px 20px;
+  }
+}
+
+.buttonHint {
+  font-family: 'Sandoll Seoul';
+  font-size: 1rem;
+  margin-top: 2rem;
+  opacity: 0.7;
+  letter-spacing: 0.2em;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+  }
+  to {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .asciiArt {
+    font-size: 0.5rem;
+  }
+
+  .buttonHint {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .asciiArt {
+    font-size: 0.4rem;
+  }
+
+  .buttonHint {
+    font-size: 0.7rem;
   }
 }

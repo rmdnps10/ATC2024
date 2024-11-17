@@ -4,7 +4,6 @@ import styles from './page.module.css'
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-// import { worksData } from '@/components/works/MockData'
 import { getAllWorks } from '@/client-api/getAllWorks'
 //
 //
@@ -23,61 +22,95 @@ export default function WorksPage({}) {
     '비디오',
     '웹사이트'
   ]
+  // const { base64 } = await getPlaiceholder(buffer)
   const router = useRouter()
   const tabRefs = useRef([])
   const indicatorRefs = useRef([])
   const tabListRef = useRef()
-  const [tabSelected, setTabSelected] = useState('ALL')
+  const [tabSelected, setTabSelected] = useState(0)
   const [clickedId, setClickedId] = useState(null)
   const [defaultWorks, setDefaultWorks] = useState([])
   const [filteredWorks, setFilteredWorks] = useState([])
   const [scrollY, setScrollY] = useState(0)
 
-  //필터링 탭 초기화
+  //db 연결+탭 초기화
   useEffect(() => {
-    indicatorRefs.current.forEach((indiRef, indiIdx) => {
-      if (indiRef) {
-        indiRef.style.opacity = indiIdx === 0 ? '1' : '0'
-      }
-    })
-    tabRefs.current.forEach((ref, idx) => {
-      if (ref) {
-        ref.style.fontWeight = idx === 0 ? '600' : '500'
-        ref.style.color = idx === 0 ? 'black' : '#767676'
-        ref.style.background =
-          idx === 0
-            ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
-            : 'none'
-        ref.style.backgroundClip = idx === 0 ? 'text' : 'none'
-        ref.style.webkitBackgroundClip = idx === 0 ? 'text' : 'none'
-        ref.style.webkitTextFillColor = idx === 0 ? 'transparent' : 'inherit'
-      }
-    })
+    const fetchData = async () => {
+      try {
+        const data = await getAllWorks()
+        if (data) {
+          //일단 데이터 좀 가공하고
+          const parsed = data.map(el => {
+            el.category = el.category.split(',')
+            if (el._id === '672cea5b0c11e50dbd25fa13') {
+              el.title = el.title.split('(')[0]
+              return el
+            } else {
+              return el
+            }
+          })
+          setDefaultWorks(parsed)
+          setFilteredWorks(parsed)
 
+          //선택된 탭을 바꿔주는 함수
+          function handleRef(key) {
+            indicatorRefs.current.forEach((indiRef, indiIdx) => {
+              if (indiRef) {
+                indiRef.style.visibility =
+                  indiIdx === key ? 'visible' : 'hidden'
+                indiRef.style.opacity = indiIdx === key ? '1' : '0'
+              }
+            })
+            tabRefs.current.forEach((ref, idx) => {
+              if (ref) {
+                ref.style.fontWeight = idx === key ? '600' : '500'
+                ref.style.color = idx === key ? 'black' : '#767676'
+                ref.style.background =
+                  idx === key
+                    ? 'linear-gradient(90deg, #35CFFA 0%, #278FFB 20%, #3C79FB 40%, #DD4FFC 60%, #9734FB 80%, #7340FB 100%)'
+                    : 'none'
+                ref.style.backgroundClip = idx === key ? 'text' : 'none'
+                ref.style.webkitBackgroundClip = idx === key ? 'text' : 'none'
+                ref.style.webkitTextFillColor =
+                  idx === key ? 'transparent' : 'inherit'
+              }
+            })
+          }
+
+          //저장된 탭이 있어?
+          const storageTab = window.sessionStorage.getItem('tab')
+          const initialTab = storageTab !== null ? parseInt(storageTab, 10) : 0
+
+          //탭 바꾸자
+          handleRef(initialTab)
+
+          //이건 작품 리스트 설정하는 파트
+          if (initialTab === 0) {
+            setFilteredWorks(parsed)
+          } else {
+            setFilteredWorks(
+              parsed.filter(el => el.category.includes(tabList[initialTab]))
+            )
+          }
+          setTabSelected(initialTab)
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
     //스크롤 인식
     const handleScroll = () => {
       setScrollY(window.scrollY)
+      window.sessionStorage.setItem('scroll', scrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
-
-  //db 연결
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllWorks()
-      if (data) {
-        const parsed = data.map(el => {
-          el.category = el.category.split(',')
-          return el
-        })
-        setDefaultWorks(parsed)
-        setFilteredWorks(parsed)
-      }
-    }
-    fetchData()
   }, [])
 
   //work 요소 클릭 시
@@ -104,10 +137,14 @@ export default function WorksPage({}) {
     })
     indicatorRefs.current.forEach((indiRef, indiIdx) => {
       if (indiRef) {
+        indiRef.style.visibility = indiIdx === key ? 'visible' : 'hidden'
         indiRef.style.opacity = indiIdx === key ? '1' : '0'
       }
     })
     setTabSelected(key)
+
+    window.sessionStorage.setItem('tab', key)
+
     if (key === 0) {
       //all을 선택하면 가져온 데이터 모두로 set
       setFilteredWorks(defaultWorks)
@@ -130,8 +167,8 @@ export default function WorksPage({}) {
           <div>
             예술은 과감해졌고, 기술은 정교해졌습니다.
             <br />
-            <span>아트&테크놀로지</span>라
-            는 사회 속에서 우리는 항상 그 사이의 미묘한 균형을 찾고 있습니다. 
+            <span>아트&테크놀로지</span>
+            라는 사회 속에서 우리는 항상 그 사이의 미묘한 균형을 찾고 있습니다. 
             <br />
             자유로운 표현의 바다와 정밀한 구조의 정글 사이에서, 각자의 길을 개척하며, 걷습니다.{' '}
             <br />
@@ -141,7 +178,10 @@ export default function WorksPage({}) {
             이 <span>방식</span>
             은 각기 다를 것입니다. 어떤 이는 냉장고를 확장하고, 다른 이는 코끼리를 축소합니다. 
             <br />
-            또 어떤 이는 그 사이의 빈 공간을 새롭게 정의합니다. 어쩌면 세상에 없던것을 가져오는 사람도 있을지 모릅니다.
+            또 어떤 이는 그 사이의 빈 공간을 새롭게 정의합니다. 
+            <span className={styles.omit}>
+              어쩌면 세상에 없던 것을 가져오는 사람도 있을지 모릅니다.
+            </span>
             <br />
             이 전시는 그 아트&테크놀로지에 속한 <span>아테커</span>
              각자의 <span>방법</span>을 보여주는 공간입니다.
@@ -155,7 +195,11 @@ export default function WorksPage({}) {
               key={key}
               ref={el => (tabRefs.current[key] = el)}
               onClick={() => handleTabClick(key)}>
-              <span>{el}</span>
+              {el === '인터랙티브아트' || el === '애플리케이션' ? (
+                <span className={styles.long}>{el}</span>
+              ) : (
+                <span>{el}</span>
+              )}
               <div
                 className="indicator"
                 ref={el => (indicatorRefs.current[key] = el)}></div>
@@ -176,16 +220,31 @@ export default function WorksPage({}) {
             className={styles.figure}
             key={el._id}>
             <Image
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
               className={styles.image}
-              // src={el.thumbnailImg}
-              src={'/images/works/page0.png'}
+              src={el.thumbnailImg}
               alt={el.title}
               fill
+              objectFit="cover"
             />
             <figcaption>
               <div className={styles.figBox}>
                 <span className={styles.figTeam}>{el.teamName}</span>
-                <span className={styles.figTitle}>{el.title}</span>
+                {el._id === '672cea5b0c11e50dbd25fa34' ? (
+                  <span className={styles.figTitle}>怒世怒世</span>
+                ) : null}
+                {el._id === '672cea5b0c11e50dbd25fa2b' ? (
+                  <span className={styles.figTitle}>소음疏音</span>
+                ) : null}
+                {el._id !== '672cea5b0c11e50dbd25fa34' &&
+                el._id !== '672cea5b0c11e50dbd25fa2b' ? (
+                  <span
+                    style={{ fontFamily: 'Sandoll Seoul' }}
+                    className={styles.figTitle}>
+                    {el.title}
+                  </span>
+                ) : null}
                 <span className={styles.figDesc}>{el.oneLiner}</span>
               </div>
             </figcaption>

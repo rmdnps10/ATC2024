@@ -21,7 +21,7 @@ function reducer(state, action) {
 export default function SelectCategory({ category }) {
   const [selectedOption, dispatch] = useReducer(
     reducer,
-    category === 'staff' ? 'ATC STAFF' : 'ATC ARTIST'
+    category === 'artist' ? 'ATC ARTIST' : 'ATC STAFF'
   )
   const router = useRouter()
 

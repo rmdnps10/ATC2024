@@ -1,69 +1,63 @@
 .main {
-  position: relative;
   display: flex;
   justify-content: center;
+  position: relative;
   width: 100%;
   height: 100%;
   padding: 10rem 0;
   @media (max-width: 768px) {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     gap: 2.4rem;
     padding: 5rem 1rem;
   }
 }
 
-.cyan1 {
+.cyan1,
+.cyan2,
+.pink1,
+.pink2,
+.blue1 {
   position: absolute;
+  filter: blur(150px);
+  z-index: -1;
+}
+
+.cyan1 {
   width: 50%;
   height: 50%;
   top: 0;
   right: 0;
   background-color: #35cffa30;
-  filter: blur(150px);
-  z-index: -1;
 }
 .cyan2 {
-  position: absolute;
   width: 60%;
   height: 60%;
   bottom: 0;
   background-color: #35cffa30;
-  filter: blur(150px);
-  z-index: -1;
 }
 .pink1 {
-  position: absolute;
   width: 50%;
   height: 50%;
   top: 0;
   left: 0;
   background-color: #dd4ffc20;
-  filter: blur(150px);
-  z-index: -1;
 }
-
 .pink2 {
-  position: absolute;
   width: 40%;
   height: 60%;
   bottom: 0;
   right: 10%;
   background-color: #dd4ffc20;
-  filter: blur(150px);
-  z-index: -1;
 }
 .blue1 {
-  position: absolute;
   width: 30%;
   height: 50%;
   bottom: 0;
   left: 0;
   background-color: #278ffb20;
-  filter: blur(150px);
-  z-index: -1;
 }
 
 .timetableContainer {
@@ -73,14 +67,14 @@
   width: 38vw;
   height: 85vh;
   padding: 2rem;
+  margin-right: 1%;
   border: 0;
   border-radius: 1rem;
   background-color: white;
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
-  margin-right: 1%;
   @media (max-width: 768px) {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     margin: 0;
   }
 }
@@ -91,9 +85,6 @@
   grid-template-rows: auto repeat(6, 1fr);
   height: 85%;
   font-size: 2rem;
-  @media (max-width: 768px) {
-    grid-template-columns: 20% 1fr 1fr 1fr;
-  }
 }
 
 .alwaysTableContainer {
@@ -101,7 +92,12 @@
   grid-template-columns: 15% 1fr 1fr;
   margin-top: 1rem;
   height: 12%;
-  @media (max-width: 768px) {
+}
+@media (max-width: 425px) {
+  .gridContainer {
+    grid-template-columns: 20% 1fr 1fr 1fr;
+  }
+  .alwaysTableContainer {
     grid-template-columns: 20% 1fr 1fr;
   }
 }
@@ -110,23 +106,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
   border: 1px solid #f0f0f0;
   text-align: center;
   font-size: 2rem;
   height: 100%;
+  background-color: #ffffff;
 }
 
 .alwaysProgramTitle {
-  color: #333;
   font-size: 2rem;
+  color: #333;
 }
 
 .dayHeader {
   position: relative;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #333333;
+  transform: translate(0, -10%);
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
@@ -148,13 +145,10 @@
   display: flex;
   justify-content: center;
   grid-column: 1;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: right;
   color: #333333;
   transform: translate(0, -8%);
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
 }
 
 .alwaysLabel {
@@ -162,23 +156,37 @@
   justify-content: center;
   align-items: center;
   grid-column: 1;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: right;
   color: #333333;
-  @media (max-width: 768px) {
+}
+@media (max-width: 1300px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
+    font-size: max(1rem, 1.2vw);
+  }
+}
+@media (max-width: 768px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
+    font-size: min(1.6rem, 3vw);
+  }
+}
+@media (max-width: 425px) {
+  .timeLabel,
+  .alwaysLabel,
+  .dayHeader {
     font-size: 1.2rem;
   }
 }
-
 .programCell {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white;
   border: 1px solid #f0f0f0;
-  text-align: center;
-  font-size: 1.6rem;
-  transition: background-color 0.3s;
   padding: 1rem;
   @media (max-width: 768px) {
     padding: 0.5rem;
@@ -192,11 +200,16 @@
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   text-align: center;
-  font-size: 1.6rem;
-  transition: background-color 0.3s;
+  font-size: 1.8rem;
   padding: 1rem;
+  word-break: keep-all;
+  cursor: pointer;
+  transition: all 0.3s ease;
   @media (max-width: 768px) {
     padding: 0.5rem;
+    font-size: max(1.4rem, 2.5vw);
+  }
+  @media (max-width: 425px) {
     font-size: 1.4rem;
   }
 }
@@ -204,10 +217,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #7dffad;
   border: 1px solid #ddd;
   text-align: center;
-  transition: background-color 0.3s;
 }
 
 .highlightedBackground {
@@ -216,8 +227,9 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: #f1fcff;
   border: 1px solid #1160f7;
+  background-color: #f1fcff;
+  transition: all 0.3s ease;
 }
 
 .highlightedText {
@@ -233,14 +245,10 @@
     #9734fb,
     #7340fb
   );
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  background-clip: text;
 }
-
-/**/
-/**/
-/**/
 
 .programContainer {
   width: 38vw;
@@ -255,61 +263,123 @@
   margin-bottom: 1rem;
 }
 
-.programHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.programAccordion {
   width: 100%;
-  height: 10.4rem;
-  padding: 2.8rem 3rem;
-  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
   background-color: white;
-  font-size: 4.4rem;
-  color: #444444;
-  transition: background-color 0.3s;
-  font-family: 'Sandoll Seoul';
+  border-radius: 1rem;
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.groups {
+  margin-bottom: 3.2rem;
+}
+.headerGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.4rem;
   @media (max-width: 768px) {
-    font-size: 2rem; /*임의로 줄여놓음*/
+    margin-bottom: 1.8rem;
   }
+}
+.groupTitle {
+  font-size: 4.6rem;
+  font-family: 'Sandoll Seoul';
+}
+.programHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2.8rem 3rem;
+  font-family: 'Sandoll Seoul';
+  font-size: 4.4rem;
+  cursor: pointer;
+  background-color: white;
+  @media (max-width: 768px) {
+    font-size: 4rem;
+  }
+}
+.programHeader span:first-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+.programAccordion.open .programHeader span:first-child {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.textWrapper {
+  max-width: max-content;
+  font-size: 1em;
+}
+.textWrapper.gradientText {
+  background: linear-gradient(
+    90deg,
+    #35cffa,
+    #278ffb,
+    #3c79fb,
+    #dd4ffc,
+    #9734fb,
+    #7340fb
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .arrow {
-  display: inline;
-  font-size: 1.6rem;
+  position: absolute;
+  top: 2.8rem;
+  right: 3rem;
+  transition: transform 0.3s ease;
+}
+.arrow.rotated {
+  transform: rotate(-180deg);
 }
 
 .accordionContent {
-  padding: 2rem;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0 3rem;
+  font-size: 1.6rem;
+  color: #444;
   background-color: white;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  @media (max-width: 768px) {
-    padding: 3rem;
-  }
+  border-radius: 0 0 1rem 1rem;
+  transition: max-height 0.3s ease;
 }
-
+.accordionContent.activeContent {
+  max-height: 50rem;
+}
+.innerContent {
+  padding: 3rem 0;
+}
 .programDetails {
   padding: 1rem 0;
 }
-
 .programTime {
   font-size: 1.8rem;
   @media (max-width: 768px) {
     font-size: 1.6rem;
   }
 }
-
 .programLocation {
   position: relative;
+  margin-bottom: 0.8rem;
   font-size: 2.2rem;
   font-weight: 600;
-  margin-bottom: 0.8rem;
   @media (max-width: 768px) {
-    font-size: 2rem; /*글씨 넘치는 거 수정 필요*/
+    font-size: 2rem;
   }
 }
-
 .programLocation::before {
   position: absolute;
   content: '';
@@ -321,17 +391,6 @@
   padding-top: 1.6rem;
   font-size: 1.4rem;
   color: #444444;
-}
-
-.activeHeader {
-  border-radius: 1rem 1rem 0 0;
-  box-shadow: none;
-}
-.activeContent {
-  border-radius: 0 0 1rem 1rem;
-  box-shadow: none;
-}
-.activeShadow {
-  border-radius: 1rem;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+  word-break: keep-all;
+  white-space: pre-line;
 }
