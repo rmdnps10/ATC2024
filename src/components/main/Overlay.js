@@ -66,7 +66,7 @@ export default function Overlay({ scrollPercent }) {
     if (scrollPercent >= 95) {
       timer = setTimeout(() => {
         setShowDelayedContent(true);
-      }, 1700); // 1.7초 딜레이
+      }, 700); // 1.7초 딜레이
     } else {
       setShowDelayedContent(false);
     }
