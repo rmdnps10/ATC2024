@@ -85,6 +85,9 @@
     font-size: 1.2rem;
     padding-bottom: 1rem;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .headerDesc div span {
@@ -160,6 +163,7 @@
 }
 
 .main nav ul li div {
+  visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
@@ -206,6 +210,10 @@
   @media (max-width: 430px) {
     border-bottom: 1px solid transparent;
     border-right: 1px solid transparent;
+  }
+  @media (min-width: 2000px) {
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid transparent;
   }
 }
 
@@ -354,4 +362,12 @@
   @media (max-width: 1024px) {
     display: none;
   }
+}
+
+.tab {
+  display: none; /* 기본적으로 숨김 */
+}
+
+.tab.active {
+  display: block; /* 활성화된 탭만 보임 */
 }
