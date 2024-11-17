@@ -10,6 +10,11 @@ export default function ProgramPage() {
   const [hoveredProgram, setHoveredProgram] = useState(null)
   const programRefs = useRef({})
 
+  const isHighlighted = useCallback(
+    id => hoveredProgram === id || openPrograms.includes(id),
+    [hoveredProgram, openPrograms]
+  )
+
   const isMobile =
     typeof window !== 'undefined' &&
     window.matchMedia('(max-width: 768px)').matches
@@ -173,14 +178,14 @@ export default function ProgramPage() {
   const processedTableData = useMemo(() => {
     return tableData.map((row, rowIndex) =>
       row.map((cell, colIndex) => {
-        if (!cell) return null // 빈 셀 처리
+        if (!cell) return null
         if (cell.rowspan) {
-          // 병합된 셀인지 확인
-          const isStartRow =
-            !tableData[rowIndex - 1] ||
-            !tableData[rowIndex - 1][colIndex] ||
-            tableData[rowIndex - 1][colIndex]?.id !== cell.id
-          return { ...cell, isStartRow }
+          return {
+            ...cell,
+            isStartRow:
+              rowIndex === 0 ||
+              tableData[rowIndex - 1]?.[colIndex]?.id !== cell.id
+          }
         }
         return cell
       })
@@ -239,9 +244,7 @@ export default function ProgramPage() {
       <div
         key={`${rowIndex}-${colIndex}`}
         className={`${styles.programCellStyled} ${
-          hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
-            ? styles.highlightedBackground
-            : ''
+          isHighlighted(cellData.id) ? styles.highlightedBackground : ''
         }`}
         style={{
           gridColumn: colIndex + 2,
@@ -299,10 +302,7 @@ export default function ProgramPage() {
             <div
               key={program.id}
               className={`${styles.programCellStyled} ${
-                hoveredProgram === program.id ||
-                openPrograms.includes(program.id)
-                  ? styles.highlightedBackground
-                  : ''
+                isHighlighted(program.id) ? styles.highlightedBackground : ''
               }`}
               onMouseEnter={() => handleMouseEnter(program.id)}
               onMouseLeave={handleMouseLeave}
