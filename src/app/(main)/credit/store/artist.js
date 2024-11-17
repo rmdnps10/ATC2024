@@ -35,7 +35,13 @@ export const 아티스트정보 = {
     { 이름: '김민정', 영문명: 'Kim Minjeong', 팀이름: '오리너구리' },
     { 이름: '이다은', 영문명: 'Lee Daeun', 팀이름: '오리너구리' }
   ],
-  '너 누구야': [{ 이름: '유다혜', 영문명: 'Dahye Ryu', 팀이름: 'EXPANDED' }],
+  '너 누구야': [
+    { 이름: '김민균', 영문명: 'Kim Minkyun', 팀이름: 'EXPANDED' },
+    { 이름: '김예찬', 영문명: 'Kim Yechan', 팀이름: 'EXPANDED' },
+    { 이름: '문예담', 영문명: 'Yedam Moon', 팀이름: 'EXPANDED' },
+    { 이름: '배윤진', 영문명: 'YunJin Bae', 팀이름: 'EXPANDED' },
+    { 이름: '유다혜', 영문명: 'Dahye Ryu', 팀이름: 'EXPANDED' },
+  ],
   '너를 위해서': [
     { 이름: '최송화', 영문명: 'Choi songhwa', 팀이름: 'CHOIs' },
     { 이름: '최수지', 영문명: 'Choi Suji', 팀이름: 'CHOIs' },
