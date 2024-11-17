@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useMemo } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
 //
@@ -135,7 +135,8 @@ export default function ProgramPage() {
       {
         title: '[MAKE BLANK]',
         id: 'program4',
-        rowspan: 2
+        rowspan: 3,
+        isStartRow: true
       },
       null
     ],
@@ -144,7 +145,8 @@ export default function ProgramPage() {
       {
         title: '[MAKE BLANK]',
         id: 'program4',
-        rowspan: 3
+        rowspan: 3,
+        isStartRow: false
       },
       null
     ],
@@ -153,9 +155,9 @@ export default function ProgramPage() {
       {
         title: '[MAKE BLANK]',
         id: 'program4',
-        rowspan: 3
+        rowspan: 3,
+        isStartRow: false
       },
-      ,
       null
     ],
     [null, null, null],
@@ -168,45 +170,69 @@ export default function ProgramPage() {
     [null, null, null]
   ]
 
-  const renderProgramCell = (cellData, rowIndex, colIndex) => {
-    if (cellData && cellData.rowspan) {
-      const isStartRow = tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id
-      if (isStartRow) {
-        return (
-          <div
-            key={`merged-${rowIndex}-${colIndex}`}
-            className={`${styles.programCellStyled} ${
-              hoveredProgram === cellData.id ||
-              openPrograms.includes(cellData.id)
-                ? styles.highlightedBackground
-                : ''
-            }`}
-            style={{ gridRow: 'span 3', gridColumn: colIndex + 2 }}
-            onMouseEnter={() => handleMouseEnter(cellData.id)}
-            onMouseLeave={handleMouseLeave}
-            onClick={() => toggleProgram(cellData.id)}>
-            <div
-              className={`${styles.gradientText} ${
-                hoveredProgram === cellData.id ||
-                openPrograms.includes(cellData.id)
-                  ? styles.highlightedText
-                  : ''
-              }`}>
-              {cellData.title}
-            </div>
-          </div>
-        )
-      }
-      return null
-    }
+  const processedTableData = useMemo(() => {
+    return tableData.map((row, rowIndex) =>
+      row.map((cell, colIndex) => {
+        if (!cell) return null // 빈 셀 처리
+        if (cell.rowspan) {
+          // 병합된 셀인지 확인
+          const isStartRow =
+            !tableData[rowIndex - 1] ||
+            !tableData[rowIndex - 1][colIndex] ||
+            tableData[rowIndex - 1][colIndex]?.id !== cell.id
+          return { ...cell, isStartRow }
+        }
+        return cell
+      })
+    )
+  }, [tableData])
 
+  const renderProgramCell = (cellData, rowIndex, colIndex) => {
     if (!cellData) {
+      // 빈 셀 렌더링
       return (
         <div
           key={`empty-${rowIndex}-${colIndex}`}
           className={styles.programCell}
-          style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}></div>
+          style={{
+            gridColumn: colIndex + 2,
+            gridRow: rowIndex + 2
+          }}></div>
       )
+    }
+
+    if (cellData.rowspan && cellData.isStartRow) {
+      // 병합된 셀의 시작 부분만 렌더링
+      return (
+        <div
+          key={`merged-${rowIndex}-${colIndex}`}
+          className={`${styles.programCellStyled} ${
+            hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+              ? styles.highlightedBackground
+              : ''
+          }`}
+          style={{
+            gridColumn: colIndex + 2,
+            gridRow: `span ${cellData.rowspan}`
+          }}
+          onMouseEnter={() => handleMouseEnter(cellData.id)}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => toggleProgram(cellData.id)}>
+          <div
+            className={`${styles.gradientText} ${
+              hoveredProgram === cellData.id ||
+              openPrograms.includes(cellData.id)
+                ? styles.highlightedText
+                : ''
+            }`}>
+            {cellData.title}
+          </div>
+        </div>
+      )
+    }
+
+    if (cellData.rowspan && !cellData.isStartRow) {
+      return null
     }
 
     return (
@@ -217,7 +243,10 @@ export default function ProgramPage() {
             ? styles.highlightedBackground
             : ''
         }`}
-        style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}
+        style={{
+          gridColumn: colIndex + 2,
+          gridRow: rowIndex + 2
+        }}
         onMouseEnter={() => handleMouseEnter(cellData.id)}
         onMouseLeave={handleMouseLeave}
         onClick={() => toggleProgram(cellData.id)}>
@@ -257,15 +286,9 @@ export default function ProgramPage() {
                   style={{ gridRow: rowIndex + 2 }}>
                   {time}
                 </div>
-                {Array(3)
-                  .fill(null)
-                  .map((_, colIndex) =>
-                    renderProgramCell(
-                      tableData[rowIndex][colIndex],
-                      rowIndex,
-                      colIndex
-                    )
-                  )}
+                {processedTableData[rowIndex].map((cellData, colIndex) =>
+                  renderProgramCell(cellData, rowIndex, colIndex)
+                )}
               </React.Fragment>
             )
           )}
