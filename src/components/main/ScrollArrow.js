@@ -72,7 +72,7 @@ export default function ScrollArrow({ isVisible }) {
                     x: boxPositions[i][0],
                     y: boxPositions[i][1],
                     z: boxPositions[i][2],
-                    duration: 1,
+                    duration: 0.5,
                     ease: "back.out(1.7)",
                     delay: i * 0.05
                 })
