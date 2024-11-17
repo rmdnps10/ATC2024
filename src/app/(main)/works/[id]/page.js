@@ -233,6 +233,7 @@ export default function WorkDetailPage() {
                     width={windowWidth}
                     height={imageHeight * windowWidth}
                     objectFit="contain"
+                    priority={true}
                   />
                 </figure>
               </div>
