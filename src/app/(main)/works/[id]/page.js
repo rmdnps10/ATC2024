@@ -22,6 +22,9 @@ export default function WorkDetailPage() {
   const [nickname, setNickname] = useState('')
   const [content, setContent] = useState('')
   const [modalData, setModalData] = useState(null)
+  const [imageHeight, setImageHeight] = useState(0)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
   //data fetching
   useEffect(() => {
     if (pathname.id) {
@@ -48,7 +51,21 @@ export default function WorkDetailPage() {
     setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     }, 100)
-  }, [])
+  }, [imageHeight])
+
+  useEffect(() => {
+    if (detailData && detailData.mainImg) {
+      // const img = new Image()
+      // console.log(img)
+      // img.src = detailData.mainImg
+      // img.onload = () => {
+      // setImageHeight(img.height)
+      // console.log(img.height)
+      // }
+      // const size = getImageSize(detailData.mainImg)
+      // console.log(size)
+    }
+  }, [detailData])
 
   function handleExit() {
     setIsClicked(true)
@@ -100,6 +117,22 @@ export default function WorkDetailPage() {
     }
   }
 
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  function handleHeight(height, width) {
+    const ratio = height / width
+    setImageHeight(ratio)
+  }
+
   return (
     <AnimatePresence>
       {!isClicked && (
@@ -117,18 +150,17 @@ export default function WorkDetailPage() {
               <div className={styles.headerImageDiv}>
                 <Image
                   className={styles.headerImage}
-                  src={'/images/works/page0.png'}
+                  src={detailData.thumbnailImg}
                   alt="header image"
                   layout="fill"
                   placeholder="blur"
-                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-                  // placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
                   objectFit="cover"
                 />
                 <Image
                   onClick={() => handleExit()}
                   className={styles.back}
-                  width={30}
+                  width={20}
                   height={30}
                   src="/images/works/back.svg"
                   alt="back"
@@ -158,7 +190,7 @@ export default function WorkDetailPage() {
                   <nav>
                     <ul>
                       <li>작품 위치 | {detailData.space}</li>
-                      {detailData.openAddress?.split(',').map((el, key) => (
+                      {detailData.openAddress?.split('\n').map((el, key) => (
                         <a
                           key={key}
                           href={el}
@@ -166,43 +198,55 @@ export default function WorkDetailPage() {
                           작품 외부주소 ↗
                         </a>
                       ))}
+                      {detailData.artistURL && (
+                        <a
+                          href={detailData.artistURL}
+                          target="_blank">
+                          {' '}
+                          아티스트 주소 ↗
+                        </a>
+                      )}
                     </ul>
                   </nav>
                 </div>
               </header>
               <div className={styles.introduceBox}>
-                {'/images/works/page5.png,/images/works/page6.png,/images/works/page9.png,/images/works/page10.png'
-                  .split(',')
-                  .map((el, key) => (
-                    <figure
-                      key={key}
-                      className={styles.introduceImage}>
-                      <Image
-                        // className={styles.headerImage}
-                        placeholder="blur"
-                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-                        key={key}
-                        src={el}
-                        alt="detail image"
-                        fill
-                        objectFit="contain"
-                        // placeholder="blur"
-                      />
-                    </figure>
-                  ))}
+                <figure
+                  style={{
+                    height: `${imageHeight * windowWidth}px`
+                  }}
+                  className={styles.introduceImage}>
+                  <Image
+                    className={styles.mainImage}
+                    onLoad={e => {
+                      handleHeight(
+                        e.target.naturalHeight,
+                        e.target.naturalWidth
+                      )
+                    }}
+                    quality={100}
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
+                    src={detailData.mainImg}
+                    alt="detail image"
+                    // fill
+                    width={windowWidth}
+                    height={imageHeight * windowWidth}
+                    objectFit="contain"
+                  />
+                </figure>
               </div>
               <section>
                 <h1 className={styles.maxMobile}>아티스트</h1>
                 <figure>
                   <Image
                     className={styles.teamImage}
-                    src={'/images/works/elephant2.png'}
+                    src={detailData.artistImg}
                     alt="artist image"
                     layout="fill"
-                    objectFit="cover"
+                    objectFit=""
                     placeholder="blur"
-                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
-                    // placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
                   />
                 </figure>
                 <div className={styles.teamDesc}>

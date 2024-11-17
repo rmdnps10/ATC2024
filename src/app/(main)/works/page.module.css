@@ -23,7 +23,7 @@
 
 .headerTitle {
   width: fit-content;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 7rem;
   font-style: normal;
   font-weight: 400;
@@ -295,7 +295,8 @@
 
 .figTeam {
   font-size: 1.5rem;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
+  margin-bottom: 0.7rem;
   @media (min-width: 2000px) {
     font-size: 3rem;
   }
