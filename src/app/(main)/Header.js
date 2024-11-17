@@ -13,7 +13,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const isPathCredit = pathname === '/credit'
-  const isMobile = useMedia('(max-width: 768px)')
+  const isMobile = useMedia('(max-width: 768px)', false)
   const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(
     state => !state,
     false
