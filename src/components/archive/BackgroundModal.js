@@ -42,7 +42,7 @@ export default function BackgroundModal({
           <Image
             style={{ objectFit: 'cover' }}
             src={currentImage?.imageUrl}
-            priority={true}
+            priority
             fill={true}
             alt={currentImage?.caption}
           />

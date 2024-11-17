@@ -47,15 +47,24 @@
   -webkit-text-fill-color: transparent;
 }
 
-.logo {
+.mobileLogo {
   padding-bottom: 10px;
 }
 
-.logo a {
+.mobileLogo a {
   height: 40px;
   display: flex;
   align-items: flex-end;
   gap: 14px;
+}
+
+.mobileLogo a img {
+  width: 32px;
+  height: 32px;
+}
+
+.logo a img {
+  width: 80px;
 }
 
 .line {

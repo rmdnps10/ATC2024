@@ -74,7 +74,7 @@
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     margin: 0;
   }
 }
@@ -121,8 +121,9 @@
 .dayHeader {
   position: relative;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #333333;
+  transform: translate(0, -10%);
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
@@ -144,7 +145,7 @@
   display: flex;
   justify-content: center;
   grid-column: 1;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: right;
   color: #333333;
   transform: translate(0, -8%);
@@ -155,7 +156,7 @@
   justify-content: center;
   align-items: center;
   grid-column: 1;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   text-align: right;
   color: #333333;
 }
@@ -163,14 +164,14 @@
   .timeLabel,
   .alwaysLabel,
   .dayHeader {
-    font-size: max(1rem, 1.3vw);
+    font-size: max(1rem, 1.2vw);
   }
 }
 @media (max-width: 768px) {
   .timeLabel,
   .alwaysLabel,
   .dayHeader {
-    font-size: min(1.8rem, 3vw);
+    font-size: min(1.6rem, 3vw);
   }
 }
 @media (max-width: 425px) {
@@ -199,9 +200,11 @@
   background-color: #f8f8f8;
   border: 1px solid #ddd;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   padding: 1rem;
   word-break: keep-all;
+  cursor: pointer;
+  transition: all 0.3s ease;
   @media (max-width: 768px) {
     padding: 0.5rem;
     font-size: max(1.4rem, 2.5vw);
@@ -226,8 +229,7 @@
   height: 100%;
   border: 1px solid #1160f7;
   background-color: #f1fcff;
-  transition: opacity 0.3s ease-in, background-color 0.3s ease-in,
-    border 0.3s ease-in;
+  transition: all 0.3s ease;
 }
 
 .highlightedText {
@@ -264,23 +266,38 @@
 .programAccordion {
   width: 100%;
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   background-color: white;
   border-radius: 1rem;
   box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
-
+.groups {
+  margin-bottom: 3.2rem;
+}
+.headerGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.4rem;
+  @media (max-width: 768px) {
+    margin-bottom: 1.8rem;
+  }
+}
+.groupTitle {
+  font-size: 4.6rem;
+  font-family: 'Sandoll Seoul';
+}
 .programHeader {
   position: relative;
   display: flex;
   align-items: center;
   padding: 2.8rem 3rem;
+  font-family: 'Sandoll Seoul';
   font-size: 4.4rem;
   cursor: pointer;
   background-color: white;
-  transition: background-color 0.5s ease;
   @media (max-width: 768px) {
     font-size: 4rem;
   }
@@ -290,7 +307,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   width: 95%;
-  transition: text-overflow 0.5s ease;
   @media (max-width: 768px) {
     width: 90%;
   }
@@ -302,9 +318,8 @@
 }
 
 .textWrapper {
+  max-width: max-content;
   font-size: 1em;
-  color: #444;
-  transition: background 0.5s ease, -webkit-background-clip 0.5s ease;
 }
 .textWrapper.gradientText {
   background: linear-gradient(
@@ -325,7 +340,7 @@
   position: absolute;
   top: 2.8rem;
   right: 3rem;
-  transition: transform 0.5s ease;
+  transition: transform 0.3s ease;
 }
 .arrow.rotated {
   transform: rotate(-180deg);
@@ -339,13 +354,14 @@
   color: #444;
   background-color: white;
   border-radius: 0 0 1rem 1rem;
-  transition: max-height 0.5s ease, padding 0.5s ease;
+  transition: max-height 0.3s ease;
 }
 .accordionContent.activeContent {
   max-height: 50rem;
-  padding: 0 3rem 2.8rem 3rem;
 }
-
+.innerContent {
+  padding: 3rem 0;
+}
 .programDetails {
   padding: 1rem 0;
 }
@@ -361,7 +377,7 @@
   font-size: 2.2rem;
   font-weight: 600;
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 }
 .programLocation::before {
@@ -376,4 +392,5 @@
   font-size: 1.4rem;
   color: #444444;
   word-break: keep-all;
+  white-space: pre-line;
 }

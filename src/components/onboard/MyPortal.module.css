@@ -26,27 +26,27 @@
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'Sandoll Seoul';
 }
 
 .portalDescription {
-  font-family: 'Pretendard', sans-serif;
-  font-size: 18px;
+  font-family: 'Sandoll Seoul';
+  font-size: 60px;
+  line-height: 80%;
   color: #ffffff;
   padding: 10px;
   border-radius: 8px;
-  max-width: 250px;
   text-align: center;
 }
 
 .portalLinkButton {
-  font-family: 'Pretendard', sans-serif;
-  padding: 8px 16px;
-  font-size: 1rem;
+  font-family: 'Sandoll Seoul';
+  padding: 4px 12px;
+  font-size: 30px;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.15); /* 반투명한 배경 */
   border: 1px solid rgba(255, 255, 255, 0.25); /* 부드러운 테두리 */
-  border-radius: 80px; /* 더 둥근 모서리 */
+  border-radius: 10px; /* 더 둥근 모서리 */
   color: #fff; /* 글자색 */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;

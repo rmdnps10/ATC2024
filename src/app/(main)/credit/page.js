@@ -4,7 +4,9 @@ import StaffSection from '@/components/credit/StaffSection'
 import ArtistSection from '@/components/credit/ArtistSection'
 import SelectCategory from '@/components/credit/SelectCategory'
 import { motion, AnimatePresence } from 'framer-motion'
-
+//
+//
+//
 export default function CreditPage({ searchParams }) {
   const { category } = searchParams
 

@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   padding: 0 8rem;
-  @media (max-width: 430px) {
-    padding: 0 4rem;
+  @media (max-width: 768px) {
+    padding: 0rem 4rem;
   }
 }
 
@@ -18,33 +18,62 @@
 .headerTitle {
   color: #000;
   font-family: 'Sandoll Seoul';
-  font-size: 8rem;
+  font-size: 7rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 150px */
   letter-spacing: -2px;
-  @media (max-width: 431px) {
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    text-align: center;
     color: #000;
-    font-size: 3rem;
+    font-size: 5rem;
     letter-spacing: -0.9px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  @media (max-width: 768px) {
+    color: #000;
+    font-size: 5rem;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 430px) {
+    color: #000;
+    font-size: 13vw;
+    letter-spacing: -0.9px;
+    display: flex;
+    justify-content: center;
   }
 }
 
 .headerDesc {
-  font-family: Pretendard;
   font-size: 1.8rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 136.364% */
+  line-height: 3rem; /* 136.364% */
+  color: #000;
   letter-spacing: -0.66px;
-  @media (max-width: 431px) {
+  word-break: keep-all;
+  @media (max-width: 1024px) {
+    font-size: 1.4rem;
+    line-height: 2rem;
+  }
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    text-align: center;
+    line-height: 2rem;
+  }
+  @media (max-width: 430px) {
     font-size: 1rem;
     text-align: center;
-    line-height: 1.4rem;
+    line-height: 1.6rem;
   }
 }
 
 .spanRainbow {
+  word-break: keep-all;
   font-family: 'Sandoll Seoul';
   font-size: 36px;
   font-style: normal;
@@ -60,13 +89,34 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  @media (max-width: 431px) {
+  @media (max-width: 1024px) {
     font-size: 24px;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.8rem;
   }
 }
 
 .spanBold {
   font-weight: 600;
+}
+
+.spanHighLight {
+  font-weight: 600;
+  margin-right: 0.35rem;
+  background: linear-gradient(90deg, #dd4ffc 0%, #7340fb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.spanMobile {
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .main section {
@@ -78,14 +128,19 @@
   padding-top: 5rem;
   position: relative;
   overflow: hidden;
+  @media (max-width: 768px) {
+    padding: 0;
+    height: 100vh;
+    overflow: visible;
+  }
 }
 
 .main section ul {
   display: flex;
   gap: 3rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #a5a5a5;
-  @media (max-width: 431px) {
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -106,8 +161,16 @@
   display: flex;
   overflow: hidden;
   position: relative;
-  @media (max-width: 431px) {
+  padding: 0 0 3rem 0;
+  @media (max-width: 768px) {
     flex-direction: column;
+    overflow: visible;
+    height: 100vh;
+    gap: 3rem;
+  }
+  @media (max-width: 430px) {
+    height: 70vh;
+    gap: 3rem;
   }
 }
 
@@ -117,25 +180,33 @@
   height: 90%;
   transform: translateX(100%);
   transition: transform 0.3s ease-in;
-  @media (max-width: 431px) {
-    flex-basis: 30%;
+  @media (max-width: 768px) {
+    height: 100vh;
+    flex: 0 0 30%;
+    transform: translateX(0);
+  }
+  @media (max-width: 430px) {
+    height: 50vh;
+    flex: 0 0 20%;
     transform: translateX(0);
   }
 }
 
 .main section div span p {
   display: none;
-  @media (max-width: 431px) {
+  @media (max-width: 768px) {
     width: 100%;
     display: flex;
     justify-content: center;
     color: #000;
     text-align: center;
-    font-family: Pretendard;
-    font-size: 10px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  }
+  @media (max-width: 430px) {
+    font-size: 1.2rem;
   }
 }
 
@@ -146,6 +217,7 @@
 
 .main section div span svg circle {
   cursor: pointer;
+  position: relative;
 }
 
 .main section div span svg circle:hover {
@@ -158,7 +230,7 @@
 
 .main section div span svg path,
 .main section div span svg circle {
-  transition: fill 0.3s ease-in;
+  transition: fill 0.1s ease-in;
 }
 /* .main section div span svg path {
 }
@@ -175,10 +247,12 @@
 .arrowLeft {
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  left: 0;
-  /* transform: translate(-100%, -50%); */
-  @media (max-width: 431px) {
+  top: 70%;
+  left: 2rem;
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -187,10 +261,13 @@
   z-index: 2000;
   cursor: pointer;
   position: absolute;
-  top: 50%;
-  right: 0;
+  top: 70%;
+  right: 2rem;
   transform: rotate(180deg);
-  @media (max-width: 431px) {
+  @media (max-width: 1024px) {
+    top: 50%;
+  }
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -211,7 +288,10 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 2rem;
-  @media (max-width: 430px) {
+  @media (max-width: 1024px) {
+    width: 25vw;
+  }
+  @media (max-width: 768px) {
     display: none;
   }
 }
@@ -222,9 +302,6 @@
   color: white;
   padding: 0.5rem 1rem;
   cursor: pointer;
-}
-
-.selectedCircleInfo button:hover {
 }
 
 .selectedCircleInfo.visible {
@@ -265,20 +342,28 @@
 .popupTeam {
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 10px;
   font-style: normal;
   font-weight: 600;
   line-height: 10px; /* 100% */
+  margin-bottom: 1rem;
+  @media (max-width: 1024px) {
+    font-size: 10px;
+  }
 }
 .popupTitle {
   color: #fff;
-  text-align: center;
+  text-align: start;
   font-family: 'Sandoll Seoul';
   font-size: 35px;
   font-style: normal;
   font-weight: 400;
-  word-break: break-all;
+  word-break: keep-all;
+  line-height: 3rem;
+  margin-bottom: 1rem;
+  @media (max-width: 1024px) {
+    font-size: 30px;
+  }
 }
 
 .line {

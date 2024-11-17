@@ -10,7 +10,7 @@ export default function InfiniteBanner() {
     { name: 'smilegate_orange', link: null },
     {
       name: 'urbanbeesseoul',
-      link: 'https://www.instagram.com/urban.bees.seoul/'
+      link: 'https://www.youtube.com/@urbanbeesseoul'
     },
     { name: 'futurelab', link: null },
     { name: 'BARO', link: null },

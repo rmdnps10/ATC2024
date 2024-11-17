@@ -80,7 +80,7 @@ export default function ScrollContainer() {
         alt="atc2024 연표, timeline"
         width={TIMELINE_WIDTH}
         height={TIMELINE_HEIGHT}
-        priority={true}
+        priority
       />
       <Elephant
         alt="atc2024 elephant"

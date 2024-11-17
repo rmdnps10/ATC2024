@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
 //
@@ -8,65 +8,62 @@ import Image from 'next/image'
 export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
-  const [animatingPrograms, setAnimatingPrograms] = useState([])
   const programRefs = useRef({})
 
   const isMobile =
     typeof window !== 'undefined' &&
     window.matchMedia('(max-width: 768px)').matches
 
-  const scrollToProgram = id => {
+  const scrollToProgram = useCallback(id => {
     programRefs.current[id]?.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
       inline: 'nearest'
     })
-  }
+  }, [])
 
-  const toggleProgram = id => {
-    setAnimatingPrograms(prev => [...prev, id])
-
-    if (isMobile) {
-      setOpenPrograms(prevOpenPrograms => {
-        const isOpening = !prevOpenPrograms.includes(id)
-        if (isOpening) scrollToProgram(id)
-
-        return isOpening
-          ? [...prevOpenPrograms, id]
-          : prevOpenPrograms.filter(p => p !== id)
-      })
-
-      if (openPrograms.includes(id)) setHoveredProgram(null)
-    } else {
-      setOpenPrograms(prevOpenPrograms =>
-        prevOpenPrograms.includes(id)
-          ? prevOpenPrograms.filter(p => p !== id)
-          : [...prevOpenPrograms, id]
-      )
-    }
-  }
-
-  const timeToRow = time => {
-    const [hour, minute] = time.split(':').map(Number)
-    return hour - 14
-  }
-
-  const dayToColumn = day => ({ 수: 1, 목: 2, 금: 3 }[day] || 0)
+  const toggleProgram = useCallback(
+    id => {
+      if (isMobile) {
+        setOpenPrograms(prevOpenPrograms => {
+          const isOpening = !prevOpenPrograms.includes(id)
+          if (isOpening) {
+            requestAnimationFrame(() => scrollToProgram(id))
+          }
+          return isOpening
+            ? [...prevOpenPrograms, id]
+            : prevOpenPrograms.filter(p => p !== id)
+        })
+        if (openPrograms.includes(id)) {
+          requestAnimationFrame(() => setHoveredProgram(null))
+        }
+      } else {
+        setOpenPrograms(prevOpenPrograms =>
+          prevOpenPrograms.includes(id)
+            ? prevOpenPrograms.filter(p => p !== id)
+            : [...prevOpenPrograms, id]
+        )
+      }
+    },
+    [isMobile, openPrograms, scrollToProgram]
+  )
 
   const programs = [
     {
       id: 'program1',
       title: '그래서 그놈의 융합이 뭔데?',
+      name: '노상호 작가 강연',
       day: '수',
       startTime: '19:00',
       endTime: '20:00',
       location: '서강대학교 하비에르관 5F 이머시브홀',
       description:
-        "노상호의 작업을 중심으로 '융합예술'이 가지고 있는 한계와 오해에 관하여 논하고 함께 고민합니다."
+        "노상호의 작업을 중심으로 '융합예술'이 가지고 있는 한계와 오해에 관하여 논하고 함께 고민한다."
     },
     {
       id: 'program2',
       title: '트러블과 함께 전시하기',
+      name: '이수영 백남준아트센터 큐레이터 강연',
       day: '목',
       startTime: '19:00',
       endTime: '20:00',
@@ -77,14 +74,27 @@ export default function ProgramPage() {
     {
       id: 'program3',
       title: '기술 비평에 창작을 할애하기',
+      name: '포킹룸 강민형 기획자 강연',
       day: '금',
       startTime: '19:00',
       endTime: '20:00',
       location: '서강대학교 하비에르관 5F 이머시브홀',
       description:
-        '기술을 기반으로 창작하는 사람들에게 기술은 어떠한 표현의 도구나 창작의 재료가 되는 경우가 많다. 세 명의 여성 멤버로 이루어진 포킹룸은 기술을 도구나 재료로 보기보다 기술을 다루는 사람들 (개발자, 교육자, 사용자 등)의 문화에서 만들어진 기술 사회에 비평적으로 접근하는 것에 관심을 가지고 있다. 이번 강연에서 연사는 기술 기반의 창작 활동의 의의를 기술 문화를 일구어가는 공동체적인 것으로 보고, 기술은 과연 중립적인가, 기술의 실패는 무엇을 의미하는가, 와 같은 질문을 던지며 기술-창작의 이야기의 폭을 넓혀가고자 한다.'
+        '기술을 기반으로 창작하는 사람들에게 기술은 어떠한 표현의 도구나 창작의 재료가 되는 경우가 많다. 세 명의 여성 멤버로 이루어진 포킹룸은 기술을 도구나 재료로 보기보다 기술을 다루는 사람들 (개발자, 교육자, 사용자 등)의 문화에서 만들어진 기술 사회에 비평적으로 접근하는 것에 관심을 가지고 있다. \n이번 강연에서 연사는 기술 기반의 창작 활동의 의의를 기술 문화를 일구어가는 공동체적인 것으로 보고, 기술은 과연 중립적인가, 기술의 실패는 무엇을 의미하는가, 와 같은 질문을 던지며 기술-창작의 이야기의 폭을 넓혀가고자 한다.'
+    },
+    {
+      id: 'program4',
+      title: '[MAKE BLANK]',
+      name: '점선면 작가 워크숍',
+      day: '목',
+      startTime: '15:00',
+      endTime: '18:00',
+      location: '서강대학교 하비에르관 5F 이머시브홀',
+      description:
+        "'우리는 코끼리가 될 수도 있고 냉장고를 만들 수도 있다.' \n 다양한 여러가지 표현방법을 통해 나의 빈칸을 채워본다. 그리는 과정을 통해 우리의 가능성과 꿈, 여백의 아름다움에 대한 이야기를 나눈다."
     }
   ]
+
   const alwaysAvailablePrograms = [
     {
       id: 'always1',
@@ -105,18 +115,108 @@ export default function ProgramPage() {
   const days = ['수', '목', '금']
 
   const tableData = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
+    [
+      null,
+      {
+        title: 'MAKE BLANK',
+        id: 'program4',
+        rowspan: 2
+      },
+      null
+    ],
+    [
+      null,
+      {
+        title: 'MAKE BLANK',
+        id: 'program4',
+        rowspan: 3
+      },
+      null
+    ],
+    [
+      null,
+      {
+        title: '[MAKE BLANK]',
+        id: 'program4',
+        rowspan: 3
+      },
+      ,
+      null
+    ],
     [null, null, null],
     [
-      { title: '그래서 그놈의 융합이 뭔데?', id: 'program1', rowspan: 2 },
-      { title: '트러블과 함께 전시하기', id: 'program2', rowspan: 2 },
-      { title: '기술 비평에 창작을 할애하기', id: 'program3', rowspan: 2 }
+      { title: '그래서 그놈의 융합이 뭔데?', id: 'program1' },
+      { title: '트러블과 함께 전시하기', id: 'program2' },
+      { title: '기술 비평에 창작을 할애하기', id: 'program3' }
     ],
     [null, null, null],
     [null, null, null]
   ]
+
+  const renderProgramCell = (cellData, rowIndex, colIndex) => {
+    if (cellData && cellData.rowspan) {
+      const isStartRow = tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id
+      if (isStartRow) {
+        return (
+          <div
+            key={`merged-${rowIndex}-${colIndex}`}
+            className={`${styles.programCellStyled} ${
+              hoveredProgram === cellData.id ||
+              openPrograms.includes(cellData.id)
+                ? styles.highlightedBackground
+                : ''
+            }`}
+            style={{ gridRow: 'span 3', gridColumn: colIndex + 2 }}
+            onMouseEnter={() => setHoveredProgram(cellData.id)}
+            onMouseLeave={() => setHoveredProgram(null)}
+            onClick={() => toggleProgram(cellData.id)}>
+            <div
+              className={`${styles.gradientText} ${
+                hoveredProgram === cellData.id ||
+                openPrograms.includes(cellData.id)
+                  ? styles.highlightedText
+                  : ''
+              }`}>
+              {cellData.title}
+            </div>
+          </div>
+        )
+      }
+      return null
+    }
+
+    if (!cellData) {
+      return (
+        <div
+          key={`empty-${rowIndex}-${colIndex}`}
+          className={styles.programCell}
+          style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}></div>
+      )
+    }
+
+    return (
+      <div
+        key={`${rowIndex}-${colIndex}`}
+        className={`${styles.programCellStyled} ${
+          hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+            ? styles.highlightedBackground
+            : ''
+        }`}
+        style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}
+        onMouseEnter={() => setHoveredProgram(cellData.id)}
+        onMouseLeave={() => setHoveredProgram(null)}
+        onClick={() => toggleProgram(cellData.id)}>
+        <div
+          className={`${styles.gradientText} ${
+            hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+              ? styles.highlightedText
+              : ''
+          }`}>
+          {cellData.title}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <main className={styles.main}>
@@ -144,40 +244,13 @@ export default function ProgramPage() {
                 </div>
                 {Array(3)
                   .fill(null)
-                  .map((_, colIndex) => {
-                    const cellData = tableData[rowIndex][colIndex]
-                    return cellData ? (
-                      <div
-                        key={colIndex}
-                        className={`${styles.programCellStyled} ${
-                          hoveredProgram === cellData.id ||
-                          openPrograms.includes(cellData.id)
-                            ? styles.highlightedBackground
-                            : ''
-                        }`}
-                        onMouseEnter={() => setHoveredProgram(cellData.id)}
-                        onMouseLeave={() => setHoveredProgram(null)}
-                        onClick={() => toggleProgram(cellData.id)}>
-                        <div
-                          className={`${styles.gradientText} ${
-                            hoveredProgram === cellData.id ||
-                            openPrograms.includes(cellData.id)
-                              ? styles.highlightedText
-                              : ''
-                          }`}>
-                          {cellData.title}
-                        </div>
-                      </div>
-                    ) : (
-                      <div
-                        key={colIndex}
-                        className={styles.programCell}
-                        style={{
-                          gridColumn: colIndex + 2,
-                          gridRow: rowIndex + 2
-                        }}></div>
+                  .map((_, colIndex) =>
+                    renderProgramCell(
+                      tableData[rowIndex][colIndex],
+                      rowIndex,
+                      colIndex
                     )
-                  })}
+                  )}
               </React.Fragment>
             )
           )}
@@ -210,59 +283,84 @@ export default function ProgramPage() {
         </div>
       </section>
       <section className={styles.programContainer}>
-        {[...alwaysAvailablePrograms, ...programs].map(program => (
+        {[
+          { title: '강연', programs: programs },
+          { title: '부스', programs: alwaysAvailablePrograms }
+        ].map(group => (
           <div
-            key={program.id}
-            ref={el => (programRefs.current[program.id] = el)}
-            className={`${styles.programAccordion} ${
-              openPrograms.includes(program.id) ? styles.open : ''
-            }`}
-            onMouseEnter={() => setHoveredProgram(program.id)}
-            onMouseLeave={() => setHoveredProgram(null)}>
-            <div
-              className={styles.programHeader}
-              onClick={() => toggleProgram(program.id)}>
-              <span
-                className={`${styles.textWrapper} ${
-                  hoveredProgram === program.id ||
-                  openPrograms.includes(program.id)
-                    ? styles.gradientText
-                    : ''
-                }`}>
-                {program.title}
-              </span>
-              <span
-                className={`${styles.arrow} ${
-                  openPrograms.includes(program.id) ? styles.rotated : ''
-                }`}>
-                <Image
-                  src="/icon/button/toggle.svg"
-                  width={24}
-                  height={24}
-                  alt="Toggle Arrow"
-                />
-              </span>
+            key={group.title}
+            className={styles.groups}>
+            <div className={styles.headerGroup}>
+              <Image
+                src={`images/program/subComponent${
+                  group.title === '강연' ? '1' : '2'
+                }.svg`}
+                alt={`2024 atc 서브 컴포넌트 - ${group.title}`}
+                width={34}
+                height={34}
+              />
+              <p className={styles.groupTitle}>{group.title}</p>
             </div>
-
-            <div
-              className={`${styles.accordionContent} ${
-                openPrograms.includes(program.id) ? styles.activeContent : ''
-              }`}
-              style={{
-                maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
-              }}>
-              <div className={styles.programDetails}>
-                <p className={styles.programTime}>
-                  {program.startTime
-                    ? `${program.startTime} - ${program.endTime} (${program.day})`
-                    : '상시운영'}
-                </p>
-                <p className={styles.programLocation}>{program.location}</p>
-                <p className={styles.programDescription}>
-                  {program.description}
-                </p>
+            {group.programs.map(program => (
+              <div
+                key={program.id}
+                ref={el => (programRefs.current[program.id] = el)}
+                className={`${styles.programAccordion} ${
+                  openPrograms.includes(program.id) ? styles.open : ''
+                }`}
+                onMouseEnter={() => setHoveredProgram(program.id)}
+                onMouseLeave={() => setHoveredProgram(null)}>
+                <div
+                  className={styles.programHeader}
+                  onClick={() => toggleProgram(program.id)}>
+                  <span
+                    className={`${styles.textWrapper} ${
+                      hoveredProgram === program.id ||
+                      openPrograms.includes(program.id)
+                        ? styles.gradientText
+                        : ''
+                    }`}>
+                    {program.title}
+                  </span>
+                  <span
+                    className={`${styles.arrow} ${
+                      openPrograms.includes(program.id) ? styles.rotated : ''
+                    }`}>
+                    <Image
+                      src="/icon/button/toggle.svg"
+                      width={24}
+                      height={24}
+                      alt="Toggle Arrow"
+                    />
+                  </span>
+                </div>
+                <div
+                  className={`${styles.accordionContent} ${
+                    openPrograms.includes(program.id)
+                      ? styles.activeContent
+                      : ''
+                  }`}
+                  style={{
+                    maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
+                  }}>
+                  <div className={styles.innerContent}>
+                    <div className={styles.programDetails}>
+                      <p className={styles.programTime}>
+                        {program.startTime
+                          ? `${program.startTime} - ${program.endTime} (${program.day}), ${program.name}`
+                          : '상시운영'}
+                      </p>
+                      <p className={styles.programLocation}>
+                        {program.location}
+                      </p>
+                      <p className={styles.programDescription}>
+                        {program.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         ))}
       </section>
