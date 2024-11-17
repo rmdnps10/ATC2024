@@ -1,66 +1,68 @@
+import { buttons } from './buttonPosition'
+
 export const archiveStore = [
   {
     imageUrl: '/images/archive/1.png',
-    caption: '스태프 프로필 촬영1'
+    caption: buttons[0].text
   },
   {
     imageUrl: '/images/archive/2.png',
-    caption: '스태프 프로필 촬영2'
+    caption: buttons[1].text
   },
   {
     imageUrl: '/images/archive/3.png',
-    caption: '스태프 프로필 촬영3'
+    caption: buttons[2].text
   },
   {
     imageUrl: '/images/archive/4.png',
-    caption: '스태프 프로필 촬영4'
+    caption: buttons[3].text
   },
   {
     imageUrl: '/images/archive/5.png',
-    caption: '스태프 프로필 촬영5'
+    caption: buttons[4].text
   },
   {
     imageUrl: '/images/archive/6.png',
-    caption: '스태프 프로필 촬영6'
+    caption: buttons[5].text
   },
   {
     imageUrl: '/images/archive/7.png',
-    caption: '스태프 프로필 촬영7'
+    caption: buttons[6].text
   },
   {
     imageUrl: '/images/archive/8.png',
-    caption: '스태프 프로필 촬영8'
+    caption: buttons[7].text
   },
   {
     imageUrl: '/images/archive/9.png',
-    caption: '스태프 프로필 촬영9'
+    caption: buttons[8].text
   },
   {
     imageUrl: '/images/archive/10.png',
-    caption: '스태프 프로필 촬영10'
+    caption: buttons[9].text
   },
   {
     imageUrl: '/images/archive/11.png',
-    caption: '스태프 프로필 촬영11'
+    caption: buttons[10].text
   },
   {
     imageUrl: '/images/archive/12.png',
-    caption: '스태프 프로필 촬영12'
+    caption: buttons[11].text
   },
   {
     imageUrl: '/images/archive/13.png',
-    caption: '스태프 프로필 촬영13'
+    caption: buttons[12].text
   },
   {
     imageUrl: '/images/archive/14.png',
-    caption: '스태프 프로필 촬영14'
+    caption: buttons[13].text
   },
   {
     imageUrl: '/images/archive/15.png',
-    caption: '스태프 프로필 촬영15'
+    caption: buttons[14].text
   },
   {
     imageUrl: '/images/archive/16.png',
-    caption: '스태프 프로필 촬영16'
+    caption: buttons[15].text
   }
 ]
