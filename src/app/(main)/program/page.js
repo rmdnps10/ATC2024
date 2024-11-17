@@ -48,6 +48,21 @@ export default function ProgramPage() {
     [isMobile, openPrograms, scrollToProgram]
   )
 
+  const handleMouseEnter = useCallback(
+    id => {
+      if (hoveredProgram !== id) {
+        setHoveredProgram(id) // 상태가 변경될 때만 업데이트
+      }
+    },
+    [hoveredProgram]
+  )
+
+  const handleMouseLeave = useCallback(() => {
+    if (hoveredProgram !== null) {
+      setHoveredProgram(null) // 이미 null이면 업데이트 하지 않음
+    }
+  }, [hoveredProgram])
+
   const programs = [
     {
       id: 'program1',
@@ -167,8 +182,8 @@ export default function ProgramPage() {
                 : ''
             }`}
             style={{ gridRow: 'span 3', gridColumn: colIndex + 2 }}
-            onMouseEnter={() => setHoveredProgram(cellData.id)}
-            onMouseLeave={() => setHoveredProgram(null)}
+            onMouseEnter={() => handleMouseEnter(cellData.id)}
+            onMouseLeave={handleMouseLeave}
             onClick={() => toggleProgram(cellData.id)}>
             <div
               className={`${styles.gradientText} ${
@@ -203,8 +218,8 @@ export default function ProgramPage() {
             : ''
         }`}
         style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}
-        onMouseEnter={() => setHoveredProgram(cellData.id)}
-        onMouseLeave={() => setHoveredProgram(null)}
+        onMouseEnter={() => handleMouseEnter(cellData.id)}
+        onMouseLeave={handleMouseLeave}
         onClick={() => toggleProgram(cellData.id)}>
         <div
           className={`${styles.gradientText} ${
@@ -266,8 +281,8 @@ export default function ProgramPage() {
                   ? styles.highlightedBackground
                   : ''
               }`}
-              onMouseEnter={() => setHoveredProgram(program.id)}
-              onMouseLeave={() => setHoveredProgram(null)}
+              onMouseEnter={() => handleMouseEnter(program.id)}
+              onMouseLeave={handleMouseLeave}
               onClick={() => toggleProgram(program.id)}>
               <div
                 className={`${styles.gradientText} ${
@@ -308,8 +323,8 @@ export default function ProgramPage() {
                 className={`${styles.programAccordion} ${
                   openPrograms.includes(program.id) ? styles.open : ''
                 }`}
-                onMouseEnter={() => setHoveredProgram(program.id)}
-                onMouseLeave={() => setHoveredProgram(null)}>
+                onMouseEnter={() => handleMouseEnter(program.id)}
+                onMouseLeave={handleMouseLeave}>
                 <div
                   className={styles.programHeader}
                   onClick={() => toggleProgram(program.id)}>
@@ -339,10 +354,7 @@ export default function ProgramPage() {
                     openPrograms.includes(program.id)
                       ? styles.activeContent
                       : ''
-                  }`}
-                  style={{
-                    maxHeight: openPrograms.includes(program.id) ? '500px' : '0'
-                  }}>
+                  }`}>
                   <div className={styles.innerContent}>
                     <div className={styles.programDetails}>
                       <p className={styles.programTime}>
