@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef, useCallback } from 'react'
+import React, { useState, useRef, useCallback, useMemo } from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
 //
@@ -9,6 +9,11 @@ export default function ProgramPage() {
   const [openPrograms, setOpenPrograms] = useState([])
   const [hoveredProgram, setHoveredProgram] = useState(null)
   const programRefs = useRef({})
+
+  const isHighlighted = useCallback(
+    id => hoveredProgram === id || openPrograms.includes(id),
+    [hoveredProgram, openPrograms]
+  )
 
   const isMobile =
     typeof window !== 'undefined' &&
@@ -77,25 +82,25 @@ export default function ProgramPage() {
     },
     {
       id: 'program2',
-      title: '트러블과 함께 전시하기',
-      name: '이수영 백남준아트센터 큐레이터 강연',
+      title: '기술 비평에 창작을 할애하기',
+      name: '포킹룸 강민형 기획자 강연',
       day: '목',
       startTime: '19:00',
       endTime: '20:00',
       location: '서강대학교 하비에르관 5F 이머시브홀',
       description:
-        '"트러블과 함께 하라"에서 트러블(Trouble)의 어원은 "불러일으키다. 애매하게 만들다. 방해하다"에서 온 것이다. 프로블럼(Problem)이 해결책을 제시하는 것과 연결되어 있는 반면, 트러블은 하나의 원인으로 환원되지도, 깔끔하게 정리되지도 않는다. 오히려 문제해결을 위해 상황을 잘 정리하는 것 보다 뒤섞어버리는 쪽에 가깝다. 트러블은 지나친 단순화와 싸우며, 지금 당장 가능한 응답을 불러일으키는 능력을 키우는 것을 말한다. 본 강의는 지금까지 기획한 여러 전시들을 돌아보며 트러블과 함께 하는 전시의 몇 가지 원칙에 대해 이야기하고자 한다.'
+        '기술을 기반으로 창작하는 사람들에게 기술은 어떠한 표현의 도구나 창작의 재료가 되는 경우가 많다. 세 명의 여성 멤버로 이루어진 포킹룸은 기술을 도구나 재료로 보기보다 기술을 다루는 사람들 (개발자, 교육자, 사용자 등)의 문화에서 만들어진 기술 사회에 비평적으로 접근하는 것에 관심을 가지고 있다. \n이번 강연에서 연사는 기술 기반의 창작 활동의 의의를 기술 문화를 일구어가는 공동체적인 것으로 보고, 기술은 과연 중립적인가, 기술의 실패는 무엇을 의미하는가, 와 같은 질문을 던지며 기술-창작의 이야기의 폭을 넓혀가고자 한다.'
     },
     {
       id: 'program3',
-      title: '기술 비평에 창작을 할애하기',
-      name: '포킹룸 강민형 기획자 강연',
+      title: '트러블과 함께 전시하기',
+      name: '이수영 백남준아트센터 큐레이터 강연',
       day: '금',
       startTime: '19:00',
       endTime: '20:00',
       location: '서강대학교 하비에르관 5F 이머시브홀',
       description:
-        '기술을 기반으로 창작하는 사람들에게 기술은 어떠한 표현의 도구나 창작의 재료가 되는 경우가 많다. 세 명의 여성 멤버로 이루어진 포킹룸은 기술을 도구나 재료로 보기보다 기술을 다루는 사람들 (개발자, 교육자, 사용자 등)의 문화에서 만들어진 기술 사회에 비평적으로 접근하는 것에 관심을 가지고 있다. \n이번 강연에서 연사는 기술 기반의 창작 활동의 의의를 기술 문화를 일구어가는 공동체적인 것으로 보고, 기술은 과연 중립적인가, 기술의 실패는 무엇을 의미하는가, 와 같은 질문을 던지며 기술-창작의 이야기의 폭을 넓혀가고자 한다.'
+        '"트러블과 함께 하라"에서 트러블(Trouble)의 어원은 "불러일으키다. 애매하게 만들다. 방해하다"에서 온 것이다. 프로블럼(Problem)이 해결책을 제시하는 것과 연결되어 있는 반면, 트러블은 하나의 원인으로 환원되지도, 깔끔하게 정리되지도 않는다. 오히려 문제해결을 위해 상황을 잘 정리하는 것 보다 뒤섞어버리는 쪽에 가깝다. 트러블은 지나친 단순화와 싸우며, 지금 당장 가능한 응답을 불러일으키는 능력을 키우는 것을 말한다. 본 강의는 지금까지 기획한 여러 전시들을 돌아보며 트러블과 함께 하는 전시의 몇 가지 원칙에 대해 이야기하고자 한다.'
     },
     {
       id: 'program4',
@@ -133,18 +138,10 @@ export default function ProgramPage() {
     [
       null,
       {
-        title: 'MAKE BLANK',
+        title: '[MAKE BLANK]',
         id: 'program4',
-        rowspan: 2
-      },
-      null
-    ],
-    [
-      null,
-      {
-        title: 'MAKE BLANK',
-        id: 'program4',
-        rowspan: 3
+        rowspan: 3,
+        isStartRow: true
       },
       null
     ],
@@ -153,71 +150,106 @@ export default function ProgramPage() {
       {
         title: '[MAKE BLANK]',
         id: 'program4',
-        rowspan: 3
+        rowspan: 3,
+        isStartRow: false
       },
-      ,
+      null
+    ],
+    [
+      null,
+      {
+        title: '[MAKE BLANK]',
+        id: 'program4',
+        rowspan: 3,
+        isStartRow: false
+      },
       null
     ],
     [null, null, null],
     [
       { title: '그래서 그놈의 융합이 뭔데?', id: 'program1' },
-      { title: '트러블과 함께 전시하기', id: 'program2' },
-      { title: '기술 비평에 창작을 할애하기', id: 'program3' }
+      { title: '기술 비평에 창작을 할애하기', id: 'program2' },
+      { title: '트러블과 함께 전시하기', id: 'program3' }
     ],
     [null, null, null],
     [null, null, null]
   ]
 
-  const renderProgramCell = (cellData, rowIndex, colIndex) => {
-    if (cellData && cellData.rowspan) {
-      const isStartRow = tableData[rowIndex - 1]?.[colIndex]?.id !== cellData.id
-      if (isStartRow) {
-        return (
-          <div
-            key={`merged-${rowIndex}-${colIndex}`}
-            className={`${styles.programCellStyled} ${
-              hoveredProgram === cellData.id ||
-              openPrograms.includes(cellData.id)
-                ? styles.highlightedBackground
-                : ''
-            }`}
-            style={{ gridRow: 'span 3', gridColumn: colIndex + 2 }}
-            onMouseEnter={() => handleMouseEnter(cellData.id)}
-            onMouseLeave={handleMouseLeave}
-            onClick={() => toggleProgram(cellData.id)}>
-            <div
-              className={`${styles.gradientText} ${
-                hoveredProgram === cellData.id ||
-                openPrograms.includes(cellData.id)
-                  ? styles.highlightedText
-                  : ''
-              }`}>
-              {cellData.title}
-            </div>
-          </div>
-        )
-      }
-      return null
-    }
+  const processedTableData = useMemo(() => {
+    return tableData.map((row, rowIndex) =>
+      row.map((cell, colIndex) => {
+        if (!cell) return null
+        if (cell.rowspan) {
+          return {
+            ...cell,
+            isStartRow:
+              rowIndex === 0 ||
+              tableData[rowIndex - 1]?.[colIndex]?.id !== cell.id
+          }
+        }
+        return cell
+      })
+    )
+  }, [tableData])
 
+  const renderProgramCell = (cellData, rowIndex, colIndex) => {
     if (!cellData) {
+      // 빈 셀 렌더링
       return (
         <div
           key={`empty-${rowIndex}-${colIndex}`}
           className={styles.programCell}
-          style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}></div>
+          style={{
+            gridColumn: colIndex + 2,
+            gridRow: rowIndex + 2
+          }}></div>
       )
+    }
+
+    if (cellData.rowspan && cellData.isStartRow) {
+      // 병합된 셀의 시작 부분만 렌더링
+      return (
+        <div
+          key={`merged-${rowIndex}-${colIndex}`}
+          className={`${styles.programCellStyled} ${
+            hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
+              ? styles.highlightedBackground
+              : ''
+          }`}
+          style={{
+            gridColumn: colIndex + 2,
+            gridRow: `span ${cellData.rowspan}`
+          }}
+          onMouseEnter={() => handleMouseEnter(cellData.id)}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => toggleProgram(cellData.id)}>
+          <div
+            className={`${styles.gradientText} ${
+              hoveredProgram === cellData.id ||
+              openPrograms.includes(cellData.id)
+                ? styles.highlightedText
+                : ''
+            }`}>
+            {cellData.title}
+          </div>
+        </div>
+      )
+    }
+
+    if (cellData.rowspan && !cellData.isStartRow) {
+      return null
     }
 
     return (
       <div
         key={`${rowIndex}-${colIndex}`}
         className={`${styles.programCellStyled} ${
-          hoveredProgram === cellData.id || openPrograms.includes(cellData.id)
-            ? styles.highlightedBackground
-            : ''
+          isHighlighted(cellData.id) ? styles.highlightedBackground : ''
         }`}
-        style={{ gridColumn: colIndex + 2, gridRow: rowIndex + 2 }}
+        style={{
+          gridColumn: colIndex + 2,
+          gridRow: rowIndex + 2
+        }}
         onMouseEnter={() => handleMouseEnter(cellData.id)}
         onMouseLeave={handleMouseLeave}
         onClick={() => toggleProgram(cellData.id)}>
@@ -257,15 +289,9 @@ export default function ProgramPage() {
                   style={{ gridRow: rowIndex + 2 }}>
                   {time}
                 </div>
-                {Array(3)
-                  .fill(null)
-                  .map((_, colIndex) =>
-                    renderProgramCell(
-                      tableData[rowIndex][colIndex],
-                      rowIndex,
-                      colIndex
-                    )
-                  )}
+                {processedTableData[rowIndex].map((cellData, colIndex) =>
+                  renderProgramCell(cellData, rowIndex, colIndex)
+                )}
               </React.Fragment>
             )
           )}
@@ -276,10 +302,7 @@ export default function ProgramPage() {
             <div
               key={program.id}
               className={`${styles.programCellStyled} ${
-                hoveredProgram === program.id ||
-                openPrograms.includes(program.id)
-                  ? styles.highlightedBackground
-                  : ''
+                isHighlighted(program.id) ? styles.highlightedBackground : ''
               }`}
               onMouseEnter={() => handleMouseEnter(program.id)}
               onMouseLeave={handleMouseLeave}
