@@ -53,20 +53,6 @@ export default function WorkDetailPage() {
     }, 100)
   }, [imageHeight])
 
-  useEffect(() => {
-    if (detailData && detailData.mainImg) {
-      // const img = new Image()
-      // console.log(img)
-      // img.src = detailData.mainImg
-      // img.onload = () => {
-      // setImageHeight(img.height)
-      // console.log(img.height)
-      // }
-      // const size = getImageSize(detailData.mainImg)
-      // console.log(size)
-    }
-  }, [detailData])
-
   function handleExit() {
     setIsClicked(true)
     setTimeout(() => {
