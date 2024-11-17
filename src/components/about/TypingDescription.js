@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import styles from './TypingDescription.module.css'
 //
 //
@@ -101,14 +100,11 @@ export default function TypingDescription() {
               {content.text}
             </span>
           ) : (
-            <Image
+            <img
               key={`image-${index}`}
               src={content.src}
               alt={content.alt}
-              width={78}
-              height={56}
-              priority
-              className={styles.image}
+              loading="eager"
             />
           )
         )}
