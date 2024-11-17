@@ -62,8 +62,9 @@
 
 .main header h1 span:first-child {
   width: fit-content;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 10rem;
+  line-height: 80%;
   font-weight: 400;
   background: var(
     --linear,
@@ -118,13 +119,9 @@
   align-items: flex-end;
 }
 
-.main header h1 span div img {
-  /* background-color: yellow; */
-}
-
 .main header h3 {
   color: #121212;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 3rem;
   font-weight: 400;
   line-height: 3rem;
@@ -135,6 +132,7 @@
     line-height: 2.3rem;
     max-width: 90%;
     margin-bottom: 3rem;
+    margin-top: 2rem;
   }
   @media (max-width: 430px) {
     font-size: 2.4rem;
@@ -154,14 +152,14 @@
 
 .headerDesc p {
   text-wrap: wrap;
-  max-width: 40%;
+  max-width: 70%;
   color: #121212;
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
   word-break: keep-all;
   @media (max-width: 768px) {
-    max-width: 80%;
+    max-width: 100%;
   }
 }
 
@@ -179,7 +177,7 @@
   color: #121212;
   text-align: right;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.4px;
 }
 
@@ -187,7 +185,7 @@
   color: #121212;
   text-align: right;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.4px;
 }
 
@@ -206,10 +204,12 @@
 
 .introduceImage {
   width: 100%;
-  height: 100vh;
+  height: 600vh;
   position: relative;
+  /* display: block; */
+  /* height: auto; */
   @media (max-width: 1024px) {
-    height: 90vh;
+    height: 300vw;
   }
   @media (max-width: 640px) {
     height: 50vh;
@@ -217,6 +217,12 @@
   @media (max-width: 430px) {
     height: 30vh;
   }
+}
+
+.mainImage {
+  width: 100%;
+  height: auto;
+  position: absolute;
 }
 
 .main section {
@@ -237,7 +243,7 @@
   overflow: hidden;
   position: relative;
   border-radius: 50%;
-  background-color: black;
+  /* background-color: black; */
   flex-shrink: 0;
   @media (max-width: 768px) {
     width: 100%;
@@ -252,7 +258,7 @@
   margin-bottom: 3rem;
   color: #000;
   text-align: right;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 2.5rem;
   font-weight: 400;
   line-height: 4rem; /* 57.143% */
@@ -277,7 +283,7 @@
   margin-bottom: 3rem;
   color: #000;
   text-align: right;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 4rem;
   font-weight: 400;
   line-height: 4rem; /* 57.143% */
@@ -296,7 +302,7 @@
 .teamDesc h2 {
   color: #000;
   text-align: right;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 4rem;
   font-style: normal;
   font-weight: 400;
@@ -319,7 +325,7 @@
 .nameList {
   color: #000;
   text-align: right;
-  font-family: 'Sandoll Seoul';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 3rem;
   font-style: normal;
   font-weight: 400;
