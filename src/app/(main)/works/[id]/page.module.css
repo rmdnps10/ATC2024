@@ -62,7 +62,7 @@
 
 .main header h1 span:first-child {
   width: fit-content;
-  font-family: 'Sandoll Seoul', 'Pretendard', '';
+  font-family: 'Sandoll Seoul', 'Pretendard';
   font-size: 10rem;
   line-height: 80%;
   font-weight: 400;
@@ -243,7 +243,7 @@
   overflow: hidden;
   position: relative;
   border-radius: 50%;
-  background-color: black;
+  /* background-color: black; */
   flex-shrink: 0;
   @media (max-width: 768px) {
     width: 100%;

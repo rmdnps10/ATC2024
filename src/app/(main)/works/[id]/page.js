@@ -233,6 +233,7 @@ export default function WorkDetailPage() {
                     width={windowWidth}
                     height={imageHeight * windowWidth}
                     objectFit="contain"
+                    priority={true}
                   />
                 </figure>
               </div>
@@ -244,7 +245,7 @@ export default function WorkDetailPage() {
                     src={detailData.artistImg}
                     alt="artist image"
                     layout="fill"
-                    objectFit=""
+                    objectFit="cover"
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
                   />
