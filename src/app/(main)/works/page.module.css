@@ -45,7 +45,6 @@
 
 .headerSummary {
   color: #000;
-  font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 700;
@@ -62,7 +61,6 @@
 }
 
 .headerDesc {
-  font-family: Pretendard;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
@@ -135,7 +133,7 @@
   font-size: 1.2rem;
   position: relative;
   @media (min-width: 2000px) {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
   }
   @media (max-width: 1024px) {
     font-size: 1.2rem;
