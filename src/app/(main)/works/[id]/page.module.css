@@ -549,5 +549,8 @@
 
 .weirdWord {
   font-family: 'Pretendard';
-  color: red;
+  font-size: 2rem;
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
 }
