@@ -1,6 +1,10 @@
+'use client'
+
 import React from 'react'
 import { Reflector, useTexture } from '@react-three/drei'
-
+//
+//
+//
 export default function Wall() {
     const [floor, normal] = useTexture(['./images/main/SurfaceImperfections003_1K_var1.jpg', './images/main/SurfaceImperfectionsNormal.jpg'])
 

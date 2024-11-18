@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
 //

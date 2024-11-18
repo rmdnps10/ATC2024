@@ -2,7 +2,9 @@
 
 import React, { Suspense, useState, useEffect } from 'react'
 import { Text } from '@react-three/drei'
-
+//
+//
+//
 export default function ThreeText() {
   const [fontSize, setFontSize] = useState({ main: 5, and: 7, tech: 5 })
 

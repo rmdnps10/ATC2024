@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Model as FishModel } from './fish';
 import { Model as MainModel } from './main';
 import { Model as Fish2Model } from './fish2'
