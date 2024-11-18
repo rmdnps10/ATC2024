@@ -41,6 +41,7 @@
   display: flex;
   gap: 1rem;
   flex-direction: row;
+  width: fit-content;
   /* flex-wrap: nowrap; */
   max-width: 80%;
   /* word-break: break-all; */
@@ -97,18 +98,20 @@
 
 .main header h1 span:nth-child(2) {
   width: 4rem;
-  height: 10rem;
+  height: 8rem;
   display: flex;
   align-items: flex-end;
   position: relative;
   @media (max-width: 1024px) {
-    transform: translateY(1rem);
     height: 8rem;
+  }
+  @media (max-width: 768px) {
+    height: 6.5rem;
   }
   @media (max-width: 430px) {
     width: 4rem;
     /* transform: translateY(2rem); */
-    height: 7rem;
+    height: 5rem;
   }
 }
 
@@ -542,4 +545,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.weirdWord {
+  font-family: 'Pretendard';
+  color: red;
 }

@@ -235,7 +235,10 @@ export default function WorksPage({}) {
                   <span className={styles.figTitle}>怒世怒世</span>
                 ) : null}
                 {el._id === '672cea5b0c11e50dbd25fa2b' ? (
-                  <span className={styles.figTitle}>소음疏音</span>
+                  <span className={styles.figTitle}>
+                    <span style={{ fontFamily: 'Sandoll Seoul' }}>소음</span>
+                    疏音
+                  </span>
                 ) : null}
                 {el._id !== '672cea5b0c11e50dbd25fa34' &&
                 el._id !== '672cea5b0c11e50dbd25fa2b' ? (
