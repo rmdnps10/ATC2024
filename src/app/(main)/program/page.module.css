@@ -20,7 +20,7 @@
 .pink1,
 .pink2,
 .blue1 {
-  position: absolute;
+  position: fixed;
   filter: blur(150px);
   z-index: -1;
 }
