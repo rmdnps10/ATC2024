@@ -75,13 +75,12 @@ export default function ScrollContainer() {
         </ModalPortal>
       )}
 
-      <Image
-        src="/images/archive/연표.png"
+      <img
+        src="/images/archive/chronology.png"
         alt="atc2024 연표, timeline"
-        width={TIMELINE_WIDTH}
-        height={TIMELINE_HEIGHT}
-        priority
+        style={{ width: TIMELINE_WIDTH, height: TIMELINE_HEIGHT }}
       />
+
       <Elephant
         alt="atc2024 elephant"
         src="/images/archive/코끼리.webp"

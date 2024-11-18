@@ -19,8 +19,6 @@ export default function Header() {
     false
   )
 
-  useLockBodyScroll(isOpenMobileMenu)
-
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100)
     window.addEventListener('scroll', handleScroll)
@@ -73,7 +71,7 @@ export default function Header() {
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
       style={{
-        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
+        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'white'
       }}>
       {renderAtcLogo(isMobile)}
       <ul>
@@ -100,7 +98,7 @@ export default function Header() {
         className={styles.mobileMenu}
         style={{
           overflow: 'hidden',
-          height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0'
+          height: isOpenMobileMenu ? '21.9rem' : '0'
         }}>
         <nav onClick={toggleIsShowMobileMenu}>
           {['/about', '/works', '/program', '/archive', '/map'].map(link => (
