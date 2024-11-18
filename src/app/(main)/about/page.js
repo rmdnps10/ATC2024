@@ -113,7 +113,7 @@ export default function AboutPage() {
       <div className={styles.videoWrapper}>
         <section className={styles.videoContainer}>
           <iframe
-            src="https://www.youtube.com/embed/eDSicjXGiVw?si=c3-OPMBzRb9HEW7k"
+            src="https://www.youtube.com/embed/F1Kab1fGy0A?si=EpG1I9iCLU8rXSMb"
             title="atc2024 공식 영상"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
