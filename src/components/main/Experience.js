@@ -47,7 +47,7 @@ export default function Experience({ accent, scrollPercent }) {
 
   useEffect(() => {
     if (scrollPercent >= 85) {
-      const progress = (scrollPercent - 85) / 15; // 75%에서 100%까지의 진행률 계산
+      const progress = (scrollPercent - 85) / 15;
       gsap.to(bgRef.current, {
         r: 0,
         g: 0,
@@ -69,10 +69,8 @@ export default function Experience({ accent, scrollPercent }) {
 
   return (
     <>
-      {/* <Perf position="bottom-left" /> */}
       <color ref={bgRef} attach="background" args={['white']} />
       <CameraController />
-      {/* <OrbitControls /> */}
 
       <Environment resolution={64} preset="studio" environmentIntensity={0.5} />
 
@@ -147,20 +145,43 @@ function Sphere({
 
 function Pointer({ vec = new THREE.Vector3() }) {
   const ref = useRef();
-  const [hitSound] = useState(() => new Audio("./images/main/hit.mp3"));
+  const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
+  const [hitSound, setHitSound] = useState(null);
+
+  useEffect(() => {
+    if (audioContext.state === 'suspended') {
+      audioContext.resume();
+    }
+
+    const audio = new Audio("./images/main/hit.mp3");
+    audio.addEventListener('canplaythrough', () => {
+      setHitSound(audio);
+    });
+  }, []);
 
   const lastPlayTime = useRef(0);
   const soundCooldown = 80;
 
   const collisionEnter = () => {
+    if (!hitSound || audioContext.state !== 'running') return;
+
     const now = Date.now();
-
     if (now - lastPlayTime.current > soundCooldown) {
-      hitSound.currentTime = 0;
-      hitSound.volume = Math.random() * 0.3;
-      hitSound.play();
+      try {
+        hitSound.currentTime = 0;
+        hitSound.volume = Math.random() * 0.3;
+        const playPromise = hitSound.play();
 
-      lastPlayTime.current = now;
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log("Audio playback failed:", error);
+          });
+        }
+
+        lastPlayTime.current = now;
+      } catch (error) {
+        console.log("Audio playback error:", error);
+      }
     }
   };
 
