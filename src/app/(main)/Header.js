@@ -25,6 +25,20 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleOutsideClick = event => {
+      if (
+        isOpenMobileMenu &&
+        !event.target.closest(`.${styles.mobileMenu}`) &&
+        !event.target.closest(`.${styles.hamburgerMenu}`)
+      ) {
+        toggleIsShowMobileMenu()
+      }
+    }
+    document.addEventListener('click', handleOutsideClick)
+    return () => document.removeEventListener('click', handleOutsideClick)
+  }, [isOpenMobileMenu])
+
   const renderAtcLogo = isMobile => (
     <div className={isMobile ? styles.mobileLogo : styles.logo}>
       <Link href={'/'}>
@@ -71,7 +85,11 @@ export default function Header() {
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
       style={{
-        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'white'
+        backgroundColor: isOpenMobileMenu
+          ? 'white'
+          : isPathCredit
+          ? 'black'
+          : 'transparent'
       }}>
       {renderAtcLogo(isMobile)}
       <ul>
@@ -102,9 +120,11 @@ export default function Header() {
         }}>
         <nav onClick={toggleIsShowMobileMenu}>
           {['/about', '/works', '/program', '/archive', '/map'].map(link => (
-            <li key={link}>
-              <Link href={link}>{link.slice(1).toUpperCase()}</Link>
-            </li>
+            <Link
+              href={link}
+              key={link}>
+              <li>{link.slice(1).toUpperCase()}</li>
+            </Link>
           ))}
         </nav>
       </section>
