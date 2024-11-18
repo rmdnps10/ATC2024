@@ -14,7 +14,7 @@ export default function Home() {
   const router = useRouter()
   const tabList = ['하비에르관 4F', '하비에르관 5F', '로욜라도서관 1관']
   const [selectedTab, setSelectedTab] = useState(0)
-  const tabRefs = useRef([])  
+  const tabRefs = useRef([])
   const mapRefs = useRef([])
   const boxRef = useRef(null)
   const [popupOpen, setPopupOpen] = useState(false)
@@ -190,20 +190,25 @@ export default function Home() {
             ref={el => (mapRefs.current[0] = el)}
             className={styles.firstSpan}>
             <FourthFloorSVG />
-            <p>{tabList[0]}</p>
           </span>
           <span
             ref={el => (mapRefs.current[1] = el)}
             className={styles.secondSpan}>
             <FifthFloorSVG />
-            <p>{tabList[1]}</p>
           </span>
           <span
             ref={el => (mapRefs.current[2] = el)}
             className={styles.thirdSpan}>
             <LoyolaSVG />
-            <p>{tabList[2]}</p>
           </span>
+          <div className={styles.mobileMap}>
+            <FourthFloorSVG />
+            <p>{tabList[0]}</p>
+            <FifthFloorSVG />
+            <p>{tabList[1]}</p>
+            <LoyolaSVG />
+            <p>{tabList[2]}</p>
+          </div>
         </div>
       </section>
       {selectedTab === 0 ? null : (
