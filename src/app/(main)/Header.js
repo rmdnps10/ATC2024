@@ -25,6 +25,20 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const handleOutsideClick = event => {
+      if (
+        isOpenMobileMenu &&
+        !event.target.closest(`.${styles.mobileMenu}`) &&
+        !event.target.closest(`.${styles.hamburgerMenu}`)
+      ) {
+        toggleIsShowMobileMenu()
+      }
+    }
+    document.addEventListener('click', handleOutsideClick)
+    return () => document.removeEventListener('click', handleOutsideClick)
+  }, [isOpenMobileMenu])
+
   const renderAtcLogo = isMobile => (
     <div className={isMobile ? styles.mobileLogo : styles.logo}>
       <Link href={'/'}>
