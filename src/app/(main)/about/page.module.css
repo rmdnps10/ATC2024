@@ -490,7 +490,7 @@
     font-size: 1.2rem;
   }
 }
-.quote blockquote:last-child span {
+.quote blockquote span {
   font-weight: 600;
 }
 .quoteTitle {

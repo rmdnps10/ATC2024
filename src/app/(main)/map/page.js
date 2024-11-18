@@ -152,7 +152,7 @@ export default function Home() {
         <div className={styles.headerTitle}>오프라인 맵 | OFFLINE MAP</div>
         <div className={styles.headerDesc}>
           <span className={styles.spanRainbow}>
-            2024 ATC : 코끼리를 냉장고에 넣는 방법
+            ATC 2024 「코끼리를 냉장고에 넣는 방법」
           </span>{' '}
           은<br />
           서강대학교{' '}
