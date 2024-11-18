@@ -156,14 +156,15 @@
   transition: height 0.4s;
 }
 
-.mobileMenu nav li {
+.mobileMenu nav a {
+  display: block;
   border-bottom: 1px solid rgb(227, 227, 227);
 }
-.mobileMenu nav li:first-child {
+.mobileMenu nav a:first-child {
   border-top: 1px solid rgb(217, 217, 217);
 }
 
-.mobileMenu nav li a {
+.mobileMenu nav li {
   display: inline-block;
   font-size: 1.5rem;
   margin-top: 1rem;

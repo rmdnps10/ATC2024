@@ -71,7 +71,11 @@ export default function Header() {
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
       style={{
-        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'white'
+        backgroundColor: isOpenMobileMenu
+          ? 'white'
+          : isPathCredit
+          ? 'black'
+          : 'transparent'
       }}>
       {renderAtcLogo(isMobile)}
       <ul>
@@ -102,9 +106,11 @@ export default function Header() {
         }}>
         <nav onClick={toggleIsShowMobileMenu}>
           {['/about', '/works', '/program', '/archive', '/map'].map(link => (
-            <li key={link}>
-              <Link href={link}>{link.slice(1).toUpperCase()}</Link>
-            </li>
+            <Link
+              href={link}
+              key={link}>
+              <li>{link.slice(1).toUpperCase()}</li>
+            </Link>
           ))}
         </nav>
       </section>
