@@ -58,7 +58,7 @@ export default function ToCreditPage() {
           </Link>
           <div className={`${styles.designedTags} ${styles.animate}`}>
             <div>A & T</div>
-            <div>Atc Staff</div>
+            <div>ATC STAFF</div>
             <div>Artist</div>
           </div>
         </div>

@@ -161,7 +161,7 @@ export default function WorksPage({}) {
       <header>
         <div className={styles.headerTitle}>OUR WORKS</div>
         <div className={styles.headerSummary}>
-          {`ATC 2024, <코끼리를 냉장고에 넣는 방법>, 그리고 아테커들의 방식`}
+          {`ATC 2024 「코끼리를 냉장고에 넣는 방법」 , 그리고 아테커들의 방식`}
         </div>
         <div className={styles.headerDesc}>
           <div>
