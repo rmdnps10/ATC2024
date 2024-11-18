@@ -38,6 +38,12 @@ export default function Header() {
           />
         ) : (
           <img
+            style={{
+              marginBottom:
+                isShowMouseEnterAnimation ||
+                isShowMouseLeaveAnimation ||
+                '-0.5rem'
+            }}
             src={
               isShowMouseEnterAnimation
                 ? '/icon/logo/transition/atc2024-elephant.webp'
