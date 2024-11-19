@@ -13,19 +13,31 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const isPathCredit = pathname === '/credit'
-  const isMobile = useMedia('(max-width: 768px)')
+  const isMobile = useMedia('(max-width: 768px)', false)
   const [isOpenMobileMenu, toggleIsShowMobileMenu] = useReducer(
     state => !state,
     false
   )
-
-  useLockBodyScroll(isOpenMobileMenu)
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const handleOutsideClick = event => {
+      if (
+        isOpenMobileMenu &&
+        !event.target.closest(`.${styles.mobileMenu}`) &&
+        !event.target.closest(`.${styles.hamburgerMenu}`)
+      ) {
+        toggleIsShowMobileMenu()
+      }
+    }
+    document.addEventListener('click', handleOutsideClick)
+    return () => document.removeEventListener('click', handleOutsideClick)
+  }, [isOpenMobileMenu])
 
   const renderAtcLogo = isMobile => (
     <div className={isMobile ? styles.mobileLogo : styles.logo}>
@@ -38,6 +50,12 @@ export default function Header() {
           />
         ) : (
           <img
+            style={{
+              marginBottom:
+                isShowMouseEnterAnimation ||
+                isShowMouseLeaveAnimation ||
+                '-0.5rem'
+            }}
             src={
               isShowMouseEnterAnimation
                 ? '/icon/logo/transition/atc2024-elephant.webp'
@@ -67,7 +85,11 @@ export default function Header() {
     <header
       className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}
       style={{
-        backgroundColor: (isOpenMobileMenu || isPathCredit) && 'black'
+        backgroundColor: isOpenMobileMenu
+          ? 'white'
+          : isPathCredit
+          ? 'black'
+          : 'transparent'
       }}>
       {renderAtcLogo(isMobile)}
       <ul>
@@ -94,13 +116,15 @@ export default function Header() {
         className={styles.mobileMenu}
         style={{
           overflow: 'hidden',
-          height: isOpenMobileMenu ? 'calc(100vh - 6.5rem)' : '0'
+          height: isOpenMobileMenu ? '21.9rem' : '0'
         }}>
         <nav onClick={toggleIsShowMobileMenu}>
           {['/about', '/works', '/program', '/archive', '/map'].map(link => (
-            <li key={link}>
-              <Link href={link}>{link.slice(1).toUpperCase()}</Link>
-            </li>
+            <Link
+              href={link}
+              key={link}>
+              <li>{link.slice(1).toUpperCase()}</li>
+            </Link>
           ))}
         </nav>
       </section>

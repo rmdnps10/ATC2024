@@ -157,7 +157,7 @@
 .main section div {
   justify-content: center;
   width: 100%;
-  height: 70vh;
+  height: 60vh;
   display: flex;
   overflow: hidden;
   position: relative;
@@ -165,11 +165,7 @@
   @media (max-width: 768px) {
     flex-direction: column;
     overflow: visible;
-    height: 100vh;
-    gap: 3rem;
-  }
-  @media (max-width: 430px) {
-    height: 70vh;
+    height: 100%;
     gap: 3rem;
   }
 }
@@ -181,6 +177,7 @@
   transform: translateX(100%);
   transition: transform 0.3s ease-in;
   @media (max-width: 768px) {
+    display: none;
     height: 100vh;
     flex: 0 0 30%;
     transform: translateX(0);
@@ -192,7 +189,26 @@
   }
 }
 
-.main section div span p {
+.mobileMap {
+  display: none;
+  gap: 1rem;
+  margin-top: 3rem;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mobileMap svg {
+  width: 100%;
+  height: max-content;
+}
+
+.mobileMap p {
   display: none;
   @media (max-width: 768px) {
     width: 100%;

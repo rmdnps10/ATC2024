@@ -33,12 +33,13 @@ export default function WorksPage({}) {
   const [filteredWorks, setFilteredWorks] = useState([])
   const [scrollY, setScrollY] = useState(0)
 
-  //db 연결
+  //db 연결+탭 초기화
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getAllWorks()
         if (data) {
+          //일단 데이터 좀 가공하고
           const parsed = data.map(el => {
             el.category = el.category.split(',')
             if (el._id === '672cea5b0c11e50dbd25fa13') {
@@ -51,10 +52,12 @@ export default function WorksPage({}) {
           setDefaultWorks(parsed)
           setFilteredWorks(parsed)
 
-          const storageTab = window.sessionStorage.getItem('tab')
+          //선택된 탭을 바꿔주는 함수
           function handleRef(key) {
             indicatorRefs.current.forEach((indiRef, indiIdx) => {
               if (indiRef) {
+                indiRef.style.visibility =
+                  indiIdx === key ? 'visible' : 'hidden'
                 indiRef.style.opacity = indiIdx === key ? '1' : '0'
               }
             })
@@ -73,10 +76,15 @@ export default function WorksPage({}) {
               }
             })
           }
+
+          //저장된 탭이 있어?
+          const storageTab = window.sessionStorage.getItem('tab')
           const initialTab = storageTab !== null ? parseInt(storageTab, 10) : 0
 
+          //탭 바꾸자
           handleRef(initialTab)
 
+          //이건 작품 리스트 설정하는 파트
           if (initialTab === 0) {
             setFilteredWorks(parsed)
           } else {
@@ -90,11 +98,9 @@ export default function WorksPage({}) {
         console.error('Error fetching data:', error)
       }
     }
-
     fetchData()
   }, [])
 
-  //필터링 탭 초기화
   useEffect(() => {
     //스크롤 인식
     const handleScroll = () => {
@@ -131,6 +137,7 @@ export default function WorksPage({}) {
     })
     indicatorRefs.current.forEach((indiRef, indiIdx) => {
       if (indiRef) {
+        indiRef.style.visibility = indiIdx === key ? 'visible' : 'hidden'
         indiRef.style.opacity = indiIdx === key ? '1' : '0'
       }
     })
@@ -154,7 +161,7 @@ export default function WorksPage({}) {
       <header>
         <div className={styles.headerTitle}>OUR WORKS</div>
         <div className={styles.headerSummary}>
-          {`ATC 2024, <코끼리를 냉장고에 넣는 방법>, 그리고 아테커들의 방식`}
+          {`ATC 2024 「코끼리를 냉장고에 넣는 방법」 , 그리고 아테커들의 방식`}
         </div>
         <div className={styles.headerDesc}>
           <div>
@@ -228,7 +235,10 @@ export default function WorksPage({}) {
                   <span className={styles.figTitle}>怒世怒世</span>
                 ) : null}
                 {el._id === '672cea5b0c11e50dbd25fa2b' ? (
-                  <span className={styles.figTitle}>소음疏音</span>
+                  <span className={styles.figTitle}>
+                    <span style={{ fontFamily: 'Sandoll Seoul' }}>소음</span>
+                    疏音
+                  </span>
                 ) : null}
                 {el._id !== '672cea5b0c11e50dbd25fa34' &&
                 el._id !== '672cea5b0c11e50dbd25fa2b' ? (

@@ -20,7 +20,7 @@
 .pink1,
 .pink2,
 .blue1 {
-  position: absolute;
+  position: fixed;
   filter: blur(150px);
   z-index: -1;
 }
@@ -213,13 +213,6 @@
     font-size: 1.4rem;
   }
 }
-.grdientText {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ddd;
-  text-align: center;
-}
 
 .highlightedBackground {
   display: flex;
@@ -360,7 +353,7 @@
   max-height: 50rem;
 }
 .innerContent {
-  padding: 3rem 0;
+  padding: 0 0 3rem 0;
 }
 .programDetails {
   padding: 1rem 0;

@@ -156,15 +156,27 @@
   transition: height 0.4s;
 }
 
-.mobileMenu nav li {
-  border-bottom: 1px solid #404040;
+.mobileMenu nav a {
+  display: block;
+  border-bottom: 1px solid rgb(227, 227, 227);
+}
+.mobileMenu nav a:first-child {
+  border-top: 1px solid rgb(217, 217, 217);
 }
 
-.mobileMenu nav li a {
-  display: block;
-  color: white;
-  font-size: 2rem;
-  padding-top: 3.6rem;
-  padding-bottom: 3.6rem;
-  padding-left: 4.4rem;
+.mobileMenu nav li {
+  display: inline-block;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 4.4rem;
+  background: linear-gradient(
+    270deg,
+    #9734fb 0.27%,
+    #1160f7 36.56%,
+    #35cffa 99.7%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

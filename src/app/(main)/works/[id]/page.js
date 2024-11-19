@@ -53,20 +53,6 @@ export default function WorkDetailPage() {
     }, 100)
   }, [imageHeight])
 
-  useEffect(() => {
-    if (detailData && detailData.mainImg) {
-      // const img = new Image()
-      // console.log(img)
-      // img.src = detailData.mainImg
-      // img.onload = () => {
-      // setImageHeight(img.height)
-      // console.log(img.height)
-      // }
-      // const size = getImageSize(detailData.mainImg)
-      // console.log(size)
-    }
-  }, [detailData])
-
   function handleExit() {
     setIsClicked(true)
     setTimeout(() => {
@@ -168,7 +154,21 @@ export default function WorkDetailPage() {
               </div>
               <header>
                 <h1>
-                  <span>{detailData.title}</span>
+                  {detailData._id === '672cea5b0c11e50dbd25fa34' ? (
+                    <span style={{ fontFamily: 'Pretendard' }}>
+                      {detailData.title}
+                    </span>
+                  ) : null}
+                  {detailData._id === '672cea5b0c11e50dbd25fa2b' ? (
+                    <span style={{ fontFamily: 'Pretendard' }}>
+                      <span style={{ fontFamily: 'Sandoll Seoul' }}>소음</span>
+                      疏音
+                    </span>
+                  ) : null}
+                  {detailData._id !== '672cea5b0c11e50dbd25fa2b' &&
+                  detailData._id !== '672cea5b0c11e50dbd25fa34' ? (
+                    <span>{detailData.title}</span>
+                  ) : null}
                   <span>
                     <div>
                       <Image
@@ -180,7 +180,26 @@ export default function WorkDetailPage() {
                     </div>
                   </span>
                 </h1>
-                <h3>{detailData.oneLiner}</h3>
+                {detailData._id !== '672cea5b0c11e50dbd25fa12' &&
+                detailData._id !== '672cea5b0c11e50dbd25fa0c' ? (
+                  <h3>{detailData.oneLiner}</h3>
+                ) : null}
+                {detailData._id === '672cea5b0c11e50dbd25fa12' ? (
+                  <h3>
+                    예티와 함께 마음속 머뭇거림을 마주하며, 한 걸음 나아가길
+                    응원하는 전시이다. YETi 전시 속{' '}
+                    <span className={styles.weirdWord}>옡</span>:마을의 이야기를
+                    만나보자.
+                  </h3>
+                ) : null}
+                {detailData._id === '672cea5b0c11e50dbd25fa0c' ? (
+                  <h3>
+                    익숙한 것을 낯설게, 그리고 다시 익숙하게'라는 철학 아래,
+                    창의적인 제작 과정 속에서 구조화되지 않은 자연스러운 미{'('}
+                    <span className={styles.weirdWord}>美</span>
+                    {')'}를 추구합니다.
+                  </h3>
+                ) : null}
                 <div className={styles.headerDesc}>
                   <p
                     dangerouslySetInnerHTML={{
@@ -233,7 +252,7 @@ export default function WorkDetailPage() {
                     width={windowWidth}
                     height={imageHeight * windowWidth}
                     objectFit="contain"
-                    priority={true}
+                    priority
                   />
                 </figure>
               </div>

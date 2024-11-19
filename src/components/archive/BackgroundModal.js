@@ -40,14 +40,14 @@ export default function BackgroundModal({
         />
         <div className="image-container">
           <Image
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'contain' }}
             src={currentImage?.imageUrl}
             priority
             fill={true}
             alt={currentImage?.caption}
           />
         </div>
-        <figcaption>{currentImage?.caption}</figcaption>
+        <figcaption>{currentImage.caption}</figcaption>
       </section>
       <Arrow
         src="/icon/button/right-arrow.svg"
@@ -73,11 +73,13 @@ const Darkscreen = styled.div`
     position: relative;
   }
   section figcaption {
-    bottom: -20px;
-    right: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    color: white;
   }
   .image-container {
-    width: 30vw;
+    width: 70vw;
     height: 70vh;
     object-fit: cover;
     @media (max-width: 1300px) {
