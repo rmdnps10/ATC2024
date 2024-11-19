@@ -37,7 +37,7 @@ export default function MyPortal({
       position: new THREE.Vector3(-35, 20, 15),
       focus: new THREE.Vector3(-35, 20, 0),
       description: 'ATC FILM',
-      link: 'https://youtu.be/eDSicjXGiVw?si=wGyp-uo1aB3I6vzY'
+      link: 'https://www.youtube.com/watch?v=F1Kab1fGy0A'
     },
     {
       position: new THREE.Vector3(0, 20, 15),
