@@ -19,17 +19,20 @@ function Ocean() {
   const geom = useMemo(() => new THREE.PlaneGeometry(3000, 3000), [])
   const config = useMemo(
     () => ({
-      textureWidth: 512,
-      textureHeight: 512,
+      textureWidth: 256,
+      textureHeight: 256,
       waterNormals,
       sunDirection: new THREE.Vector3(),
       sunColor: 0xffffff,
       waterColor: 0x005afb,
       distortionScale: 3.7,
       fog: false,
-      format: gl.encoding
+      // gl.encoding은 Three.js r152+에서 deprecated → outputColorSpace 기반으로 대체
+      format: gl.outputColorSpace === THREE.SRGBColorSpace
+        ? THREE.RGBAFormat
+        : THREE.RGBAFormat
     }),
-    [waterNormals]
+    [waterNormals, gl]
   )
   useFrame(
     (state, delta) => (ref.current.material.uniforms.time.value += delta)

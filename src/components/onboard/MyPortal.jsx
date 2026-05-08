@@ -5,7 +5,15 @@ import {
   useAnimations,
   MeshPortalMaterial
 } from '@react-three/drei'
-import { forwardRef, useState, useEffect, useRef } from 'react'
+import {
+  forwardRef,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback
+} from 'react'
+
 import * as THREE from 'three'
 import { useFrame, extend } from '@react-three/fiber'
 import { geometry } from 'maath'
@@ -27,86 +35,113 @@ export default function MyPortal({
   const [targetFocus, setTargetFocus] = useState(null)
   const [animationComplete, setAnimationComplete] = useState(false)
   const [currentPortal, setCurrentPortal] = useState(0)
-  const [isHovered, setIsHovered] = useState(false) // 전체 hover 상태 관리
+  const [isHovered, setIsHovered] = useState(false)
+
   const controlsRef = useRef()
-  const portalRefs = [useRef(), useRef(), useRef()]
-  const blendValues = useRef([0, 0, 0]) // 각 포털의 Blend 값을 저장
+  const portalRef0 = useRef()
+  const portalRef1 = useRef()
+  const portalRef2 = useRef()
+  // 배열을 useMemo로 안정화 → useCallback deps에서 배열 재생성 방지
+  const portalRefs = useMemo(() => [portalRef0, portalRef1, portalRef2], [])
 
-  const portalPositions = [
-    {
-      position: new THREE.Vector3(-35, 20, 15),
-      focus: new THREE.Vector3(-35, 20, 0),
-      description: 'ATC FILM',
-      link: 'https://www.youtube.com/watch?v=F1Kab1fGy0A'
-    },
-    {
-      position: new THREE.Vector3(0, 20, 15),
-      focus: new THREE.Vector3(0, 20, 0),
-      description: 'ATC WEB',
-      link: './..'
-    },
-    {
-      position: new THREE.Vector3(35, 20, 15),
-      focus: new THREE.Vector3(35, 20, 0),
-      description: 'ATC INSTAGRAM',
-      link: 'https://www.instagram.com/atc.sogang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
-    }
-  ]
-
-  const updateBlendValues = blendValue => {
-    portalRefs.forEach((ref, index) => {
-      if (ref.current) {
-        gsap.to(ref.current, {
-          blend: blendValue,
-          duration: 1,
-          onComplete: () => {
-            blendValues.current[index] = blendValue // 애니메이션이 끝난 후 확실히 갱신
-          }
-        })
+  // Vector3 객체를 컴포넌트 렌더마다 재생성하지 않도록 useMemo로 고정
+  const portalPositions = useMemo(
+    () => [
+      {
+        position: new THREE.Vector3(-35, 20, 15),
+        focus: new THREE.Vector3(-35, 20, 0),
+        description: 'ATC FILM',
+        link: 'https://www.youtube.com/watch?v=F1Kab1fGy0A'
+      },
+      {
+        position: new THREE.Vector3(0, 20, 15),
+        focus: new THREE.Vector3(0, 20, 0),
+        description: 'ATC WEB',
+        link: './..'
+      },
+      {
+        position: new THREE.Vector3(35, 20, 15),
+        focus: new THREE.Vector3(35, 20, 0),
+        description: 'ATC INSTAGRAM',
+        link: 'https://www.instagram.com/atc.sogang?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=='
       }
-    })
-  }
+    ],
+    []
+  )
 
-  const goToNextPortal = () => {
-    updateBlendValues(0)
+  // excludeIndex 포털을 제외한 나머지 blend를 0으로 닫는 함수
+  // excludeIndex = -1 이면 전체 닫기 (center로 돌아갈 때)
+  const closePortals = useCallback(
+    (excludeIndex = -1) => {
+      portalRefs.forEach((ref, index) => {
+        if (index === excludeIndex || !ref.current) return
+        gsap.killTweensOf(ref.current)
+        gsap.to(ref.current, { blend: 0, duration: 1 })
+      })
+    },
+    [portalRefs]
+  )
+
+  // 특정 포털을 여는 함수: 기존 트윈 kill 후 blend 1 애니메이션
+  const openPortal = useCallback(
+    index => {
+      gsap.killTweensOf(portalRefs[index].current)
+      gsap.to(portalRefs[index].current, { blend: 1, duration: 1 })
+    },
+    [portalRefs]
+  )
+
+  const goToNextPortal = useCallback(() => {
     const nextIndex = (currentPortal + 1) % portalPositions.length
+    closePortals(nextIndex)
+    openPortal(nextIndex)
     setCurrentPortal(nextIndex)
     setTargetPosition(portalPositions[nextIndex].position)
     setTargetFocus(portalPositions[nextIndex].focus)
     setRigActive(true)
-    gsap.to(portalRefs[nextIndex].current, { blend: 1, duration: 1 })
-  }
+  }, [currentPortal, portalPositions, closePortals, openPortal, setRigActive])
 
-  const goToPreviousPortal = () => {
-    updateBlendValues(0)
+  const goToPreviousPortal = useCallback(() => {
     const prevIndex =
       (currentPortal - 1 + portalPositions.length) % portalPositions.length
+    closePortals(prevIndex)
+    openPortal(prevIndex)
     setCurrentPortal(prevIndex)
     setTargetPosition(portalPositions[prevIndex].position)
     setTargetFocus(portalPositions[prevIndex].focus)
     setRigActive(true)
-    gsap.to(portalRefs[prevIndex].current, { blend: 1, duration: 1 })
-  }
+  }, [currentPortal, portalPositions, closePortals, openPortal, setRigActive])
 
-  const goToCenterPortal = () => {
+  const goToCenterPortal = useCallback(() => {
     setTargetPosition(new THREE.Vector3(0, 10, 100))
     setTargetFocus(new THREE.Vector3(0, 20, -10))
-    updateBlendValues(0)
     setRigActive(false)
-  }
+    closePortals(-1)
+  }, [closePortals, setRigActive])
 
+  // useCallback으로 안정화된 함수만 dep에 넣어 매 렌더마다 ref 재할당 방지
   useEffect(() => {
     nextPortalRef.current = goToNextPortal
     prevPortalRef.current = goToPreviousPortal
     centerPortalRef.current = goToCenterPortal
-  }, [
-    nextPortalRef,
-    prevPortalRef,
-    centerPortalRef,
-    goToNextPortal,
-    goToPreviousPortal,
-    goToCenterPortal
-  ])
+  }, [goToNextPortal, goToPreviousPortal, goToCenterPortal])
+
+  // hover 핸들러를 useCallback으로 안정화
+  const handlePointerOver = useCallback(() => setIsHovered(true), [])
+  const handlePointerOut = useCallback(() => setIsHovered(false), [])
+
+  const handlePortalClick = useCallback(
+    index => {
+      if (!animationComplete) return
+      closePortals(index)
+      openPortal(index)
+      setCurrentPortal(index)
+      setTargetPosition(portalPositions[index].position)
+      setTargetFocus(portalPositions[index].focus)
+      setRigActive(true)
+    },
+    [animationComplete, portalPositions, closePortals, openPortal, setRigActive]
+  )
 
   return (
     <>
@@ -154,7 +189,6 @@ export default function MyPortal({
               Go !
             </button>
           </div>
-          {/* 커서 hover 상태 확인 */}
           <div
             className={isHovered ? styles.hoverCursor : ''}
             style={{
@@ -170,70 +204,39 @@ export default function MyPortal({
       )}
 
       <Portal1
-        ref={portalRefs[0]}
-        rigActive={rigActive}
-        blend={blendValues.current[0]}
-        onPointerOver={() => setIsHovered(true)}
-        onPointerOut={() => setIsHovered(false)}
-        onClick={() => {
-          if (animationComplete) {
-            setTargetPosition(new THREE.Vector3(-35, 20, 15))
-            setTargetFocus(new THREE.Vector3(-35, 20, 0))
-            setCurrentPortal(0)
-            updateBlendValues(0)
-            gsap.to(portalRefs[0].current, { blend: 1, duration: 1 })
-            setRigActive(true)
-          }
-        }}
+        ref={portalRef0}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        onClick={() => handlePortalClick(0)}
       />
       <Portal2
-        ref={portalRefs[1]}
-        rigActive={rigActive}
-        blend={blendValues.current[1]}
-        onPointerOver={() => setIsHovered(true)}
-        onPointerOut={() => setIsHovered(false)}
-        onClick={() => {
-          if (animationComplete) {
-            setTargetPosition(new THREE.Vector3(0, 20, 15))
-            setTargetFocus(new THREE.Vector3(0, 20, 0))
-            setCurrentPortal(1)
-            updateBlendValues(0)
-            gsap.to(portalRefs[1].current, { blend: 1, duration: 1 })
-            setRigActive(true)
-          }
-        }}
+        ref={portalRef1}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        onClick={() => handlePortalClick(1)}
       />
       <Portal3
-        ref={portalRefs[2]}
-        rigActive={rigActive}
-        blend={blendValues.current[2]}
-        onPointerOver={() => setIsHovered(true)}
-        onPointerOut={() => setIsHovered(false)}
-        onClick={() => {
-          if (animationComplete) {
-            setTargetPosition(new THREE.Vector3(35, 20, 15))
-            setTargetFocus(new THREE.Vector3(35, 20, 0))
-            setCurrentPortal(2)
-            updateBlendValues(0)
-            gsap.to(portalRefs[2].current, { blend: 1, duration: 1 })
-            setRigActive(true)
-          }
-        }}
+        ref={portalRef2}
+        onPointerOver={handlePointerOver}
+        onPointerOut={handlePointerOut}
+        onClick={() => handlePortalClick(2)}
       />
     </>
   )
 }
 
-const Portal1 = forwardRef(({ onClick, rigActive, blend }, ref) => (
+// blend prop 제거: GSAP이 THREE material을 직접 조작하므로 React가 값을 덮어쓰지 않도록 함
+// isActive=false일 때 모델을 언마운트 → FBO 씬이 배경색만 렌더링 (GPU 비용 절감)
+const Portal1 = forwardRef(({ onClick, onPointerOver, onPointerOut }, ref) => (
   <group position={[-35, 0, 0]}>
     <mesh
       name={'Film'}
       position={[0, 20, 0]}
-      onClick={onClick}>
+      onClick={onClick}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}>
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
-      <MeshPortalMaterial
-        ref={ref}
-        blend={blend}>
+      <MeshPortalMaterial ref={ref}>
         <color
           attach="background"
           args={['#005afb']}
@@ -244,16 +247,16 @@ const Portal1 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   </group>
 ))
 
-const Portal2 = forwardRef(({ onClick, rigActive, blend }, ref) => (
+const Portal2 = forwardRef(({ onClick, onPointerOver, onPointerOut }, ref) => (
   <group position={[0, 0, 0]}>
     <mesh
       name={'MainPage'}
       position={[0, 20, 0]}
-      onClick={onClick}>
+      onClick={onClick}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}>
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
-      <MeshPortalMaterial
-        ref={ref}
-        blend={blend}>
+      <MeshPortalMaterial ref={ref}>
         <color
           attach="background"
           args={['#FFFFFF']}
@@ -264,16 +267,16 @@ const Portal2 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   </group>
 ))
 
-const Portal3 = forwardRef(({ onClick, rigActive, blend }, ref) => (
+const Portal3 = forwardRef(({ onClick, onPointerOver, onPointerOut }, ref) => (
   <group position={[35, 0, 0]}>
     <mesh
       name={'Instagram'}
       position={[0, 20, 0]}
-      onClick={onClick}>
+      onClick={onClick}
+      onPointerOver={onPointerOver}
+      onPointerOut={onPointerOut}>
       <roundedPlaneGeometry args={[20, 20 * 1.61803398875, 3]} />
-      <MeshPortalMaterial
-        ref={ref}
-        blend={blend}>
+      <MeshPortalMaterial ref={ref}>
         <color
           attach="background"
           args={['#7334ff']}
@@ -284,29 +287,27 @@ const Portal3 = forwardRef(({ onClick, rigActive, blend }, ref) => (
   </group>
 ))
 
-function FishModel({ clip, color = '#000000', ...props }) {
+function FishModel({ color = '#000000' }) {
   const { scene: fishScene, animations: fishAnimations } = useGLTF(
     './model/fishfast.glb'
   )
   const { actions } = useAnimations(fishAnimations, fishScene)
-
-  const action = actions[fishAnimations[0].name]
-  action.play()
-
   const fishRef = useRef()
+
+  useEffect(() => {
+    actions[fishAnimations[0].name]?.play()
+  }, [actions, fishAnimations])
 
   useEffect(() => {
     fishScene.traverse(child => {
       if (child.isMesh) {
-        child.material = new THREE.MeshBasicMaterial({ color }) // 임의 색상 적용
+        child.material = new THREE.MeshBasicMaterial({ color })
       }
     })
   }, [fishScene, color])
 
   useFrame(() => {
-    if (fishRef.current) {
-      fishRef.current.rotation.y += 0.01
-    }
+    if (fishRef.current) fishRef.current.rotation.y += 0.01
   })
 
   return (
@@ -319,11 +320,10 @@ function FishModel({ clip, color = '#000000', ...props }) {
   )
 }
 
-function CakeModel({ blend, rigActive, clip, color = '#25CEFC', ...props }) {
+function CakeModel({ color = '#25CEFC' }) {
   const { scene } = useGLTF('./model/ATC_cake.glb')
   const CakeRef = useRef()
 
-  // 모델의 모든 Mesh에 임의의 색상 적용
   useEffect(() => {
     scene.traverse(child => {
       if (child.isMesh) {
@@ -332,7 +332,6 @@ function CakeModel({ blend, rigActive, clip, color = '#25CEFC', ...props }) {
     })
   }, [scene, color])
 
-  // 회전 애니메이션
   useFrame(() => {
     if (CakeRef.current) {
       CakeRef.current.rotation.y += 0.01
@@ -350,26 +349,20 @@ function CakeModel({ blend, rigActive, clip, color = '#25CEFC', ...props }) {
   )
 }
 
-function StarModel({ clip, color = '#de45ff', ...props }) {
+function StarModel({ color = '#de45ff' }) {
   const { scene } = useGLTF('./model/StarCrystal2.glb')
   const StarRef = useRef()
 
-  // 모델의 모든 Mesh에 임의의 색상 적용
   useEffect(() => {
     scene.traverse(child => {
       if (child.isMesh) {
-        child.material = new THREE.MeshBasicMaterial({ color }) // 임의 색상 적용
+        child.material = new THREE.MeshBasicMaterial({ color })
       }
     })
   }, [scene, color])
 
-  // 회전 애니메이션
   useFrame(() => {
-    if (StarRef.current) {
-      //   StarRef.current.rotation.x += -0.005
-      StarRef.current.rotation.y += 0.01
-      //   StarRef.current.rotation.z += 0.01
-    }
+    if (StarRef.current) StarRef.current.rotation.y += 0.01
   })
 
   return (
@@ -379,7 +372,6 @@ function StarModel({ clip, color = '#de45ff', ...props }) {
       scale={7}
       position={[0, 0, -5]}
       rotation-z={Math.PI * 0.5}
-      {...props}
     />
   )
 }
