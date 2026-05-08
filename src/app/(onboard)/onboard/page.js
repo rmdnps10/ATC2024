@@ -12,6 +12,12 @@ export default function Page() {
 
   return (
     <div className={styles.root}>
+      {/* Sandoll FontStream FOUT 방지: 페이지 마운트 즉시 폰트 워밍업 */}
+      <span
+        className={styles.fontWarmUp}
+        aria-hidden="true">
+        ATC FILM ATC WEB ATC INSTAGRAM Go !
+      </span>
       <Experience
         setRigActive={setRigActive}
         nextPortalRef={nextPortalRef}

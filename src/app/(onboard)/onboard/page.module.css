@@ -64,3 +64,16 @@
 .portalButton:focus {
   outline: none; /* 클릭되었을 때 border 안나타나도록 */
 }
+
+/* Sandoll FontStream FOUT 방지용 warm-up 엘리먼트
+   display:none은 브라우저가 폰트를 로드하지 않으므로 opacity:0 + position:absolute 사용 */
+.fontWarmUp {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  font-family: 'Sandoll Seoul';
+  user-select: none;
+  aria-hidden: true;
+}
