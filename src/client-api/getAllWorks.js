@@ -1,11 +1,6 @@
-const API_END_POINT = process.env.NEXT_PUBLIC_BASE_URL
-
 export const getAllWorks = async () => {
-  if (!API_END_POINT) {
-    console.log('api connection error')
-  }
-  const res = await fetch(`${API_END_POINT}api/works`)
+  const res = await fetch('/api/works')
+  if (!res.ok) throw new Error(`works API error: ${res.status}`)
   const { data } = await res.json()
   return data
 }
-// console.log(process.env.NEXT_PUBLIC_BASE_URL)

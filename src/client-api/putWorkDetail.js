@@ -1,11 +1,6 @@
-const API_END_POINT = process.env.NEXT_PUBLIC_BASE_URL
-
 export const putWorkDetail = async ({ id, name, comment }) => {
-  if (!API_END_POINT) {
-    console.log('api connection error')
-  }
   try {
-    const res = await fetch(`${API_END_POINT}api/works/${id}`, {
+    const res = await fetch(`/api/works/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

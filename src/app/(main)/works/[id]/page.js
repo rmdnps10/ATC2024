@@ -22,8 +22,7 @@ export default function WorkDetailPage() {
   const [nickname, setNickname] = useState('')
   const [content, setContent] = useState('')
   const [modalData, setModalData] = useState(null)
-  const [imageHeight, setImageHeight] = useState(0)
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [imageHeight, setImageHeight] = useState(null)
 
   //data fetching
   useEffect(() => {
@@ -47,11 +46,6 @@ export default function WorkDetailPage() {
     }
   }, [])
 
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-    }, 100)
-  }, [imageHeight])
 
   function handleExit() {
     setIsClicked(true)
@@ -101,22 +95,6 @@ export default function WorkDetailPage() {
       setContent('')
       setNickname('')
     }
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  function handleHeight(height, width) {
-    const ratio = height / width
-    setImageHeight(ratio)
   }
 
   return (
@@ -230,28 +208,22 @@ export default function WorkDetailPage() {
                 </div>
               </header>
               <div className={styles.introduceBox}>
+                {/* aspect-ratio를 onLoad 후 실제 비율로 교체 → 첫 렌더부터 공간 확보, CLS 없음 */}
                 <figure
-                  style={{
-                    height: `${imageHeight * windowWidth}px`
-                  }}
-                  className={styles.introduceImage}>
+                  className={styles.introduceImage}
+                  style={imageHeight ? { aspectRatio: `1 / ${imageHeight}` } : undefined}>
                   <Image
                     className={styles.mainImage}
-                    onLoad={e => {
-                      handleHeight(
-                        e.target.naturalHeight,
-                        e.target.naturalWidth
-                      )
-                    }}
-                    quality={100}
+                    onLoad={e =>
+                      setImageHeight(e.target.naturalHeight / e.target.naturalWidth)
+                    }
+                    quality={90}
                     placeholder="blur"
                     blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAADCAYAAABS3WWCAAAAEElEQVR42mN88ODOMUY4AQBMxQoqNfPGngAAAABJRU5ErkJggg=="
                     src={detailData.mainImg}
                     alt="detail image"
-                    // fill
-                    width={windowWidth}
-                    height={imageHeight * windowWidth}
-                    objectFit="contain"
+                    fill
+                    style={{ objectFit: 'contain', objectPosition: 'top' }}
                     priority
                   />
                 </figure>

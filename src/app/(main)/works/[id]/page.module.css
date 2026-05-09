@@ -207,25 +207,15 @@
 
 .introduceImage {
   width: 100%;
-  height: 600vh;
+  /* aspect-ratio는 JS onLoad 후 inline style로 설정됨.
+     로드 전 기본 공간을 min-height으로 확보해 CLS 방지 */
+  min-height: 50vw;
   position: relative;
-  /* display: block; */
-  /* height: auto; */
-  @media (max-width: 1024px) {
-    height: 300vw;
-  }
-  @media (max-width: 640px) {
-    height: 50vh;
-  }
-  @media (max-width: 430px) {
-    height: 30vh;
-  }
 }
 
 .mainImage {
-  width: 100%;
-  height: auto;
-  position: absolute;
+  object-fit: contain;
+  object-position: top;
 }
 
 .main section {
