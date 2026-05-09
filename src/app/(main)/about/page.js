@@ -3,18 +3,14 @@ import Image from 'next/image'
 import InfiniteBanner from '@/components/about/InfiniteBanner'
 import TypingDescription from '@/components/about/TypingDescription'
 import ToCreditPage from '@/components/about/ToCreditPage'
-//
-//
-//
+import YouTubeFacade from '@/components/about/YouTubeFacade'
+
 export const metadata = {
   title: 'About · 코끼리를 냉장고에 넣는 방법',
   metadataBase: new URL('https://www.atc2024.site/'),
   description:
     '2024년 Art&Technology 컨퍼런스의 소개 페이지입니다. ATC 2024의 주제와 관련된 소개 영상과 축사를 확인해보세요!'
 }
-//
-//
-//
 
 export default function AboutPage() {
   return (
@@ -34,35 +30,44 @@ export default function AboutPage() {
       </div>
 
       <div className={styles.components}>
+        {/* top 11% — LCP 후보, priority 적용 */}
         <Image
           src="images/about/component1.svg"
-          alt="2024 atc 서브 컴포넌트"
+          alt=""
           width={330.43}
           height={554.85}
+          priority
         />
+        {/* top 2% — above the fold, priority 적용 */}
         <Image
           src="images/about/component2.svg"
-          alt="2024 atc 서브 컴포넌트"
+          alt=""
           width={264.51}
           height={196.31}
+          priority
         />
+        {/* top 23% — 스크롤 필요, lazy 유지 */}
         <Image
           src="images/about/component3.svg"
-          alt="2024 atc 서브 컴포넌트"
+          alt=""
           width={343}
           height={343}
+          loading="lazy"
         />
         <Image
           src="images/about/component4.svg"
-          alt="2024 atc 서브 컴포넌트"
+          alt=""
           width={253}
           height={262}
+          loading="lazy"
         />
+        {/* top -1% — above the fold, priority 적용 */}
         <Image
           src="images/about/component5.svg"
-          alt="2024 atc 서브 컴포넌트"
+          alt=""
           width={240}
           height={240}
+          priority
         />
         <div></div>
         <div></div>
@@ -82,54 +87,62 @@ export default function AboutPage() {
         <div></div>
       </div>
 
+      {/* 히어로 섹션 - LCP 후보이므로 priority 추가, layout 구 API → fill/responsive 교체 */}
       <section className={styles.imageContainer}>
         <div className={styles.typography}>
           <Image
             src="/icon/logo/atc-typography.svg"
             alt="2024 atc 공식 타이포그래피"
-            layout="fill"
+            fill
+            priority
           />
         </div>
         <div className={styles.title}>
           <Image
             src="/icon/logo/atc_slogan_horizontal_black.png"
             alt="2024 atc 공식 타이틀"
-            layout="responsive"
             width={924}
             height={126}
+            priority
+            style={{ width: '100%', height: 'auto' }}
           />
           <Image
             src="/icon/logo/atc_slogan_vertical_black.png"
             alt="2024 atc 공식 타이틀"
-            layout="responsive"
             width={542}
             height={444}
+            priority
+            style={{ width: '100%', height: 'auto' }}
           />
         </div>
       </section>
+
       <div className={styles.subtitle}>
         <p>코끼리를 냉장고에 넣는 방법이란?</p>
       </div>
+
+      {/* YouTube iframe → Facade: 클릭 전까지 ~500KB YouTube JS 로드 차단 */}
       <div className={styles.videoWrapper}>
         <section className={styles.videoContainer}>
-          <iframe
-            src="https://www.youtube.com/embed/F1Kab1fGy0A?si=EpG1I9iCLU8rXSMb"
+          <YouTubeFacade
+            videoId="F1Kab1fGy0A"
             title="atc2024 공식 영상"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
+          />
         </section>
       </div>
+
       <TypingDescription />
+
       <section className={styles.quote}>
         <div>
           <blockquote>
+            {/* 인용 섹션은 스크롤 후 보이므로 lazy */}
             <Image
               src="images/about/quotation.svg"
               alt="쉼표 아이콘"
               width={123}
               height={106}
+              loading="lazy"
             />
             <p className={styles.quoteTitle}>최용순 교수님 축사</p>
             <p>
@@ -140,8 +153,8 @@ export default function AboutPage() {
               </span>
               <br />
               <br />
-              2012년부터 매해 학생들이 직접 기획, 제작, 운영해 오고 있는 ATC는
-              차세대 크리에이터인 학생들의 초학제적 융합과 경계 없는 다양한
+              2012년부터 매해 학생들이 직접 기획, 제작, 운영해 오고 있는 ATC는
+              차세대 크리에이터인 학생들의 초학제적 융합과 경계 없는 다양한
               실험과 상상력 넘치는 탐험을 통해 서로 자극받고 즐기는 하나의
               놀이이자 축제이며, 또한 창의성 발현의 장으로서 공유하고, 협력의
               중요성을 다시 한번 되새기는 소중한 교육의 기회입니다.
@@ -184,6 +197,7 @@ export default function AboutPage() {
               alt="쉼표 아이콘"
               width={123}
               height={106}
+              loading="lazy"
             />
           </blockquote>
         </div>

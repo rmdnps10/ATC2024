@@ -1,29 +1,28 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import styles from './TypingDescription.module.css'
-//
-//
-//
+
+const typingContent = [
+  { type: 'text', text: "'코끼리를 냉장고에 넣는 방법'", font: 'Sandoll' },
+  { type: 'text', text: '은', font: 'Pretendard' },
+  { type: 'image', src: '/images/about/StarBalloon.svg', alt: '별 이미지' },
+  { type: 'text', text: '불가능해보이는 도전', font: 'Cafe' },
+  { type: 'text', text: '에 대한 ', font: 'Pretendard' },
+  { type: 'text', text: '아트&테크놀로지의 ', font: 'Pretendard' },
+  { type: 'text', text: '물음', font: 'Sandoll' },
+  { type: 'image', src: '/images/about/StarCrystal2.svg', alt: '별 이미지' },
+  { type: 'text', text: '입니다. 우리는 ', font: 'Pretendard' },
+  { type: 'text', text: '예술과 기술 ', font: 'Cafe' },
+  { type: 'image', src: '/images/about/StarWood 1.svg', alt: '별 이미지' },
+  { type: 'text', text: '이라는, ', font: 'Pretendard' },
+  { type: 'text', text: '거대한 두 축 ', font: 'Cafe' },
+  { type: 'image', src: '/images/about/StarPaper.svg', alt: '별 이미지' },
+  { type: 'text', text: '을 통해 이 물음에 ', font: 'Pretendard' },
+  { type: 'text', text: '답', font: 'Sandoll' },
+  { type: 'text', text: '하고자 합니다.', font: 'Pretendard' }
+]
+
 export default function TypingDescription() {
-  const typingContent = [
-    { type: 'text', text: "'코끼리를 냉장고에 넣는 방법'", font: 'Sandoll' },
-    { type: 'text', text: '은', font: 'Pretendard' },
-    { type: 'image', src: '/images/about/StarBalloon.svg', alt: '별 이미지' },
-    { type: 'text', text: '불가능해보이는 도전', font: 'Cafe' },
-    { type: 'text', text: '에 대한 ', font: 'Pretendard' },
-    { type: 'text', text: '아트&테크놀로지의 ', font: 'Pretendard' },
-    { type: 'text', text: '물음', font: 'Sandoll' },
-    { type: 'image', src: '/images/about/StarCrystal2.svg', alt: '별 이미지' },
-    { type: 'text', text: '입니다. 우리는 ', font: 'Pretendard' },
-    { type: 'text', text: '예술과 기술 ', font: 'Cafe' },
-    { type: 'image', src: '/images/about/StarWood 1.svg', alt: '별 이미지' },
-    { type: 'text', text: '이라는, ', font: 'Pretendard' },
-    { type: 'text', text: '거대한 두 축 ', font: 'Cafe' },
-    { type: 'image', src: '/images/about/StarPaper.svg', alt: '별 이미지' },
-    { type: 'text', text: '을 통해 이 물음에 ', font: 'Pretendard' },
-    { type: 'text', text: '답', font: 'Sandoll' },
-    { type: 'text', text: '하고자 합니다.', font: 'Pretendard' }
-  ]
 
   const [renderedContent, setRenderedContent] = useState([])
   const [typingIndex, setTypingIndex] = useState({ current: 0, charIndex: 0 })
@@ -45,7 +44,11 @@ export default function TypingDescription() {
         if (currentItem.type === 'text') {
           const textToRender = currentItem.text.slice(0, charIndex + 1)
           if (updatedContent[current]?.type === 'text') {
-            updatedContent[current].text = textToRender
+            // 기존 객체를 직접 수정하지 않고 새 객체로 교체
+            updatedContent[current] = {
+              ...updatedContent[current],
+              text: textToRender
+            }
           } else {
             updatedContent.push({
               type: 'text',
@@ -91,6 +94,34 @@ export default function TypingDescription() {
     <section
       ref={sectionRef}
       className={styles.description}>
+      {/* 폰트·이미지 warm-up: 타이핑 시작 전에 리소스를 미리 fetch */}
+      <div
+        aria-hidden="true"
+        className={styles.warmUp}>
+        <span className={styles.SandollFont}>물음답</span>
+        <span className={styles.CafeFont}>가</span>
+        <img src="/images/about/StarBalloon.svg" alt="" width="1" height="1" />
+        <img src="/images/about/StarCrystal2.svg" alt="" width="1" height="1" />
+        <img src="/images/about/StarWood 1.svg" alt="" width="1" height="1" />
+        <img src="/images/about/StarPaper.svg" alt="" width="1" height="1" />
+      </div>
+
+      {/* Ghost: 최종 전체 텍스트를 처음부터 렌더해 section 높이를 고정시킴 */}
+      <article aria-hidden="true" className={styles.articleGhost}>
+        {typingContent.map((item, index) =>
+          item.type === 'text' ? (
+            <span
+              key={`ghost-${index}`}
+              className={styles[`${item.font}Font`] || ''}>
+              {item.text}
+            </span>
+          ) : (
+            <img key={`ghost-${index}`} src={item.src} alt="" />
+          )
+        )}
+      </article>
+
+      {/* 실제 타이핑 article: ghost와 동일한 grid 셀에 스태킹 */}
       <article>
         {renderedContent.map((content, index) =>
           content.type === 'text' ? (
@@ -104,7 +135,6 @@ export default function TypingDescription() {
               key={`image-${index}`}
               src={content.src}
               alt={content.alt}
-              loading="eager"
             />
           )
         )}

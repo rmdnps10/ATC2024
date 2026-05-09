@@ -10,6 +10,14 @@ export default function RootLayout({ children }) {
     <html
       lang="kr"
       className={`${Pretendard.className}`}>
+      <head>
+        {/* Sandoll FontStream 크리티컬 패스 단축: DNS + TCP + TLS 미리 연결 */}
+        <link rel="preconnect" href="https://media.sandollcloud.com" />
+        <link
+          rel="preconnect"
+          href="https://qns2c88qif.execute-api.ap-northeast-2.amazonaws.com"
+        />
+      </head>
       {/* 산돌 서울 폰트 */}
       <Script
         type="module"

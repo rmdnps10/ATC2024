@@ -37,6 +37,12 @@
     "vercel": "^37.5.3",
     "wouter": "^3.3.5"
   },
+  "browserslist": [
+    "chrome >= 90",
+    "firefox >= 90",
+    "safari >= 14",
+    "edge >= 90"
+  ],
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.0.0",
     "@react-three/drei": "^9.108.1",
@@ -55,6 +61,7 @@
     "mongodb": "^6.9.0",
     "mongoose": "^8.6.3",
     "r3f-perf": "^7.2.1",
+    "sharp": "^0.34.5",
     "styled-components": "^6.1.13",
     "three": "^0.169.0"
   }

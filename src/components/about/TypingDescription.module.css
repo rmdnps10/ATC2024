@@ -8,21 +8,45 @@
 
 .description {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  justify-items: center;
   margin-top: 22.9rem;
   padding: 20rem 0;
   font-weight: 200;
-  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.description article {
+/* 폰트·이미지 warm-up 컨테이너: 화면 밖, 레이아웃 무영향 */
+.warmUp {
   position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ghost와 실제 article 공통 기본 스타일 + 같은 grid 셀 점유 */
+.articleGhost,
+.description article {
+  grid-column: 1;
+  grid-row: 1;
   width: 60%;
   padding: 0 3.6rem;
   font-size: 3.6rem;
   line-height: 180%;
+}
+
+/* ghost: 공간만 차지하고 보이지 않음 */
+.articleGhost {
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 실제 타이핑 article */
+.description article {
   color: #1160f7;
 }
 
@@ -34,7 +58,7 @@
   height: 3.8rem;
   background-color: black;
   animation: blink 0.7s infinite;
-  vertical-align: middle; /* 텍스트 기준으로 정렬 */
+  vertical-align: middle;
 }
 
 @keyframes blink {
@@ -65,6 +89,7 @@
 }
 
 @media (max-width: 1420px) {
+  .articleGhost,
   .description article {
     width: 65%;
     font-size: 2.5vw;
@@ -81,6 +106,7 @@
   .description {
     padding: 12rem 0;
   }
+  .articleGhost,
   .description article {
     width: 70%;
     font-size: 2.4vw;
@@ -102,6 +128,7 @@
   .description {
     margin-top: 6.2rem;
   }
+  .articleGhost,
   .description article {
     width: 90%;
     font-size: 2rem;
@@ -112,6 +139,7 @@
     width: 4rem;
   }
 }
+
 @media (max-width: 520px) {
   .SandollFont {
     font-size: 1.6rem;
@@ -119,6 +147,7 @@
   .description {
     padding: 8rem 0;
   }
+  .articleGhost,
   .description article {
     width: 90%;
     font-size: 1.2rem;
