@@ -60,15 +60,15 @@ export default function Header() {
               isShowMouseEnterAnimation
                 ? '/icon/logo/transition/atc2024-elephant.webp'
                 : isShowMouseLeaveAnimation
-                ? '/icon/logo/transition/elephant-atc2024.webp'
-                : '/icon/logo/atc-typography.svg'
+                  ? '/icon/logo/transition/elephant-atc2024.webp'
+                  : '/icon/logo/atc-typography.svg'
             }
             alt={
               isShowMouseEnterAnimation
                 ? 'Mouse Enter Animation'
                 : isShowMouseLeaveAnimation
-                ? 'Mouse Leave Animation'
-                : 'atc2024 타이포그래피'
+                  ? 'Mouse Leave Animation'
+                  : 'atc2024 타이포그래피'
             }
             onMouseEnter={() => setIsShowMouseEnterAnimation(true)}
             onMouseLeave={() => {
@@ -88,8 +88,8 @@ export default function Header() {
         backgroundColor: isOpenMobileMenu
           ? 'white'
           : isPathCredit
-          ? 'black'
-          : 'transparent'
+            ? 'black'
+            : 'transparent'
       }}>
       {renderAtcLogo(isMobile)}
       <ul>
