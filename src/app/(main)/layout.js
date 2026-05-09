@@ -1,4 +1,5 @@
 import Header from './Header'
+import PageTransitionOverlay from '@/components/common/PageTransitionOverlay'
 import '@/style/global.css'
 
 export const metadata = {
@@ -11,6 +12,7 @@ export const metadata = {
 export default function MainLayout({ children }) {
   return (
     <>
+      <PageTransitionOverlay />
       <Header />
       {children}
     </>

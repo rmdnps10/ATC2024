@@ -1,0 +1,29 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gif {
+  position: absolute;
+  bottom: -1rem;
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .gif {
+    position: relative;
+    width: 80%;
+  }
+}
