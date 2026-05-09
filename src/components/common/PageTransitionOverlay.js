@@ -51,23 +51,31 @@ function preloadImages(srcs) {
 export default function PageTransitionOverlay() {
   const pathname = usePathname()
   const [phase, setPhase] = useState('on')
+  const phaseRef = useRef('on') // scheduleHide 클로저에서 최신 phase 참조용
   const pathnameRef = useRef(pathname)
   const showStartRef = useRef(Date.now())
   const timerRef = useRef(null)
 
+  function setPhaseSync(next) {
+    phaseRef.current = next
+    setPhase(next)
+  }
+
   function show() {
     clearTimeout(timerRef.current)
     showStartRef.current = Date.now()
-    setPhase('on')
+    setPhaseSync('on')
   }
 
   function scheduleHide(minMs) {
+    // 이미 꺼진 상태면 스킵 (credit 등 오버레이 미사용 페이지 이동 시 방어)
+    if (phaseRef.current === 'off') return
     clearTimeout(timerRef.current)
     const elapsed = Date.now() - showStartRef.current
     const delay = Math.max(0, minMs - elapsed)
     timerRef.current = setTimeout(() => {
-      setPhase('fading')
-      timerRef.current = setTimeout(() => setPhase('off'), 350)
+      setPhaseSync('fading')
+      timerRef.current = setTimeout(() => setPhaseSync('off'), 350)
     }, delay)
   }
 
@@ -92,15 +100,21 @@ export default function PageTransitionOverlay() {
         !href ||
         href.startsWith('http') ||
         href.startsWith('#') ||
-        href.startsWith('mailto:')
+        href.startsWith('mailto:') ||
+        href.includes('#') // /page#section 형태 앵커도 제외
       )
         return
       if (href === pathname) return
+      // credit 페이지는 자체 framer-motion 전환을 사용하므로 오버레이 제외
+      if (pathname.startsWith('/credit') || href.startsWith('/credit')) return
       show()
     }
 
-    // 브라우저 뒤로/앞으로 가기
-    const handlePopState = () => show()
+    // 브라우저 뒤로/앞으로 가기 (hash 변경은 pathname이 그대로이므로 무시)
+    const handlePopState = () => {
+      if (window.location.pathname === pathnameRef.current) return
+      show()
+    }
 
     document.addEventListener('click', handleClick)
     window.addEventListener('popstate', handlePopState)
