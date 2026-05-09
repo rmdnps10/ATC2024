@@ -10,6 +10,27 @@ export default function Page() {
   const prevPortalRef = useRef(null)
   const centerPortalRef = useRef(null)
 
+  // 키보드 화살표 키로 포탈 전환
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (!rigActive) return
+      switch (e.key) {
+        case 'ArrowRight':
+          nextPortalRef.current?.()
+          break
+        case 'ArrowLeft':
+          prevPortalRef.current?.()
+          break
+        case 'ArrowDown':
+        case 'Escape':
+          centerPortalRef.current?.()
+          break
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [rigActive])
+
   return (
     <div className={styles.root}>
       {/* Sandoll FontStream FOUT 방지: 페이지 마운트 즉시 폰트 워밍업 */}

@@ -4,7 +4,7 @@ import Ocean from './Ocean'
 import MyPortal from './MyPortal'
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Perf, AdaptiveDpr } from 'r3f-perf'
+import { AdaptiveDpr } from 'r3f-perf'
 
 export default function Experience({
   setRigActive,
@@ -19,7 +19,7 @@ export default function Experience({
       // DPR 최대 1.2로 제한 → Retina에서 GPU 픽셀 처리량 추가 절감
       dpr={[1, 1.2]}
     >
-      <Perf position="top-left" />
+     
       <Suspense fallback={null}>
         <Ocean />
         <MyPortal
